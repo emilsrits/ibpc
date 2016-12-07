@@ -16,12 +16,14 @@ Web shop for PC parts.
 
 ### Installation
 
-Install Composer, Node.js and make sure to add PHP to your %PATH% environment variable to run `php artisan` commands.
+Install Composer, Node.js and make sure to add PHP to your %PATH% environment variable to be able to run `php artisan` commands.
 
 Install the app's dependencies by running `composer install` using the terminal in the app root directory.
 
 Configure .env file for your database and run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
 
 Run `node -v` to ensure that Node.js is installed on your machine.
+
 Pull Gulp as a global NPM package `npm install --global gulp`.
+
 Install Node dependencies by running `npm install` using the terminal in the app root directory.
