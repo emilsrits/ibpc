@@ -20,7 +20,7 @@ Install Composer, Node.js and make sure to add PHP to your %PATH% environment va
 
 Install the app's dependencies by running `composer install` using the terminal in the app root directory.
 
-Configure .env file for your database and run `php artisan migrate` to migrate the tables and triggers, run `php artisan db:seed` to seed the tables.
+Configure .env file for your database and run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
 
 Run `node -v` to ensure that Node.js is installed on your machine.
 Pull Gulp as a global NPM package `npm install --global gulp`.
