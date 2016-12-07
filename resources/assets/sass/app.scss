@@ -1,0 +1,261 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+/* VARIABLES */
+// Color variables
+$color_white: #fff;
+$color_fontWhite: #e0e0e0;
+$color_lightGray: #eee;
+$color_gray: #303030;
+$color_darkGray: #222;
+$color_sidebarGray: #3a3a3a;
+$color_black: #0d0d0d;
+$color_red: #CC4040;
+$color_orange: #f37c34;
+
+/* FONTS */
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Regular-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('../fonts/montserrat-regular-webfont.woff2') format('woff2'),
+         url('../fonts/montserrat-regular-webfont.woff') format('woff'),
+         url('../fonts/montserrat-regular-webfont.ttf') format('truetype'),
+         url('../fonts/montserrat-regular-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/roboto-regular-webfont.woff2') format('woff2'),
+         url('../fonts/roboto-regular-webfont.woff') format('woff'),
+         url('../fonts/roboto-regular-webfont.ttf') format('truetype'),
+         url('../fonts/roboto-regular-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Main elements
+body {
+	font-family: OpenSans-Regular;
+	background-color: $color_lightGray;
+	line-height: 1.2;
+}
+
+// Main
+main {
+	margin: 0 10px 0 10px;
+	padding-bottom: 50px;
+	min-height: 840px;
+}
+
+// Main classes
+.text-center {
+	text-align: center !important;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1; /* ie 6/7 */
+}
+
+/* BUTTONS */
+.btn-cart-add {
+	margin-top: 5px;
+	line-height: 20px;
+	color: $color_white;
+	background: $color_orange;
+	border-color: $color_black;
+	float: right;
+}
+
+.btn-cart-add:hover {
+	color: $color_white;
+	background: $color_red;
+}
+
+// Header
+#nav-top {
+	background-color: $color_gray;
+
+	a {
+		color: $color_fontWhite; 
+	}
+
+	a:hover {
+		color: $color_red;
+	}
+
+	li:hover {
+		background-color: #272323;
+	}
+
+	li.dropdown.open a.dropdown-toggle {
+		background-color: $color_red;
+	}
+
+	li.dropdown > a {
+		color: $color_fontWhite;
+	}
+
+	ul.dropdown-menu {
+		background-color: $color_red;
+
+		li.divider {
+			background-color: $color_black;
+		}
+
+		li > a:hover, li > a:focus {
+			background-color: $color_orange;
+			color: $color_fontWhite;
+		}
+	}
+}
+
+// Footer
+footer {
+	position: relative;
+   bottom: 0;
+   width: 100%;
+   height: 50px;
+   text-align: center;
+   background-color: $color_black;
+   clear: both;
+
+   p {
+    	padding: 15px 0 0 0;
+	   margin: 0;
+	   color: #999999;
+	   font-size: 1em;
+   }
+}
+
+// Wrapper
+#wrapper {
+	margin: auto;
+}
+
+.container-inner {
+	max-width: 1920px;
+	margin: auto;
+}
+
+/* SIDEBAR */
+.sidebar-grid {
+	max-width: 185px;
+	width: 90%;
+	height: 800px;
+	background-color: $color_sidebarGray;
+	float: none;
+}
+
+/* PRODUCT DISPLAY */
+.product-grid {
+	padding: 0 10px 0 10px;
+	height: 300px;
+	background-color: $color_white;
+	border: 1px solid #E6E6E6;
+}
+
+.product-grid-image {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 120px;
+	img {
+		display: block;
+		margin: auto;
+		width: auto;
+		max-height: 120px;
+	}
+}
+
+.product-link {
+	width: 100%;
+	height: 50px;
+	font-size: 12px;
+	font-weight: bold; 
+	a {
+		color: $color_black;
+	}
+	a:hover, a:focus {
+		color: $color_red;
+		text-decoration: none;
+	}
+}
+
+.product-price-old {
+	margin: 0;
+	height: 20px;
+	s {
+		text-decoration: line-through;
+	}
+}
+
+.product-price {
+	height: 20px;
+	font-size: 16px;
+	font-weight: bold;
+	color: $color_black;
+}
+
+/* GRID SYSTEM */
+.grid {
+	margin-bottom: 10px;
+}
+
+.grid-uniform {
+	margin: 0;
+	padding: 0;
+}
+
+.grid-item {
+	float: left;
+}
+
+@media only screen and (max-width: 640px) {
+	.small-50 {
+		width: 50%
+	}
+}
+
+@media only screen and (max-width: 1079px) and (min-width: 641px) {
+	.medium-33 {
+		width: 33.33%
+	}
+}
+
+@media only screen and (min-width: 1080px) {
+	.large-25 {
+		width: 25%;
+	}
+
+	.large-15 {
+		width: 15%;
+	}
+
+	.large-85 {
+		width: 85%;
+	}
+}
