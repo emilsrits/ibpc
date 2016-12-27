@@ -1,6 +1,6 @@
 ## **IBPC.** 
 
-**CURRENTLY IN DEVELOPMENT**
+## **CURRENTLY IN DEVELOPMENT**
 
 Web shop for PC parts.
 
