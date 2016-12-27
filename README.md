@@ -1,5 +1,7 @@
 ## **IBPC.** 
 
+**CURRENTLY IN DEVELOPMENT**
+
 Web shop for PC parts.
 
 **Author:** @emilsrits - Emils Rits
