@@ -22,7 +22,7 @@ Install Composer, Node.js and make sure to add PHP to your %PATH% environment va
 
 Install the app's dependencies by running `composer install` using the terminal in the app root directory.
 
-Create and configure .env file for your database and run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
+Create and configure .env file for your database, run `php artisan key:generate` to generate APP_KEY value in .env file. Run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
 
 Run `node -v` to ensure that Node.js is installed on your machine.
 
