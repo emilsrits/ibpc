@@ -30,4 +30,4 @@ Pull Gulp as a global NPM package `npm install --global gulp` to mix .scss and .
 
 Install Node dependencies by running `npm install` using the terminal in the app root directory.
 
-For image paths to work your website home/index URL should look something like **ibpc.dev/** not **localhost/ibpc-master/public/**. Of course how it works can be changed.
+For image paths to work your home/index URL of the website should look something like **ibpc.dev/** not **localhost/ibpc-master/public/**. Of course how it works can be changed.
