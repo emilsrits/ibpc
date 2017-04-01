@@ -8,13 +8,13 @@ Web shop for PC parts.
 
 ### Made using:
 
-  * Laravel 5.3
-  * PHP	5.6.25/7.0.10
-  * Apache	2.4.23
-  * MySQL	5.7.14
-  * Composer	1.2.3
-  * Node.js	2.15.5
-  * Gulp	3.9.1
+  * Laravel     5.3
+  * PHP         5.6.25/7.0.10
+  * Apache      2.4.23
+  * MySQL       5.7.14
+  * Composer    1.2.3
+  * Node.js     2.15.5
+  * Gulp        3.9.1
 
 ### Installation
 
