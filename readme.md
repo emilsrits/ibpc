@@ -1,27 +1,31 @@
-# Laravel PHP Framework
+## **IBPC.** 
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+**_CURRENTLY IN DEVELOPMENT_**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+Web shop for PC parts.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+**Author:** @emilsrits - Emils Rits
 
-## Official Documentation
+### Made using:
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+  * Laravel 5.3
+  * PHP	5.6.25/7.0.10
+  * Apache	2.4.23
+  * MySQL	5.7.14
+  * Composer	1.2.3
+  * Node.js	2.15.5
+  * Gulp	3.9.1
 
-## Contributing
+### Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Install Composer, Node.js and make sure to add PHP to your %PATH% environment variable to be able to run `php artisan` commands.
 
-## Security Vulnerabilities
+Install the app's dependencies by running `composer install` using the terminal in the app root directory.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Create and configure .env file for your database, run `php artisan key:generate` to generate APP_KEY value in .env file. Run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
 
-## License
+Run `node -v` to ensure that Node.js is installed on your machine.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Pull Gulp as a global NPM package `npm install --global gulp` to mix .scss and .css with Laravel Elixir.
+
+Install Node dependencies by running `npm install` using the terminal in the app root directory.
