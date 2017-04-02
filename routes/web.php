@@ -31,12 +31,12 @@ Route::get('/profile', [
 
 Route::get('/addToCart/{id}', [
 	'uses' => 'ProductController@addToCart',
-	'as' => 'shop.addToCart'
+	'as' => 'cart.addToCart'
 ]);
 
 Route::get('/shop/cart', [
 	'uses' => 'ProductController@cart',
-	'as' => 'shop.cart'
+	'as' => 'cart.index'
 ]);
 
 Route::get('/storage/{filePath}', function ($filePath) {

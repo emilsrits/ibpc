@@ -2,7 +2,9 @@
 
 namespace App;
 
-class Cart 
+use Illuminate\Database\Eloquent\Model;
+
+class Cart extends Model
 {
     public $items = null;
     public $totalQuantity = 0;
@@ -28,5 +30,10 @@ class Cart
         $this->items[$id] = $storedItem;
         $this->totalQuantity++;
         $this->totalPrice += $item->price;
+    }
+
+    public function getTotalPrice()
+    {
+        return '€'.$this->totalPrice;
     }
 }

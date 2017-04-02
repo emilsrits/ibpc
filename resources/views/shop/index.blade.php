@@ -12,7 +12,7 @@
                 @foreach($products as $product)
                     <div class="grid-item large-25 medium-33 small-50">
                         <div class="product-grid">
-                            <div class="grid-image product-grid-image">
+                            <div class="product-image">
                                 <a href="#">
                                     <img src="{{ $product->image_path }}" alt="{{ $product->code }}" class="img-responsive">
                                 </a>
@@ -20,7 +20,7 @@
                             <p class="product-link text-center">
                                 <a href="#">{{ $product->title }}</a>
                             </p>
-                            <p class="product-price-old"><s>{{ $product->old_price or '' }}</s></p>
+                            <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
                             <p class="product-price">{{ $product->current_price }}</p>
                             <a href="{{ url('/addToCart', ['id' => $product->id]) }}" class="btn btn-cart-add" role="button">ADD TO CART</a>
                         </div>
