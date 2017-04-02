@@ -17,13 +17,13 @@ class UsersTableSeeder extends Seeder
         // add users to the database
         DB::table('users')->insert([
             [
-	            'name' => 'Emīls',
-	            'surname' => 'Rīts',
+	            'name' => 'Emils',
+	            'surname' => 'Rits',
 	            'email' => 'admin@ibpc.dev',
-	            'address' => 'Zirgu iela 2a',
-	            'country' => 'Latvia',
-	            'city' => 'Ikšķile',
-	            'postcode' => 'LV-5052',
+	            'address' => 'Easy Street',
+	            'country' => 'USA',
+	            'city' => 'San Francisco',
+	            'postcode' => '9412',
 	            'password' => Hash::make('ibpcadmin')
             ]
         ]);
