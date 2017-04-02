@@ -1,0 +1,39 @@
+/* GRID SYSTEM */
+.grid {
+	margin-bottom: 10px;
+}
+
+.grid-uniform {
+	margin: 0;
+	padding: 0;
+}
+
+.grid-item {
+	float: left;
+}
+
+@media only screen and (max-width: $mobile-md - 1) {
+	.small-50 {
+		width: 50%
+	}
+}
+
+@media only screen and (max-width: $desktop-lg - 1) and (min-width: $mobile-md) {
+	.medium-33 {
+		width: 33.33%
+	}
+}
+
+@media only screen and (min-width: $desktop-lg) {
+	.large-25 {
+		width: 25%;
+	}
+
+	.large-15 {
+		width: 15%;
+	}
+
+	.large-85 {
+		width: 85%;
+	}
+}
