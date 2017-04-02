@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -24,18 +24,16 @@
     </script>
 </head>
 <body>
-	<div id="app">
-		<div id="wrapper">
-			@include('partials.header')
+	<div id="wrapper">
+		@include('partials.header')
 
-			<main>
-				<div class="container-inner clearfix">
-					@yield('content')
-				</div>
-			</main>
+		<main>
+			<div class="container-inner clearfix">
+				@yield('content')
+			</div>
+		</main>
 
-			@include('partials.footer')
-		</div>
+		@include('partials.footer')
 	</div>
 
 	<!-- Scripts -->

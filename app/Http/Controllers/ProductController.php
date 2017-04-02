@@ -12,6 +12,7 @@ class ProductController extends Controller
     public function index()
     {
     	$products = Product::all();
+
     	return view('shop.index', ['products' => $products]);
     }
 
@@ -22,6 +23,7 @@ class ProductController extends Controller
     	$cart->add($product, $product->id);
 
     	Session::put('cart', $cart);
+
     	return redirect()->route('shop.index');
     }
 

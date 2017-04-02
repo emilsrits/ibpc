@@ -28,7 +28,7 @@
 
                <!-- Right Side Of Navbar -->
                <ul class="nav navbar-nav navbar-right">
-                  <li><a href="{{ url('shop/cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"><span> {{ Session::has('cart') ? Session::get('cart')->totalQuantity : '0' }}</span></i> items</a></li>
+                  <li><a href="{{ url('shop/cart') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span> ({{ Session::has('cart') ? Session::get('cart')->totalQuantity : '0' }})</span></a></li>
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user" aria-hidden="true"></i>
