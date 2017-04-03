@@ -35,7 +35,7 @@
                                     @if (Session::has('cart'))
                                         ({{ Session::get('cart')->totalQuantity }}) {{ Session::get('cart')->getTotalPrice() }}
                                     @else
-                                        '0'
+                                        0
                                     @endif
                                 </span>
                             </a>

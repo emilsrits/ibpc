@@ -191,6 +191,9 @@ footer {
 
 /* CART */
 #shopping-cart-table {
+    width: 100%;
+    border-top: 1px solid $color_lightGray;
+    border-bottom: 1px solid $color_lightGray;
     .product-image {
         > img {
             margin: auto;
@@ -201,7 +204,15 @@ footer {
     tr {
         background-color: $color_white;
     }
-    td {
-        padding: 15px;
+    th, td {
+        padding: 4px;
+    }
+    .table-headers {
+        padding: 5px 0;
+        border-right: 1px solid $color_lightGray;
+        border-left: 1px solid $color_lightGray;
+        > tr {
+            line-height: 30px;
+        }
     }
 }

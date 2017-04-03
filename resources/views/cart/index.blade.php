@@ -12,7 +12,7 @@
                     {{ csrf_field() }}
                     <fieldset>
                         <table id="shopping-cart-table">
-                            <thead>
+                            <thead class="table-headers">
                                 <tr>
                                     <th></th>
                                     <th>Product</th>
@@ -23,7 +23,7 @@
                                     <th>Total Price</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table-body">
                                 @foreach($products as $product)
                                     <tr>
                                         <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
@@ -36,7 +36,7 @@
                                         <td></td>
                                         <td>{{ $product['price'] }}</td>
                                         <td>{{ $product['quantity'] }}</td>
-                                        <td></td>
+                                        <td>{{ $product['price'] * $product['quantity'] }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
