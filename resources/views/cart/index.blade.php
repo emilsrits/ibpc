@@ -6,44 +6,40 @@
 
 @section('content')
     @if(Session::has('cart'))
-        <div class="row">
-            <div class="col-md-12">
-                <form role="form" method="POST" action="{{ url('/checkout') }}">
-                    {{ csrf_field() }}
-                    <fieldset>
-                        <table id="shopping-cart-table">
-                            <thead class="table-headers">
+        <div class="large-100">
+            <form role="form" method="POST" action="{{ url('/checkout') }}">
+                {{ csrf_field() }}
+                <fieldset>
+                    <table id="shopping-cart-table">
+                        <thead class="table-headers">
+                            <tr>
+                                <th></th>
+                                <th class="hidden-xs">Product</th>
+                                <th><span class="visible-xs">Product</span></th>
+                                <th class="hidden-xs">Price</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                            @foreach($products as $product)
                                 <tr>
-                                    <th></th>
-                                    <th>Product</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
+                                    <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                    <td class="product-image hidden-xs">
+                                        <a href="{{ url($product['item']['code']) }}">
+                                            <img src="{{ asset($product['item']['image_path']) }}" alt="{{ $product['item']['code'] }}">
+                                        </a>
+                                    </td>
+                                    <td>{{ $product['item']['title'] }}</td>
+                                    <td class="hidden-xs">{{ $product['price'] }}</td>
+                                    <td>{{ $product['qty'] }}</td>
+                                    <td>{{ $product['price'] * $product['qty'] }}</td>
                                 </tr>
-                            </thead>
-                            <tbody class="table-body">
-                                @foreach($products as $product)
-                                    <tr>
-                                        <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                                        <td>
-                                            <a class="product-image" href="{{ url($product['item']['code']) }}">
-                                                <img src="{{ asset($product['item']['image_path']) }}" alt="{{ $product['item']['code'] }}">
-                                            </a>
-                                        </td>
-                                        <td>{{ $product['item']['title'] }}</td>
-                                        <td></td>
-                                        <td>{{ $product['price'] }}</td>
-                                        <td>{{ $product['quantity'] }}</td>
-                                        <td>{{ $product['price'] * $product['quantity'] }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </fieldset>
-                </form>
-            </div>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </fieldset>
+            </form>
         </div>
     @else
         <div class="row">
@@ -58,7 +54,7 @@
                 <ul class="list-group">
                     @foreach($products as $product)
                         <li class="list-group-item">
-                            <span class="badge">{{ $product['quantity'] }}</span>
+                            <span class="badge">{{ $product['qty'] }}</span>
                             <strong>{{ $product['item']['title'] }}</strong>
                             <span class="label label-success">{{ $product['price'] }}</span>
                             <div class="btn-group">

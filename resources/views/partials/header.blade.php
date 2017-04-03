@@ -33,7 +33,7 @@
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span>
                                     @if (Session::has('cart'))
-                                        ({{ Session::get('cart')->totalQuantity }}) {{ Session::get('cart')->getTotalPrice() }}
+                                        ({{ Session::get('cart')->totalQty }}) {{ Session::get('cart')->getTotalPrice() }}
                                     @else
                                         0
                                     @endif

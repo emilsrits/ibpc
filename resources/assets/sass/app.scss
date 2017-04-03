@@ -57,6 +57,7 @@ a {
 
 .container-inner {
     margin: auto;
+    padding: 0 5px;
     max-width: 1200px;
 }
 
@@ -82,7 +83,6 @@ a {
     a {
         color: $color_fontWhite;
     }
-
     a:hover {
         color: $color_red;
     }
@@ -90,22 +90,18 @@ a {
     li:hover {
         background-color: #272323;
     }
-
     li.dropdown.open a.dropdown-toggle {
         background-color: $color_red;
     }
-
     li.dropdown > a {
         color: $color_fontWhite;
     }
 
     ul.dropdown-menu {
         background-color: $color_red;
-
         li.divider {
             background-color: $color_black;
         }
-
         li > a:hover, li > a:focus {
             background-color: $color_orange;
             color: $color_fontWhite;
@@ -164,6 +160,7 @@ footer {
         height: 50px;
         font-size: 12px;
         font-weight: bold;
+
         a {
             color: $color_black;
         }
@@ -176,6 +173,7 @@ footer {
     .product-price-old {
         margin: 0;
         height: 20px;
+
         s {
             text-decoration: line-through;
         }
@@ -194,25 +192,41 @@ footer {
     width: 100%;
     border-top: 1px solid $color_lightGray;
     border-bottom: 1px solid $color_lightGray;
+
     .product-image {
-        > img {
+        img {
             margin: auto;
             width: auto;
             max-height: 50px;
         }
     }
+
     tr {
         background-color: $color_white;
+        border-bottom: 1px solid $color_lightGray;
     }
     th, td {
-        padding: 4px;
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
     }
+
     .table-headers {
         padding: 5px 0;
         border-right: 1px solid $color_lightGray;
         border-left: 1px solid $color_lightGray;
         > tr {
             line-height: 30px;
+        }
+        th {
+            color: $color_red;
+            font-weight: bold;
+        }
+    }
+
+    .table-body {
+        td {
+            line-height: 20px;
         }
     }
 }
