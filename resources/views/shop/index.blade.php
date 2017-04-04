@@ -22,7 +22,7 @@
                             </p>
                             <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
                             <p class="product-price">{{ $product->current_price }}</p>
-                            <a href="{{ url('/addToCart', ['id' => $product->id]) }}" class="btn btn-cart-add" role="button">ADD TO CART</a>
+                            <a href="{{ url('/cart/add', ['id' => $product->id]) }}" class="btn btn-cart-add" role="button">ADD TO CART</a>
                         </div>
                     </div>
                 @endforeach

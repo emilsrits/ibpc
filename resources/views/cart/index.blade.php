@@ -7,7 +7,7 @@
 @section('content')
     @if(Session::has('cart'))
         <div class="large-100">
-            <form role="form" method="POST" action="{{ url('/checkout') }}">
+            <form role="form" method="POST" action="{{ url('/cart/checkout') }}">
                 {{ csrf_field() }}
                 <fieldset>
                     <table id="shopping-cart-table">
@@ -24,7 +24,7 @@
                         <tbody class="table-body">
                             @foreach($products as $product)
                                 <tr>
-                                    <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                    <td><a href=""><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                     <td class="product-image hidden-xs">
                                         <a href="{{ url($product['item']['code']) }}">
                                             <img src="{{ asset($product['item']['image_path']) }}" alt="{{ $product['item']['code'] }}">

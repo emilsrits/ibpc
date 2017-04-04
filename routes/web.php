@@ -24,19 +24,24 @@ Route::get('/', [
     'as' => 'shop.index'
 ]);
 
-Route::get('/profile', [
+Route::get('/user/profile', [
 	'uses' => 'UserController@index',
 	'as' => 'user.profile'
 ]);
 
-Route::get('/addToCart/{id}', [
+Route::get('/cart/add/{id}', [
 	'uses' => 'ProductController@addToCart',
 	'as' => 'cart.addToCart'
 ]);
 
-Route::get('/shop/cart', [
+Route::get('/cart', [
 	'uses' => 'ProductController@cart',
 	'as' => 'cart.index'
+]);
+
+Route::get('/cart/delete/', [
+    'uses' => 'ProductController@removeFromCart',
+    'as' => 'cart.removeFromCart'
 ]);
 
 Route::get('/storage/{filePath}', function ($filePath) {

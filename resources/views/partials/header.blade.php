@@ -29,7 +29,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{ url('shop/cart') }}">
+                            <a href="{{ url('/cart') }}">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span>
                                     @if (Session::has('cart'))
@@ -52,7 +52,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 @if(Auth::check())
-                                    <li><a href="{{ url('/profile') }}">Profile</a></li>
+                                    <li><a href="{{ url('/user/profile') }}">Profile</a></li>
                                     <li><a href="#">Settings</a></li>
                                     <li><a href="#">Manage</a></li>
                                     <li role="separator" class="divider"></li>
