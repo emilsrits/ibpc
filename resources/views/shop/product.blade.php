@@ -7,7 +7,7 @@
 @section('content')
     <div class="grid clearfix">
         @include('partials.sidebar')
-        <div class="grid-item large-85">
+        <div class="grid-item lg-85">
 
         </div>
     </div>

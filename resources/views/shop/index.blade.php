@@ -7,10 +7,10 @@
 @section('content')
     <div class="grid clearfix">
         @include('partials.sidebar')
-        <div class="grid-item large-85">
+        <div class="grid-item lg-85">
             <div class="grid-uniform">
                 @foreach($products as $product)
-                    <div class="grid-item large-25 medium-33 small-50">
+                    <div class="grid-item lg-25 md-33 sm-50">
                         <div class="product-grid">
                             <div class="product-image">
                                 <a href="{{ url('/product', ['id' => $product->id]) }}">
@@ -27,6 +27,6 @@
                     </div>
                 @endforeach
             </div> <!-- grid-uniform -->
-        </div> <!-- grid-item large-eight-tenths -->
+        </div> <!-- grid-item lg-eight-tenths -->
     </div> <!-- grid -->
 @endsection 
