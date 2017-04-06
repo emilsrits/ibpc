@@ -14,7 +14,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function profile()
     {
         return view('user.profile', ['user' => Auth::user()]);
     }

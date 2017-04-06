@@ -33,7 +33,7 @@
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span>
                                     @if (Session::has('cart'))
-                                        ({{ Session::get('cart')->totalQty }}) {{ Session::get('cart')->getTotalPrice() }}
+                                        ({{ Session::get('cart')->totalQty }}) {{ Session::get('cart')->getTotalCartPrice() }}
                                     @else
                                         0
                                     @endif
@@ -59,11 +59,11 @@
                                 @endif
                             <!-- Authentication Links -->
                                 @if (Auth::guest())
-                                    <li><a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a></li>
-                                    <li><a href="{{ url('/register') }}"><i class="fa fa-pencil-square" aria-hidden="true"></i> Register</a></li>
+                                    <li><a href="{{ url('/user/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a></li>
+                                    <li><a href="{{ url('/user/register') }}"><i class="fa fa-pencil-square" aria-hidden="true"></i> Register</a></li>
                                 @else
-                                    <li><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    <li><a href="{{ url('/user/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+                                    <form id="logout-form" action="{{ url('/user/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 @endif

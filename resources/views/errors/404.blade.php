@@ -9,7 +9,7 @@
 
     <style>
         .title-404 {
-            margin: 20% auto;
+            margin: 5% auto;
             width: 100%;
             height: 350px;
             font-family: 'Lato', sans-serif;

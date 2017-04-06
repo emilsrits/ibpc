@@ -13,12 +13,12 @@
                     <div class="grid-item large-25 medium-33 small-50">
                         <div class="product-grid">
                             <div class="product-image">
-                                <a href="#">
+                                <a href="{{ url('/product', ['id' => $product->id]) }}">
                                     <img src="{{ $product->image_path }}" alt="{{ $product->code }}" class="img-responsive">
                                 </a>
                             </div>
                             <p class="product-link text-center">
-                                <a href="#">{{ $product->title }}</a>
+                                <a href="{{ url('/product', ['id' => $product->id]) }}">{{ $product->title }}</a>
                             </p>
                             <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
                             <p class="product-price">{{ $product->current_price }}</p>

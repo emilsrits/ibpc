@@ -8244,11 +8244,11 @@ main {
 
 a {
   color: #0d0d0d;
-  text-decoration: none;
 }
 
-a:hover {
+a:hover, a:focus {
   color: #CC4040;
+  text-decoration: none;
 }
 
 /* HELPERS */

@@ -23,9 +23,9 @@ main {
 
 a {
     color: $color_black;
-    text-decoration: none;
-    &:hover {
+    &:hover, &:focus {
         color: $color_red;
+        text-decoration: none;
     }
 }
 
