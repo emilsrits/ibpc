@@ -28,5 +28,6 @@
                 @endforeach
             </div> <!-- grid-uniform -->
         </div> <!-- grid-item lg-eight-tenths -->
+        {{ $products->render() }}
     </div> <!-- grid -->
 @endsection 

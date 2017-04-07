@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Cart;
-use Illuminate\Http\Request;
 use Session;
 
 class ProductController extends Controller
@@ -16,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-    	$products = Product::all();
+    	$products = Product::paginate(4);
 
     	return view('shop.index', ['products' => $products]);
     }
