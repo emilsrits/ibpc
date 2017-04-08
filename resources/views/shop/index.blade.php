@@ -7,8 +7,9 @@
 @section('content')
     <div class="grid clearfix">
         @include('partials.sidebar')
-        <div class="grid-item lg-85">
-            <div class="grid-uniform">
+        <div class="grid-item lg-85 md-100 sm-100">
+            {{ $products->appends(Request::except('page'))->links() }}
+            <div class="grid-uniform clearfix">
                 @foreach($products as $product)
                     <div class="grid-item lg-25 md-33 sm-50">
                         <div class="product-grid">
@@ -27,7 +28,9 @@
                     </div>
                 @endforeach
             </div> <!-- grid-uniform -->
+            @if($products->count() >= 8)
+                {{ $products->appends(Request::except('page'))->links() }}
+            @endif
         </div> <!-- grid-item lg-eight-tenths -->
-        {{ $products->render() }}
     </div> <!-- grid -->
 @endsection 

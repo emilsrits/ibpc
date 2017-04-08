@@ -24,10 +24,12 @@
 }
 
 @media only screen and (max-width: $mobile-md - 1) {
+    .sm-100 {
+        width: 100%;
+    }
     .sm-50 {
         width: 50%
     }
-
     .hidden-xs {
         display: none;
     }
@@ -48,25 +50,25 @@
 }
 
 @media only screen and (min-width: $mobile-md) and (max-width: $desktop-lg - 1) {
+    .md-100 {
+        width: 100%;
+    }
     .md-33 {
         width: 33.33%
     }
 }
 
 @media only screen and (min-width: $desktop-lg) {
-    .lg-15 {
-        width: 15%;
+    .lg-100 {
+        width: 100%;
     }
-
-    .lg-25 {
-        width: 25%;
-    }
-
     .lg-85 {
         width: 85%;
     }
-
-    .lg-100 {
-        width: 100%;
+    .lg-25 {
+        width: 25%;
+    }
+    .lg-15 {
+        width: 15%;
     }
 }

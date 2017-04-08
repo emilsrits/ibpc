@@ -447,6 +447,8 @@ th {
   clear: both; }
 
 @media only screen and (max-width: 767px) {
+  .sm-100 {
+    width: 100%; }
   .sm-50 {
     width: 50%; }
   .hidden-xs {
@@ -459,18 +461,20 @@ th {
     text-align: right; } }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .md-100 {
+    width: 100%; }
   .md-33 {
     width: 33.33%; } }
 
 @media only screen and (min-width: 1024px) {
-  .lg-15 {
-    width: 15%; }
-  .lg-25 {
-    width: 25%; }
+  .lg-100 {
+    width: 100%; }
   .lg-85 {
     width: 85%; }
-  .lg-100 {
-    width: 100%; } }
+  .lg-25 {
+    width: 25%; }
+  .lg-15 {
+    width: 15%; } }
 
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -6293,6 +6297,18 @@ a {
 .btn-cart-add:hover {
   color: #fff;
   background: #CC4040; }
+
+/* PAGINATION */
+.product-pagination .pagination {
+  margin: 22px 10px;
+  float: right; }
+  .product-pagination .pagination a, .product-pagination .pagination a:hover {
+    color: #0d0d0d; }
+  .product-pagination .pagination .page-first, .product-pagination .pagination .page-last {
+    font-weight: bold; }
+  .product-pagination .pagination > li {
+    display: inline-block;
+    float: left; }
 
 /* HEADER */
 #nav-top {
