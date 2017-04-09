@@ -34,6 +34,6 @@ class CreateOrdersTable extends Migration
             $table->dropForeign('orders_user_id_foreign');
         });
 
-        Schema::drop('orders');
+        Schema::dropIfExists('orders');
     }
 }

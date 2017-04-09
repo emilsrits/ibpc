@@ -11,6 +11,16 @@ class Product extends Model
         'price_old', 'storage', 'status', 'created_at', 'updated_at'
     ];
 
+    public function specifications()
+    {
+        return $this->belongsToMany(Specification::class, 'product_specification')->withPivot('attribute', 'value');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_product');
+    }
+
     /**
      * Get product old price attribute
      *

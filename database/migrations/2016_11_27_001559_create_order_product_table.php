@@ -17,11 +17,11 @@ class CreateOrderProductTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->integer('order_id')->unsigned();
+            $table->integer('order_id')->unsigned()->index();
             $table->foreign('order_id')->references('id')->on('orders');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('user_id')->on('orders');
-            $table->integer('product_id')->unsigned();
+            $table->integer('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('quantity')->default(1);
             $table->timestamp('created_at')->useCurrent();
@@ -42,6 +42,6 @@ class CreateOrderProductTable extends Migration
             $table->dropForeign('order_product_product_id_foreign');
         });
 
-        Schema::drop('order_product');
+        Schema::dropIfExists('order_product');
     }
 }

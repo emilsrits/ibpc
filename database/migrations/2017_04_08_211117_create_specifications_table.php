@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration
+class CreateSpecificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +13,17 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('specifications', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->text('description')->nullable();
+            $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migration.
+     * Reverse the migrations.
      *
      * @return void
      */
@@ -31,7 +31,7 @@ class CreateRolesTable extends Migration
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
 
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('specifications');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }

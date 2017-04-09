@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Cart;
 use Session;
+use Illuminate\Database\Eloquent\Collection;
 
 class ProductController extends Controller
 {
@@ -52,7 +53,7 @@ class ProductController extends Controller
 
         Session::put('cart', $cart);
 
-        return redirect()->route('shop.index');
+        return redirect()->route('product.cart');
     }
 
     /**
@@ -82,7 +83,20 @@ class ProductController extends Controller
      */
     public function viewProduct($id)
     {
-        $product = Product::find($id);
-        return view('shop.product', ['product' => $product]);
+        $product = Product::with('specifications')->find($id);
+
+        $specifications = new Collection;
+
+        foreach($product->specifications as $specification) {
+            if (!$specifications->has($specification->name)) {
+                $currentSpecs = new Collection;
+            } else {
+                $currentSpecs = $specifications->get($specification->name);
+            }
+            $currentSpecs->put($specification->pivot->attribute, $specification->pivot->value);
+            $specifications->put($specification->name, $currentSpecs);
+        }
+
+        return view('shop.product', ['product' => $product], ['specifications' => $specifications]);
     }
 }
