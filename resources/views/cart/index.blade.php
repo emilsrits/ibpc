@@ -7,7 +7,7 @@
 @section('content')
     @if(Session::has('cart'))
         <div class="lg-100">
-            <form id="shopping-cart-form" role="form" method="POST" action="{{ url('/cart/checkout') }}">
+            <form id="shopping-cart-form" role="form" method="POST" action="{{ url('/cart/update') }}">
                 {{ csrf_field() }}
                 <fieldset>
                     <table id="shopping-cart-table">
@@ -36,7 +36,7 @@
                                         </a>
                                     </td>
                                     <td class="hidden-xs">{{ $cart->getItemPrice($product['item']['id']) }}</td>
-                                    <td>{{ $product['qty'] }}</td>
+                                    <td><input id="qty" type="text" name="qty" maxlength="3" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*"></td>
                                     <td>{{ $cart->getItemTotalPrice($product['item']['id']) }}</td>
                                 </tr>
                             @endforeach

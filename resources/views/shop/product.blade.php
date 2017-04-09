@@ -46,7 +46,7 @@
                         <form id="add-to-cart-form" class="clearfix" role="form" method="POST" action="{{ url('/cart/checkout') }}">
                             {{ csrf_field() }}
                             <label for="qty">Qty: </label>
-                            <input id="qty" class="product-qty" type="text" name="qty" maxlength="3" value="1" title="qty" pattern="[0-9]*">
+                            <input id="qty" type="text" name="qty" maxlength="3" value="1" title="qty" pattern="[0-9]*">
                             <a class="btn btn-cart-add" href="{{ url('/cart/add', ['id' => $product->id]) }}" role="button">ADD TO CART</a>
                         </form>
                     </div>
