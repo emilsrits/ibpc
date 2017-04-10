@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/roles/create', 'RolesController@role');
 
+Route::get('/admin', 'AdminController@index');
+
 Route::get('/user/login', 'Auth\LoginController@index');
 
 Route::get('/user/logout', 'Auth\LoginController@logout');
