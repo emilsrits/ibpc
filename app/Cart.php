@@ -43,7 +43,6 @@ class Cart extends Model
     /**
      * Remove an item from cart
      *
-     * @param $item
      * @param $id
      */
     public function remove($id)
