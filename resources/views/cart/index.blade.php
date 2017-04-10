@@ -16,9 +16,8 @@
                                 <th></th>
                                 <th class="hidden-xs">Product</th>
                                 <th><span class="visible-xs">Product</span></th>
-                                <th class="hidden-xs">Price</th>
                                 <th>Quantity</th>
-                                <th>Total Price</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         <tbody class="table-body">
@@ -35,9 +34,12 @@
                                             {{ $product['item']['title'] }}
                                         </a>
                                     </td>
-                                    <td class="hidden-xs">{{ $cart->getItemPrice($product['item']['id']) }}</td>
-                                    <td><input id="qty" type="text" name="qty" maxlength="3" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*"></td>
-                                    <td>{{ $cart->getItemTotalPrice($product['item']['id']) }}</td>
+                                    <td>
+                                        <input id="qty" type="text" name="qty" maxlength="3" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
+                                    </td>
+                                    <td>
+                                        {{ $cart->getItemTotalPrice($product['item']['id']) }}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
