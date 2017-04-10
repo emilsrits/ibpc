@@ -46,9 +46,10 @@
             </form>
         </div>
     @else
-        <div class="row">
-            <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-                <h2 style="margin: auto; text-align: center;">Cart is empty.</h2>
+        <div class="lg-100">
+            <div class="cart-empty">
+                <h2>Cart is empty</h2>
+                <a class="btn" href="{{ url('/') }}">Back To Shop</a>
             </div>
         </div>
     @endif

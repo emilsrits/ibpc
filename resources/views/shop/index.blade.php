@@ -30,6 +30,6 @@
             @if($products->count() >= 8)
                 {{ $products->appends(Request::except('page'))->links() }}
             @endif
-        </div> <!-- grid-item lg-eight-tenths -->
+        </div>
     </div> <!-- grid -->
 @endsection 
