@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Cart;
 use Session;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 
 class ProductController extends Controller
@@ -41,15 +42,22 @@ class ProductController extends Controller
     /**
      * Adds product to cart and redirects to main shop view
      *
+     * @param Request $request
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addToCart($id)
+    public function addToCart(Request $request, $id)
     {
+        if ($request->input('qty')) {
+            $qty = $request->input('qty');
+        } else {
+            $qty = 1;
+        }
+
         $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->add($product, $product->id);
+        $cart->add($product, $product->id, $qty);
 
         Session::put('cart', $cart);
 

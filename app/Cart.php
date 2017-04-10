@@ -25,8 +25,9 @@ class Cart extends Model
      *
      * @param $item
      * @param $id
+     * @param $qty
      */
-    public function add($item, $id)
+    public function add($item, $id, $qty)
     {
         $cartItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
         if ($this->items) {
@@ -34,10 +35,10 @@ class Cart extends Model
                 $cartItem = $this->items[$id];
             }
         }
-        $cartItem['qty']++;
+        $cartItem['qty'] += $qty;
         $this->items[$id] = $cartItem;
-        $this->totalQty++;
-        $this->totalPrice += $item->price;
+        $this->totalQty += $qty;
+        $this->totalPrice += $item->price * $qty;
     }
 
     /**

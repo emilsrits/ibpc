@@ -40,6 +40,11 @@ Route::get('/cart/add/{id}', [
 	'as' => 'product.addToCart'
 ]);
 
+Route::post('/cart/add/{id}', [
+    'uses' => 'ProductController@addToCart',
+    'as' => 'product.addToCart'
+]);
+
 Route::get('/cart/remove/{id}', [
     'uses' => 'ProductController@removeFromCart',
     'as' => 'product.removeFromCart'

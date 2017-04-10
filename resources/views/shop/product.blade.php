@@ -43,11 +43,11 @@
                     <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
                     <p class="product-price">{{ $product->current_price }}</p>
                     <div class="form-container">
-                        <form id="add-to-cart-form" class="clearfix" role="form" method="POST" action="{{ url('/cart/checkout') }}">
+                        <form id="add-to-cart-form" class="clearfix" role="form" method="POST" action="{{ url('/cart/add', ['id' => $product->id]) }}">
                             {{ csrf_field() }}
                             <label for="qty">Qty: </label>
                             <input id="qty" type="text" name="qty" maxlength="3" value="1" title="qty" pattern="[0-9]*">
-                            <a class="btn btn-cart-add" href="{{ url('/cart/add', ['id' => $product->id]) }}" role="button">ADD TO CART</a>
+                            <button class="btn btn-cart-add" type="submit" name="submit">Add To Cart</button>
                         </form>
                     </div>
                 </div>
