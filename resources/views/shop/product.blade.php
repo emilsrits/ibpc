@@ -42,6 +42,17 @@
                     <p class="product-code">{{ $product->code }}</p>
                     <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
                     <p class="product-price">{{ $product->current_price }}</p>
+                    @if($product->status)
+                        <div class="stock-status in-stock">
+                            <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+                            <div class="stock-text">In Stock</div>
+                        </div>
+                    @else
+                        <div class="stock-status out-of-stock">
+                            <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+                            <div class="stock-text">Out of Stock</div>
+                        </div>
+                    @endif
                     <div class="form-container">
                         <form id="add-to-cart-form" class="clearfix" role="form" method="POST" action="{{ url('/cart/add', ['id' => $product->id]) }}">
                             {{ csrf_field() }}

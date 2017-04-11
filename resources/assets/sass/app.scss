@@ -255,6 +255,37 @@ footer {
         font-size: 16px;
         font-weight: bold;
     }
+    .stock-status {
+        margin: 15px 0;
+        .stock-icon {
+            display: table-cell;
+            padding-right: 7px;
+            vertical-align: middle;
+            > i {
+                display:block;
+                font-size: 10px;
+            }
+        }
+        .stock-text {
+            display: table-cell;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+    }
+    .in-stock {
+        .stock-icon {
+            > i {
+                color: #67e824;
+            }
+        }
+    }
+    .out-of-stock {
+        .stock-icon {
+            > i {
+                color: $color_red;
+            }
+        }
+    }
     .form-container {
         margin: 20px 0;
         padding: 15px 0;
