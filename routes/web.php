@@ -36,28 +36,23 @@ Route::get('/user/profile', [
 ]);
 
 Route::get('/cart/add/{id}', [
-	'uses' => 'ProductController@addToCart',
-	'as' => 'product.addToCart'
+	'uses' => 'CartController@addToCart',
+	'as' => 'cart.addToCart'
 ]);
 
 Route::post('/cart/add/{id}', [
-    'uses' => 'ProductController@addToCart',
-    'as' => 'product.addToCart'
+    'uses' => 'CartController@addToCart',
+    'as' => 'cart.addToCart'
 ]);
 
 Route::get('/cart/remove/{id}', [
-    'uses' => 'ProductController@removeFromCart',
-    'as' => 'product.removeFromCart'
+    'uses' => 'CartController@removeFromCart',
+    'as' => 'cart.removeFromCart'
 ]);
 
 Route::get('/cart', [
-	'uses' => 'ProductController@cart',
-	'as' => 'product.cart'
-]);
-
-Route::get('/cart/delete/', [
-    'uses' => 'ProductController@removeFromCart',
-    'as' => 'product.removeFromCart'
+	'uses' => 'CartController@index',
+	'as' => 'cart.index'
 ]);
 
 Route::get('/product/{id}', [
