@@ -63,11 +63,15 @@ a {
 /* BUTTONS */
 .btn-cart-add {
     margin-top: 5px;
-    line-height: 20px;
+    padding: 6px 10px;
+    line-height: 16px;
     color: $color_white;
+    font-size: 13px;
+    font-weight: bold;
     text-transform: uppercase;
     background: $color_orange;
     border-color: $color_black;
+    box-shadow: inset $color_red 0 1px 20px 2px;
     float: right;
     transition: background ease-in-out .15s;
 }
@@ -75,6 +79,7 @@ a {
 .btn-cart-add:hover {
     color: $color_white;
     background: $color_red;
+    box-shadow: inset $color_darkGray 0 1px 20px 2px;
 }
 
 /* PAGINATION */
@@ -313,6 +318,8 @@ footer {
         }
         .btn-cart-add {
             padding: 10px 20px;
+            font-size: 14px;
+            line-height: 20px;
             float: left;
         }
     }

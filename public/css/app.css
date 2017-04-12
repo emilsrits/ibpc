@@ -8358,11 +8358,15 @@ a:hover, a:focus {
 /* BUTTONS */
 .btn-cart-add {
   margin-top: 5px;
-  line-height: 20px;
+  padding: 6px 10px;
+  line-height: 16px;
   color: #fff;
+  font-size: 13px;
+  font-weight: bold;
   text-transform: uppercase;
   background: #f37c34;
   border-color: #0d0d0d;
+  box-shadow: inset #CC4040 0 1px 20px 2px;
   float: right;
   -webkit-transition: background ease-in-out .15s;
   transition: background ease-in-out .15s;
@@ -8371,6 +8375,7 @@ a:hover, a:focus {
 .btn-cart-add:hover {
   color: #fff;
   background: #CC4040;
+  box-shadow: inset #303030 0 1px 20px 2px;
 }
 
 /* PAGINATION */
@@ -8639,6 +8644,8 @@ footer p {
 
 #product-buy #add-to-cart-form .btn-cart-add {
   padding: 10px 20px;
+  font-size: 14px;
+  line-height: 20px;
   float: left;
 }
 
