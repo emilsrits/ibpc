@@ -48,16 +48,6 @@
     }
 }
 
-@media only screen and (min-width: $mobile-md) {
-    #shopping-cart-table {
-        .table-body {
-            td:first-child {
-                text-align: right;
-            }
-        }
-    }
-}
-
 @media only screen and (min-width: $mobile-md) and (max-width: $desktop-lg - 1) {
     .md-100 {  width: 100%;  }
     .md-85 {  width: 85%;  }

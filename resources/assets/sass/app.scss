@@ -375,6 +375,11 @@ footer {
             padding: 15px;
             line-height: 20px;
         }
+        td:first-child {
+            a {
+                padding: 5px 10px;
+            }
+        }
     }
 }
 .cart-empty {
