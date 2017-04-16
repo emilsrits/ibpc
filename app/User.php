@@ -27,21 +27,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany('App\Role');
     }
 
     // Checks if user has been given any role
-    public function hasRoleSet() {
+    public function hasRoleSet()
+    {
         return ($this->roles()->count()) ? true : false;
     }
 
     // Checks if user has a specific role
-    public function hasRole($role) {
+    public function hasRole($role)
+    {
         return $this->roles->pluck('slug')->contains($role);
     }
 
-    private function getIdInArray($array, $term) {
+    private function getIdInArray($array, $term)
+    {
         foreach ($array as $key => $value) {
             if ($value == $term) { // 1 => "admin", 2 => "moderator" ...
                 return $key;
@@ -50,7 +54,8 @@ class User extends Authenticatable
         throw new \Exception('Cant get the ID in array');
     }
 
-    public function assignRole($title) {
+    public function assignRole($title)
+    {
         $assignedRoles = array();
 
         $roles = Role::all()->pluck('slug', 'id');

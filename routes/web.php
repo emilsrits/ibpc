@@ -33,6 +33,11 @@ Route::get('/roles/create', 'RolesController@role');
  */
 Route::get('/admin', 'AdminController@index');
 
+Route::get('/admin/products/create', [
+    'uses' => 'AdminController@createProduct',
+    'as' => 'admin.createProduct'
+]);
+
 /**
  * User routes
  */
