@@ -81,6 +81,13 @@ class Cart extends Model
         return view('cart.index');
     }
 
+    /**
+     * Update quantity of cart items
+     *
+     * @param $request
+     * @param $cart
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateCartItems($request, $cart)
     {
         $oldTotalQty = $this->totalQty;

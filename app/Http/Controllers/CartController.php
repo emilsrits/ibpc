@@ -72,6 +72,12 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    /**
+     * Update cart
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateCart(Request $request)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
