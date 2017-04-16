@@ -54,7 +54,9 @@
                                 @if(Auth::check())
                                     <li><a href="{{ url('/user/profile') }}">Profile</a></li>
                                     <li><a href="#">Settings</a></li>
-                                    <li><a href="#">Manage</a></li>
+                                    @if(Auth::user()->hasRole('admin'))
+                                        <li><a href="{{ url('/admin') }}">Manage</a></li>
+                                    @endif
                                     <li role="separator" class="divider"></li>
                                 @endif
                             <!-- Authentication Links -->
@@ -75,3 +77,16 @@
         </div>
     </nav>
 </header>
+
+<div class="flash-message">
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has('message-' . $msg))
+            <div class="message message-{{ $msg }}">
+                <div class="message-text">{{ Session::get('message-' . $msg) }}</div>
+                <div class="message-close">
+                    <a href="#" data-dismiss="message" aria-label="message-close"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        @endif
+    @endforeach
+</div>

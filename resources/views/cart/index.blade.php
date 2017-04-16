@@ -24,7 +24,7 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td><a href="{{ url('/cart/remove', ['id' => $product['item']['id']]) }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                                    <td class="product-image hidden-xs">
+                                    <td class="cart-item-image hidden-xs">
                                         <a href="{{ url('/product', ['id' => $product['item']['id']]) }}">
                                             <img src="{{ asset($product['item']['image_path']) }}" alt="{{ $product['item']['code'] }}">
                                         </a>
@@ -35,16 +35,19 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <input id="qty" type="text" name="qty" maxlength="3" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
+                                        <input id="qty" type="number" name="qty" min="1" max="1000" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
                                     </td>
-                                    <td>
-                                        {{ $cart->getItemTotalPrice($product['item']['id']) }}
+                                    <td class="cart-item-price">
+                                        {{ $cart->getItemPrice($product['item']['id']) }}
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </fieldset>
+                <div class="cart-total">
+                    <strong>Total: {{ $cart->getTotalCartPrice() }}</strong>
+                </div>
             </form>
         </div>
     @else

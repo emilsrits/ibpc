@@ -41,7 +41,7 @@
                     <h2>{{ $product->title }}</h2>
                     <p class="product-code">{{ $product->code }}</p>
                     <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
-                    <p class="product-price">{{ $product->current_price }}</p>
+                    <p class="product-price-current">{{ $product->current_price }}</p>
                     @if($product->status)
                         <div class="stock-status in-stock">
                             <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
@@ -57,7 +57,7 @@
                         <form id="add-to-cart-form" class="clearfix" role="form" method="POST" action="{{ url('/cart/add', ['id' => $product->id]) }}">
                             {{ csrf_field() }}
                             <label for="qty">Qty: </label>
-                            <input id="qty" type="text" name="qty" maxlength="3" value="1" title="qty" pattern="[0-9]*">
+                            <input id="qty" type="number" name="qty" min="1" max="1000" value="1" title="qty" pattern="[0-9]*">
                             <button class="btn btn-cart-add" type="submit" name="submit">Add To Cart</button>
                         </form>
                     </div>

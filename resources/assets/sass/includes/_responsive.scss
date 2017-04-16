@@ -24,6 +24,12 @@
 }
 
 @media only screen and (max-width: $mobile-md - 1) {
+    #wrapper {
+        .flash-message {
+            width: 90%;
+        }
+    }
+
     #product-view {
         display: flex;
         flex-flow: column;

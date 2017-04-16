@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $fillable = [
         'category_id', 'image_path', 'code', 'title', 'description', 'price',
-        'price_old', 'storage', 'status', 'created_at', 'updated_at'
+        'price_old', 'stock', 'status', 'created_at', 'updated_at'
     ];
 
     public function specifications()
@@ -29,7 +29,7 @@ class Product extends Model
     public function getOldPriceAttribute()
     {
     	if ($this->price_old != '')
-    		return '€' . ($this->price_old);
+    		return ($this->price_old) . ' €';
     	else 
     		return  '';
     }
@@ -41,6 +41,6 @@ class Product extends Model
      */
     public function getCurrentPriceAttribute()
     {
-    	return '€' . ($this->price);
+    	return ($this->price) . ' €';
     }
 }

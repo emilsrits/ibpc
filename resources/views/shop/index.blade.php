@@ -10,21 +10,35 @@
             {{ $products->appends(Request::except('page'))->links() }}
             <div class="grid-uniform clearfix">
                 @foreach($products as $product)
-                    <div class="grid-item lg-25 md-33 sm-50">
-                        <div class="product-grid">
-                            <div class="product-image">
-                                <a href="{{ url('/product', ['id' => $product->id]) }}">
-                                    <img class="img-responsive" src="{{ $product->image_path }}" alt="{{ $product->code }}">
-                                </a>
+                    @if($product->status)
+                        <div class="grid-item lg-25 md-33 sm-50">
+                            <div class="product-grid">
+                                <div class="product-image">
+                                    <a href="{{ url('/product', ['id' => $product->id]) }}">
+                                        <img class="img-responsive" src="{{ $product->image_path }}" alt="{{ $product->code }}">
+                                    </a>
+                                </div>
+                                <p class="product-link text-center">
+                                    <a href="{{ url('/product', ['id' => $product->id]) }}">{{ $product->title }}</a>
+                                </p>
+                                @if($product->stock >= 5)
+                                    <div class="stock-status in-stock">
+                                        <div class="stock-text">In Stock</div>
+                                    </div>
+                                @else
+                                    <div class="stock-status out-of-stock">
+                                        <div class="stock-text">Last {{ $product->stock }}</div>
+                                    </div>
+                                @endif
+                                <div class="product-price">
+                                    @if($product->old_price)
+                                        <div class="product-price-old">{{ $product->old_price }}</div>
+                                    @endif
+                                    <div class="product-price-current">{{ $product->current_price }}</div>
+                                </div>
                             </div>
-                            <p class="product-link text-center">
-                                <a href="{{ url('/product', ['id' => $product->id]) }}">{{ $product->title }}</a>
-                            </p>
-                            <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
-                            <p class="product-price">{{ $product->current_price }}</p>
-                            <a class="btn btn-cart-add" href="{{ url('/cart/add', ['id' => $product->id]) }}" role="button">Add To Cart</a>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div> <!-- grid-uniform -->
             @if($products->count() >= 8)

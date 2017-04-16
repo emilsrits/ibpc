@@ -37,8 +37,10 @@ class CartController extends Controller
     {
         if ($request->input('qty')) {
             $qty = $request->input('qty');
+            $request->session()->flash('message-success', 'Product added to cart!');
         } else {
-            $qty = 1;
+            $request->session()->flash('message-warning', 'Product can not be added!');
+            return redirect()->back();
         }
 
         $product = Product::find($id);

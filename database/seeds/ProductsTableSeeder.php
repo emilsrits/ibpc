@@ -23,7 +23,7 @@ class ProductsTableSeeder extends Seeder
         	'description' => 'Gaming graphics card',
         	'price' => 195.50,
             'price_old' => 220.57,
-        	'storage' => 10,
+        	'stock' => 10,
         	'status' => 1
         ]);
         $product->save();
@@ -36,7 +36,7 @@ class ProductsTableSeeder extends Seeder
         	'description' => 'Gaming graphics card',
         	'price' => 280.90,
             'price_old' => 298.83,
-        	'storage' => 5,
+        	'stock' => 5,
         	'status' => 1
         ]);
         $product->save();
@@ -48,8 +48,8 @@ class ProductsTableSeeder extends Seeder
         	'title' => 'ASUS RX 480 4GB Dual-fan OC',
         	'description' => 'Gaming graphics card',
         	'price' => 210.46,
-        	'storage' => 0,
-        	'status' => 0
+        	'stock' => 6,
+        	'status' => 1
         ]);
         $product->save();
 
@@ -60,7 +60,7 @@ class ProductsTableSeeder extends Seeder
             'title' => 'MSI GTX 1050 Ti 4GB GAMING X',
             'description' => 'Gaming graphics card',
             'price' => 165.94,
-            'storage' => 2,
+            'stock' => 2,
             'status' => 1
         ]);
         $product->save();
@@ -73,7 +73,7 @@ class ProductsTableSeeder extends Seeder
             'description' => 'Gaming graphics card',
             'price' => 730.21,
             'price_old' => 764.58,
-            'storage' => 6,
+            'stock' => 6,
             'status' => 1
         ]);
         $product->save();
@@ -86,7 +86,7 @@ class ProductsTableSeeder extends Seeder
             'description' => 'Gaming graphics card',
             'price' => 268.62,
             'price_old' => 279.87,
-            'storage' => 3,
+            'stock' => 3,
             'status' => 1
         ]);
         $product->save();
@@ -99,7 +99,7 @@ class ProductsTableSeeder extends Seeder
             'description' => 'Gaming graphics card',
             'price' => 145.42,
             'price_old' => 156.54,
-            'storage' => 3,
+            'stock' => 3,
             'status' => 1
         ]);
         $product->save();
@@ -112,7 +112,7 @@ class ProductsTableSeeder extends Seeder
             'description' => 'Gaming graphics card',
             'price' => 730.89,
             'price_old' => 742.64,
-            'storage' => 1,
+            'stock' => 1,
             'status' => 1
         ]);
         $product->save();
@@ -125,8 +125,8 @@ class ProductsTableSeeder extends Seeder
             'description' => 'Gaming graphics card',
             'price' => 215.21,
             'price_old' => 238.63,
-            'storage' => 0,
-            'status' => 0
+            'stock' => 5,
+            'status' => 1
         ]);
         $product->save();
 

@@ -26,7 +26,7 @@ Route::get('/admin', 'AdminController@index');
 
 Route::get('/user/login', 'Auth\LoginController@index');
 
-Route::get('/user/logout', 'Auth\LoginController@logout');
+Route::post('/user/logout', 'Auth\LoginController@logout');
 
 Route::get('/user/register', 'Auth\RegisterController@index');
 

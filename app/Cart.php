@@ -88,7 +88,7 @@ class Cart extends Model
      */
     public function getTotalCartPrice()
     {
-        return '€' . $this->totalPrice;
+        return $this->totalPrice . ' €';
     }
 
     /**
@@ -99,7 +99,7 @@ class Cart extends Model
      */
     public function getItemTotalPrice($id)
     {
-        return '€' . $this->items[$id]['price'] * $this->items[$id]['qty'];
+        return $this->items[$id]['price'] * $this->items[$id]['qty'] . ' €';
     }
 
     /**
@@ -110,6 +110,6 @@ class Cart extends Model
      */
     public function getItemPrice($id)
     {
-        return '€' . $this->items[$id]['price'];
+        return  $this->items[$id]['price'] . ' €';
     }
 }
