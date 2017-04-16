@@ -43,10 +43,17 @@
                     <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
                     <p class="product-price-current">{{ $product->current_price }}</p>
                     @if($product->status)
-                        <div class="stock-status in-stock">
-                            <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
-                            <div class="stock-text">In Stock</div>
-                        </div>
+                        @if($product->stock > 5)
+                            <div class="stock-status in-stock">
+                                <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+                                <div class="stock-text">In Stock</div>
+                            </div>
+                        @else
+                            <div class="stock-status low-stock">
+                                <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+                                <div class="stock-text">Low Stock</div>
+                            </div>
+                        @endif
                     @else
                         <div class="stock-status out-of-stock">
                             <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>

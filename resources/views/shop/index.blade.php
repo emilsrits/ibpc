@@ -21,13 +21,13 @@
                                 <p class="product-link text-center">
                                     <a href="{{ url('/product', ['id' => $product->id]) }}">{{ $product->title }}</a>
                                 </p>
-                                @if($product->stock >= 5)
+                                @if($product->stock > 5)
                                     <div class="stock-status in-stock">
                                         <div class="stock-text">In Stock</div>
                                     </div>
                                 @else
-                                    <div class="stock-status out-of-stock">
-                                        <div class="stock-text">Last {{ $product->stock }}</div>
+                                    <div class="stock-status low-stock">
+                                        <div class="stock-text">Low Stock</div>
                                     </div>
                                 @endif
                                 <div class="product-price">

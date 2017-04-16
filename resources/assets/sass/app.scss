@@ -248,7 +248,7 @@ footer {
             color: $color_green;
         }
     }
-    .out-of-stock {
+    .low-stock {
         .stock-text {
             color: $color_orange;
         }
@@ -346,7 +346,14 @@ footer {
     .in-stock {
         .stock-icon {
             > i {
-                color: #67e824;
+                color: $color_green;
+            }
+        }
+    }
+    .low-stock {
+        .stock-icon {
+            > i {
+                color: $color_orange;
             }
         }
     }
@@ -360,7 +367,7 @@ footer {
     .form-container {
         margin: 20px 0;
         padding: 15px 0;
-        border-top: 1px solid #e6e6e6;
+        border-top: 1px solid $color_gray;
     }
     #add-to-cart-form {
         label {

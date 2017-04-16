@@ -6486,7 +6486,7 @@ footer {
       letter-spacing: 0.2px; }
   .product-grid .in-stock .stock-text {
     color: #67E824; }
-  .product-grid .out-of-stock .stock-text {
+  .product-grid .low-stock .stock-text {
     color: #f37c34; }
   .product-grid .product-price {
     margin: 5px; }
@@ -6555,13 +6555,15 @@ footer {
       font-size: 14px;
       font-weight: bold; }
   #product-buy .in-stock .stock-icon > i {
-    color: #67e824; }
+    color: #67E824; }
+  #product-buy .low-stock .stock-icon > i {
+    color: #f37c34; }
   #product-buy .out-of-stock .stock-icon > i {
     color: #CC4040; }
   #product-buy .form-container {
     margin: 20px 0;
     padding: 15px 0;
-    border-top: 1px solid #e6e6e6; }
+    border-top: 1px solid #E6E6E6; }
   #product-buy #add-to-cart-form label {
     display: none; }
   #product-buy #add-to-cart-form #qty {
