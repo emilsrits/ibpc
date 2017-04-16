@@ -6681,8 +6681,6 @@ footer {
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase; }
-  .manage-section > div {
-    padding: 10px; }
   .manage-section .icon {
     float: left; }
     .manage-section .icon i {
@@ -6699,6 +6697,7 @@ footer {
 .manage-tab {
   display: -webkit-box;
   display: flex;
+  padding: 10px;
   height: 70px;
   font-size: 15px;
   font-weight: bold;
@@ -6715,14 +6714,21 @@ footer {
     background-color: #eee;
     box-shadow: inset #303030 0 1px 12px 1px; }
 
-/* MANAGE PRODUCTS */
-.manage-products {
+.manage-products, .manage-users {
   width: 100%; }
-  .manage-products .products-create {
+  .manage-products .products-create, .manage-products .users-create, .manage-users .products-create, .manage-users .users-create {
     width: 50%;
     float: left; }
-  .manage-products .products-edit {
+  .manage-products .products-edit, .manage-products .users-edit, .manage-users .products-edit, .manage-users .users-edit {
     width: 50%;
     float: left; }
+
+/* MANAGE PRODUCTS */
+.manage-products > h4 {
+  color: #800080; }
+
+/* MANAGE USERS */
+.manage-users > h4 {
+  color: #1c98ff; }
 
 /*# sourceMappingURL=app.css.map */

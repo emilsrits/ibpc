@@ -510,9 +510,6 @@ footer {
         font-weight: bold;
         text-transform: uppercase;
     }
-    > div {
-        padding: 10px;
-    }
     .icon {
         float: left;
         i {
@@ -530,6 +527,7 @@ footer {
 }
 .manage-tab {
     display: flex;
+    padding: 10px;
     height: 70px;
     font-size: 15px;
     font-weight: bold;
@@ -546,16 +544,28 @@ footer {
         box-shadow: inset $color_darkGray 0 1px 12px 1px;
     }
 }
-
-/* MANAGE PRODUCTS */
-.manage-products {
+.manage-products, .manage-users {
     width: 100%;
-    .products-create {
+    .products-create, .users-create {
         width: 50%;
         float: left;
     }
-    .products-edit {
+    .products-edit, .users-edit {
         width: 50%;
         float: left;
+    }
+}
+
+/* MANAGE PRODUCTS */
+.manage-products {
+    > h4 {
+        color: #800080;
+    }
+}
+
+/* MANAGE USERS */
+.manage-users {
+    > h4 {
+        color: #1c98ff;
     }
 }

@@ -22,6 +22,21 @@
                     </div>
                 </a>
             </div>
+            <div class="manage-section manage-users">
+                <h4>Users</h4>
+                <a href="{{ url('/admin/users/create') }}">
+                    <div class="manage-tab users-create">
+                        <div class="icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+                        <div class="text">Create Users</div>
+                    </div>
+                </a>
+                <a href="{{ url('/admin/users/edit') }}">
+                    <div class="manage-tab users-edit">
+                        <div class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                        <div class="text">Edit Users</div>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div> <!-- grid -->
+    </div>
 @endsection
