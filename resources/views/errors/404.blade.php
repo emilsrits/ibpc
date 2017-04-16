@@ -10,13 +10,15 @@
     <style>
         .title-404 {
             margin: 5% auto;
+            padding: 0 10px;
             width: 100%;
             height: 350px;
             font-family: 'Lato', sans-serif;
-            font-size: 72px;
+            font-size: 50px;
             font-weight: bold;
             text-align: center;
             background: url({{ asset("/images/pepe.png") }}) no-repeat center;
+            background-size: contain;
         }
     </style>
 @endsection
