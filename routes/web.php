@@ -13,6 +13,9 @@
 
 Auth::routes();
 
+/**
+ * Home routes
+ */
 Route::get('/', [
     'uses' => 'ProductController@index',
     'as' => 'shop.index'
@@ -20,10 +23,19 @@ Route::get('/', [
 
 Route::get('/home', 'HomeController@index');
 
+/**
+ * User role routes
+ */
 Route::get('/roles/create', 'RolesController@role');
 
+/**
+ * Admin routes
+ */
 Route::get('/admin', 'AdminController@index');
 
+/**
+ * User routes
+ */
 Route::get('/user/login', 'Auth\LoginController@index');
 
 Route::post('/user/logout', 'Auth\LoginController@logout');
@@ -35,6 +47,9 @@ Route::get('/user/profile', [
 	'as' => 'user.profile'
 ]);
 
+/**
+ * Cart routes
+ */
 Route::get('/cart/add/{id}', [
 	'uses' => 'CartController@addToCart',
 	'as' => 'cart.addToCart'
@@ -55,11 +70,17 @@ Route::get('/cart', [
 	'as' => 'cart.index'
 ]);
 
+/**
+ * Product routes
+ */
 Route::get('/product/{id}', [
    'uses' => 'ProductController@viewProduct',
     'as' => 'product.viewProduct'
 ]);
 
+/**
+ * Resource routes
+ */
 Route::get('/storage/{filePath}', function ($filePath) {
     $path = storage_path('public/' . $filePath);
 
