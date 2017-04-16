@@ -35,6 +35,26 @@
         }
     }
 
+    #shopping-cart-form {
+        #shopping-cart-table {
+            .table-headers {
+                th {
+                    font-size: 13px;
+                }
+            }
+            .table-body {
+                td {
+                    padding: 15px 10px;
+                    font-size: 13px;
+                }
+            }
+            #qty {
+                width: 40px;
+                font-size: 14px;
+            }
+        }
+    }
+
     .sm-100 {  width: 100%;  }
     .sm-85 {  width: 85%;  }
     .sm-50 {  width: 50%  }
