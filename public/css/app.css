@@ -6414,6 +6414,18 @@ input[type=number]::-webkit-inner-spin-button {
     color: #3c763d;
     background-color: #dff0d8;
     border: 1px solid #3c763d; }
+  .flash-message .message-info {
+    color: #b3b13e;
+    background-color: #fafbde;
+    border: 1px solid #b3b13e; }
+  .flash-message .message-warning {
+    color: #f37c34;
+    background-color: #fff3eb;
+    border: 1px solid #f37c34; }
+  .flash-message .message-danger {
+    color: #CC4040;
+    background-color: #ffe7e7;
+    border: 1px solid #CC4040; }
   .flash-message .message-text {
     word-wrap: break-word; }
   .flash-message .message-close {
