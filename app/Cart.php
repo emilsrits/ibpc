@@ -81,6 +81,20 @@ class Cart extends Model
         return view('cart.index');
     }
 
+    public function updateCartItems($request, $cart)
+    {
+        foreach ($cart as $item => $qty) {
+            if ($qty['qty']) {
+                $this->items[$item]['qty'] = $qty['qty'];
+                $this->totalQty = $qty['qty'];
+                $this->totalPrice = $this->items[$item]['price'] * $qty['qty'];
+            } else {
+                $request->session()->flash('message-warning', 'Invalid product quantity!');
+                return redirect()->back();
+            }
+        }
+    }
+
     /**
      * Return price of all items in cart
      *

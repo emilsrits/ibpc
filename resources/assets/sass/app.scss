@@ -70,25 +70,27 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 /* BUTTONS */
-.btn-cart-add {
+.btn-cart-add, .btn-cart-update {
     margin-top: 5px;
-    padding: 6px 10px;
-    line-height: 16px;
     color: $color_white;
     font-size: 13px;
     font-weight: bold;
     text-transform: uppercase;
-    background: $color_orange;
-    border-color: $color_black;
+    border: 1px solid $color_black;
     box-shadow: inset $color_red 0 1px 20px 2px;
-    float: right;
+    background: $color_orange;
     transition: background ease-in-out .15s;
+    float: right;
+    &:hover {
+        color: $color_white;
+        background: $color_red;
+        box-shadow: inset $color_darkGray 0 1px 20px 2px;
+    }
 }
+.btn-cart-add {
+    padding: 6px 10px;
+    line-height: 16px;
 
-.btn-cart-add:hover {
-    color: $color_white;
-    background: $color_red;
-    box-shadow: inset $color_darkGray 0 1px 20px 2px;
 }
 
 /* PAGINATION */
@@ -419,6 +421,9 @@ footer {
         strong {
             font-size: 16px;
         }
+    }
+    .cart-update {
+        padding: 10px;
     }
 }
 #shopping-cart-table {

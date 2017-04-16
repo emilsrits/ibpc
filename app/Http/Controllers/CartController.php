@@ -35,8 +35,8 @@ class CartController extends Controller
      */
     public function addToCart(Request $request, $id)
     {
-        if ($request->input('qty')) {
-            $qty = $request->input('qty');
+        $qty = $request->input('qty');
+        if ($qty) {
             $request->session()->flash('message-success', 'Product added to cart!');
         } else {
             $request->session()->flash('message-warning', 'Product can not be added!');
@@ -72,5 +72,18 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    public function updateCart(Request $request)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
 
+        $cartItemsQty = $request->input('cart');
+        $cart->updateCartItems($request, $cartItemsQty);
+
+        Session::put('cart', $cart);
+
+        $cart->isCartEmpty();
+
+        return redirect()->route('cart.index');
+    }
 }

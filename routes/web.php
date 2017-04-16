@@ -65,6 +65,11 @@ Route::get('/cart/remove/{id}', [
     'as' => 'cart.removeFromCart'
 ]);
 
+Route::post('/cart/update', [
+   'uses' => 'CartController@updateCart',
+    'as' => 'cart.updateCart'
+]);
+
 Route::get('/cart', [
 	'uses' => 'CartController@index',
 	'as' => 'cart.index'

@@ -35,7 +35,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <input id="qty" type="number" name="qty" min="1" max="1000" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
+                                        <input id="qty" type="number" name="cart[{{ $product['item']['id'] }}][qty]" min="1" max="1000" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
                                     </td>
                                     <td class="cart-item-price">
                                         {{ $cart->getItemPrice($product['item']['id']) }}
@@ -47,6 +47,9 @@
                 </fieldset>
                 <div class="cart-total">
                     <strong>Total: {{ $cart->getTotalCartPrice() }}</strong>
+                </div>
+                <div class="cart-update clearfix">
+                    <button class="btn btn-cart-update" type="submit" name="submit">Update Cart</button>
                 </div>
             </form>
         </div>
