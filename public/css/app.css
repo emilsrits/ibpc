@@ -6672,4 +6672,57 @@ footer {
       color: #0d0d0d;
       background-color: #CC4040; }
 
+/* MANAGE */
+.manage-section {
+  margin: 10px auto;
+  padding: 10px; }
+  .manage-section > h4 {
+    margin: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase; }
+  .manage-section > div {
+    padding: 10px; }
+  .manage-section .icon {
+    float: left; }
+    .manage-section .icon i {
+      padding-right: 15px; }
+
+.manage-section:before,
+.manage-section:after {
+  content: "";
+  display: table; }
+
+.manage-section:after {
+  clear: both; }
+
+.manage-tab {
+  display: -webkit-box;
+  display: flex;
+  height: 70px;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  border: 1px solid #eee;
+  -webkit-transition: color ease-in-out 0.2s, border ease-in-out 0.2s, background ease-in-out 0.2s;
+  transition: color ease-in-out 0.2s, border ease-in-out 0.2s, background ease-in-out 0.2s; }
+  .manage-tab:hover, .manage-tab:focus {
+    border-color: #E6E6E6;
+    background-color: #eee;
+    box-shadow: inset #303030 0 1px 12px 1px; }
+
+/* MANAGE PRODUCTS */
+.manage-products {
+  width: 100%; }
+  .manage-products .products-create {
+    width: 50%;
+    float: left; }
+  .manage-products .products-edit {
+    width: 50%;
+    float: left; }
+
 /*# sourceMappingURL=app.css.map */
