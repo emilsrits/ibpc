@@ -83,12 +83,19 @@ class Cart extends Model
 
     public function updateCartItems($request, $cart)
     {
+        $oldTotalQty = $this->totalQty;
+        $oldTotalPrice = $this->totalPrice;
+        $this->totalQty = 0;
+        $this->totalPrice = 0;
+
         foreach ($cart as $item => $qty) {
             if ($qty['qty']) {
                 $this->items[$item]['qty'] = $qty['qty'];
-                $this->totalQty = $qty['qty'];
-                $this->totalPrice = $this->items[$item]['price'] * $qty['qty'];
+                $this->totalQty += $qty['qty'];
+                $this->totalPrice += $this->items[$item]['price'] * $qty['qty'];
             } else {
+                $this->totalQty = $oldTotalQty;
+                $this->totalPrice = $oldTotalPrice;
                 $request->session()->flash('message-warning', 'Invalid product quantity!');
                 return redirect()->back();
             }
