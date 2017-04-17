@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Role;
 use App\User;
 use App\Product;
+use App\Category;
 
 class AdminController extends Controller
 {
@@ -40,7 +40,6 @@ class AdminController extends Controller
      */
     public function createProduct()
     {
-        //dd(Category::all());
         $categories = Category::all();
         return view('admin.products.create', ['categories' => $categories]);
     }
