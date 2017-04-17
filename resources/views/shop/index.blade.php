@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="grid clearfix">
+    <div class="grid cf">
         <div class="grid-item lg-100 md-100 sm-100">
             {{ $products->appends(Request::except('page'))->links() }}
-            <div class="grid-uniform clearfix">
+            <div class="grid-uniform cf">
                 @foreach($products as $product)
                     @if($product->status)
                         <div class="grid-item lg-25 md-33 sm-50">

@@ -48,7 +48,7 @@
                 <div class="cart-total">
                     <strong>Total: {{ $cart->getTotalCartPrice() }}</strong>
                 </div>
-                <div class="cart-update clearfix">
+                <div class="cart-update cf">
                     <button class="btn btn-cart-update" type="submit" name="submit">Update Cart</button>
                 </div>
             </form>

@@ -28,7 +28,7 @@
 		@include('partials.header')
 
 		<main>
-			<div class="container-inner clearfix">
+			<div class="container-inner cf">
 				@yield('content')
 			</div>
 		</main>

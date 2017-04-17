@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="grid clearfix">
+    <div class="grid cf">
         <div class="lg-100">
-            <div id="product-view" class="clearfix">
+            <div id="product-view" class="cf">
                 <div id="product-details" class="lg-65 md-65 sm-100">
                     <div class="product-image">
                         <img class="img-responsive" src="{{ $product->image_path }}" alt="{{ $product->code }}">
@@ -61,7 +61,7 @@
                         </div>
                     @endif
                     <div class="form-container">
-                        <form id="add-to-cart-form" class="clearfix" role="form" method="POST" action="{{ url('/cart/add', ['id' => $product->id]) }}">
+                        <form id="add-to-cart-form" class="cf" role="form" method="POST" action="{{ url('/cart/add', ['id' => $product->id]) }}">
                             {{ csrf_field() }}
                             <label for="qty">Qty: </label>
                             <input id="qty" type="number" name="qty" min="1" max="1000" value="1" title="qty" pattern="[0-9]*">
