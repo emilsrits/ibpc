@@ -16,8 +16,7 @@ class ProductsTableSeeder extends Seeder
     	DB::table('products')->truncate();
         // Product table seeder
         $product = new \App\Product([
-        	'category_id' => 1,
-        	'image_path' => '/images/products/1/000001.jpg',
+        	'image_path' => '/images/products/4/000001.jpg',
         	'code' => 'STRIX-RX470-O4G-GAMING',
         	'title' => 'ASUS RX 470 4GB STRIX OC',
         	'description' => 'Gaming graphics card',
@@ -29,8 +28,7 @@ class ProductsTableSeeder extends Seeder
         $product->save();
 
         $product = new \App\Product([
-        	'category_id' => 1,
-        	'image_path' => '/images/products/1/000002.jpg',
+        	'image_path' => '/images/products/4/000002.jpg',
         	'code' => 'GTX-1060-GAMING-X-6G',
         	'title' => 'MSI GTX 1060 6GB GAMING X',
         	'description' => 'Gaming graphics card',
@@ -42,8 +40,7 @@ class ProductsTableSeeder extends Seeder
         $product->save();
 
         $product = new \App\Product([
-        	'category_id' => 1,
-        	'image_path' => '/images/products/1/000003.jpg',
+        	'image_path' => '/images/products/4/000003.jpg',
         	'code' => 'DUAL-RX480-O4G',
         	'title' => 'ASUS RX 480 4GB Dual-fan OC',
         	'description' => 'Gaming graphics card',
@@ -54,8 +51,7 @@ class ProductsTableSeeder extends Seeder
         $product->save();
 
         $product = new \App\Product([
-            'category_id' => 1,
-            'image_path' => '/images/products/1/000004.jpg',
+            'image_path' => '/images/products/4/000004.jpg',
             'code' => 'GTX-1050-Ti-GAMING-X-4G',
             'title' => 'MSI GTX 1050 Ti 4GB GAMING X',
             'description' => 'Gaming graphics card',
@@ -66,8 +62,7 @@ class ProductsTableSeeder extends Seeder
         $product->save();
 
         $product = new \App\Product([
-            'category_id' => 1,
-            'image_path' => '/images/products/1/000005.jpg',
+            'image_path' => '/images/products/4/000005.jpg',
             'code' => 'STRIX-GTX1080-O8G-GAMING',
             'title' => 'ASUS GTX 1080 8GB ROG STRIX OC',
             'description' => 'Gaming graphics card',
@@ -79,8 +74,7 @@ class ProductsTableSeeder extends Seeder
         $product->save();
 
         $product = new \App\Product([
-            'category_id' => 1,
-            'image_path' => '/images/products/1/000006.jpg',
+            'image_path' => '/images/products/4/000006.jpg',
             'code' => 'GTX-1060-3GT-OC',
             'title' => 'MSI GTX 1060 3GB OC',
             'description' => 'Gaming graphics card',
@@ -92,8 +86,7 @@ class ProductsTableSeeder extends Seeder
         $product->save();
 
         $product = new \App\Product([
-            'category_id' => 1,
-            'image_path' => '/images/products/1/000007.jpg',
+            'image_path' => '/images/products/4/000007.jpg',
             'code' => 'GV-RX460WF2OC-4GD',
             'title' => 'GIGABYTE RX 460 4GB WINDFORCE OC',
             'description' => 'Gaming graphics card',
@@ -105,8 +98,7 @@ class ProductsTableSeeder extends Seeder
         $product->save();
 
         $product = new \App\Product([
-            'category_id' => 1,
-            'image_path' => '/images/products/1/000008.jpg',
+            'image_path' => '/images/products/4/000008.jpg',
             'code' => 'SAPPHIRE-FX-4G',
             'title' => 'SAPPHIRE R9 FURY X 4GB HBM',
             'description' => 'Gaming graphics card',
@@ -118,8 +110,7 @@ class ProductsTableSeeder extends Seeder
         $product->save();
 
         $product = new \App\Product([
-            'category_id' => 1,
-            'image_path' => '/images/products/1/000009.jpg',
+            'image_path' => '/images/products/4/000009.jpg',
             'code' => 'SAPPHIRE-N+-4G',
             'title' => 'SAPPHIRE NITRO+ RX 470 4GB',
             'description' => 'Gaming graphics card',

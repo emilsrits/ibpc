@@ -19,7 +19,7 @@
                                     </a>
                                 </div>
                                 <p class="product-link text-center">
-                                    <a href="{{ url('/product', ['id' => $product->id]) }}">{{ $product->title }}</a>
+                                    <a href="{{ url('/product', ['id' => $product->id], '/' . $product->code) }}">{{ $product->title }}</a>
                                 </p>
                                 @if($product->stock > 5)
                                     <div class="stock-status in-stock">

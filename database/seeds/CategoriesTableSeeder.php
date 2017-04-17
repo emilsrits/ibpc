@@ -17,7 +17,34 @@ class CategoriesTableSeeder extends Seeder
         // Categories table seeder
         DB::table('categories')->insert([
             [
-	            'title' => 'Video Cards'
+                'title' => 'CPUs / Processors'
+            ],
+            [
+                'title' => 'Motherboards'
+            ],
+            [
+                'title' => 'Memory'
+            ],
+            [
+                'title' => 'Video Cards'
+            ],
+            [
+                'title' => 'Computer Cases'
+            ],
+            [
+                'title' => 'Power Supplies'
+            ],
+            [
+                'title' => 'Fans & PC Cooling'
+            ],
+            [
+                'title' => 'SSDs'
+            ],
+            [
+                'title' => 'CD / DVD / Blu-Ray Burners & Media'
+            ],
+            [
+                'title' => 'Sound Cards'
             ]
         ]);
 

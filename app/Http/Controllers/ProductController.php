@@ -31,7 +31,7 @@ class ProductController extends Controller
 
         $specifications = new Collection;
 
-        foreach($product->specifications as $specification) {
+        foreach ($product->specifications as $specification) {
             if (!$specifications->has($specification->name)) {
                 $currentSpecs = new Collection;
             } else {

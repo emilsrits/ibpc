@@ -17,8 +17,6 @@ class CreateProductsTable extends Migration
             $table->engine = 'InnoDB';
             
             $table->increments('id');
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('image_path');
             $table->string('code')->unique();
             $table->string('title');
@@ -38,10 +36,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign('products_category_id_foreign');
-        });
-
         Schema::dropIfExists('products');
     }
 }
