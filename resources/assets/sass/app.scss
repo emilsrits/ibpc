@@ -90,6 +90,26 @@ input[type=number]::-webkit-inner-spin-button {
     line-height: 16px;
 
 }
+.btn-manage-back {
+    display: inline-block;
+    margin: 5px;
+    a {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        border: 1px solid $color_darkGray;
+        border-radius: 4px;
+        background-color: $color_gray;
+        transition: box-shadow ease-in-out .15s;
+        &:hover, &:focus {
+            color: $color_black;
+            box-shadow: inset $color_darkGray 0 1px 10px 1px;
+        }
+    }
+}
 
 /* PAGINATION */
 .product-pagination {
@@ -555,6 +575,10 @@ footer {
         float: left;
     }
 }
+.manage-btn-group {
+    width: 100%;
+    text-align: right;
+}
 
 /* MANAGE PRODUCTS */
 .manage-products {
@@ -567,5 +591,28 @@ footer {
 .manage-users {
     > h4 {
         color: #1c98ff;
+    }
+}
+
+/* CREATE PRODUCTS */
+.product-create {
+    .product-create-save {
+        margin: 5px;
+        padding: 10px 35px;
+        color: $color_white;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        border: 1px solid $color_black;
+        border-radius: 4px;
+        background-color: $color_orange;
+        transition: box-shadow ease-in-out .15s;
+        &:hover, &:focus {
+            box-shadow: inset $color_darkGray 0 1px 10px 1px;
+        }
+    }
+    .create-attribute {
+        padding: 10px;
     }
 }

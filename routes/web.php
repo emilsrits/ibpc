@@ -38,6 +38,11 @@ Route::get('/admin/products/create', [
     'as' => 'admin.createProduct'
 ]);
 
+Route::post('/admin/products/create/save', [
+    'uses' => 'AdminController@saveCreatedProduct',
+    'as' => 'admin.saveCreatedProduct'
+]);
+
 /**
  * User routes
  */

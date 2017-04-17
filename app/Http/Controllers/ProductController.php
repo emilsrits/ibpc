@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-    	$products = Product::paginate(12);
+        $products = Product::where('status', '=', 1)->paginate(12);
 
     	return view('shop.index', ['products' => $products]);
     }

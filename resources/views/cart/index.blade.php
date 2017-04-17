@@ -6,7 +6,7 @@
 
 @section('content')
     @if(Session::has('cart'))
-        <div class="lg-100">
+        <div class="lg-100 md-100 sm-100">
             <form id="shopping-cart-form" role="form" method="POST" action="{{ url('/cart/update') }}">
                 {{ csrf_field() }}
                 <fieldset>
