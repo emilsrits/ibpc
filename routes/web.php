@@ -83,7 +83,7 @@ Route::get('/cart', [
 /**
  * Product routes
  */
-Route::get('/product/{id}', [
+Route::get('/product/{id}/{code}', [
    'uses' => 'ProductController@viewProduct',
     'as' => 'product.viewProduct'
 ]);

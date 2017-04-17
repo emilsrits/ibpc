@@ -25,12 +25,12 @@
                                 <tr>
                                     <td><a href="{{ url('/cart/remove', ['id' => $product['item']['id']]) }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                     <td class="cart-item-image hidden-xs">
-                                        <a href="{{ url('/product', ['id' => $product['item']['id']]) }}">
+                                        <a href="{{ url('/product', ['id' => $product['item']['id'], 'code' => $product['item']['code']]) }}">
                                             <img src="{{ asset($product['item']['image_path']) }}" alt="{{ $product['item']['code'] }}">
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/product', ['id' => $product['item']['id']]) }}">
+                                        <a href="{{ url('/product', ['id' => $product['item']['id'], 'code' => $product['item']['code']]) }}">
                                             {{ $product['item']['title'] }}
                                         </a>
                                     </td>

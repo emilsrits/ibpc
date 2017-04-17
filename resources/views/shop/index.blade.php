@@ -14,12 +14,12 @@
                         <div class="grid-item lg-25 md-33 sm-50">
                             <div class="product-grid">
                                 <div class="product-image">
-                                    <a href="{{ url('/product', ['id' => $product->id]) }}">
+                                    <a href="{{ url('/product', ['id' => $product->id, 'code' => $product->code]) }}">
                                         <img class="img-responsive" src="{{ $product->image_path }}" alt="{{ $product->code }}">
                                     </a>
                                 </div>
                                 <p class="product-link text-center">
-                                    <a href="{{ url('/product', ['id' => $product->id], '/' . $product->code) }}">{{ $product->title }}</a>
+                                    <a href="{{ url('/product', ['id' => $product->id, 'code' => $product->code]) }}">{{ $product->title }}</a>
                                 </p>
                                 @if($product->stock > 5)
                                     <div class="stock-status in-stock">
