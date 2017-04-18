@@ -612,7 +612,30 @@ footer {
             box-shadow: inset $color_darkGray 0 1px 10px 1px;
         }
     }
+    .product-create-table {
+        width: 100%;
+        max-width: 900px;
+        margin: 10px 0 5px;
+    }
     .create-attribute {
-        padding: 10px;
+        td:first-child {
+            width: 160px;
+        }
+        td {
+            padding: 10px;
+            input[type="text"] {
+                width: 100%;
+            }
+            input[type="number"] {
+                width: 150px;
+            }
+            textarea {
+                width: 100%;
+                resize: none;
+            }
+            select {
+                width: 150px;
+            }
+        }
     }
 }

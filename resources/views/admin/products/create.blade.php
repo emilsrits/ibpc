@@ -15,46 +15,54 @@
                     </div>
                     <button class="product-create-save" type="submit" name="submit">Save</button>
                 </div>
-                <div class="create-attribute product-create-category">
-                    <label for="category">Category: </label>
-                    <select name="category">
-                        <option value="0"></option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="create-attribute product-create-image">
-                    <label for="image">Image: </label>
-                    <input type="file" name="image">
-                </div>
-                <div class="create-attribute product-create-code">
-                    <label for="code">Code: </label>
-                    <input type="text" name="code" required>
-                </div>
-                <div class="create-attribute product-create-title">
-                    <label for="title">Title: </label>
-                    <input type="text" name="title" required>
-                </div>
-                <div class="create-attribute product-create-description">
-                    <label for="description">Description: </label>
-                    <textarea name="description" cols="30" rows="10"></textarea>
-                </div>
-                <div class="create-attribute product-create-price">
-                    <label for="price">Price: </label>
-                    <input type="text" name="price" required pattern="^[0-9]*\.[0-9]{2}|[0-9]*$">
-                </div>
-                <div class="create-attribute product-create-stock">
-                    <label for="stock">Stock: </label>
-                    <input type="number" min="0" max="1000" name="stock" required>
-                </div>
-                <div class="create-attribute product-create-status">
-                    <label for="status">Status: </label>
-                    <select name="status" required>
-                        <option value="0">Disabled</option>
-                        <option value="1">Enabled</option>
-                    </select>
-                </div>
+                <table class="product-create-table">
+                    <tbody>
+                        <tr class="create-attribute product-create-category">
+                            <td><label for="category">Category: </label></td>
+                            <td>
+                                <select name="category">
+                                    <option value="0"></option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="create-attribute product-create-image">
+                            <td><label for="image">Image: </label></td>
+                            <td><input type="file" name="image"></td>
+                        </tr>
+                        <tr class="create-attribute product-create-code">
+                            <td><label for="code">Code: </label></td>
+                            <td><input type="text" name="code" required></td>
+                        </tr>
+                        <tr class="create-attribute product-create-title">
+                            <td><label for="title">Title: </label></td>
+                            <td><input type="text" name="title" required></td>
+                        </tr>
+                        <tr class="create-attribute product-create-description">
+                            <td><label for="description">Description: </label></td>
+                            <td><textarea name="description" cols="20" rows="10"></textarea></td>
+                        </tr>
+                        <tr class="create-attribute product-create-price">
+                            <td><label for="price">Price: </label></td>
+                            <td><input type="text" name="price" required pattern="^[0-9]*\.[0-9]{2}|[0-9]*$"></td>
+                        </tr>
+                        <tr class="create-attribute product-create-stock">
+                            <td><label for="stock">Stock: </label></td>
+                            <td><input type="number" min="0" max="1000" name="stock" required></td>
+                        </tr>
+                        <tr class="create-attribute product-create-status">
+                            <td><label for="status">Status: </label></td>
+                            <td>
+                                <select name="status" required>
+                                    <option value="0">Disabled</option>
+                                    <option value="1">Enabled</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </form>
         </div>
     </div>
