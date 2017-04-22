@@ -61,6 +61,13 @@
         }
     }
 
+    .product-create-image {
+        input[type="file"] {
+            width: 160px;
+            color: transparent;
+        }
+    }
+
     .sm-100 {  width: 100%;  }
     .sm-85 {  width: 85%;  }
     .sm-50 {  width: 50%  }

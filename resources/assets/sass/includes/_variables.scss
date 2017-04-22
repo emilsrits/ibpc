@@ -28,6 +28,7 @@ $color_fontWhite: #e0e0e0;
 $color_lightGray: #eee;
 $color_gray: #E6E6E6;
 $color_darkGray: #303030;
+$color_darkBrown: #373330;
 $color_brownBlack: #222;
 $color_sidebarGray: #3a3a3a;
 $color_black: #0d0d0d;
@@ -52,27 +53,21 @@ $panel-default-heading-bg: #fff;
 // Fonts
 @font-face {
     font-family: 'OpenSans-Regular';
-    src: url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
-         url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
-         url('../fonts/OpenSans-Regular-webfont.svg') format('svg');
+    src: url('../fonts/OpenSans-Regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Montserrat-Regular';
     src: url('../fonts/montserrat-regular-webfont.woff2') format('woff2'),
-         url('../fonts/montserrat-regular-webfont.woff') format('woff'),
-         url('../fonts/montserrat-regular-webfont.ttf') format('truetype'),
-         url('../fonts/montserrat-regular-webfont.svg') format('svg');
+         url('../fonts/montserrat-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Roboto-Regular';
     src: url('../fonts/roboto-regular-webfont.woff2') format('woff2'),
-         url('../fonts/roboto-regular-webfont.woff') format('woff'),
-         url('../fonts/roboto-regular-webfont.ttf') format('truetype'),
-         url('../fonts/roboto-regular-webfont.svg') format('svg');
+         url('../fonts/roboto-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }

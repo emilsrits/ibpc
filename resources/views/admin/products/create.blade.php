@@ -7,6 +7,7 @@
 @section('content')
     <div class="lg-100 md-100 sm-100">
         <div class="product-create">
+            <h3>New Product</h3>
             <form id="create-products-form" role="form" method="POST" action="{{ url('/admin/products/create/save') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="manage-btn-group">
@@ -20,7 +21,7 @@
                         <tr class="create-attribute product-create-category">
                             <td><label for="category">Category: </label></td>
                             <td>
-                                <select name="category">
+                                <select name="category" required>
                                     <option value="0"></option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -30,7 +31,7 @@
                         </tr>
                         <tr class="create-attribute product-create-image">
                             <td><label for="image">Image: </label></td>
-                            <td><input type="file" name="image"></td>
+                            <td><input type="file" name="image" accept="image/gif, image/jpeg, image/png"></td>
                         </tr>
                         <tr class="create-attribute product-create-code">
                             <td><label for="code">Code: </label></td>

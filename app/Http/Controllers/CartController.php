@@ -39,7 +39,7 @@ class CartController extends Controller
         if ($qty) {
             $request->session()->flash('message-success', 'Product added to cart!');
         } else {
-            $request->session()->flash('message-warning', 'Product can not be added!');
+            $request->session()->flash('message-danger', 'Product can not be added!');
             return redirect()->back();
         }
 

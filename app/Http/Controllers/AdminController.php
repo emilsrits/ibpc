@@ -61,6 +61,11 @@ class AdminController extends Controller
             $imgName = self::defaultProductImage;
         }
 
+        // Check for missing values
+        if ($this->validateCreatedProduct($request)) {
+            return redirect()->back();
+        }
+
         $product = new Product();
         $product->image_path = self::storageProductImagePath . $imgName;
         $product->code = $request['code'];
@@ -76,5 +81,29 @@ class AdminController extends Controller
         }
 
         return back();
+    }
+
+    protected function validateCreatedProduct($request)
+    {
+        $errors = 0;
+
+        if (!$request['category']) {
+            $errors++;
+        } if (!$request['code']) {
+            $errors++;
+        } if (!$request['price']) {
+            $errors++;
+        } if (!$request['stock']) {
+            $errors++;
+        } if (!$request['status']) {
+            $errors++;
+        }
+
+        if ($errors) {
+            $request->session()->flash('message-danger', 'Fill all the required fields!');
+            return true;
+        } else {
+            return false;
+        }
     }
 }
