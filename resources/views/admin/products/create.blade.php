@@ -62,12 +62,12 @@
                                 </select>
                             </td>
                         </tr>
-                        @if($specifications)
+                        {{--@if($specifications)
                             {{ dd($specifications) }}
                             @foreach($specifications->specifications as $category => $specification)
                                 {{ dd($specifications) }}
                             @endforeach
-                        @endif
+                        @endif--}}
                     </tbody>
                 </table>
             </form>

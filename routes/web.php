@@ -41,11 +41,6 @@ Route::get('/admin/products/create', [
     'as' => 'admin.getCreateProduct'
 ]);
 
-Route::get('/admin/products/create/{specifications}', [
-    'uses' => 'AdminController@getCreateProduct',
-    'as' => 'admin.getCreateProduct'
-]);
-
 Route::post('/admin/products/create/save', [
     'uses' => 'AdminController@postSaveProduct',
     'as' => 'admin.postSaveProduct'

@@ -108,6 +108,8 @@ class AdminController extends Controller
             $product->categories()->attach(['category_id' => $request['category']]);
         }
 
+        $request->session()->flash('message-success', 'Product successfully created!');
+
         return back();
     }
 
