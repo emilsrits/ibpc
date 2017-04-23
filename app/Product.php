@@ -11,11 +11,21 @@ class Product extends Model
         'price_old', 'stock', 'status', 'created_at', 'updated_at'
     ];
 
-    public function specifications()
+    /**
+     * ManyToMany relationship with Attribute class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function attributes()
     {
-        return $this->belongsToMany(Specification::class, 'product_specification')->withPivot('attribute', 'value');
+        return $this->belongsToMany(Attribute::class, 'attribute_product')->withPivot('value');
     }
 
+    /**
+     * ManyToMany relationship with Category class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product');

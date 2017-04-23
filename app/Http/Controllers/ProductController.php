@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -16,7 +18,7 @@ class ProductController extends Controller
     {
         $products = Product::where('status', '=', 1)->paginate(12);
 
-    	return view('shop.index', ['products' => $products]);
+        return view('shop.index', ['products' => $products]);
     }
 
     /**
@@ -25,22 +27,22 @@ class ProductController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function viewProduct($id)
+    public function getProduct($id)
     {
-        $product = Product::with('specifications')->find($id);
+        $product = Product::with('attributes.specification')->find($id);
 
-        $specifications = new Collection;
+        $attributes = new Collection;
 
-        foreach ($product->specifications as $specification) {
-            if (!$specifications->has($specification->name)) {
-                $currentSpecs = new Collection;
+        foreach ($product->attributes as $attribute) {
+            if (!$attributes->has($attribute->specification->name)) {
+                $currentAttributes = new Collection;
             } else {
-                $currentSpecs = $specifications->get($specification->name);
+                $currentAttributes = $attributes->get($attribute->specification->name);
             }
-            $currentSpecs->put($specification->pivot->attribute, $specification->pivot->value);
-            $specifications->put($specification->name, $currentSpecs);
+            $currentAttributes->put($attribute->name, $attribute->pivot->value);
+            $attributes->put($attribute->specification->name, $currentAttributes);
         }
 
-        return view('shop.product', ['product' => $product], ['specifications' => $specifications]);
+        return view('shop.product', ['product' => $product], ['specifications' => $attributes]);
     }
 }

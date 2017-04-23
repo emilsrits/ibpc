@@ -5,14 +5,14 @@
 @endsection
 
 @section('content')
-    <div class="lg-100 md-100 sm-100">
+    <div class="admin-page lg-100 md-100 sm-100">
         <div class="product-create">
             <h3>New Product</h3>
             <form id="create-products-form" role="form" method="POST" action="{{ url('/admin/products/create/save') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="manage-btn-group">
                     <div class="btn-manage-back">
-                        <a href="{{ url('/admin') }}">Back</a>
+                        <a href="{{ url('/admin/catalog') }}">Back</a>
                     </div>
                     <button class="product-create-save" type="submit" name="submit">Save</button>
                 </div>
@@ -21,7 +21,7 @@
                         <tr class="create-attribute product-create-category">
                             <td><label for="category">Category: </label></td>
                             <td>
-                                <select name="category" required>
+                                <select id="category-select" name="category" required>
                                     <option value="0"></option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -62,6 +62,12 @@
                                 </select>
                             </td>
                         </tr>
+                        @if($specifications)
+                            {{ dd($specifications) }}
+                            @foreach($specifications->specifications as $category => $specification)
+                                {{ dd($specifications) }}
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </form>

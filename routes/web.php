@@ -14,14 +14,12 @@
 Auth::routes();
 
 /**
- * Home routes
+ * Base routes
  */
 Route::get('/', [
     'uses' => 'ProductController@index',
     'as' => 'shop.index'
 ]);
-
-Route::get('/home', 'HomeController@index');
 
 /**
  * User role routes
@@ -31,16 +29,36 @@ Route::get('/roles/create', 'RolesController@role');
 /**
  * Admin routes
  */
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@getAdmin');
+
+Route::get('/admin/catalog', [
+    'uses' => 'AdminController@getCatalog',
+    'as' => 'admin.getCatalog'
+]);
 
 Route::get('/admin/products/create', [
-    'uses' => 'AdminController@createProduct',
-    'as' => 'admin.createProduct'
+    'uses' => 'AdminController@getCreateProduct',
+    'as' => 'admin.getCreateProduct'
+]);
+
+Route::get('/admin/products/create/{specifications}', [
+    'uses' => 'AdminController@getCreateProduct',
+    'as' => 'admin.getCreateProduct'
 ]);
 
 Route::post('/admin/products/create/save', [
-    'uses' => 'AdminController@saveCreatedProduct',
-    'as' => 'admin.saveCreatedProduct'
+    'uses' => 'AdminController@postSaveProduct',
+    'as' => 'admin.postSaveProduct'
+]);
+
+Route::get('/admin/products/edit/{id}', [
+    'uses' => 'AdminController@getEditProduct',
+    'as' => 'admin.getEditProduct'
+]);
+
+Route::get('/admin/catalog/specifications', [
+    'uses' => 'AdminController@getProductSpecifications',
+    'as' => 'admin.getProductSpecifications'
 ]);
 
 /**
@@ -53,44 +71,39 @@ Route::post('/user/logout', 'Auth\LoginController@logout');
 Route::get('/user/register', 'Auth\RegisterController@index');
 
 Route::get('/user/profile', [
-	'uses' => 'UserController@profile',
-	'as' => 'user.profile'
+	'uses' => 'UserController@getProfile',
+	'as' => 'user.getProfile'
 ]);
 
 /**
  * Cart routes
  */
-Route::get('/cart/add/{id}', [
-	'uses' => 'CartController@addToCart',
-	'as' => 'cart.addToCart'
+Route::get('/cart', [
+    'uses' => 'CartController@getCart',
+    'as' => 'cart.getCart'
 ]);
 
 Route::post('/cart/add/{id}', [
-    'uses' => 'CartController@addToCart',
-    'as' => 'cart.addToCart'
+    'uses' => 'CartController@postAddToCart',
+    'as' => 'cart.postAddToCart'
 ]);
 
 Route::get('/cart/remove/{id}', [
-    'uses' => 'CartController@removeFromCart',
-    'as' => 'cart.removeFromCart'
+    'uses' => 'CartController@getRemoveFromCart',
+    'as' => 'cart.getRemoveFromCart'
 ]);
 
 Route::post('/cart/update', [
-   'uses' => 'CartController@updateCart',
-    'as' => 'cart.updateCart'
-]);
-
-Route::get('/cart', [
-	'uses' => 'CartController@index',
-	'as' => 'cart.index'
+   'uses' => 'CartController@postUpdateCart',
+    'as' => 'cart.postUpdateCart'
 ]);
 
 /**
  * Product routes
  */
 Route::get('/product/{id}/{code}', [
-   'uses' => 'ProductController@viewProduct',
-    'as' => 'product.viewProduct'
+   'uses' => 'ProductController@getProduct',
+    'as' => 'product.getProduct'
 ]);
 
 /**

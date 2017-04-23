@@ -38,10 +38,10 @@
                         </div>
                     </div>
                 @endforeach
-            </div> <!-- grid-uniform -->
+            </div>
             @if($products->count() >= 8)
                 {{ $products->appends(Request::except('page'))->links() }}
             @endif
         </div>
-    </div> <!-- grid -->
+    </div>
 @endsection 

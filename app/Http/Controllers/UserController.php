@@ -14,7 +14,12 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function profile()
+    /**
+     * Return profile view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getProfile()
     {
         return view('user.profile', ['user' => Auth::user()]);
     }

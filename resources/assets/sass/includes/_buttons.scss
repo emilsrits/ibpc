@@ -1,43 +1,59 @@
 /* BUTTONS */
-.btn-cart-add, .btn-cart-update {
-    margin-top: 5px;
-    color: $color_white;
-    font-size: 13px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: 1px solid $color_black;
-    box-shadow: inset $color_red 0 1px 20px 2px;
-    background: $color_orange;
-    transition: background ease-in-out .15s;
-    float: right;
-    &:hover {
+body {
+    .btn-cart-add, .btn-cart-update {
+        margin-top: 5px;
         color: $color_white;
-        background: $color_red;
-        box-shadow: inset $color_darkGray 0 1px 20px 2px;
-    }
-}
-.btn-cart-add {
-    padding: 6px 10px;
-    line-height: 16px;
-
-}
-.btn-manage-back {
-    display: inline-block;
-    margin: 5px;
-    a {
-        display: inline-block;
-        padding: 10px 20px;
         font-size: 13px;
         font-weight: bold;
-        letter-spacing: 0.8px;
         text-transform: uppercase;
-        border: 1px solid $color_darkGray;
-        border-radius: 4px;
-        background-color: $color_gray;
-        transition: box-shadow ease-in-out .15s;
-        &:hover, &:focus {
-            color: $color_black;
-            box-shadow: inset $color_darkGray 0 1px 10px 1px;
+        border: 1px solid $color_black;
+        box-shadow: inset $color_red 0 1px 20px 2px;
+        background: $color_orange;
+        transition: background ease-in-out .15s;
+        float: right;
+        &:hover {
+            color: $color_white;
+            background: $color_red;
+            box-shadow: inset $color_darkGray 0 1px 20px 2px;
+        }
+    }
+    .btn-cart-add {
+        padding: 6px 10px;
+        line-height: 16px;
+    }
+    .btn-manage-back, .btn-manage-add {
+        display: inline-block;
+        margin: 5px;
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            border: 1px solid $color_darkGray;
+            border-radius: 4px;
+            transition: box-shadow ease-in-out .15s;
+            &:hover, &:focus {
+                box-shadow: inset $color_darkGray 0 1px 10px 1px;
+            }
+        }
+    }
+    .btn-manage-back {
+        a {
+            background-color: $color_gray;
+            &:hover, &:focus {
+                color: $color_black;
+            }
+        }
+    }
+    .btn-manage-add {
+        a {
+            color: $color_white;
+            background-color: $color_orange;
+            &:hover, &:focus {
+                color: $color_white;
+            }
         }
     }
 }

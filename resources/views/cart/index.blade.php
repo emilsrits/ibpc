@@ -11,7 +11,7 @@
                 {{ csrf_field() }}
                 <fieldset>
                     <table id="shopping-cart-table">
-                        <thead class="table-headers">
+                        <thead class="table-head">
                             <tr>
                                 <th></th>
                                 <th class="hidden-xs">Product</th>

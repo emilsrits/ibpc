@@ -23,22 +23,25 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after login / registration.
+     * Where to redirect users after login / registration
      *
      * @var string
      */
     protected $redirectTo = '/';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * RegisterController constructor
      */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
+    /**
+     * Return register view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('auth.register');

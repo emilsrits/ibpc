@@ -23,22 +23,25 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
+     * Where to redirect users after login
      *
      * @var string
      */
     protected $redirectTo = '/';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * LoginController constructor
      */
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
 
+    /**
+     * Return login view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('auth.login', ['user' => Auth::user()]);

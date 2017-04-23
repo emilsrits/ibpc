@@ -14,7 +14,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function getCart()
     {
         if (!Session::has('cart')) {
             return view('cart.index');
@@ -33,7 +33,7 @@ class CartController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addToCart(Request $request, $id)
+    public function postAddToCart(Request $request, $id)
     {
         $qty = $request->input('qty');
         if ($qty) {
@@ -50,7 +50,7 @@ class CartController extends Controller
 
         Session::put('cart', $cart);
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.getCart');
     }
 
     /**
@@ -59,7 +59,7 @@ class CartController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function removeFromCart($id)
+    public function getRemoveFromCart($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -69,7 +69,7 @@ class CartController extends Controller
 
         $cart->isCartEmpty();
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.getCart');
     }
 
     /**
@@ -78,7 +78,7 @@ class CartController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateCart(Request $request)
+    public function postUpdateCart(Request $request)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -90,6 +90,6 @@ class CartController extends Controller
 
         $cart->isCartEmpty();
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.getCart');
     }
 }

@@ -14,9 +14,9 @@
                     </div>
                     <table class="product-specifications">
                         <tbody>
-                        @foreach($specifications as $name => $attributes)
+                        @foreach($specifications as $specification => $attributes)
                             <tr class="category">
-                                <td>{{ $name }}</td>
+                                <td>{{ $specification }}</td>
                             </tr>
                             @foreach($attributes as $attribute => $value)
                                 <tr class="specification">
