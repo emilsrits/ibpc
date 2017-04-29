@@ -18,7 +18,7 @@ class Product extends Model
      */
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_product')->withPivot('value');
+        return $this->belongsToMany(Attribute::class, 'attribute_product')->withPivot('attribute_id', 'value');
     }
 
     /**
@@ -29,6 +29,41 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product');
+    }
+
+    /**
+     * Delete a product
+     *
+     * @param $id
+     */
+    public function deleteProduct($id)
+    {
+        if (is_array($id)) {
+            Product::destroy($id);
+        } else {
+            Product::findOrFail($id)->delete();
+        }
+    }
+
+    /**
+     * Change product status
+     *
+     * @param $id
+     * @param $status
+     */
+    public function setStatus($id, $status)
+    {
+        if (is_array($id)) {
+            foreach ($id as $productId => $value) {
+                $product = Product::find($value['id']);
+                $product->status = $status;
+                $product->save();
+            }
+        } else {
+            $product = Product::findOrFail($id);
+            $product->status = $status;
+            $product->save();
+        }
     }
 
     /**

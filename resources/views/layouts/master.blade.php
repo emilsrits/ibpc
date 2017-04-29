@@ -25,6 +25,7 @@
 </head>
 <body>
 	<div id="wrapper">
+        @yield('modal')
 		@include('partials.header')
 
 		<main>

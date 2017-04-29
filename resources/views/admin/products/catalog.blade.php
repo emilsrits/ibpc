@@ -4,26 +4,39 @@
     Catalog
 @endsection
 
+@section('modal')
+    <div id="confirm-mass-action" class="modal-container">
+        <div class="modal-confirm-action">
+            <h4>Delete</h4>
+            <a class="modal-close" href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <button class="modal-confirm" type="button">Confirm</button>
+        </div>
+    </div>
+@endsection
+
 @section('content')
     <div class="admin-page lg-100 md-100 sm-100">
         <div class="product-catalog">
             <h3>Catalog</h3>
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
-                    <a href="{{ url('/admin') }}">Back</a>
+                    <a href="{{ url('/admin') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
                 <div class="btn-manage-add">
                     <a href="{{ url('/admin/products/create') }}">Add Product</a>
                 </div>
             </div>
             <form id="catalog-form" role="form" method="POST" action="{{ url('/admin/catalog/action') }}">
+                {{ csrf_field() }}
                 <div class="catalog-action">
                     <select id="mass-action" name="mass-action">
                         <option value="0"></option>
-                        <option value="1">Edit</option>
-                        <option value="2">Delete</option>
+                        <option value="1">Enable</option>
+                        <option value="2">Disable</option>
+                        <option value="3">Edit</option>
+                        <option value="4">Delete</option>
                     </select>
-                    <button class="mass-action-run" type="submit" name="submit"><i class="fa fa-play" aria-hidden="true"></i></button>
+                    <button id="mass-action-run" type="submit" name="submit"><i class="fa fa-play" aria-hidden="true"></i></button>
                 </div>
                 {{ $products->appends(Request::except('page'))->links() }}
                 <table id="catalog-table">
@@ -46,7 +59,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td>
-                                <input class="product-select" type="checkbox" name="catalog[{{ $product->id }}]" value="catalog[{{ $product->id }}]">
+                                <input class="product-select" type="checkbox" name="catalog[{{ $product->id }}][id]" value="{{ $product->id }}">
                             </td>
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->title }}</td>

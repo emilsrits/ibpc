@@ -15,9 +15,9 @@ use App\Specification;
 
 class AdminController extends Controller
 {
-    const storageProductImagePath = '/storage/images/products/';
+    const STORAGE_PRODUCT_IMAGE_PATH = '/storage/images/products/';
 
-    const defaultProductImagePath = '/images/products/default.png';
+    const DEFAULT_PRODUCT_IMAGE_PATH = '/images/products/default.png';
 
     /**
      * AdminController constructor.
@@ -37,10 +37,47 @@ class AdminController extends Controller
         return view('admin.index', ['user' => Auth::user()]);
     }
 
+    /**
+     * Reurn catalog page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getCatalog()
     {
         $products = Product::paginate(20);
         return view('admin.products.catalog', ['products' => $products]);
+    }
+
+    /**
+     * Catalog mass action
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postMassAction(Request $request)
+    {
+        $productIds = $request->input('catalog');
+        $product = new Product();
+
+        switch ($request->input('mass-action')) {
+            case 1:
+                $product->setStatus($productIds, 1);
+                $request->session()->flash('message-success', 'Product(s) enabled!');
+                break;
+            case 2:
+                $product->setStatus($productIds, 0);
+                $request->session()->flash('message-success', 'Product(s) disabled!');
+                break;
+            case 3:
+                dd('penis');
+                break;
+            case 4:
+                $product->deleteProduct($productIds);
+                $request->session()->flash('message-success', 'Product(s) deleted!');
+                break;
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -53,22 +90,37 @@ class AdminController extends Controller
     {
         $categories = Category::all();
 
-        if ($request['specifications']) {
-            $specifications = json_decode($request['specifications']);
+        if ($request['category']) {
+            $categoryId = json_decode($request['category']);
+            $specifications = Category::with('specifications.attributes')->find($categoryId);
         } else {
             $specifications = null;
         }
 
-        return view('admin.products.create', ['categories' => $categories, 'specifications' => $specifications]);
+        return view('admin.products.create', [
+            'categories' => $categories,
+            'specifications' => $specifications,
+            'request' => $request
+        ]);
     }
 
-    public function getProductSpecifications(Request $request)
+    /**
+     * Return category id for AJAX response
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAjaxCategoryId(Request $request)
     {
         $categoryId = $request['selectFieldValue'];
 
-        $specifications = Category::with('specifications.attributes')->find($categoryId);
+        $category = Category::find($categoryId);
 
-        return response()->json(array('data' => json_encode($specifications), 'redirectUrl'=> '/admin/products/create?specifications='), 200);
+        if ($category) {
+            return response()->json(array('category' => json_encode($categoryId), 'redirectUrl'=> '/admin/products/create?category='), 200);
+        } else {
+            return response()->json(array('category' => json_encode($categoryId)), 400);
+        }
     }
 
     /**
@@ -79,14 +131,21 @@ class AdminController extends Controller
      */
     public function postSaveProduct(Request $request)
     {
+        $request->flash();
+
+        if ($this->productExists($request['code'])) {
+            $request->session()->flash('message-danger', 'Product with this code already exists!');
+            return redirect()->back();
+        }
+
         $img = request()->file('image');
         if ($img) {
             $imgExt =  $img->guessClientExtension();
             $imgName = $request['code'] . str_random(20) . '.' . $imgExt;
             $img->storeAs('/public/images/products/', $imgName);
-            $imagePath = self::storageProductImagePath . $imgName;
+            $imgPath = self::STORAGE_PRODUCT_IMAGE_PATH . $imgName;
         } else {
-            $imagePath = self::defaultProductImagePath;
+            $imgPath = self::DEFAULT_PRODUCT_IMAGE_PATH;
         }
 
         // Check for missing values
@@ -95,7 +154,7 @@ class AdminController extends Controller
         }
 
         $product = new Product();
-        $product->image_path = $imagePath;
+        $product->image_path = $imgPath;
         $product->code = $request['code'];
         $product->title = $request['title'];
         $product->description = $request['description'];
@@ -106,6 +165,15 @@ class AdminController extends Controller
 
         if ($request['category']) {
             $product->categories()->attach(['category_id' => $request['category']]);
+
+            $specifications = collect($request['attr']);
+            foreach ($specifications as $category => $attributes) {
+                foreach ($attributes as $attribute => $value) {
+                    if ($value) {
+                        $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                    }
+                }
+            }
         }
 
         $request->session()->flash('message-success', 'Product successfully created!');
@@ -113,9 +181,9 @@ class AdminController extends Controller
         return back();
     }
 
-    public function getEditProduct(Request $request)
+    public function getEditProduct($id)
     {
-        $product = Product::find($request['id']);
+        $product = Product::find($id);
         $categories = Category::all();
 
         return view('admin.products.edit', ['product' => $product, 'categories' => $categories]);
@@ -144,10 +212,14 @@ class AdminController extends Controller
         }
 
         if ($errors) {
-            $request->session()->flash('message-danger', 'Fill all the required fields!');
+            $request->session()->flash('message-danger', 'Invalid form data!');
             return true;
         } else {
             return false;
         }
+    }
+
+    protected function productExists($code) {
+        return $product = Product::where('code', $code)->exists();
     }
 }

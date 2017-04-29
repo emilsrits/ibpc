@@ -85,17 +85,17 @@ class Cart extends Model
      * Update quantity of cart items
      *
      * @param $request
-     * @param $cart
+     * @param $cartItemsQty
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateCartItems($request, $cart)
+    public function updateCartItems($request, $cartItemsQty)
     {
         $oldTotalQty = $this->totalQty;
         $oldTotalPrice = $this->totalPrice;
         $this->totalQty = 0;
         $this->totalPrice = 0;
 
-        foreach ($cart as $item => $qty) {
+        foreach ($cartItemsQty as $item => $qty) {
             if ($qty['qty']) {
                 $this->items[$item]['qty'] = $qty['qty'];
                 $this->totalQty += $qty['qty'];

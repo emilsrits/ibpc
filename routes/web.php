@@ -36,6 +36,11 @@ Route::get('/admin/catalog', [
     'as' => 'admin.getCatalog'
 ]);
 
+Route::post('/admin/catalog/action', [
+    'uses' => 'AdminController@postMassAction',
+    'as' => 'admin.postMassAction'
+]);
+
 Route::get('/admin/products/create', [
     'uses' => 'AdminController@getCreateProduct',
     'as' => 'admin.getCreateProduct'
@@ -52,8 +57,8 @@ Route::get('/admin/products/edit/{id}', [
 ]);
 
 Route::get('/admin/catalog/specifications', [
-    'uses' => 'AdminController@getProductSpecifications',
-    'as' => 'admin.getProductSpecifications'
+    'uses' => 'AdminController@getAjaxCategoryId',
+    'as' => 'admin.getAjaxCategoryId'
 ]);
 
 /**
@@ -96,7 +101,7 @@ Route::post('/cart/update', [
 /**
  * Product routes
  */
-Route::get('/product/{id}/{code}', [
+Route::get('/product/{id}/{title}', [
    'uses' => 'ProductController@getProduct',
     'as' => 'product.getProduct'
 ]);
