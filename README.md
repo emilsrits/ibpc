@@ -6,12 +6,12 @@ Web shop for PC parts.
 
 **Author:** @emilsrits - Emils Rits
 
-### Made using:
+### Tools:
 
   * Laravel     5.3
   * PHP         7.0.10
-  * Apache      2.4.23
   * MySQL       5.7.14
+  * jQuery      3.1.1
 
 ### Installation
 
