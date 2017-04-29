@@ -66,6 +66,11 @@ class Product extends Model
         }
     }
 
+    public function getCategoryId()
+    {
+        return $this->categories()->getRelatedIds();
+    }
+
     /**
      * Get product old price attribute
      *

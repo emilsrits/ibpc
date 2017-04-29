@@ -31,7 +31,7 @@
         // Toggle specifications sections when creating product
         $('.product-content-section-toggle').click(function () {
             $('i', this).toggleClass('fa-angle-up fa-angle-down');
-            $(this).parent().find('.product-create-container').slideToggle();
+            $(this).parent().find('.product-container').slideToggle();
         });
 
         /* ------AJAX------ */

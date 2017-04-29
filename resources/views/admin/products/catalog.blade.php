@@ -13,7 +13,7 @@
                     <a href="{{ url('/admin') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
                 <div class="btn-manage-add">
-                    <a href="{{ url('/admin/products/create') }}">Add Product</a>
+                    <a href="{{ url('/admin/product/create') }}">Add Product</a>
                 </div>
             </div>
             <form id="catalog-form" role="form" method="POST" action="{{ url('/admin/catalog/action') }}">
@@ -65,7 +65,7 @@
                             <td>{{ $product->created_at }}</td>
                             <td>{{ $product->updated_at }}</td>
                             <td>
-                                <a href="{{ url('/admin/products/edit', ['id' => $product->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a href="{{ url('/admin/product/edit', ['id' => $product->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     @endforeach

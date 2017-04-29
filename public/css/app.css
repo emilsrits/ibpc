@@ -550,8 +550,8 @@ th {
     #catalog-table .table-body td:last-of-type > a {
       padding: 5px; }
 
-/* CREATE PRODUCTS */
-.product-create .product-create-save {
+/* CREATE, EDIT PRODUCTS */
+.product-create .product-save, .product-edit .product-save {
   margin: 5px;
   padding: 10px 30px;
   color: #fff;
@@ -564,60 +564,60 @@ th {
   background-color: #f37c34;
   -webkit-transition: box-shadow ease-in-out .15s;
   transition: box-shadow ease-in-out .15s; }
-  .product-create .product-create-save:hover, .product-create .product-create-save:focus {
+  .product-create .product-save:hover, .product-create .product-save:focus, .product-edit .product-save:hover, .product-edit .product-save:focus {
     box-shadow: inset #303030 0 1px 10px 1px; }
 
-.product-create .product-content-section-toggle {
+.product-create .product-content-section-toggle, .product-edit .product-content-section-toggle {
   margin: 15px 0 0;
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid #eee; }
-  .product-create .product-content-section-toggle > strong {
+  .product-create .product-content-section-toggle > strong, .product-edit .product-content-section-toggle > strong {
     color: #CC4040;
     font-size: 15px;
     letter-spacing: 0.3px;
     text-transform: uppercase; }
-    .product-create .product-content-section-toggle > strong i {
+    .product-create .product-content-section-toggle > strong i, .product-edit .product-content-section-toggle > strong i {
       padding-left: 10px; }
 
-.product-create .product-create-container {
+.product-create .product-container, .product-edit .product-container {
   -webkit-transition: all ease-in-out 0.2s;
   transition: all ease-in-out 0.2s; }
-  .product-create .product-create-container .product-specification-attributes {
+  .product-create .product-container .product-specification-attributes, .product-edit .product-container .product-specification-attributes {
     display: none; }
 
-.product-create .product-create-table {
+.product-create .product-table, .product-edit .product-table {
   width: 100%;
   margin: 10px 0 5px; }
 
-.product-create .product-create-specification {
+.product-create .product-specification, .product-edit .product-specification {
   font-weight: bold;
   letter-spacing: 0.2px;
   border-left: 1px solid #f37c34; }
-  .product-create .product-create-specification > td {
+  .product-create .product-specification > td, .product-edit .product-specification > td {
     padding: 15px 10px;
     color: #0d0d0d;
     text-transform: uppercase; }
 
-.product-create .create-attribute {
+.product-create .product-attribute, .product-edit .product-attribute {
   height: 60px; }
-  .product-create .create-attribute td:first-child {
+  .product-create .product-attribute td:first-child, .product-edit .product-attribute td:first-child {
     width: 110px;
     color: #0d0d0d;
     font-size: 13px;
     vertical-align: top; }
-  .product-create .create-attribute td {
+  .product-create .product-attribute td, .product-edit .product-attribute td {
     padding: 10px; }
-    .product-create .create-attribute td input {
+    .product-create .product-attribute td input, .product-edit .product-attribute td input {
       line-height: 20px; }
-    .product-create .create-attribute td input[type="text"] {
+    .product-create .product-attribute td input[type="text"], .product-edit .product-attribute td input[type="text"] {
       width: 100%; }
-    .product-create .create-attribute td input[type="number"] {
+    .product-create .product-attribute td input[type="number"], .product-edit .product-attribute td input[type="number"] {
       width: 150px; }
-    .product-create .create-attribute td textarea {
+    .product-create .product-attribute td textarea, .product-edit .product-attribute td textarea {
       width: 100%;
       resize: none; }
-    .product-create .create-attribute td select {
+    .product-create .product-attribute td select, .product-edit .product-attribute td select {
       width: 150px; }
 
 /* BUTTONS */

@@ -41,17 +41,17 @@ Route::post('/admin/catalog/action', [
     'as' => 'admin.postMassAction'
 ]);
 
-Route::get('/admin/products/create', [
+Route::get('/admin/product/create', [
     'uses' => 'AdminController@getCreateProduct',
     'as' => 'admin.getCreateProduct'
 ]);
 
-Route::post('/admin/products/create/save', [
+Route::post('/admin/product/create/save', [
     'uses' => 'AdminController@postSaveProduct',
     'as' => 'admin.postSaveProduct'
 ]);
 
-Route::get('/admin/products/edit/{id}', [
+Route::get('/admin/product/edit/{id}', [
     'uses' => 'AdminController@getEditProduct',
     'as' => 'admin.getEditProduct'
 ]);

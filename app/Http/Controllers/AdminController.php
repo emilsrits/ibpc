@@ -45,6 +45,7 @@ class AdminController extends Controller
     public function getCatalog()
     {
         $products = Product::paginate(20);
+
         return view('admin.products.catalog', ['products' => $products]);
     }
 
@@ -105,25 +106,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Return category id for AJAX response
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getAjaxCategoryId(Request $request)
-    {
-        $categoryId = $request['selectFieldValue'];
-
-        $category = Category::find($categoryId);
-
-        if ($category) {
-            return response()->json(array('category' => json_encode($categoryId), 'redirectUrl'=> '/admin/products/create?category='), 200);
-        } else {
-            return response()->json(array('category' => json_encode($categoryId)), 400);
-        }
-    }
-
-    /**
      * Save created product
      *
      * @param Request $request
@@ -142,8 +124,8 @@ class AdminController extends Controller
         if ($img) {
             $imgExt =  $img->guessClientExtension();
             $imgName = $request['code'] . str_random(20) . '.' . $imgExt;
-            $img->storeAs('/public/images/products/', $imgName);
-            $imgPath = self::STORAGE_PRODUCT_IMAGE_PATH . $imgName;
+            $img->storeAs('/public/images/products/' . $request['category'] . '/' , $imgName);
+            $imgPath = self::STORAGE_PRODUCT_IMAGE_PATH . $request['category'] . '/' . $imgName;
         } else {
             $imgPath = self::DEFAULT_PRODUCT_IMAGE_PATH;
         }
@@ -181,12 +163,37 @@ class AdminController extends Controller
         return back();
     }
 
-    public function getEditProduct($id)
+    /**
+     * Return category id for AJAX response
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAjaxCategoryId(Request $request)
     {
-        $product = Product::find($id);
-        $categories = Category::all();
+        $categoryId = $request['selectFieldValue'];
 
-        return view('admin.products.edit', ['product' => $product, 'categories' => $categories]);
+        $category = Category::find($categoryId);
+
+        if ($category) {
+            return response()->json(array('category' => json_encode($categoryId), 'redirectUrl'=> '/admin/product/create?category='), 200);
+        } else {
+            return response()->json(array('category' => json_encode($categoryId)), 400);
+        }
+    }
+
+    public function getEditProduct(Request $request, $id)
+    {
+        $product = Product::with('categories')->find($id);
+        $categories = Category::all();
+        $specifications = Category::with('specifications.attributes')->find($product->getCategoryId());
+
+        return view('admin.products.edit', [
+            'product' => $product,
+            'categories' => $categories,
+            'specifications' => $specifications,
+            'request' => $request
+        ]);
     }
 
     /**
@@ -199,9 +206,7 @@ class AdminController extends Controller
     {
         $errors = 0;
 
-        if (!$request['category']) {
-            $errors++;
-        } if (!$request['code']) {
+        if (!$request['code']) {
             $errors++;
         } if (!$request['price']) {
             $errors++;
