@@ -39,6 +39,7 @@
                         <th>Title</th>
                         <th>Code</th>
                         <th>Price</th>
+                        <th>Qty</th>
                         <th>Status</th>
                         <th>Created at</th>
                         <th>Updated at</th>
@@ -55,6 +56,7 @@
                             <td>{{ $product->title }}</td>
                             <td>{{ $product->code }}</td>
                             <td>{{ $product->current_price }}</td>
+                            <td>{{ $product->stock }}</td>
                             <td>
                                 @if($product->status)
                                     Enabled
