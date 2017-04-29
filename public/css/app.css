@@ -512,43 +512,6 @@ th {
 .manage-users > h4 {
   color: #1c98ff; }
 
-/* CONFIRM ACTION MODAL */
-.modal-container {
-  display: none;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(22, 22, 22, 0.5);
-  z-index: 40; }
-  .modal-container .modal-confirm-action {
-    position: fixed;
-    margin-left: -110px;
-    padding: 30px;
-    width: 220px;
-    height: 200px;
-    top: 25%;
-    left: 50%;
-    text-align: center;
-    background-color: #E6E6E6;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    z-index: 41; }
-    .modal-container .modal-confirm-action > h4 {
-      margin-top: 35px;
-      color: #0d0d0d;
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase; }
-    .modal-container .modal-confirm-action .modal-close {
-      position: absolute;
-      padding: 5px;
-      top: 10px;
-      right: 10px; }
-    .modal-container .modal-confirm-action .modal-confirm {
-      margin-top: 30px;
-      color: #0d0d0d;
-      font-size: 14px;
-      text-transform: uppercase; }
-
 /* CATALOG */
 #catalog-form {
   margin: 20px 0;

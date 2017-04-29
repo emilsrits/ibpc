@@ -4,16 +4,6 @@
     Catalog
 @endsection
 
-@section('modal')
-    <div id="confirm-mass-action" class="modal-container">
-        <div class="modal-confirm-action">
-            <h4>Delete</h4>
-            <a class="modal-close" href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
-            <button class="modal-confirm" type="button">Confirm</button>
-        </div>
-    </div>
-@endsection
-
 @section('content')
     <div class="admin-page lg-100 md-100 sm-100">
         <div class="product-catalog">
