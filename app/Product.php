@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Product extends Model
 {
@@ -69,9 +70,29 @@ class Product extends Model
         }
     }
 
+    /**
+     * Get related category ids
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function getCategoryId()
     {
         return $this->categories()->getRelatedIds();
+    }
+
+    /**
+     * Get product image attribute
+     *
+     * @return mixed|string
+     */
+    public function getImageAttribute()
+    {
+        $imagePath = $this->image_path;
+        if ($imagePath && File::exists(public_path($imagePath))) {
+            return $imagePath;
+        } else {
+            return self::DEFAULT_PRODUCT_IMAGE_PATH;
+        }
     }
 
     /**

@@ -119,7 +119,7 @@ class ProductController extends Controller
             $img->storeAs('/public/images/products/' . $request['category'] . '/' , $imgName);
             $imgPath = Product::STORAGE_PRODUCT_IMAGE_PATH . $request['category'] . '/' . $imgName;
         } else {
-            $imgPath = Product::DEFAULT_PRODUCT_IMAGE_PATH;
+            $imgPath = null;
         }
 
         // Check for missing values

@@ -14,7 +14,7 @@
                         <div class="product-grid">
                             <div class="product-image">
                                 <a href="{{ url('/product', ['id' => $product->id, 'title' => str_slug($product->title, '-')]) }}">
-                                    <img class="img-responsive" src="{{ $product->image_path }}" alt="{{ $product->code }}">
+                                    <img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}">
                                 </a>
                             </div>
                             <p class="product-link text-center">
