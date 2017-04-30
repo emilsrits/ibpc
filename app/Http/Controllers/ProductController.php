@@ -152,12 +152,12 @@ class ProductController extends Controller
 
         $request->session()->flash('message-success', 'Product successfully created!');
 
-        return back();
+        return redirect()->route('catalog.index');
     }
 
     public function edit(Request $request, $id)
     {
-        $product = Product::with('categories')->find($id);
+        $product = Product::with('categories.specifications.attributes')->find($id);
         $categories = Category::all();
 
         if (!$product->getCategoryId()->isEmpty()) {

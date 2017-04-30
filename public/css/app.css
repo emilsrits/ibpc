@@ -616,6 +616,7 @@ th {
   .product-create .product-attribute td, .product-edit .product-attribute td {
     padding: 10px; }
     .product-create .product-attribute td input, .product-edit .product-attribute td input {
+      padding: 2px 3px;
       line-height: 20px; }
     .product-create .product-attribute td input[type="text"], .product-edit .product-attribute td input[type="text"] {
       width: 100%; }

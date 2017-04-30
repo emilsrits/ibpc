@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -38,14 +39,22 @@ class Product extends Model
     /**
      * Delete a product
      *
-     * @param $id
+     * @param $ids
      */
-    public function deleteProduct($id)
+    public function deleteProduct($ids)
     {
-        if (is_array($id)) {
-            Product::destroy($id);
+        if (is_array($ids)) {
+            foreach ($ids as $id => $value) {
+                $product = Product::find($id);
+                $productImage = str_replace('/storage', '', $product->image_path);
+                if ($productImage) {
+                    Storage::delete($productImage);
+                    $product->destroy($id);
+                }
+            }
+            //Product::destroy($ids);
         } else {
-            Product::findOrFail($id)->delete();
+            Product::findOrFail($ids)->delete();
         }
     }
 
@@ -68,6 +77,24 @@ class Product extends Model
             $product->status = $status;
             $product->save();
         }
+    }
+
+    /**
+     * Get product attribute by id
+     *
+     * @param $id
+     * @return null
+     */
+    public function getAttributeById($id)
+    {
+        $attribute = $this->attributes()->find($id);
+        if ($attribute) {
+            $test = $attribute->pivot->value;
+        } else {
+            $test = null;
+        }
+
+        return $test;
     }
 
     /**
