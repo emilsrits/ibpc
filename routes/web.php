@@ -72,6 +72,16 @@ Route::get('/admin/product/edit/{id}', [
     'as' => 'product.edit'
 ]);
 
+Route::post('/admin/product/update/{id}', [
+    'uses' => 'ProductController@update',
+    'as' => 'product.update'
+]);
+
+Route::post('/admin/product/delete/{id}', [
+    'uses' => 'ProductController@delete',
+    'as' => 'product.delete'
+]);
+
 /**
  * User routes
  */

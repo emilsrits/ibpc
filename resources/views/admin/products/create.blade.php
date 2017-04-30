@@ -39,7 +39,7 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="product-attribute">
+                            <tr class="product-attribute product-image">
                                 <td><label for="image">Image</label></td>
                                 <td><input type="file" name="image" accept="image/gif, image/jpeg, image/png"></td>
                             </tr>

@@ -159,7 +159,12 @@ class ProductController extends Controller
     {
         $product = Product::with('categories')->find($id);
         $categories = Category::all();
-        $specifications = Category::with('specifications.attributes')->find($product->getCategoryId());
+
+        if (!$product->getCategoryId()->isEmpty()) {
+            $specifications = Category::with('specifications.attributes')->find($product->getCategoryId());
+        } else {
+            $specifications = null;
+        }
 
         return view('admin.products.edit', [
             'product' => $product,
@@ -167,6 +172,24 @@ class ProductController extends Controller
             'specifications' => $specifications,
             'request' => $request
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        if ($request['submit'] === 'delete') {
+            $product = new Product();
+            $product->deleteProduct($id);
+
+            $request->session()->flash('message-success', 'Product deleted!');
+
+            return redirect()->route('catalog.index');
+        }
+    }
+
+    public function delete($id)
+    {
+        $product = new Product();
+        $product->deleteProduct($id);
     }
 
     /**

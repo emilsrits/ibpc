@@ -28,6 +28,11 @@
             }
         });
 
+        // Cofnrim producr deletion in product edit page
+        $('#product-delete').click(function () {
+            return confirm('Delete product?');
+        });
+
         // Toggle specifications sections when creating product
         $('.product-content-section-toggle').click(function () {
             $('i', this).toggleClass('fa-angle-up fa-angle-down');

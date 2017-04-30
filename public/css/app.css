@@ -551,21 +551,28 @@ th {
       padding: 5px; }
 
 /* CREATE, EDIT PRODUCTS */
-.product-create .product-save, .product-edit .product-save {
+.product-create .product-save, .product-create #product-delete, .product-edit .product-save, .product-edit #product-delete {
   margin: 5px;
-  padding: 10px 30px;
-  color: #fff;
   font-size: 13px;
   font-weight: bold;
   letter-spacing: 0.8px;
   text-transform: uppercase;
   border: 1px solid #0d0d0d;
   border-radius: 4px;
-  background-color: #f37c34;
   -webkit-transition: box-shadow ease-in-out .15s;
   transition: box-shadow ease-in-out .15s; }
-  .product-create .product-save:hover, .product-create .product-save:focus, .product-edit .product-save:hover, .product-edit .product-save:focus {
+  .product-create .product-save:hover, .product-create .product-save:focus, .product-create #product-delete:hover, .product-create #product-delete:focus, .product-edit .product-save:hover, .product-edit .product-save:focus, .product-edit #product-delete:hover, .product-edit #product-delete:focus {
     box-shadow: inset #303030 0 1px 10px 1px; }
+
+.product-create .product-save, .product-edit .product-save {
+  padding: 10px 30px;
+  color: #fff;
+  background-color: #f37c34; }
+
+.product-create #product-delete, .product-edit #product-delete {
+  padding: 10px 15px;
+  color: #0d0d0d;
+  background-color: #CC4040; }
 
 .product-create .product-content-section-toggle, .product-edit .product-content-section-toggle {
   margin: 15px 0 0;
@@ -710,7 +717,7 @@ body .btn-manage-add a {
   #shopping-cart-form #shopping-cart-table #qty {
     width: 40px;
     font-size: 14px; }
-  .product-create-image input[type="file"] {
+  .product-image input[type="file"] {
     width: 160px;
     color: transparent; }
   .sm-100 {

@@ -149,21 +149,28 @@
 
 /* CREATE, EDIT PRODUCTS */
 .product-create, .product-edit {
-    .product-save {
+    .product-save, #product-delete {
         margin: 5px;
-        padding: 10px 30px;
-        color: $color_white;
         font-size: 13px;
         font-weight: bold;
         letter-spacing: 0.8px;
         text-transform: uppercase;
         border: 1px solid $color_black;
         border-radius: 4px;
-        background-color: $color_orange;
         transition: box-shadow ease-in-out .15s;
         &:hover, &:focus {
             box-shadow: inset $color_darkGray 0 1px 10px 1px;
         }
+    }
+    .product-save {
+        padding: 10px 30px;
+        color: $color_white;
+        background-color: $color_orange;
+    }
+    #product-delete {
+        padding: 10px 15px;
+        color: $color_black;
+        background-color: $color_red;
     }
     .product-content-section-toggle {
         margin: 15px 0 0;

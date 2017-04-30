@@ -8,14 +8,14 @@
     <div class="admin-page lg-100 md-100 sm-100">
         <div class="product-edit">
             <h3>#{{ $product->id . ' ' . $product->title }}</h3>
-            <form id="edit-products-form" role="form" method="POST" action="{{ url('/admin/products/edit/save') }}" enctype="multipart/form-data">
+            <form id="edit-products-form" role="form" method="POST" action="{{ url('/admin/product/update', ['id' => $product->id]) }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="manage-btn-group">
                     <div class="btn-manage-back">
                         <a href="{{ url('/admin/catalog') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                     </div>
-                    <button type="submit" name="delete" formnovalidate>Delete</button>
-                    <button class="product-save" type="submit" name="submit">Save</button>
+                    <button id="product-delete" type="submit" name="submit" value="delete" formnovalidate>Delete</button>
+                    <button class="product-save" type="submit" name="submit" value="save">Save</button>
                 </div>
                 <div class="product-content-section">
                     <div class="product-content-section-toggle">
@@ -40,7 +40,7 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="product-attribute">
+                            <tr class="product-attribute product-image">
                                 <td><label for="image">Image</label></td>
                                 <td><input type="file" name="image" accept="image/gif, image/jpeg, image/png"></td>
                             </tr>
