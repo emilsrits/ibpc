@@ -19,7 +19,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getProfile()
+    public function index()
     {
         return view('user.profile', ['user' => Auth::user()]);
     }

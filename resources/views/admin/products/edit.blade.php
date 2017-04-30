@@ -14,6 +14,7 @@
                     <div class="btn-manage-back">
                         <a href="{{ url('/admin/catalog') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                     </div>
+                    <button type="submit" name="delete" formnovalidate>Delete</button>
                     <button class="product-save" type="submit" name="submit">Save</button>
                 </div>
                 <div class="product-content-section">

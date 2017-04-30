@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    const STORAGE_PRODUCT_IMAGE_PATH = '/storage/images/products/';
+    const DEFAULT_PRODUCT_IMAGE_PATH = '/images/products/default.png';
+
     protected $fillable = [
         'category_id', 'image_path', 'code', 'title', 'description', 'price',
         'price_old', 'stock', 'status', 'created_at', 'updated_at'

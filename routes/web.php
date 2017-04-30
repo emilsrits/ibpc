@@ -29,36 +29,47 @@ Route::get('/roles/create', 'RolesController@role');
 /**
  * Admin routes
  */
-Route::get('/admin', 'AdminController@getAdmin');
+Route::get('/admin', 'AdminController@index');
 
+/**
+ * Catalog routes
+ */
 Route::get('/admin/catalog', [
-    'uses' => 'AdminController@getCatalog',
-    'as' => 'admin.getCatalog'
+    'uses' => 'CatalogController@index',
+    'as' => 'catalog.index'
 ]);
 
 Route::post('/admin/catalog/action', [
-    'uses' => 'AdminController@postMassAction',
-    'as' => 'admin.postMassAction'
+    'uses' => 'CatalogController@massAction',
+    'as' => 'catalog.massAction'
+]);
+
+/**
+ * Product routes
+ */
+Route::get('/product/{id}/{title}', [
+    'uses' => 'ProductController@show',
+    'as' => 'product.show'
 ]);
 
 Route::get('/admin/product/create', [
-    'uses' => 'AdminController@getCreateProduct',
-    'as' => 'admin.getCreateProduct'
-]);
-
-Route::post('/admin/product/create/save', [
-    'uses' => 'AdminController@postSaveProduct',
-    'as' => 'admin.postSaveProduct'
-]);
-
-Route::get('/admin/product/edit/{id}', [
-    'uses' => 'AdminController@getEditProduct',
-    'as' => 'admin.getEditProduct'
+    'uses' => 'ProductController@create',
+    'as' => 'product.create'
 ]);
 
 Route::get('/admin/catalog/specifications', [
-    'uses' => 'AdminController@getAjaxCategoryId',
-    'as' => 'admin.getAjaxCategoryId'
+    'uses' => 'ProductController@createWithCategory',
+    'as' => 'product.createWithCategory'
+]);
+
+Route::post('/admin/product/create/save', [
+    'uses' => 'ProductController@store',
+    'as' => 'product.store'
+]);
+
+Route::get('/admin/product/edit/{id}', [
+    'uses' => 'ProductController@edit',
+    'as' => 'product.edit'
 ]);
 
 /**
@@ -71,39 +82,31 @@ Route::post('/user/logout', 'Auth\LoginController@logout');
 Route::get('/user/register', 'Auth\RegisterController@index');
 
 Route::get('/user/profile', [
-	'uses' => 'UserController@getProfile',
-	'as' => 'user.getProfile'
+	'uses' => 'UserController@index',
+	'as' => 'user.index'
 ]);
 
 /**
  * Cart routes
  */
 Route::get('/cart', [
-    'uses' => 'CartController@getCart',
-    'as' => 'cart.getCart'
+    'uses' => 'CartController@index',
+    'as' => 'cart.index'
 ]);
 
 Route::post('/cart/add/{id}', [
-    'uses' => 'CartController@postAddToCart',
-    'as' => 'cart.postAddToCart'
+    'uses' => 'CartController@store',
+    'as' => 'cart.store'
 ]);
 
 Route::get('/cart/remove/{id}', [
-    'uses' => 'CartController@getRemoveFromCart',
-    'as' => 'cart.getRemoveFromCart'
+    'uses' => 'CartController@delete',
+    'as' => 'cart.delete'
 ]);
 
 Route::post('/cart/update', [
-   'uses' => 'CartController@postUpdateCart',
-    'as' => 'cart.postUpdateCart'
-]);
-
-/**
- * Product routes
- */
-Route::get('/product/{id}/{title}', [
-   'uses' => 'ProductController@getProduct',
-    'as' => 'product.getProduct'
+   'uses' => 'CartController@update',
+    'as' => 'cart.update'
 ]);
 
 /**

@@ -14,7 +14,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getCart()
+    public function index()
     {
         if (!Session::has('cart')) {
             return view('cart.index');
@@ -33,7 +33,7 @@ class CartController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postAddToCart(Request $request, $id)
+    public function store(Request $request, $id)
     {
         $qty = $request->input('qty');
         if ($qty) {
@@ -50,7 +50,7 @@ class CartController extends Controller
 
         Session::put('cart', $cart);
 
-        return redirect()->route('cart.getCart');
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -59,7 +59,7 @@ class CartController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function getRemoveFromCart($id)
+    public function delete($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -67,9 +67,9 @@ class CartController extends Controller
 
         Session::put('cart', $cart);
 
-        $cart->isCartEmpty();
+        $cart->isEmpty();
 
-        return redirect()->route('cart.getCart');
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -78,18 +78,18 @@ class CartController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postUpdateCart(Request $request)
+    public function update(Request $request)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
 
         $cartItemsQty = $request->input('cart');
-        $cart->updateCartItems($request, $cartItemsQty);
+        $cart->updateCart($request, $cartItemsQty);
 
         Session::put('cart', $cart);
 
-        $cart->isCartEmpty();
+        $cart->isEmpty();
 
-        return redirect()->route('cart.getCart');
+        return redirect()->route('cart.index');
     }
 }

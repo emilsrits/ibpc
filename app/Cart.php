@@ -11,6 +11,10 @@ class Cart extends Model
     public $totalQty = 0;
     public $totalPrice = 0;
 
+    /**
+     * Cart constructor
+     * @param array $oldCart
+     */
     public function __construct($oldCart)
     {
         if ($oldCart) {
@@ -54,20 +58,6 @@ class Cart extends Model
     }
 
     /**
-     * Check if cart is empty
-     *
-     * @return null
-     */
-    public function isCartEmpty()
-    {
-        if (!$this->items) {
-            $this->deleteCart();
-        }  else {
-            return null;
-        }
-    }
-
-    /**
      * Delete the cart from session
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -88,7 +78,7 @@ class Cart extends Model
      * @param $cartItemsQty
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateCartItems($request, $cartItemsQty)
+    public function updateCart($request, $cartItemsQty)
     {
         $oldTotalQty = $this->totalQty;
         $oldTotalPrice = $this->totalPrice;
@@ -106,6 +96,20 @@ class Cart extends Model
                 $request->session()->flash('message-warning', 'Invalid product quantity!');
                 return redirect()->back();
             }
+        }
+    }
+
+    /**
+     * Check if cart is empty
+     *
+     * @return null
+     */
+    public function isEmpty()
+    {
+        if (!$this->items) {
+            $this->deleteCart();
+        }  else {
+            return null;
         }
     }
 
