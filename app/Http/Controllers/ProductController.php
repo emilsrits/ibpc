@@ -112,20 +112,13 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        $img = request()->file('image');
-        if ($img) {
-            $imgExt =  $img->guessClientExtension();
-            $imgName = $request['code'] . str_random(20) . '.' . $imgExt;
-            $img->storeAs('/public/images/products/' . $request['category'] . '/' , $imgName);
-            $imgPath = Product::STORAGE_PRODUCT_IMAGE_PATH . $request['category'] . '/' . $imgName;
-        } else {
-            $imgPath = null;
-        }
-
         // Check for missing values
         if ($this->productValidate($request)) {
             return redirect()->back();
         }
+
+        $img = request()->file('image');
+        $imgPath = $this->storeImage($img, $request['code'], $request['category']);
 
         $product = new Product();
         $product->image_path = $imgPath;
@@ -144,7 +137,7 @@ class ProductController extends Controller
             foreach ($specifications as $category => $attributes) {
                 foreach ($attributes as $attribute => $value) {
                     if ($value) {
-                        $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                        $product->attributes()->attach([$attribute => ['value' => $value]]);
                     }
                 }
             }
@@ -176,6 +169,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Delete product
         if ($request['submit'] === 'delete') {
             $product = new Product();
             $product->deleteProduct($id);
@@ -184,12 +178,87 @@ class ProductController extends Controller
 
             return redirect()->route('catalog.index');
         }
+        // Edit product
+        if ($request['submit'] === 'save') {
+            $request->flash();
+
+            $product = Product::find($id);
+            $product->exists = true;
+
+            if ($product->isDirty($request['code'])) {
+                if ($this->productExists($request['code'])) {
+                    $request->session()->flash('message-danger', 'Product with this code already exists!');
+                    return redirect()->back();
+                }
+            }
+
+            $img = request()->file('image');
+            if ($img && (!$product->image_path || $product->image_path === Product::DEFAULT_PRODUCT_IMAGE_PATH)) {
+                $imgPath = $this->storeImage($img, $request['code'], $request['category']);
+                $product->image_path = $imgPath;
+            }
+
+            $product->code = $request['code'];
+            $product->title = $request['title'];
+            $product->description = $request['description'];
+            $product->price = $request['price'];
+            $product->stock = $request['stock'];
+            $product->status = $request['status'];
+            $product->save();
+
+            if ($request['category']) {
+                $product->categories()->sync(['category_id' => $request['category']]);
+
+                $specifications = collect($request['attr']);
+                foreach ($specifications as $category => $attributes) {
+                    foreach ($attributes as $attribute => $value) {
+                        if ($value) {
+                            $penis = $product->attributes()->find($attribute);
+                            if ($penis) {
+                                $product->attributes()->sync([$attribute => ['value' => $value]]);
+                            } else {
+                                $product->attributes()->attach([$attribute => ['value' => $value]]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            $request->session()->flash('message-success', 'Product successfully updated!');
+
+            return redirect()->back();
+        }
     }
 
+    /**
+     * Delete a product
+     *
+     * @param $id
+     */
     public function delete($id)
     {
         $product = new Product();
         $product->deleteProduct($id);
+    }
+
+    /**
+     * Store image
+     *
+     * @param $img
+     * @param $code
+     * @param $category
+     * @return null|string
+     */
+    protected function storeImage($img, $code, $category)
+    {
+        if ($img) {
+            $imgExt =  $img->guessClientExtension();
+            $imgName = $code . str_random(20) . '.' . $imgExt;
+            $img->storeAs('/public/images/products/' . $category . '/' , $imgName);
+            return Product::STORAGE_PRODUCT_IMAGE_PATH . $category . '/' . $imgName;
+        } else {
+            return null;
+        }
     }
 
     /**
