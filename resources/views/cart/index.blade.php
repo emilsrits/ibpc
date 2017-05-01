@@ -17,7 +17,8 @@ Shopping Cart
                         <th class="hidden-xs">Product</th>
                         <th><span class="visible-xs">Product</span></th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th class="hidden-xs">Price</th>
+                        <th>Subtotal</th>
                     </tr>
                 </thead>
                 <tbody class="table-body">
@@ -37,8 +38,11 @@ Shopping Cart
                             <td>
                                 <input id="qty" type="number" name="cart[{{ $product['item']['id'] }}][qty]" min="1" max="1000" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
                             </td>
-                            <td class="cart-item-price">
+                            <td class="cart-item-price hidden-xs">
                                 {{ $cart->getItemPrice($product['item']['id']) }}
+                            </td>
+                            <td>
+                                {{ $cart->getItemTotalPrice($product['item']['id']) }}
                             </td>
                         </tr>
                     @endforeach
