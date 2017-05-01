@@ -46,15 +46,13 @@ class Product extends Model
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
                 $product = Product::find($id);
-                $productImage = str_replace('/storage', '', $product->image_path);
-                if ($productImage) {
-                    Storage::delete($productImage);
-                    $product->destroy($id);
-                }
+                $this->deleteImage($id);
+                $product->destroy($id);
             }
-            //Product::destroy($ids);
         } else {
-            Product::findOrFail($ids)->delete();
+            $product = Product::findOrFail($ids);
+            $this->deleteImage($ids);
+            $product->destroy($ids);
         }
     }
 
@@ -79,15 +77,15 @@ class Product extends Model
         }
     }
 
-    public function getSpecificationById($id)
+    public function deleteImage($id)
     {
-        $specification = $this->with('attributes')->find(1);
-
-        /*foreach ($specification->attributes as $key => $value) {
-            $penis = $$value;
-        }*/
-
-        return $specification;
+        $product = Product::find($id);
+        $productImage = str_replace('/storage', '', $product->image_path);
+        if ($productImage) {
+            Storage::delete('/public' . $productImage);
+        } else {
+            return null;
+        }
     }
 
     /**

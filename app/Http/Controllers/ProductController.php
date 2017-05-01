@@ -128,7 +128,7 @@ class ProductController extends Controller
             foreach ($specifications as $category => $attributes) {
                 foreach ($attributes as $attribute => $value) {
                     if ($value) {
-                        $product->attributes()->attach([$attribute => ['value' => $value]]);
+                        $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
                     }
                 }
             }
@@ -175,20 +175,26 @@ class ProductController extends Controller
             $product = Product::find($id);
             $product->exists = true;
 
-            if ($product->isDirty($request['code'])) {
+            if ($request['code'] != $product->code) {
                 if ($this->productExists($request['code'])) {
                     $request->session()->flash('message-danger', 'Product with this code already exists!');
                     return redirect()->back();
+                } else {
+                    $product->code = $request['code'];
                 }
             }
 
             $img = request()->file('image');
-            if ($img && (!$product->image_path || $product->image_path === Product::DEFAULT_PRODUCT_IMAGE_PATH)) {
-                $imgPath = $this->storeImage($img, $request['code'], $request['category']);
+            if ($img) {
+                $imgPath = $this->storeImage($img, $request['code'], $product->categories->first()->id);
+
+                if ($product->image_path) {
+                    $product->deleteImage($id);
+                }
+
                 $product->image_path = $imgPath;
             }
 
-            $product->code = $request['code'];
             $product->title = $request['title'];
             $product->description = $request['description'];
             $product->price = $request['price'];
