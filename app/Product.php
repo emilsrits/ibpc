@@ -79,6 +79,17 @@ class Product extends Model
         }
     }
 
+    public function getSpecificationById($id)
+    {
+        $specification = $this->with('attributes')->find(1);
+
+        /*foreach ($specification->attributes as $key => $value) {
+            $penis = $$value;
+        }*/
+
+        return $specification;
+    }
+
     /**
      * Get product attribute by id
      *

@@ -39,19 +39,10 @@ class ProductController extends Controller
     {
         $product = Product::with('attributes.specification')->find($id);
 
-        $attributes = new Collection;
+        $categoryId = $product->categories()->first()->id;
+        $specifications = Category::with('specifications.attributes')->find($categoryId);
 
-        foreach ($product->attributes as $attribute) {
-            if (!$attributes->has($attribute->specification->name)) {
-                $currentAttributes = new Collection;
-            } else {
-                $currentAttributes = $attributes->get($attribute->specification->name);
-            }
-            $currentAttributes->put($attribute->name, $attribute->pivot->value);
-            $attributes->put($attribute->specification->name, $currentAttributes);
-        }
-
-        return view('shop.product', ['product' => $product], ['specifications' => $attributes]);
+        return view('shop.product', ['product' => $product], ['specifications' => $specifications]);
     }
 
     /**
@@ -151,7 +142,6 @@ class ProductController extends Controller
     public function edit(Request $request, $id)
     {
         $product = Product::with('categories.specifications.attributes')->find($id);
-        $categories = Category::all();
 
         if (!$product->getCategoryId()->isEmpty()) {
             $specifications = Category::with('specifications.attributes')->find($product->getCategoryId());
@@ -161,7 +151,6 @@ class ProductController extends Controller
 
         return view('admin.products.edit', [
             'product' => $product,
-            'categories' => $categories,
             'specifications' => $specifications,
             'request' => $request
         ]);
@@ -178,6 +167,7 @@ class ProductController extends Controller
 
             return redirect()->route('catalog.index');
         }
+
         // Edit product
         if ($request['submit'] === 'save') {
             $request->flash();
@@ -206,19 +196,21 @@ class ProductController extends Controller
             $product->status = $request['status'];
             $product->save();
 
-            if ($request['category']) {
-                $product->categories()->sync(['category_id' => $request['category']]);
 
-                $specifications = collect($request['attr']);
-                foreach ($specifications as $category => $attributes) {
-                    foreach ($attributes as $attribute => $value) {
-                        if ($value) {
-                            $penis = $product->attributes()->find($attribute);
-                            if ($penis) {
-                                $product->attributes()->sync([$attribute => ['value' => $value]]);
-                            } else {
-                                $product->attributes()->attach([$attribute => ['value' => $value]]);
-                            }
+            $specifications = collect($request['attr']);
+            foreach ($specifications as $category => $attributes) {
+                foreach ($attributes as $attribute => $value) {
+                    $productAttr = $product->attributes->find($attribute);
+                    if ($productAttr) {
+                        if (!ctype_space($value) && !$value == "") {
+                            $product->attributes()->detach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                            $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                        } else {
+                            $product->attributes()->detach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                        }
+                    } else {
+                        if (!ctype_space($value) && !$value == "") {
+                            $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
                         }
                     }
                 }
@@ -228,6 +220,10 @@ class ProductController extends Controller
 
             return redirect()->back();
         }
+
+        $request->session()->flash('message-danger', 'Invalid form action!');
+
+        return redirect()->back();
     }
 
     /**
@@ -273,13 +269,13 @@ class ProductController extends Controller
 
         if (!$request['code']) {
             $errors++;
-        } if (!$request['price']) {
-        $errors++;
-    } if (!$request['stock']) {
-        $errors++;
-    } if (!$request['status']) {
-        $errors++;
-    }
+        }
+        if (!$request['price']) {
+            $errors++;
+        }
+        if (!$request['stock']) {
+            $errors++;
+        }
 
         if ($errors) {
             $request->session()->flash('message-danger', 'Invalid form data!');

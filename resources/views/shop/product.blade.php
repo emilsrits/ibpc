@@ -14,16 +14,25 @@
                 </div>
                 <table class="product-specifications">
                     <tbody>
-                    @foreach($specifications as $specification => $attributes)
-                        <tr class="category">
-                            <td>{{ $specification }}</td>
-                        </tr>
-                        @foreach($attributes as $attribute => $value)
-                            <tr class="specification">
-                                <td class="attribute">{{ $attribute }}</td>
-                                <td class="value">{{ $value }}</td>
+                    @foreach($specifications->specifications as $category => $specifications)
+                        @if($specifications->attributes->first())
+                            <tr class="category">
+                                @foreach($product->attributes as $attribute)
+                                    @if($attribute->specification->id === $specifications->id)
+                                        <td>{{ $specifications->name }}</td>
+                                        @break
+                                    @endif
+                                @endforeach
                             </tr>
-                        @endforeach
+                            @foreach($specifications->attributes as $attribute => $value)
+                                @if($product->getAttributeById($value->id))
+                                    <tr class="specification">
+                                        <td class="attribute">{{ $value->name }}</td>
+                                        <td class="value">{{ $product->getAttributeById($value->id) }}</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        @endif
                     @endforeach
                     @if($product->description)
                         <tr class="category">

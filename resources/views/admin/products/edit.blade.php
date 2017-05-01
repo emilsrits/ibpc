@@ -26,19 +26,7 @@ Edit Product
                         <tbody>
                         <tr class="product-attribute">
                             <td><label for="category">Category</label></td>
-                            <td>
-                                <select id="category-select" name="category" required>
-                                    <option value="0"></option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                                {{ $request->old('category') == $category->id || $product->categories->first()->id == $category->id
-                                                ? 'selected'
-                                                : '' }}>
-                                            {{ $category->title }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </td>
+                            <td>{{ $product->categories->first()->title }}</td>
                         </tr>
                         <tr class="product-attribute product-image">
                             <td><label for="image">Image</label></td>
