@@ -14,26 +14,28 @@
                 </div>
                 <table class="product-specifications">
                     <tbody>
-                    @foreach($specifications->specifications as $category => $specifications)
-                        @if($specifications->attributes->first())
-                            <tr class="category">
-                                @foreach($product->attributes as $attribute)
-                                    @if($attribute->specification->id === $specifications->id)
-                                        <td>{{ $specifications->name }}</td>
-                                        @break
+                    @if($specifications)
+                        @foreach($specifications->specifications as $category => $specifications)
+                            @if($specifications->attributes->first())
+                                <tr class="category">
+                                    @foreach($product->attributes as $attribute)
+                                        @if($attribute->specification->id === $specifications->id)
+                                            <td>{{ $specifications->name }}</td>
+                                            @break
+                                        @endif
+                                    @endforeach
+                                </tr>
+                                @foreach($specifications->attributes as $attribute => $value)
+                                    @if($product->getAttributeById($value->id))
+                                        <tr class="specification">
+                                            <td class="attribute">{{ $value->name }}</td>
+                                            <td class="value">{{ $product->getAttributeById($value->id) }}</td>
+                                        </tr>
                                     @endif
                                 @endforeach
-                            </tr>
-                            @foreach($specifications->attributes as $attribute => $value)
-                                @if($product->getAttributeById($value->id))
-                                    <tr class="specification">
-                                        <td class="attribute">{{ $value->name }}</td>
-                                        <td class="value">{{ $product->getAttributeById($value->id) }}</td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        @endif
-                    @endforeach
+                            @endif
+                        @endforeach
+                    @endif
                     @if($product->description)
                         <tr class="category">
                             <td>Additional Information</td>

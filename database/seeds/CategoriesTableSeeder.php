@@ -15,38 +15,65 @@ class CategoriesTableSeeder extends Seeder
 
         DB::table('categories')->truncate();
         // Categories table seeder
-        DB::table('categories')->insert([
-            [
-                'title' => 'CPUs / Processors'
-            ],
-            [
-                'title' => 'Motherboards'
-            ],
-            [
-                'title' => 'Memory'
-            ],
-            [
-                'title' => 'Video Cards'
-            ],
-            [
-                'title' => 'Computer Cases'
-            ],
-            [
-                'title' => 'Power Supplies'
-            ],
-            [
-                'title' => 'Fans & PC Cooling'
-            ],
-            [
-                'title' => 'SSDs'
-            ],
-            [
-                'title' => 'CD / DVD / Blu-Ray Burners & Media'
-            ],
-            [
-                'title' => 'Sound Cards'
-            ]
+        $category = new \App\Category([
+            'title' => 'CPUs / Processors',
+            'status' => 1
         ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'Motherboards',
+            'status' => 1
+        ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'Memory',
+            'status' => 1
+        ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'Video Cards',
+            'status' => 1
+        ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'Computer Cases',
+            'status' => 1
+        ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'Power Supplies',
+            'status' => 1
+        ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'Fans & PC Cooling',
+            'status' => 1
+        ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'SSDs',
+            'status' => 1
+        ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'CD / DVD / Blu-Ray Burners & Media',
+            'status' => 1
+        ]);
+        $category->save();
+
+        $category = new \App\Category([
+            'title' => 'Sound Cards',
+            'status' => 1
+        ]);
+        $category->save();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

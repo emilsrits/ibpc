@@ -27,7 +27,7 @@ class CatalogController extends Controller
     {
         $products = Product::paginate(20);
 
-        return view('admin.products.catalog', ['products' => $products]);
+        return view('admin.product.catalog', ['products' => $products]);
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 use App\Category;
 use App\Product;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -39,8 +39,12 @@ class ProductController extends Controller
     {
         $product = Product::with('attributes.specification')->find($id);
 
-        $categoryId = $product->categories()->first()->id;
-        $specifications = Category::with('specifications.attributes')->find($categoryId);
+        if ($product->categories()->first()) {
+            $categoryId = $product->categories()->first()->id;
+            $specifications = Category::with('specifications.attributes')->find($categoryId);
+        } else {
+            $specifications = null;
+        }
 
         return view('shop.product', ['product' => $product], ['specifications' => $specifications]);
     }
@@ -62,7 +66,7 @@ class ProductController extends Controller
             $specifications = null;
         }
 
-        return view('admin.products.create', [
+        return view('admin.product.create', [
             'categories' => $categories,
             'specifications' => $specifications,
             'request' => $request
@@ -149,7 +153,7 @@ class ProductController extends Controller
             $specifications = null;
         }
 
-        return view('admin.products.edit', [
+        return view('admin.product.edit', [
             'product' => $product,
             'specifications' => $specifications,
             'request' => $request
@@ -168,12 +172,11 @@ class ProductController extends Controller
             return redirect()->route('catalog.index');
         }
 
-        // Edit product
+        // Update product
         if ($request['submit'] === 'save') {
             $request->flash();
 
             $product = Product::find($id);
-            $product->exists = true;
 
             if ($request['code'] != $product->code) {
                 if ($this->productExists($request['code'])) {

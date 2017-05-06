@@ -14,25 +14,25 @@ Edit Product
                 <div class="btn-manage-back">
                     <a href="{{ url('/admin/catalog') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
-                <button id="product-delete" type="submit" name="submit" value="delete" formnovalidate>Delete</button>
-                <button class="product-save" type="submit" name="submit" value="save">Save</button>
+                <button id="entity-delete" type="submit" name="submit" value="delete" formnovalidate>Delete</button>
+                <button class="entity-save" type="submit" name="submit" value="save">Save</button>
             </div>
             <div class="product-content-section">
-                <div class="product-content-section-toggle">
+                <div class="content-section-toggle">
                     <strong>General<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
                 </div>
-                <div class="product-container product-general-attributes">
+                <div class="content-container">
                     <table class="product-table">
                         <tbody>
-                        <tr class="product-attribute">
+                        <tr class="entity-attribute">
                             <td><label for="category">Category</label></td>
                             <td>{{ $product->categories->first()->title }}</td>
                         </tr>
-                        <tr class="product-attribute product-image">
+                        <tr class="entity-attribute product-image">
                             <td><label for="image">Image</label></td>
                             <td><input type="file" name="image" accept="image/gif, image/jpeg, image/png"></td>
                         </tr>
-                        <tr class="product-attribute">
+                        <tr class="entity-attribute">
                             <td><label for="code">Code</label></td>
                             <td><input type="text" name="code" required value="{{
                                 $request->old('code') ?
@@ -40,7 +40,7 @@ Edit Product
                                 $product->code }}">
                             </td>
                         </tr>
-                        <tr class="product-attribute">
+                        <tr class="entity-attribute">
                             <td><label for="title">Title</label></td>
                             <td><input type="text" name="title" required value="{{
                                 $request->old('title') ?
@@ -48,7 +48,7 @@ Edit Product
                                 $product->title }}">
                             </td>
                         </tr>
-                        <tr class="product-attribute">
+                        <tr class="entity-attribute">
                             <td><label for="description">Description</label></td>
                             <td><textarea name="description" cols="20" rows="10">{{
                                 $request->old('description') ?
@@ -56,7 +56,7 @@ Edit Product
                                 $product->description }}</textarea>
                             </td>
                         </tr>
-                        <tr class="product-attribute">
+                        <tr class="entity-attribute">
                             <td><label for="price">Price</label></td>
                             <td><input type="text" name="price" required pattern="^[0-9]*\.[0-9]{2}|[0-9]*$" value="{{
                                 $request->old('price') ?
@@ -64,7 +64,7 @@ Edit Product
                                 $product->price }}">
                             </td>
                         </tr>
-                        <tr class="product-attribute">
+                        <tr class="entity-attribute">
                             <td><label for="stock">Stock</label></td>
                             <td><input type="number" min="0" max="1000" name="stock" required value="{{
                                 $request->old('stock') ?
@@ -72,7 +72,7 @@ Edit Product
                                 $product->stock }}">
                             </td>
                         </tr>
-                        <tr class="product-attribute">
+                        <tr class="entity-attribute">
                             <td><label for="status">Status</label></td>
                             <td>
                                 <select name="status" required>
@@ -88,19 +88,20 @@ Edit Product
             @if($specifications)
                 @if($specifications->specifications->first())
                     <div class="product-content-section">
-                        <div class="product-content-section-toggle">
+                        <div class="content-section-toggle">
                             <strong>Specifications<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
                         </div>
-                        <div class="product-container product-specification-attributes">
+                        <div class="content-container">
                             <table class="product-table">
+                                <tbody>
                                 @foreach($specifications->specifications as $category => $specifications)
                                     @if($specifications->attributes->first())
-                                        <tr class="product-specification">
+                                        <tr class="entity-specification">
                                             <td colspan="2">{{ $specifications->name }}</td>
                                         </tr>
                                     @endif
                                     @foreach($specifications->attributes as $attribute)
-                                        <tr class="product-attribute">
+                                        <tr class="entity-attribute">
                                             <td><label for="{{ 'attr[' . $specifications->id . '][' . $attribute->id . ']' }}">{{ $attribute->name }}</label></td>
                                             <td>
                                                 <input type="text" name="{{ 'attr[' . $specifications->id . '][' . $attribute->id . ']' }}"
@@ -109,6 +110,7 @@ Edit Product
                                         </tr>
                                     @endforeach
                                 @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

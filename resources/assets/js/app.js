@@ -9,11 +9,11 @@
         // Check all checkboxes in catalog for mass action
         $('#mass-select').click(function () {
             if ($(this).is(':checked')) {
-                $('.product-select').each(function () {
+                $('.entity-select').each(function () {
                     $(this).prop('checked', true);
                 });
             } else {
-                $('.product-select').each(function () {
+                $('.entity-select').each(function () {
                     $(this).prop('checked', false);
                 });
             }
@@ -21,22 +21,40 @@
 
         // Confirm product deletion in catalog
         $('#catalog-form').submit(function () {
-            if ($('#mass-action').val() === '4') {
-                var numberOfChecked = $('.product-select:checked').length;
+            if ($('#mass-action').val() === '3') {
+                var numberOfChecked = $('.entity-select:checked').length;
 
                 return confirm('Delete ' + numberOfChecked + ' products?');
             }
         });
 
-        // Cofnrim producr deletion in product edit page
-        $('#product-delete').click(function () {
-            return confirm('Delete product?');
+        // Confirm entity delete
+        $('#entity-delete').click(function () {
+            return confirm('Delete this?');
         });
 
         // Toggle specifications sections when creating product
-        $('.product-content-section-toggle').click(function () {
+        $('.content-section-toggle').click(function () {
             $('i', this).toggleClass('fa-angle-up fa-angle-down');
-            $(this).parent().find('.product-container').slideToggle();
+            $(this).parent().find('.content-container').slideToggle();
+        });
+
+        // Toggle parent_id selection for category creation
+        $('#category-parent').change(function () {
+           if ($(this).val() === '1') {
+               $('#category-parent-id').hide();
+           } else {
+               $('#category-parent-id').show();
+           }
+        });
+
+        // Confirm category deletion in categories view
+        $('#categories-form').submit(function () {
+            if ($('#mass-action').val() === '3') {
+                var numberOfChecked = $('.entity-select:checked').length;
+
+                return confirm('Delete ' + numberOfChecked + ' categories?');
+            }
         });
 
         /* ------AJAX------ */

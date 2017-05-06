@@ -83,6 +83,44 @@ Route::post('/admin/product/delete/{id}', [
 ]);
 
 /**
+ * Category routes
+ */
+Route::get('/admin/categories', [
+    'uses' => 'CategoryController@index',
+    'as' => 'category.index'
+]);
+
+Route::post('/admin/categories/action', [
+    'uses' => 'CategoryController@massAction',
+    'as' => 'category.massAction'
+]);
+
+Route::get('/admin/category/create', [
+    'uses' => 'CategoryController@create',
+    'as' => 'category.create'
+]);
+
+Route::post('/admin/category/create/save', [
+    'uses' => 'CategoryController@store',
+    'as' => 'category.store'
+]);
+
+Route::get('/admin/category/edit/{id}', [
+    'uses' => 'CategoryController@edit',
+    'as' => 'category.edit'
+]);
+
+Route::post('/admin/category/update/{id}', [
+    'uses' => 'CategoryController@update',
+    'as' => 'category.update'
+]);
+
+Route::post('/admin/category/delete/{id}', [
+    'uses' => 'CategoryController@delete',
+    'as' => 'category.delete'
+]);
+
+/**
  * User routes
  */
 Route::get('/user/login', 'Auth\LoginController@index');

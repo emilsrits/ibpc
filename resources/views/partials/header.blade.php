@@ -55,7 +55,7 @@
                                     <li><a href="{{ url('/user/profile') }}">Profile</a></li>
                                     <li><a href="#">Settings</a></li>
                                     @if(Auth::user()->hasRole('admin'))
-                                        <li><a href="{{ url('/admin') }}">Manage</a></li>
+                                        <li><a href="{{ url('/admin') }}">Admin Panel</a></li>
                                     @endif
                                     <li role="separator" class="divider"></li>
                                 @endif

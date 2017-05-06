@@ -92,11 +92,11 @@
     }
 }
 
-/* CATALOG */
-#catalog-form {
+/* CATALOG, CATEGORIES */
+#catalog-form, #categories-form {
     margin: 20px 0;
     overflow-x: auto;
-    .catalog-action {
+    .catalog-action, .categories-action {
         margin: 0 10px 10px;
         select {
             height: 25px;
@@ -108,7 +108,7 @@
         }
     }
 }
-#catalog-table {
+#catalog-table, #categories-table {
     width: 100%;
     th, td {
         text-align: left;
@@ -148,8 +148,8 @@
 }
 
 /* CREATE, EDIT PRODUCTS */
-.product-create, .product-edit {
-    .product-save, #product-delete {
+.product-create, .product-edit, .category-create, .category-edit {
+    .entity-save, #entity-delete {
         margin: 5px;
         font-size: 13px;
         font-weight: bold;
@@ -162,17 +162,17 @@
             box-shadow: inset $color_darkGray 0 1px 10px 1px;
         }
     }
-    .product-save {
+    .entity-save {
         padding: 10px 30px;
         color: $color_white;
         background-color: $color_orange;
     }
-    #product-delete {
+    #entity-delete {
         padding: 10px 15px;
         color: $color_black;
         background-color: $color_red;
     }
-    .product-content-section-toggle {
+    .content-section-toggle {
         margin: 15px 0 0;
         padding: 10px;
         cursor: pointer;
@@ -187,17 +187,17 @@
             }
         }
     }
-    .product-container {
+    .content-container {
         transition: all ease-in-out 0.2s;
         .product-specification-attributes {
             display: none;
         }
     }
-    .product-table {
+    .product-table, .category-table {
         width: 100%;
         margin: 10px 0 5px;
     }
-    .product-specification {
+    .entity-specification {
         font-weight: bold;
         letter-spacing: 0.2px;
         border-left: 1px solid $color_orange;
@@ -207,7 +207,7 @@
             text-transform: uppercase;
         }
     }
-    .product-attribute {
+    .entity-attribute {
         height: 60px;
         td:first-child {
             width: 110px;
@@ -233,6 +233,18 @@
             }
             select {
                 width: 150px;
+            }
+        }
+    }
+}
+.category-create, .category-edit {
+    .category-table {
+        .entity-attribute {
+            .category-attribute-group {
+                width: 200px;
+                label {
+                    padding-left: 20px;
+                }
             }
         }
     }

@@ -98,12 +98,12 @@ class Product extends Model
     {
         $attribute = $this->attributes()->find($id);
         if ($attribute) {
-            $test = $attribute->pivot->value;
+            $value = $attribute->pivot->value;
         } else {
-            $test = null;
+            $value = null;
         }
 
-        return $test;
+        return $value;
     }
 
     /**
