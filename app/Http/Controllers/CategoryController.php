@@ -100,6 +100,13 @@ class CategoryController extends Controller
         ]);
     }
 
+    /**
+     * Update category
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         // Delete category
@@ -134,8 +141,8 @@ class CategoryController extends Controller
             $category->status = $request['status'];
             $category->save();
 
-            // Attach new specifications
             if ($request['spec']) {
+                // Attach new specifications
                 $specificationsGroup = collect($request['spec'])->sortBy('id');
                 foreach ($specificationsGroup as $specifications => $specification) {
                     foreach ($specification as $key => $value) {
@@ -146,6 +153,7 @@ class CategoryController extends Controller
                         }
                     }
                 }
+                // Remove unchecked values
                 if ($category->specifications->first()) {
                     foreach ($category->specifications as $categorySpecs) {
                         $specId = $categorySpecs->id;
