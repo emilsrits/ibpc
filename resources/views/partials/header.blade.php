@@ -14,18 +14,11 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'IBPC') }}
+                        <img src="{{ asset('images/logo.png') }}" alt="IBPC">
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/') }}">Products</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">About</a></li>
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -53,7 +46,6 @@
                             <ul class="dropdown-menu">
                                 @if(Auth::check())
                                     <li><a href="{{ url('/user/profile') }}">Profile</a></li>
-                                    <li><a href="#">Settings</a></li>
                                     @if(Auth::user()->hasRole('admin'))
                                         <li><a href="{{ url('/admin') }}">Admin Panel</a></li>
                                     @endif
@@ -64,7 +56,11 @@
                                     <li><a href="{{ url('/user/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a></li>
                                     <li><a href="{{ url('/user/register') }}"><i class="fa fa-pencil-square" aria-hidden="true"></i> Register</a></li>
                                 @else
-                                    <li><a href="{{ url('/user/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+                                    <li>
+                                        <a href="{{ url('/user/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out
+                                        </a>
+                                    </li>
                                     <form id="logout-form" action="{{ url('/user/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>

@@ -6716,6 +6716,8 @@ input[type=number]::-webkit-inner-spin-button {
     #nav-top ul.dropdown-menu li > a:hover, #nav-top ul.dropdown-menu li > a:focus {
       background-color: #f37c34;
       color: #e0e0e0; }
+  #nav-top .navbar-brand {
+    padding: 0; }
 
 .flash-message {
   margin: 10px auto;

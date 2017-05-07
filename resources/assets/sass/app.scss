@@ -119,6 +119,9 @@ input[type=number]::-webkit-inner-spin-button {
             color: $color_fontWhite;
         }
     }
+    .navbar-brand {
+        padding: 0;
+    }
 }
 
 .flash-message {
