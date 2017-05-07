@@ -52,7 +52,13 @@ Categories
                         </td>
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->title }}</td>
-                        <td>{{ $category->parent }}</td>
+                        <td>
+                            @if($category->parent)
+                                Yes
+                            @else
+                                No
+                            @endif
+                        </td>
                         <td>{{ $category->parent_id }}</td>
                         <td>
                             @if($category->status)
