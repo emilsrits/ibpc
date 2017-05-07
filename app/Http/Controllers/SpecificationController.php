@@ -51,6 +51,7 @@ class SpecificationController extends Controller
         }
 
         $specification = new Specification();
+        $specification->slug = $request['slug'];
         $specification->name = $request['name'];
         $specification->save();
 
@@ -96,13 +97,19 @@ class SpecificationController extends Controller
         if ($request['submit'] === 'save') {
             $specification = Specification::find($id);
 
-            if ($request['name'] != $specification->name) {
-                if ($this->specificationExists($request['name'])) {
-                    $request->session()->flash('message-danger', 'Specification with this name already exists!');
+            if ($request['slug'] != $specification->slug) {
+                if ($this->specificationExists($request['slug'])) {
+                    $request->session()->flash('message-danger', 'Specification with this slug already exists!');
                     return redirect()->back();
                 } else {
-                    $specification->name = $request['name'];
+                    $specification->slug = $request['slug'];
                 }
+            }
+            if (!ctype_space($request['name']) && !$request['name'] == "") {
+                $specification->name = $request['name'];
+            } else {
+                $request->session()->flash('message-danger', 'Attribute group needs a display name!');
+                return redirect()->back();
             }
             $specification->save();
 
@@ -154,26 +161,30 @@ class SpecificationController extends Controller
      */
     protected function specificationValidate($request)
     {
-        if (!$request['name']) {
-            $request->session()->flash('message-danger', 'Missing attribute group name!');
+        if (!ctype_space($request['slug']) && !$request['slug'] == "") {
+            $request->session()->flash('message-danger', 'Missing attribute group slug!');
             return true;
         } else {
-            if ($this->specificationExists($request['name'])) {
-                $request->session()->flash('message-danger', 'Specification with this name already exists!');
+            if ($this->specificationExists($request['slug'])) {
+                $request->session()->flash('message-danger', 'Specification with this slug already exists!');
                 return true;
-            } else {
-                return false;
             }
         }
+        if (!ctype_space($request['name']) && !$request['name'] == "") {
+            $request->session()->flash('message-danger', 'Missing attribute group name!');
+            return true;
+        }
+
+        return false;
     }
 
     /**
      * Check if specification exists
      *
-     * @param $name
+     * @param $slug
      * @return mixed
      */
-    protected function specificationExists($name) {
-        return $specification = Specification::where('name', $name)->exists();
+    protected function specificationExists($slug) {
+        return $specification = Specification::where('slug', $slug)->exists();
     }
 }

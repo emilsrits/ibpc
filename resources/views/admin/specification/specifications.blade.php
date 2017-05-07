@@ -33,6 +33,7 @@ Attribute Groups
                             <input id="mass-select" type="checkbox" name="mass-select" value="yes">
                         </th>
                         <th>Id</th>
+                        <th>Slug</th>
                         <th>Name</th>
                         <th>Attributes</th>
                         <th>Created at</th>
@@ -47,6 +48,7 @@ Attribute Groups
                                 <input class="entity-select" type="checkbox" name="specifications[{{ $specification->id }}][id]" value="{{ $specification->id }}">
                             </td>
                             <td>{{ $specification->id }}</td>
+                            <td>{{ $specification->slug }}</td>
                             <td>{{ $specification->name }}</td>
                             <td>{{ $specification->attributes->count() }}</td>
                             <td>{{ $specification->created_at }}</td>

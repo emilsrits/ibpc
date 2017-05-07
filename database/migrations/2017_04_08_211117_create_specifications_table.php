@@ -17,7 +17,8 @@ class CreateSpecificationsTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->string('name');
             $table->timestamps();
         });
     }

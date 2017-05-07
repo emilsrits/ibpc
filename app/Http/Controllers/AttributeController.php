@@ -37,7 +37,7 @@ class AttributeController extends Controller
      */
     public function store(Request $request, $specificationId)
     {
-        if ($request['name']) {
+        if (!ctype_space($request['name']) && !$request['name'] == "") {
             $attribute = new Attribute();
             $attribute->specification_id = $specificationId;
             $attribute->name = $request['name'];
@@ -91,15 +91,20 @@ class AttributeController extends Controller
         if ($request['submit'] === 'save') {
             $attribute = Attribute::find($id);
 
-            if ($request['name'] != $attribute->name) {
-                if ($this->attributeExists($request['name'])) {
-                    $request->session()->flash('message-danger', 'Attribute with this name already exists!');
-                    return redirect()->back();
-                } else {
-                    $attribute->name = $request['name'];
+            if (!ctype_space($request['name']) && !$request['name'] == "") {
+                if ($request['name'] != $attribute->name) {
+                    if ($this->attributeExists($request['name'])) {
+                        $request->session()->flash('message-danger', 'Attribute with this name already exists!');
+                        return redirect()->back();
+                    } else {
+                        $attribute->name = $request['name'];
+                    }
                 }
+                $attribute->save();
+            } else {
+                $request->session()->flash('message-danger', 'Missing attribute group name!');
+                return redirect()->back();
             }
-            $attribute->save();
 
             $request->session()->flash('message-success', 'Attribute successfully updated!');
             return redirect()->back();

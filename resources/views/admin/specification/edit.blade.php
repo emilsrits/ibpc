@@ -25,6 +25,10 @@ Edit Attribute Group
                         <table class="specification-table">
                             <tbody>
                             <tr class="entity-attribute">
+                                <td><label for="slug">Slug</label></td>
+                                <td><input type="text" name="slug" required value="{{ $specification->slug }}"></td>
+                            </tr>
+                            <tr class="entity-attribute">
                                 <td><label for="name">Name</label></td>
                                 <td><input type="text" name="name" required value="{{ $specification->name }}"></td>
                             </tr>
