@@ -428,6 +428,15 @@ th {
   font-weight: normal;
   font-style: normal; }
 
+/* ADMIN HEADER */
+#admin-header .admin-sections li {
+  font-family: Roboto-Regular, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+  text-transform: uppercase; }
+
+/* ADMIN PAGE*/
 .admin-page h3 {
   margin: 20px 10px;
   font-family: Montserrat-Regular, sans-serif;
@@ -6717,6 +6726,7 @@ input[type=number]::-webkit-inner-spin-button {
       background-color: #f37c34;
       color: #e0e0e0; }
   #nav-top .navbar-brand {
+    margin-right: 10px;
     padding: 0; }
 
 .flash-message {
