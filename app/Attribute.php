@@ -25,4 +25,22 @@ class Attribute extends Model
     {
         return $this->belongsTo(Specification::class);
     }
+
+    /**
+     * Delete attributes
+     *
+     * @param $ids
+     */
+    public function deleteAttribute($ids)
+    {
+        if (is_array($ids)) {
+            foreach ($ids as $id => $value) {
+                $attribute = Attribute::find($id);
+                $attribute->destroy($id);
+            }
+        } else {
+            $attribute = Attribute::findOrFail($ids);
+            $attribute->destroy($ids);
+        }
+    }
 }

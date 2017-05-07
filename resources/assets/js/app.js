@@ -20,11 +20,17 @@
         });
 
         // Confirm product deletion in catalog
-        $('#catalog-form').submit(function () {
+        $('#catalog-form').submit(function (e) {
             if ($('#mass-action').val() === '3') {
                 var numberOfChecked = $('.entity-select:checked').length;
 
-                return confirm('Delete ' + numberOfChecked + ' products?');
+                if (numberOfChecked > 0) {
+                    return confirm('Delete ' + numberOfChecked + ' products?');
+                } else {
+                    e.preventDefault();
+                }
+            } else {
+                e.preventDefault();
             }
         });
 
@@ -49,11 +55,47 @@
         });
 
         // Confirm category deletion in categories view
-        $('#categories-form').submit(function () {
+        $('#categories-form').submit(function (e) {
             if ($('#mass-action').val() === '3') {
                 var numberOfChecked = $('.entity-select:checked').length;
 
-                return confirm('Delete ' + numberOfChecked + ' categories?');
+                if (numberOfChecked > 0) {
+                    return confirm('Delete ' + numberOfChecked + ' categories?');
+                } else {
+                    e.preventDefault();
+                }
+            } else {
+                e.preventDefault();
+            }
+        });
+
+        // Confirm specification deletion in specifications view
+        $('#specifications-form').submit(function (e) {
+            if ($('#mass-action').val() === '1') {
+                var numberOfChecked = $('.entity-select:checked').length;
+
+                if (numberOfChecked > 0) {
+                    return confirm('Delete ' + numberOfChecked + ' attribute groups?');
+                } else {
+                    e.preventDefault();
+                }
+            } else {
+                e.preventDefault();
+            }
+        });
+
+        // Confirm attribute deletion
+        $('#attributes-form').submit(function (e) {
+            if ($('#mass-action').val() === '1') {
+                var numberOfChecked = $('.entity-select:checked').length;
+
+                if (numberOfChecked > 0) {
+                    return confirm('Delete ' + numberOfChecked + ' attributes?');
+                } else {
+                    e.preventDefault();
+                }
+            } else {
+                e.preventDefault();
             }
         });
 

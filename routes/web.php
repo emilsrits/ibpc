@@ -121,6 +121,72 @@ Route::post('/admin/category/delete/{id}', [
 ]);
 
 /**
+ * Specification / Attribute Group routes
+ */
+Route::get('/admin/specifications', [
+    'uses' => 'SpecificationController@index',
+    'as' => 'specification.index'
+]);
+
+Route::post('/admin/specifications/action', [
+    'uses' => 'SpecificationController@massAction',
+    'as' => 'specification.massAction'
+]);
+
+Route::get('/admin/specification/create', [
+    'uses' => 'SpecificationController@create',
+    'as' => 'specification.create'
+]);
+
+Route::post('/admin/specification/create/save', [
+    'uses' => 'SpecificationController@store',
+    'as' => 'specification.store'
+]);
+
+Route::get('/admin/specification/edit/{id}', [
+    'uses' => 'SpecificationController@edit',
+    'as' => 'specification.edit'
+]);
+
+Route::post('/admin/specification/update/{id}', [
+    'uses' => 'SpecificationController@update',
+    'as' => 'specification.update'
+]);
+
+Route::post('/admin/specification/delete/{id}', [
+    'uses' => 'SpecificationController@delete',
+    'as' => 'specification.delete'
+]);
+
+/**
+ * Attribute routes
+ */
+Route::post('/admin/attributes/action', [
+    'uses' => 'AttributeController@massAction',
+    'as' => 'attribute.massAction'
+]);
+
+Route::get('/admin/attribute/create/{specificationId}', [
+    'uses' => 'AttributeController@create',
+    'as' => 'attribute.create'
+]);
+
+Route::post('/admin/attribute/create/save/{specificationId}', [
+    'uses' => 'AttributeController@store',
+    'as' => 'attribute.store'
+]);
+
+Route::get('/admin/attribute/edit/{specificationId}/{id}', [
+    'uses' => 'AttributeController@edit',
+    'as' => 'attribute.edit'
+]);
+
+Route::post('/admin/attribute/update/{specificationId}/{id}', [
+    'uses' => 'AttributeController@update',
+    'as' => 'attribute.update'
+]);
+
+/**
  * User routes
  */
 Route::get('/user/login', 'Auth\LoginController@index');

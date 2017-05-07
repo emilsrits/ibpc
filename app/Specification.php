@@ -16,8 +16,31 @@ class Specification extends Model
         return $this->hasMany(Attribute::class);
     }
 
+    /**
+     * ManyToMany relationship with Category class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_specification');
+    }
+
+    /**
+     * Delete specification
+     *
+     * @param $ids
+     */
+    public function deleteSpecification($ids)
+    {
+        if (is_array($ids)) {
+            foreach ($ids as $id => $value) {
+                $specification = Specification::find($id);
+                $specification->destroy($id);
+            }
+        } else {
+            $specification = Specification::findOrFail($ids);
+            $specification->destroy($ids);
+        }
     }
 }

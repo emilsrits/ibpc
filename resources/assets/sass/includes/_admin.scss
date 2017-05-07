@@ -92,11 +92,11 @@
     }
 }
 
-/* CATALOG, CATEGORIES */
-#catalog-form, #categories-form {
+/* CATALOG, CATEGORIES, ATTRIBUTES */
+#catalog-form, #categories-form, #specifications-form, #attributes-form {
     margin: 20px 0;
     overflow-x: auto;
-    .catalog-action, .categories-action {
+    .catalog-action, .categories-action, .specifications-action, .attributes-action {
         margin: 0 10px 10px;
         select {
             height: 25px;
@@ -108,7 +108,7 @@
         }
     }
 }
-#catalog-table, #categories-table {
+#catalog-table, #categories-table, #specifications-table, #attributes-table {
     width: 100%;
     th, td {
         text-align: left;
@@ -146,9 +146,17 @@
         }
     }
 }
+.attribute-content-section {
+    .btn-manage-add {
+        margin: 25px 0 0;
+    }
+}
 
-/* CREATE, EDIT PRODUCTS */
-.product-create, .product-edit, .category-create, .category-edit {
+/* CREATE, EDIT ENTITIES */
+.product-create, .product-edit,
+.category-create, .category-edit,
+.specification-create, .specification-edit,
+.attribute-create, .attribute-edit {
     .entity-save, #entity-delete {
         margin: 5px;
         font-size: 13px;

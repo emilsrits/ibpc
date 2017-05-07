@@ -512,46 +512,55 @@ th {
 .manage-users > h4 {
   color: #1c98ff; }
 
-/* CATALOG, CATEGORIES */
-#catalog-form, #categories-form {
+/* CATALOG, CATEGORIES, ATTRIBUTES */
+#catalog-form, #categories-form, #specifications-form, #attributes-form {
   margin: 20px 0;
   overflow-x: auto; }
-  #catalog-form .catalog-action, #catalog-form .categories-action, #categories-form .catalog-action, #categories-form .categories-action {
+  #catalog-form .catalog-action, #catalog-form .categories-action, #catalog-form .specifications-action, #catalog-form .attributes-action, #categories-form .catalog-action, #categories-form .categories-action, #categories-form .specifications-action, #categories-form .attributes-action, #specifications-form .catalog-action, #specifications-form .categories-action, #specifications-form .specifications-action, #specifications-form .attributes-action, #attributes-form .catalog-action, #attributes-form .categories-action, #attributes-form .specifications-action, #attributes-form .attributes-action {
     margin: 0 10px 10px; }
-    #catalog-form .catalog-action select, #catalog-form .categories-action select, #categories-form .catalog-action select, #categories-form .categories-action select {
+    #catalog-form .catalog-action select, #catalog-form .categories-action select, #catalog-form .specifications-action select, #catalog-form .attributes-action select, #categories-form .catalog-action select, #categories-form .categories-action select, #categories-form .specifications-action select, #categories-form .attributes-action select, #specifications-form .catalog-action select, #specifications-form .categories-action select, #specifications-form .specifications-action select, #specifications-form .attributes-action select, #attributes-form .catalog-action select, #attributes-form .categories-action select, #attributes-form .specifications-action select, #attributes-form .attributes-action select {
       height: 25px;
       vertical-align: middle; }
-    #catalog-form .catalog-action button, #catalog-form .categories-action button, #categories-form .catalog-action button, #categories-form .categories-action button {
+    #catalog-form .catalog-action button, #catalog-form .categories-action button, #catalog-form .specifications-action button, #catalog-form .attributes-action button, #categories-form .catalog-action button, #categories-form .categories-action button, #categories-form .specifications-action button, #categories-form .attributes-action button, #specifications-form .catalog-action button, #specifications-form .categories-action button, #specifications-form .specifications-action button, #specifications-form .attributes-action button, #attributes-form .catalog-action button, #attributes-form .categories-action button, #attributes-form .specifications-action button, #attributes-form .attributes-action button {
       height: 25px;
       vertical-align: middle; }
 
-#catalog-table, #categories-table {
+#catalog-table, #categories-table, #specifications-table, #attributes-table {
   width: 100%; }
-  #catalog-table th, #catalog-table td, #categories-table th, #categories-table td {
+  #catalog-table th, #catalog-table td, #categories-table th, #categories-table td, #specifications-table th, #specifications-table td, #attributes-table th, #attributes-table td {
     text-align: left;
     vertical-align: middle; }
-  #catalog-table .table-head, #categories-table .table-head {
+  #catalog-table .table-head, #categories-table .table-head, #specifications-table .table-head, #attributes-table .table-head {
     padding: 5px 0; }
-    #catalog-table .table-head > tr, #categories-table .table-head > tr {
+    #catalog-table .table-head > tr, #categories-table .table-head > tr, #specifications-table .table-head > tr, #attributes-table .table-head > tr {
       line-height: 30px; }
-    #catalog-table .table-head th, #categories-table .table-head th {
+    #catalog-table .table-head th, #categories-table .table-head th, #specifications-table .table-head th, #attributes-table .table-head th {
       padding: 10px;
       font-weight: bold; }
-      #catalog-table .table-head th:first-of-type, #categories-table .table-head th:first-of-type {
+      #catalog-table .table-head th:first-of-type, #categories-table .table-head th:first-of-type, #specifications-table .table-head th:first-of-type, #attributes-table .table-head th:first-of-type {
         text-align: center; }
-  #catalog-table .table-body tr, #categories-table .table-body tr {
+  #catalog-table .table-body tr, #categories-table .table-body tr, #specifications-table .table-body tr, #attributes-table .table-body tr {
     border-top: 1px solid #eee; }
-  #catalog-table .table-body td, #categories-table .table-body td {
+  #catalog-table .table-body td, #categories-table .table-body td, #specifications-table .table-body td, #attributes-table .table-body td {
     padding: 10px;
     max-width: 300px;
     line-height: 20px; }
-    #catalog-table .table-body td:first-of-type, #categories-table .table-body td:first-of-type {
+    #catalog-table .table-body td:first-of-type, #categories-table .table-body td:first-of-type, #specifications-table .table-body td:first-of-type, #attributes-table .table-body td:first-of-type {
       text-align: center; }
-    #catalog-table .table-body td:last-of-type > a, #categories-table .table-body td:last-of-type > a {
+    #catalog-table .table-body td:last-of-type > a, #categories-table .table-body td:last-of-type > a, #specifications-table .table-body td:last-of-type > a, #attributes-table .table-body td:last-of-type > a {
       padding: 5px; }
 
-/* CREATE, EDIT PRODUCTS */
-.product-create .entity-save, .product-create #entity-delete, .product-edit .entity-save, .product-edit #entity-delete, .category-create .entity-save, .category-create #entity-delete, .category-edit .entity-save, .category-edit #entity-delete {
+.attribute-content-section .btn-manage-add {
+  margin: 25px 0 0; }
+
+/* CREATE, EDIT ENTITIES */
+.product-create .entity-save, .product-create #entity-delete, .product-edit .entity-save, .product-edit #entity-delete,
+.category-create .entity-save,
+.category-create #entity-delete, .category-edit .entity-save, .category-edit #entity-delete,
+.specification-create .entity-save,
+.specification-create #entity-delete, .specification-edit .entity-save, .specification-edit #entity-delete,
+.attribute-create .entity-save,
+.attribute-create #entity-delete, .attribute-edit .entity-save, .attribute-edit #entity-delete {
   margin: 5px;
   font-size: 13px;
   font-weight: bold;
@@ -561,71 +570,140 @@ th {
   border-radius: 4px;
   -webkit-transition: box-shadow ease-in-out .15s;
   transition: box-shadow ease-in-out .15s; }
-  .product-create .entity-save:hover, .product-create .entity-save:focus, .product-create #entity-delete:hover, .product-create #entity-delete:focus, .product-edit .entity-save:hover, .product-edit .entity-save:focus, .product-edit #entity-delete:hover, .product-edit #entity-delete:focus, .category-create .entity-save:hover, .category-create .entity-save:focus, .category-create #entity-delete:hover, .category-create #entity-delete:focus, .category-edit .entity-save:hover, .category-edit .entity-save:focus, .category-edit #entity-delete:hover, .category-edit #entity-delete:focus {
+  .product-create .entity-save:hover, .product-create .entity-save:focus, .product-create #entity-delete:hover, .product-create #entity-delete:focus, .product-edit .entity-save:hover, .product-edit .entity-save:focus, .product-edit #entity-delete:hover, .product-edit #entity-delete:focus,
+  .category-create .entity-save:hover,
+  .category-create .entity-save:focus,
+  .category-create #entity-delete:hover,
+  .category-create #entity-delete:focus, .category-edit .entity-save:hover, .category-edit .entity-save:focus, .category-edit #entity-delete:hover, .category-edit #entity-delete:focus,
+  .specification-create .entity-save:hover,
+  .specification-create .entity-save:focus,
+  .specification-create #entity-delete:hover,
+  .specification-create #entity-delete:focus, .specification-edit .entity-save:hover, .specification-edit .entity-save:focus, .specification-edit #entity-delete:hover, .specification-edit #entity-delete:focus,
+  .attribute-create .entity-save:hover,
+  .attribute-create .entity-save:focus,
+  .attribute-create #entity-delete:hover,
+  .attribute-create #entity-delete:focus, .attribute-edit .entity-save:hover, .attribute-edit .entity-save:focus, .attribute-edit #entity-delete:hover, .attribute-edit #entity-delete:focus {
     box-shadow: inset #303030 0 1px 10px 1px; }
 
-.product-create .entity-save, .product-edit .entity-save, .category-create .entity-save, .category-edit .entity-save {
+.product-create .entity-save, .product-edit .entity-save,
+.category-create .entity-save, .category-edit .entity-save,
+.specification-create .entity-save, .specification-edit .entity-save,
+.attribute-create .entity-save, .attribute-edit .entity-save {
   padding: 10px 30px;
   color: #fff;
   background-color: #f37c34; }
 
-.product-create #entity-delete, .product-edit #entity-delete, .category-create #entity-delete, .category-edit #entity-delete {
+.product-create #entity-delete, .product-edit #entity-delete,
+.category-create #entity-delete, .category-edit #entity-delete,
+.specification-create #entity-delete, .specification-edit #entity-delete,
+.attribute-create #entity-delete, .attribute-edit #entity-delete {
   padding: 10px 15px;
   color: #0d0d0d;
   background-color: #CC4040; }
 
-.product-create .content-section-toggle, .product-edit .content-section-toggle, .category-create .content-section-toggle, .category-edit .content-section-toggle {
+.product-create .content-section-toggle, .product-edit .content-section-toggle,
+.category-create .content-section-toggle, .category-edit .content-section-toggle,
+.specification-create .content-section-toggle, .specification-edit .content-section-toggle,
+.attribute-create .content-section-toggle, .attribute-edit .content-section-toggle {
   margin: 15px 0 0;
   padding: 10px;
   cursor: pointer;
   border-bottom: 1px solid #eee; }
-  .product-create .content-section-toggle > strong, .product-edit .content-section-toggle > strong, .category-create .content-section-toggle > strong, .category-edit .content-section-toggle > strong {
+  .product-create .content-section-toggle > strong, .product-edit .content-section-toggle > strong,
+  .category-create .content-section-toggle > strong, .category-edit .content-section-toggle > strong,
+  .specification-create .content-section-toggle > strong, .specification-edit .content-section-toggle > strong,
+  .attribute-create .content-section-toggle > strong, .attribute-edit .content-section-toggle > strong {
     color: #CC4040;
     font-size: 15px;
     letter-spacing: 0.3px;
     text-transform: uppercase; }
-    .product-create .content-section-toggle > strong i, .product-edit .content-section-toggle > strong i, .category-create .content-section-toggle > strong i, .category-edit .content-section-toggle > strong i {
+    .product-create .content-section-toggle > strong i, .product-edit .content-section-toggle > strong i,
+    .category-create .content-section-toggle > strong i, .category-edit .content-section-toggle > strong i,
+    .specification-create .content-section-toggle > strong i, .specification-edit .content-section-toggle > strong i,
+    .attribute-create .content-section-toggle > strong i, .attribute-edit .content-section-toggle > strong i {
       padding-left: 10px; }
 
-.product-create .content-container, .product-edit .content-container, .category-create .content-container, .category-edit .content-container {
+.product-create .content-container, .product-edit .content-container,
+.category-create .content-container, .category-edit .content-container,
+.specification-create .content-container, .specification-edit .content-container,
+.attribute-create .content-container, .attribute-edit .content-container {
   -webkit-transition: all ease-in-out 0.2s;
   transition: all ease-in-out 0.2s; }
-  .product-create .content-container .product-specification-attributes, .product-edit .content-container .product-specification-attributes, .category-create .content-container .product-specification-attributes, .category-edit .content-container .product-specification-attributes {
+  .product-create .content-container .product-specification-attributes, .product-edit .content-container .product-specification-attributes,
+  .category-create .content-container .product-specification-attributes, .category-edit .content-container .product-specification-attributes,
+  .specification-create .content-container .product-specification-attributes, .specification-edit .content-container .product-specification-attributes,
+  .attribute-create .content-container .product-specification-attributes, .attribute-edit .content-container .product-specification-attributes {
     display: none; }
 
-.product-create .product-table, .product-create .category-table, .product-edit .product-table, .product-edit .category-table, .category-create .product-table, .category-create .category-table, .category-edit .product-table, .category-edit .category-table {
+.product-create .product-table, .product-create .category-table, .product-edit .product-table, .product-edit .category-table,
+.category-create .product-table,
+.category-create .category-table, .category-edit .product-table, .category-edit .category-table,
+.specification-create .product-table,
+.specification-create .category-table, .specification-edit .product-table, .specification-edit .category-table,
+.attribute-create .product-table,
+.attribute-create .category-table, .attribute-edit .product-table, .attribute-edit .category-table {
   width: 100%;
   margin: 10px 0 5px; }
 
-.product-create .entity-specification, .product-edit .entity-specification, .category-create .entity-specification, .category-edit .entity-specification {
+.product-create .entity-specification, .product-edit .entity-specification,
+.category-create .entity-specification, .category-edit .entity-specification,
+.specification-create .entity-specification, .specification-edit .entity-specification,
+.attribute-create .entity-specification, .attribute-edit .entity-specification {
   font-weight: bold;
   letter-spacing: 0.2px;
   border-left: 1px solid #f37c34; }
-  .product-create .entity-specification > td, .product-edit .entity-specification > td, .category-create .entity-specification > td, .category-edit .entity-specification > td {
+  .product-create .entity-specification > td, .product-edit .entity-specification > td,
+  .category-create .entity-specification > td, .category-edit .entity-specification > td,
+  .specification-create .entity-specification > td, .specification-edit .entity-specification > td,
+  .attribute-create .entity-specification > td, .attribute-edit .entity-specification > td {
     padding: 15px 10px;
     color: #0d0d0d;
     text-transform: uppercase; }
 
-.product-create .entity-attribute, .product-edit .entity-attribute, .category-create .entity-attribute, .category-edit .entity-attribute {
+.product-create .entity-attribute, .product-edit .entity-attribute,
+.category-create .entity-attribute, .category-edit .entity-attribute,
+.specification-create .entity-attribute, .specification-edit .entity-attribute,
+.attribute-create .entity-attribute, .attribute-edit .entity-attribute {
   height: 60px; }
-  .product-create .entity-attribute td:first-child, .product-edit .entity-attribute td:first-child, .category-create .entity-attribute td:first-child, .category-edit .entity-attribute td:first-child {
+  .product-create .entity-attribute td:first-child, .product-edit .entity-attribute td:first-child,
+  .category-create .entity-attribute td:first-child, .category-edit .entity-attribute td:first-child,
+  .specification-create .entity-attribute td:first-child, .specification-edit .entity-attribute td:first-child,
+  .attribute-create .entity-attribute td:first-child, .attribute-edit .entity-attribute td:first-child {
     width: 110px;
     color: #0d0d0d;
     font-size: 13px;
     vertical-align: top; }
-  .product-create .entity-attribute td, .product-edit .entity-attribute td, .category-create .entity-attribute td, .category-edit .entity-attribute td {
+  .product-create .entity-attribute td, .product-edit .entity-attribute td,
+  .category-create .entity-attribute td, .category-edit .entity-attribute td,
+  .specification-create .entity-attribute td, .specification-edit .entity-attribute td,
+  .attribute-create .entity-attribute td, .attribute-edit .entity-attribute td {
     padding: 10px; }
-    .product-create .entity-attribute td input, .product-edit .entity-attribute td input, .category-create .entity-attribute td input, .category-edit .entity-attribute td input {
+    .product-create .entity-attribute td input, .product-edit .entity-attribute td input,
+    .category-create .entity-attribute td input, .category-edit .entity-attribute td input,
+    .specification-create .entity-attribute td input, .specification-edit .entity-attribute td input,
+    .attribute-create .entity-attribute td input, .attribute-edit .entity-attribute td input {
       padding: 2px 3px;
       line-height: 20px; }
-    .product-create .entity-attribute td input[type="text"], .product-edit .entity-attribute td input[type="text"], .category-create .entity-attribute td input[type="text"], .category-edit .entity-attribute td input[type="text"] {
+    .product-create .entity-attribute td input[type="text"], .product-edit .entity-attribute td input[type="text"],
+    .category-create .entity-attribute td input[type="text"], .category-edit .entity-attribute td input[type="text"],
+    .specification-create .entity-attribute td input[type="text"], .specification-edit .entity-attribute td input[type="text"],
+    .attribute-create .entity-attribute td input[type="text"], .attribute-edit .entity-attribute td input[type="text"] {
       width: 100%; }
-    .product-create .entity-attribute td input[type="number"], .product-edit .entity-attribute td input[type="number"], .category-create .entity-attribute td input[type="number"], .category-edit .entity-attribute td input[type="number"] {
+    .product-create .entity-attribute td input[type="number"], .product-edit .entity-attribute td input[type="number"],
+    .category-create .entity-attribute td input[type="number"], .category-edit .entity-attribute td input[type="number"],
+    .specification-create .entity-attribute td input[type="number"], .specification-edit .entity-attribute td input[type="number"],
+    .attribute-create .entity-attribute td input[type="number"], .attribute-edit .entity-attribute td input[type="number"] {
       width: 150px; }
-    .product-create .entity-attribute td textarea, .product-edit .entity-attribute td textarea, .category-create .entity-attribute td textarea, .category-edit .entity-attribute td textarea {
+    .product-create .entity-attribute td textarea, .product-edit .entity-attribute td textarea,
+    .category-create .entity-attribute td textarea, .category-edit .entity-attribute td textarea,
+    .specification-create .entity-attribute td textarea, .specification-edit .entity-attribute td textarea,
+    .attribute-create .entity-attribute td textarea, .attribute-edit .entity-attribute td textarea {
       width: 100%;
       resize: none; }
-    .product-create .entity-attribute td select, .product-edit .entity-attribute td select, .category-create .entity-attribute td select, .category-edit .entity-attribute td select {
+    .product-create .entity-attribute td select, .product-edit .entity-attribute td select,
+    .category-create .entity-attribute td select, .category-edit .entity-attribute td select,
+    .specification-create .entity-attribute td select, .specification-edit .entity-attribute td select,
+    .attribute-create .entity-attribute td select, .attribute-edit .entity-attribute td select {
       width: 150px; }
 
 .category-create .category-table .entity-attribute .category-attribute-group, .category-edit .category-table .entity-attribute .category-attribute-group {
