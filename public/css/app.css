@@ -6730,8 +6730,7 @@ input[type=number]::-webkit-inner-spin-button {
       background-color: #f37c34;
       color: #e0e0e0; }
   #nav-top .navbar-brand {
-    margin-right: 10px;
-    padding: 0; }
+    padding: 0 15px; }
 
 .flash-message {
   margin: 10px auto;
