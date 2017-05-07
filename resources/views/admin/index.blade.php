@@ -20,11 +20,14 @@ Admin Panel
     </div>
     <div class="manage-section manage-users">
         <h4>Users</h4>
-        <div class="manage-tab users-create">
-            <a href="{{ url('/admin/users/create') }}"><i class="fa fa-plus" aria-hidden="true"></i>Create Users</a>
+        <div class="manage-tab users-list">
+            <a href="{{ url('/admin/users') }}"><i class="fa fa-users" aria-hidden="true"></i>Users</a>
         </div>
-        <div class="manage-tab users-edit">
-            <a href="{{ url('/admin/users/edit') }}"><i class="fa fa-pencil" aria-hidden="true"></i>Edit Users</a>
+    </div>
+    <div class="manage-section manage-settings">
+        <h4>Settings</h4>
+        <div class="manage-tab settings-configuration">
+            <a href="{{ url('/admin/settings') }}"><i class="fa fa-cogs" aria-hidden="true"></i>Settings Configuration</a>
         </div>
     </div>
 </div>

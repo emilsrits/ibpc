@@ -521,6 +521,10 @@ th {
 .manage-users > h4 {
   color: #1c98ff; }
 
+/* MANAGE-SETTINGS */
+.manage-settings > h4 {
+  color: #268d2e; }
+
 /* CATALOG, CATEGORIES, ATTRIBUTES */
 #catalog-form, #categories-form, #specifications-form, #attributes-form {
   margin: 20px 0;
