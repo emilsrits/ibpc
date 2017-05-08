@@ -14,7 +14,10 @@ class ProductController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'admin'], ['only' => ['create', 'createWithCategory','store', 'edit', 'update', 'delete']]);
+        $this->middleware(['auth', 'admin'], [
+            'only' => [
+                'create', 'createWithCategory','store', 'edit', 'update', 'delete'
+            ]]);
     }
 
     /**

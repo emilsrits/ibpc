@@ -37,7 +37,7 @@ class RolesTableSeeder extends Seeder
         $role->save();
 
         $role = new \App\Role([
-            'name' => 'buyer',
+            'name' => 'customer',
             'slug' => 'user',
             'description' => 'browses the shop and buys products'
         ]);

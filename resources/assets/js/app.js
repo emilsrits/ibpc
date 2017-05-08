@@ -99,6 +99,22 @@
             }
         });
 
+        // Confirm user deletion
+        $('#users-form').submit(function (e) {
+            var massAction = $('#mass-action').val();
+            if (massAction === '1') {
+                var numberOfChecked = $('.entity-select:checked').length;
+
+                if (numberOfChecked > 0) {
+                    return confirm('Delete ' + numberOfChecked + ' users?');
+                }
+            }
+            if (massAction === '0') {
+                e.preventDefault();
+            }
+        });
+
+
         /* ------AJAX------ */
         // Load category specifications when creating product
         $('#category-select').change(function () {

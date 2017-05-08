@@ -18,9 +18,7 @@ Users
             <div class="users-action">
                 <select id="mass-action" name="mass-action">
                     <option value="0"></option>
-                    <option value="1">Disable</option>
-                    <option value="2">Enable</option>
-                    <option value="3">Delete</option>
+                    <option value="1">Delete</option>
                 </select>
                 <button id="mass-action-run" type="submit" name="submit"><i class="fa fa-play" aria-hidden="true"></i></button>
             </div>

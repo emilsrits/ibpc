@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are mass assignable
      *
      * @var array
      */
@@ -19,7 +19,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for arrays
      *
      * @var array
      */
@@ -27,9 +27,33 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * ManyToMany relationship with Role class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function roles()
     {
         return $this->belongsToMany('App\Role');
+    }
+
+    /**
+     * Delete user
+     *
+     * @param $ids
+     */
+    public function deleteUser($ids)
+    {
+        if (is_array($ids)) {
+            foreach ($ids as $id => $value) {
+                $user = User::find($id);
+                $user->destroy($id);
+            }
+        } else {
+            $user = User::findOrFail($ids);
+            $user->destroy($ids);
+        }
+
     }
 
     // Checks if user has been given any role

@@ -24,7 +24,7 @@ Route::get('/', [
 /**
  * User role routes
  */
-Route::get('/roles/create', 'RolesController@role');
+Route::get('/roles/create', 'RoleController@role');
 
 /**
  * Admin routes
@@ -197,12 +197,17 @@ Route::get('/user/register', 'Auth\RegisterController@index');
 
 Route::get('/user/profile', [
 	'uses' => 'UserController@show',
-	'as' => 'user.index'
+	'as' => 'user.show'
 ]);
 
 Route::get('/admin/users', [
     'uses' => 'UserController@index',
     'as' => 'user.index'
+]);
+
+Route::post('/admin/users/action', [
+    'uses' => 'UserController@massAction',
+    'as' => 'user.massAction'
 ]);
 
 /**
