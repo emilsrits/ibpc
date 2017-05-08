@@ -78,11 +78,11 @@
         }
     }
 }
-.manage-catalog, .manage-users {
+.manage-catalog, .manage-users, .manage-settings {
     width: 100%;
     .products-categories, .products-attributes,
-    .products-create, .users-create,
-    .products-edit, .users-edit {
+    .users-list, .users-roles
+    {
         width: 50%;
         float: left;
     }
@@ -115,7 +115,7 @@
 
 /* CATALOG, CATEGORIES, ATTRIBUTES */
 #catalog-form, #categories-form, #specifications-form,
-#attributes-form, #users-form {
+#attributes-form, #users-form, #roles-form {
     margin: 20px 0;
     overflow-x: auto;
     .catalog-action, .categories-action, .specifications-action, .attributes-action {
@@ -131,7 +131,7 @@
     }
 }
 #catalog-table, #categories-table, #specifications-table,
-#attributes-table, #users-table {
+#attributes-table, #users-table , #roles-table{
     width: 100%;
     th, td {
         text-align: left;

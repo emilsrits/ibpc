@@ -206,6 +206,14 @@ Route::get('/admin/users', [
 ]);
 
 /**
+ * Role routes
+ */
+Route::get('/admin/roles', [
+    'uses' => 'RoleController@index',
+    'as' => 'role.index'
+]);
+
+/**
  * Cart routes
  */
 Route::get('/cart', [

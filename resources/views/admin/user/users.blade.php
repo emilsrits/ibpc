@@ -12,9 +12,6 @@ Users
             <div class="btn-manage-back">
                 <a href="{{ url('/admin') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
             </div>
-            <div class="btn-manage-add">
-                <a href="{{ url('/admin/role/create') }}">Add Role</a>
-            </div>
         </div>
         <form id="users-form" role="form" method="POST" action="{{ url('/admin/users/action') }}">
             {{ csrf_field() }}

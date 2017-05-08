@@ -14,7 +14,7 @@ class RoleUserTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         DB::table('role_user')->truncate();
-        // add roles to a user
+        // add role to a user
         DB::table('role_user')->insert([
             [
 	            'role_id' => 1,

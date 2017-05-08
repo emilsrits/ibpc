@@ -568,15 +568,14 @@ th {
   padding-right: 15px;
 }
 
-.manage-catalog, .manage-users {
+.manage-catalog, .manage-users, .manage-settings {
   width: 100%;
 }
 
 .manage-catalog .products-categories, .manage-catalog .products-attributes,
-.manage-catalog .products-create, .manage-catalog .users-create,
-.manage-catalog .products-edit, .manage-catalog .users-edit, .manage-users .products-categories, .manage-users .products-attributes,
-.manage-users .products-create, .manage-users .users-create,
-.manage-users .products-edit, .manage-users .users-edit {
+.manage-catalog .users-list, .manage-catalog .users-roles, .manage-users .products-categories, .manage-users .products-attributes,
+.manage-users .users-list, .manage-users .users-roles, .manage-settings .products-categories, .manage-settings .products-attributes,
+.manage-settings .users-list, .manage-settings .users-roles {
   width: 50%;
   float: left;
 }
@@ -603,7 +602,7 @@ th {
 
 /* CATALOG, CATEGORIES, ATTRIBUTES */
 #catalog-form, #categories-form, #specifications-form,
-#attributes-form, #users-form {
+#attributes-form, #users-form, #roles-form {
   margin: 20px 0;
   overflow-x: auto;
 }
@@ -612,7 +611,7 @@ th {
 #attributes-form .catalog-action,
 #attributes-form .categories-action,
 #attributes-form .specifications-action,
-#attributes-form .attributes-action, #users-form .catalog-action, #users-form .categories-action, #users-form .specifications-action, #users-form .attributes-action {
+#attributes-form .attributes-action, #users-form .catalog-action, #users-form .categories-action, #users-form .specifications-action, #users-form .attributes-action, #roles-form .catalog-action, #roles-form .categories-action, #roles-form .specifications-action, #roles-form .attributes-action {
   margin: 0 10px 10px;
 }
 
@@ -620,7 +619,7 @@ th {
 #attributes-form .catalog-action select,
 #attributes-form .categories-action select,
 #attributes-form .specifications-action select,
-#attributes-form .attributes-action select, #users-form .catalog-action select, #users-form .categories-action select, #users-form .specifications-action select, #users-form .attributes-action select {
+#attributes-form .attributes-action select, #users-form .catalog-action select, #users-form .categories-action select, #users-form .specifications-action select, #users-form .attributes-action select, #roles-form .catalog-action select, #roles-form .categories-action select, #roles-form .specifications-action select, #roles-form .attributes-action select {
   height: 25px;
   vertical-align: middle;
 }
@@ -629,63 +628,63 @@ th {
 #attributes-form .catalog-action button,
 #attributes-form .categories-action button,
 #attributes-form .specifications-action button,
-#attributes-form .attributes-action button, #users-form .catalog-action button, #users-form .categories-action button, #users-form .specifications-action button, #users-form .attributes-action button {
+#attributes-form .attributes-action button, #users-form .catalog-action button, #users-form .categories-action button, #users-form .specifications-action button, #users-form .attributes-action button, #roles-form .catalog-action button, #roles-form .categories-action button, #roles-form .specifications-action button, #roles-form .attributes-action button {
   height: 25px;
   vertical-align: middle;
 }
 
 #catalog-table, #categories-table, #specifications-table,
-#attributes-table, #users-table {
+#attributes-table, #users-table, #roles-table {
   width: 100%;
 }
 
 #catalog-table th, #catalog-table td, #categories-table th, #categories-table td, #specifications-table th, #specifications-table td,
 #attributes-table th,
-#attributes-table td, #users-table th, #users-table td {
+#attributes-table td, #users-table th, #users-table td, #roles-table th, #roles-table td {
   text-align: left;
   vertical-align: middle;
 }
 
 #catalog-table .table-head, #categories-table .table-head, #specifications-table .table-head,
-#attributes-table .table-head, #users-table .table-head {
+#attributes-table .table-head, #users-table .table-head, #roles-table .table-head {
   padding: 5px 0;
 }
 
 #catalog-table .table-head > tr, #categories-table .table-head > tr, #specifications-table .table-head > tr,
-#attributes-table .table-head > tr, #users-table .table-head > tr {
+#attributes-table .table-head > tr, #users-table .table-head > tr, #roles-table .table-head > tr {
   line-height: 30px;
 }
 
 #catalog-table .table-head th, #categories-table .table-head th, #specifications-table .table-head th,
-#attributes-table .table-head th, #users-table .table-head th {
+#attributes-table .table-head th, #users-table .table-head th, #roles-table .table-head th {
   padding: 10px;
   font-weight: bold;
 }
 
 #catalog-table .table-head th:first-of-type, #categories-table .table-head th:first-of-type, #specifications-table .table-head th:first-of-type,
-#attributes-table .table-head th:first-of-type, #users-table .table-head th:first-of-type {
+#attributes-table .table-head th:first-of-type, #users-table .table-head th:first-of-type, #roles-table .table-head th:first-of-type {
   text-align: center;
 }
 
 #catalog-table .table-body tr, #categories-table .table-body tr, #specifications-table .table-body tr,
-#attributes-table .table-body tr, #users-table .table-body tr {
+#attributes-table .table-body tr, #users-table .table-body tr, #roles-table .table-body tr {
   border-top: 1px solid #eee;
 }
 
 #catalog-table .table-body td, #categories-table .table-body td, #specifications-table .table-body td,
-#attributes-table .table-body td, #users-table .table-body td {
+#attributes-table .table-body td, #users-table .table-body td, #roles-table .table-body td {
   padding: 10px;
   max-width: 300px;
   line-height: 20px;
 }
 
 #catalog-table .table-body td:first-of-type, #categories-table .table-body td:first-of-type, #specifications-table .table-body td:first-of-type,
-#attributes-table .table-body td:first-of-type, #users-table .table-body td:first-of-type {
+#attributes-table .table-body td:first-of-type, #users-table .table-body td:first-of-type, #roles-table .table-body td:first-of-type {
   text-align: center;
 }
 
 #catalog-table .table-body td:last-of-type > a, #categories-table .table-body td:last-of-type > a, #specifications-table .table-body td:last-of-type > a,
-#attributes-table .table-body td:last-of-type > a, #users-table .table-body td:last-of-type > a {
+#attributes-table .table-body td:last-of-type > a, #users-table .table-body td:last-of-type > a, #roles-table .table-body td:last-of-type > a {
   padding: 5px;
 }
 
