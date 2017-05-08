@@ -51,9 +51,6 @@ class CatalogController extends Controller
                 $request->session()->flash('message-success', 'Product(s) disabled!');
                 break;
             case 3:
-                dd('penis');
-                break;
-            case 4:
                 $product->deleteProduct($productIds);
                 $request->session()->flash('message-success', 'Product(s) deleted!');
                 break;

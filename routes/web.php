@@ -196,8 +196,13 @@ Route::post('/user/logout', 'Auth\LoginController@logout');
 Route::get('/user/register', 'Auth\RegisterController@index');
 
 Route::get('/user/profile', [
-	'uses' => 'UserController@index',
+	'uses' => 'UserController@show',
 	'as' => 'user.index'
+]);
+
+Route::get('/admin/users', [
+    'uses' => 'UserController@index',
+    'as' => 'user.index'
 ]);
 
 /**

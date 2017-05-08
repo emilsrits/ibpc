@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -19,8 +20,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function show()
     {
         return view('user.profile', ['user' => Auth::user()]);
+    }
+
+    public function index()
+    {
+        $users = User::with('roles')->paginate(20);
+
+        return view('admin.user.users', ['users' => $users]);
     }
 }

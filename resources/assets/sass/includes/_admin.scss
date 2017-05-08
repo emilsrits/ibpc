@@ -114,7 +114,8 @@
 }
 
 /* CATALOG, CATEGORIES, ATTRIBUTES */
-#catalog-form, #categories-form, #specifications-form, #attributes-form {
+#catalog-form, #categories-form, #specifications-form,
+#attributes-form, #users-form {
     margin: 20px 0;
     overflow-x: auto;
     .catalog-action, .categories-action, .specifications-action, .attributes-action {
@@ -129,7 +130,8 @@
         }
     }
 }
-#catalog-table, #categories-table, #specifications-table, #attributes-table {
+#catalog-table, #categories-table, #specifications-table,
+#attributes-table, #users-table {
     width: 100%;
     th, td {
         text-align: left;
@@ -177,7 +179,8 @@
 .product-create, .product-edit,
 .category-create, .category-edit,
 .specification-create, .specification-edit,
-.attribute-create, .attribute-edit {
+.attribute-create, .attribute-edit,
+.user-create, .user-edit {
     .entity-save, #entity-delete {
         margin: 5px;
         font-size: 13px;
