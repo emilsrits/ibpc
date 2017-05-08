@@ -18,6 +18,18 @@ Admin Panel
             <a href="{{ url('/admin/specifications') }}"><i class="fa fa-list" aria-hidden="true"></i>Attributes</a>
         </div>
     </div>
+    <div class="manage-section manage-orders">
+        <h4>Sales</h4>
+        <div class="manage-tab orders-list">
+            <a href="{{ url('/admin/orders') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Orders</a>
+        </div>
+        <div class="manage-tab orders-pending">
+            <a href="{{ url('/admin/orders/pending') }}"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Pending Orders</a>
+        </div>
+        <div class="manage-tab orders-history">
+            <a href="{{ url('/admin/orders/history') }}"><i class="fa fa-list-alt" aria-hidden="true"></i>Order History</a>
+        </div>
+    </div>
     <div class="manage-section manage-users">
         <h4>Users</h4>
         <div class="manage-tab users-list">

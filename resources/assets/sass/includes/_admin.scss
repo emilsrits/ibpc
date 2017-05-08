@@ -78,10 +78,10 @@
         }
     }
 }
-.manage-catalog, .manage-users, .manage-settings {
+.manage-catalog, .manage-users, .manage-settings, .manage-orders {
     width: 100%;
     .products-categories, .products-attributes,
-    .users-list, .users-roles
+    .users-list, .users-roles, .orders-pending, .orders-history
     {
         width: 50%;
         float: left;
@@ -103,6 +103,12 @@
 .manage-users {
     > h4 {
         color: #1c98ff;
+    }
+}
+
+.manage-orders {
+    > h4 {
+        color: #ff9234;
     }
 }
 

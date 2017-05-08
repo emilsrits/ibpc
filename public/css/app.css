@@ -568,14 +568,15 @@ th {
   padding-right: 15px;
 }
 
-.manage-catalog, .manage-users, .manage-settings {
+.manage-catalog, .manage-users, .manage-settings, .manage-orders {
   width: 100%;
 }
 
 .manage-catalog .products-categories, .manage-catalog .products-attributes,
-.manage-catalog .users-list, .manage-catalog .users-roles, .manage-users .products-categories, .manage-users .products-attributes,
-.manage-users .users-list, .manage-users .users-roles, .manage-settings .products-categories, .manage-settings .products-attributes,
-.manage-settings .users-list, .manage-settings .users-roles {
+.manage-catalog .users-list, .manage-catalog .users-roles, .manage-catalog .orders-pending, .manage-catalog .orders-history, .manage-users .products-categories, .manage-users .products-attributes,
+.manage-users .users-list, .manage-users .users-roles, .manage-users .orders-pending, .manage-users .orders-history, .manage-settings .products-categories, .manage-settings .products-attributes,
+.manage-settings .users-list, .manage-settings .users-roles, .manage-settings .orders-pending, .manage-settings .orders-history, .manage-orders .products-categories, .manage-orders .products-attributes,
+.manage-orders .users-list, .manage-orders .users-roles, .manage-orders .orders-pending, .manage-orders .orders-history {
   width: 50%;
   float: left;
 }
@@ -593,6 +594,10 @@ th {
 /* MANAGE USERS */
 .manage-users > h4 {
   color: #1c98ff;
+}
+
+.manage-orders > h4 {
+  color: #ff9234;
 }
 
 /* MANAGE-SETTINGS */
