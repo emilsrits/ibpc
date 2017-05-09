@@ -45,7 +45,7 @@ Users
                                    name="specifications[{{ $user->id }}][id]" value="{{ $user->id }}">
                         </td>
                         <td>{{ $user->id }}</td>
-                        <td>{{ $user->name . ' ' . $user->surname }}</td>
+                        <td>{{ $user->full_name }}</td>
                         <td>{{ $user->roles->first()->name }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->updated_at }}</td>

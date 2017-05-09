@@ -138,7 +138,7 @@ class Product extends Model
      */
     public function getOldPriceAttribute()
     {
-    	if ($this->price_old != '')
+    	if ($this->price_old)
     		return ($this->price_old) . ' €';
     	else 
     		return  '';

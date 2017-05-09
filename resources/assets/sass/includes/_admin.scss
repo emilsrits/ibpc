@@ -185,8 +185,7 @@
 .product-create, .product-edit,
 .category-create, .category-edit,
 .specification-create, .specification-edit,
-.attribute-create, .attribute-edit,
-.user-create, .user-edit {
+.attribute-create, .attribute-edit, .user-edit {
     .entity-save, #entity-delete {
         margin: 5px;
         font-size: 13px;
@@ -249,12 +248,14 @@
         height: 60px;
         td:first-child {
             width: 110px;
-            color: $color_black;
             font-size: 13px;
             vertical-align: top;
         }
         td {
             padding: 10px;
+            label {
+                color: $color_black;
+            }
             input {
                 padding: 2px 3px;
                 line-height: 20px;
@@ -275,13 +276,18 @@
         }
     }
 }
-.category-create, .category-edit {
-    .category-table {
+.category-create, .category-edit, .user-edit {
+    .category-table, .user-table {
         .entity-attribute {
-            .category-attribute-group {
+            .category-attribute-group, .user-role {
                 width: 200px;
+                input[type="checkbox"] {
+                    position: relative;
+                    top: 2px;
+                }
                 label {
                     padding-left: 20px;
+                    line-height: 20px;
                 }
             }
         }

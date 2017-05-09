@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -40,6 +41,17 @@ class UserController extends Controller
         $users = User::with('roles')->orderBy('id', 'Asc')->paginate(20);
 
         return view('admin.user.users', ['users' => $users]);
+    }
+
+    public function edit($id)
+    {
+        $user = User::with('roles')->find($id);
+        $roles = Role::all();
+
+        return view('admin.user.edit', [
+            'user' => $user,
+            'roles' => $roles
+        ]);
     }
 
     /**

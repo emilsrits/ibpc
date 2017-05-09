@@ -103,4 +103,9 @@ class User extends Authenticatable
 
         $this->roles()->sync($assignedRoles);
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->name . ' ' . $this->surname;
+    }
 }

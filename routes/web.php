@@ -210,6 +210,11 @@ Route::post('/admin/users/action', [
     'as' => 'user.massAction'
 ]);
 
+Route::get('/admin/user/edit/{id}', [
+    'uses' => 'UserController@edit',
+    'as' => 'user.edit'
+]);
+
 /**
  * Role routes
  */
