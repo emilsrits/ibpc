@@ -42,7 +42,7 @@ Users
                     <tr>
                         <td>
                             <input class="entity-select" type="checkbox"
-                                   name="specifications[{{ $user->id }}][id]" value="{{ $user->id }}">
+                                   name="users[{{ $user->id }}][id]" value="{{ $user->id }}">
                         </td>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->full_name }}</td>
