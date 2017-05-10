@@ -9,8 +9,7 @@ Edit Attribute
     <div class="attribute-edit">
         <h3>#{{ $attribute->id . ' ' . $attribute->name }}</h3>
         <form id="edit-attribute-form" role="form" method="POST"
-              action="{{ url('/admin/attribute/update', ['specificationId' => $specificationId, 'id' => $attribute->id]) }}"
-              enctype="multipart/form-data">
+              action="{{ url('/admin/attribute/update', ['specificationId' => $specificationId, 'id' => $attribute->id]) }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">

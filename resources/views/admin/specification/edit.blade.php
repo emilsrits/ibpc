@@ -8,7 +8,7 @@ Edit Attribute Group
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="specification-edit">
         <h3>#{{ $specification->id . ' ' . $specification->name }}</h3>
-        <form id="edit-specification-form" role="form" method="POST" action="{{ url('/admin/specification/update', ['id' => $specification->id]) }}" enctype="multipart/form-data">
+        <form id="edit-specification-form" role="form" method="POST" action="{{ url('/admin/specification/update', ['id' => $specification->id]) }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">

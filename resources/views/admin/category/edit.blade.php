@@ -8,7 +8,7 @@ Edit Category
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="category-edit">
         <h3>#{{ $category->id . ' ' . $category->title }}</h3>
-        <form id="edit-category-form" role="form" method="POST" action="{{ url('/admin/category/update', ['id' => $category->id]) }}" enctype="multipart/form-data">
+        <form id="edit-category-form" role="form" method="POST" action="{{ url('/admin/category/update', ['id' => $category->id]) }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
