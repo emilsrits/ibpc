@@ -90,6 +90,7 @@ class CartController extends Controller
 
         $cart->isEmpty();
 
+        $request->session()->flash('message-success', 'Cart updated!');
         return redirect()->route('cart.index');
     }
 }
