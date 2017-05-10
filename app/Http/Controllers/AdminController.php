@@ -16,14 +16,6 @@ use App\Specification;
 class AdminController extends Controller
 {
     /**
-     * AdminController constructor
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'admin']);
-    }
-
-    /**
      * Return admin panel view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

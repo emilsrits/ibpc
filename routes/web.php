@@ -29,20 +29,161 @@ Route::get('/roles/create', 'RoleController@role');
 /**
  * Admin routes
  */
-Route::get('/admin', 'AdminController@index');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('/', 'AdminController@index');
 
-/**
- * Catalog routes
- */
-Route::get('/admin/catalog', [
-    'uses' => 'CatalogController@index',
-    'as' => 'catalog.index'
-]);
+    /**
+     * Catalog routes
+     */
+    Route::get('/catalog', [
+        'uses' => 'CatalogController@index',
+        'as' => 'catalog.index'
+    ]);
+    Route::post('/catalog/action', [
+        'uses' => 'CatalogController@massAction',
+        'as' => 'catalog.massAction'
+    ]);
 
-Route::post('/admin/catalog/action', [
-    'uses' => 'CatalogController@massAction',
-    'as' => 'catalog.massAction'
-]);
+    /**
+     * Product routes
+     */
+    Route::get('/product/create', [
+        'uses' => 'ProductController@create',
+        'as' => 'product.create'
+    ]);
+    Route::get('/product/categories', [
+        'uses' => 'ProductController@createWithCategory',
+        'as' => 'product.createWithCategory'
+    ]);
+    Route::post('/product/create/save', [
+        'uses' => 'ProductController@store',
+        'as' => 'product.store'
+    ]);
+    Route::get('/product/edit/{id}', [
+        'uses' => 'ProductController@edit',
+        'as' => 'product.edit'
+    ]);
+    Route::post('/product/update/{id}', [
+        'uses' => 'ProductController@update',
+        'as' => 'product.update'
+    ]);
+    Route::post('/product/delete/{id}', [
+        'uses' => 'ProductController@delete',
+        'as' => 'product.delete'
+    ]);
+
+    /**
+     * Category routes
+     */
+    Route::get('/categories', [
+        'uses' => 'CategoryController@index',
+        'as' => 'category.index'
+    ]);
+    Route::post('/categories/action', [
+        'uses' => 'CategoryController@massAction',
+        'as' => 'category.massAction'
+    ]);
+    Route::get('/category/create', [
+        'uses' => 'CategoryController@create',
+        'as' => 'category.create'
+    ]);
+    Route::post('/category/create/save', [
+        'uses' => 'CategoryController@store',
+        'as' => 'category.store'
+    ]);
+    Route::get('/category/edit/{id}', [
+        'uses' => 'CategoryController@edit',
+        'as' => 'category.edit'
+    ]);
+    Route::post('/category/update/{id}', [
+        'uses' => 'CategoryController@update',
+        'as' => 'category.update'
+    ]);
+    Route::post('/category/delete/{id}', [
+        'uses' => 'CategoryController@delete',
+        'as' => 'category.delete'
+    ]);
+
+    /**
+     * Specification / Attribute Group routes
+     */
+    Route::get('/specifications', [
+        'uses' => 'SpecificationController@index',
+        'as' => 'specification.index'
+    ]);
+    Route::post('/specifications/action', [
+        'uses' => 'SpecificationController@massAction',
+        'as' => 'specification.massAction'
+    ]);
+    Route::get('/specification/create', [
+        'uses' => 'SpecificationController@create',
+        'as' => 'specification.create'
+    ]);
+    Route::post('/specification/create/save', [
+        'uses' => 'SpecificationController@store',
+        'as' => 'specification.store'
+    ]);
+    Route::get('/specification/edit/{id}', [
+        'uses' => 'SpecificationController@edit',
+        'as' => 'specification.edit'
+    ]);
+    Route::post('/specification/update/{id}', [
+        'uses' => 'SpecificationController@update',
+        'as' => 'specification.update'
+    ]);
+    Route::post('/specification/delete/{id}', [
+        'uses' => 'SpecificationController@delete',
+        'as' => 'specification.delete'
+    ]);
+
+    /**
+     * Attribute routes
+     */
+    Route::post('/attributes/action', [
+        'uses' => 'AttributeController@massAction',
+        'as' => 'attribute.massAction'
+    ]);
+    Route::get('/attribute/create/{specificationId}', [
+        'uses' => 'AttributeController@create',
+        'as' => 'attribute.create'
+    ]);
+    Route::post('/attribute/create/save/{specificationId}', [
+        'uses' => 'AttributeController@store',
+        'as' => 'attribute.store'
+    ]);
+    Route::get('/attribute/edit/{specificationId}/{id}', [
+        'uses' => 'AttributeController@edit',
+        'as' => 'attribute.edit'
+    ]);
+    Route::post('/attribute/update/{specificationId}/{id}', [
+        'uses' => 'AttributeController@update',
+        'as' => 'attribute.update'
+    ]);
+
+    /**
+     * User routes
+     */
+    Route::get('/users', [
+        'uses' => 'UserController@index',
+        'as' => 'user.index'
+    ]);
+    Route::post('/users/action', [
+        'uses' => 'UserController@massAction',
+        'as' => 'user.massAction'
+    ]);
+    Route::get('/user/edit/{id}', [
+        'uses' => 'UserController@edit',
+        'as' => 'user.edit'
+    ]);
+
+    /**
+     * Role routes
+     */
+    Route::get('/roles', [
+        'uses' => 'RoleController@index',
+        'as' => 'role.index'
+    ]);
+});
 
 /**
  * Product routes
@@ -52,175 +193,20 @@ Route::get('/product/{id}/{title}', [
     'as' => 'product.show'
 ]);
 
-Route::get('/admin/product/create', [
-    'uses' => 'ProductController@create',
-    'as' => 'product.create'
-]);
-
-Route::get('/admin/catalog/specifications', [
-    'uses' => 'ProductController@createWithCategory',
-    'as' => 'product.createWithCategory'
-]);
-
-Route::post('/admin/product/create/save', [
-    'uses' => 'ProductController@store',
-    'as' => 'product.store'
-]);
-
-Route::get('/admin/product/edit/{id}', [
-    'uses' => 'ProductController@edit',
-    'as' => 'product.edit'
-]);
-
-Route::post('/admin/product/update/{id}', [
-    'uses' => 'ProductController@update',
-    'as' => 'product.update'
-]);
-
-Route::post('/admin/product/delete/{id}', [
-    'uses' => 'ProductController@delete',
-    'as' => 'product.delete'
-]);
-
-/**
- * Category routes
- */
-Route::get('/admin/categories', [
-    'uses' => 'CategoryController@index',
-    'as' => 'category.index'
-]);
-
-Route::post('/admin/categories/action', [
-    'uses' => 'CategoryController@massAction',
-    'as' => 'category.massAction'
-]);
-
-Route::get('/admin/category/create', [
-    'uses' => 'CategoryController@create',
-    'as' => 'category.create'
-]);
-
-Route::post('/admin/category/create/save', [
-    'uses' => 'CategoryController@store',
-    'as' => 'category.store'
-]);
-
-Route::get('/admin/category/edit/{id}', [
-    'uses' => 'CategoryController@edit',
-    'as' => 'category.edit'
-]);
-
-Route::post('/admin/category/update/{id}', [
-    'uses' => 'CategoryController@update',
-    'as' => 'category.update'
-]);
-
-Route::post('/admin/category/delete/{id}', [
-    'uses' => 'CategoryController@delete',
-    'as' => 'category.delete'
-]);
-
-/**
- * Specification / Attribute Group routes
- */
-Route::get('/admin/specifications', [
-    'uses' => 'SpecificationController@index',
-    'as' => 'specification.index'
-]);
-
-Route::post('/admin/specifications/action', [
-    'uses' => 'SpecificationController@massAction',
-    'as' => 'specification.massAction'
-]);
-
-Route::get('/admin/specification/create', [
-    'uses' => 'SpecificationController@create',
-    'as' => 'specification.create'
-]);
-
-Route::post('/admin/specification/create/save', [
-    'uses' => 'SpecificationController@store',
-    'as' => 'specification.store'
-]);
-
-Route::get('/admin/specification/edit/{id}', [
-    'uses' => 'SpecificationController@edit',
-    'as' => 'specification.edit'
-]);
-
-Route::post('/admin/specification/update/{id}', [
-    'uses' => 'SpecificationController@update',
-    'as' => 'specification.update'
-]);
-
-Route::post('/admin/specification/delete/{id}', [
-    'uses' => 'SpecificationController@delete',
-    'as' => 'specification.delete'
-]);
-
-/**
- * Attribute routes
- */
-Route::post('/admin/attributes/action', [
-    'uses' => 'AttributeController@massAction',
-    'as' => 'attribute.massAction'
-]);
-
-Route::get('/admin/attribute/create/{specificationId}', [
-    'uses' => 'AttributeController@create',
-    'as' => 'attribute.create'
-]);
-
-Route::post('/admin/attribute/create/save/{specificationId}', [
-    'uses' => 'AttributeController@store',
-    'as' => 'attribute.store'
-]);
-
-Route::get('/admin/attribute/edit/{specificationId}/{id}', [
-    'uses' => 'AttributeController@edit',
-    'as' => 'attribute.edit'
-]);
-
-Route::post('/admin/attribute/update/{specificationId}/{id}', [
-    'uses' => 'AttributeController@update',
-    'as' => 'attribute.update'
-]);
-
 /**
  * User routes
  */
-Route::get('/user/login', 'Auth\LoginController@index');
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('/user/login', 'LoginController@index');
 
-Route::post('/user/logout', 'Auth\LoginController@logout');
+    Route::post('/user/logout', 'LoginController@logout');
 
-Route::get('/user/register', 'Auth\RegisterController@index');
+    Route::get('/user/register', 'RegisterController@index');
+});
 
 Route::get('/user/profile', [
 	'uses' => 'UserController@show',
 	'as' => 'user.show'
-]);
-
-Route::get('/admin/users', [
-    'uses' => 'UserController@index',
-    'as' => 'user.index'
-]);
-
-Route::post('/admin/users/action', [
-    'uses' => 'UserController@massAction',
-    'as' => 'user.massAction'
-]);
-
-Route::get('/admin/user/edit/{id}', [
-    'uses' => 'UserController@edit',
-    'as' => 'user.edit'
-]);
-
-/**
- * Role routes
- */
-Route::get('/admin/roles', [
-    'uses' => 'RoleController@index',
-    'as' => 'role.index'
 ]);
 
 /**

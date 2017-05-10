@@ -120,7 +120,7 @@
         $('#category-select').change(function () {
             $.ajax({
                 type: 'GET',
-                url: '/admin/catalog/specifications',
+                url: '/admin/product/categories',
                 data: {
                     selectFieldValue: $(this).val()
                 },

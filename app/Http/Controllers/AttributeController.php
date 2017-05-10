@@ -8,14 +8,6 @@ use Illuminate\Http\Request;
 class AttributeController extends Controller
 {
     /**
-     * AttributeController constructor
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'admin']);
-    }
-
-    /**
      * Return attribute create view
      *
      * @param $specificationId

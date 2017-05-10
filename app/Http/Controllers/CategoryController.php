@@ -9,14 +9,6 @@ use App\Category;
 class CategoryController extends Controller
 {
     /**
-     * CategoryController constructor
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'admin']);
-    }
-
-    /**
      * Return category view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

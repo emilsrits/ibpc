@@ -9,14 +9,6 @@ use Illuminate\Http\Request;
 class SpecificationController extends Controller
 {
     /**
-     * SpecificationController constructor
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'admin']);
-    }
-
-    /**
      * Return specifications view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
