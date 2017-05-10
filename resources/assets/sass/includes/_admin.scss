@@ -137,7 +137,7 @@
     }
 }
 #catalog-table, #categories-table, #specifications-table,
-#attributes-table, #users-table , #roles-table{
+#attributes-table, #users-table, #roles-table {
     width: 100%;
     th, td {
         text-align: left;
@@ -230,7 +230,8 @@
             display: none;
         }
     }
-    .product-table, .category-table {
+    .product-table, .category-table, .specification-table,
+    .attribute-table, .user-table {
         width: 100%;
         margin: 10px 0 5px;
     }
@@ -260,7 +261,7 @@
                 padding: 2px 3px;
                 line-height: 20px;
             }
-            input[type="text"] {
+            input[type="text"], input[type="email"], input[type="password"] {
                 width: 100%;
             }
             input[type="number"] {

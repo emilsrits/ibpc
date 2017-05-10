@@ -792,13 +792,28 @@ th {
   display: none;
 }
 
-.product-create .product-table, .product-create .category-table, .product-edit .product-table, .product-edit .category-table,
+.product-create .product-table, .product-create .category-table, .product-create .specification-table,
+.product-create .attribute-table, .product-create .user-table, .product-edit .product-table, .product-edit .category-table, .product-edit .specification-table,
+.product-edit .attribute-table, .product-edit .user-table,
 .category-create .product-table,
-.category-create .category-table, .category-edit .product-table, .category-edit .category-table,
+.category-create .category-table,
+.category-create .specification-table,
+.category-create .attribute-table,
+.category-create .user-table, .category-edit .product-table, .category-edit .category-table, .category-edit .specification-table,
+.category-edit .attribute-table, .category-edit .user-table,
 .specification-create .product-table,
-.specification-create .category-table, .specification-edit .product-table, .specification-edit .category-table,
+.specification-create .category-table,
+.specification-create .specification-table,
+.specification-create .attribute-table,
+.specification-create .user-table, .specification-edit .product-table, .specification-edit .category-table, .specification-edit .specification-table,
+.specification-edit .attribute-table, .specification-edit .user-table,
 .attribute-create .product-table,
-.attribute-create .category-table, .attribute-edit .product-table, .attribute-edit .category-table, .user-edit .product-table, .user-edit .category-table {
+.attribute-create .category-table,
+.attribute-create .specification-table,
+.attribute-create .attribute-table,
+.attribute-create .user-table, .attribute-edit .product-table, .attribute-edit .category-table, .attribute-edit .specification-table,
+.attribute-edit .attribute-table, .attribute-edit .user-table, .user-edit .product-table, .user-edit .category-table, .user-edit .specification-table,
+.user-edit .attribute-table, .user-edit .user-table {
   width: 100%;
   margin: 10px 0 5px;
 }
@@ -859,10 +874,16 @@ th {
   line-height: 20px;
 }
 
-.product-create .entity-attribute td input[type="text"], .product-edit .entity-attribute td input[type="text"],
-.category-create .entity-attribute td input[type="text"], .category-edit .entity-attribute td input[type="text"],
-.specification-create .entity-attribute td input[type="text"], .specification-edit .entity-attribute td input[type="text"],
-.attribute-create .entity-attribute td input[type="text"], .attribute-edit .entity-attribute td input[type="text"], .user-edit .entity-attribute td input[type="text"] {
+.product-create .entity-attribute td input[type="text"], .product-create .entity-attribute td input[type="email"], .product-create .entity-attribute td input[type="password"], .product-edit .entity-attribute td input[type="text"], .product-edit .entity-attribute td input[type="email"], .product-edit .entity-attribute td input[type="password"],
+.category-create .entity-attribute td input[type="text"],
+.category-create .entity-attribute td input[type="email"],
+.category-create .entity-attribute td input[type="password"], .category-edit .entity-attribute td input[type="text"], .category-edit .entity-attribute td input[type="email"], .category-edit .entity-attribute td input[type="password"],
+.specification-create .entity-attribute td input[type="text"],
+.specification-create .entity-attribute td input[type="email"],
+.specification-create .entity-attribute td input[type="password"], .specification-edit .entity-attribute td input[type="text"], .specification-edit .entity-attribute td input[type="email"], .specification-edit .entity-attribute td input[type="password"],
+.attribute-create .entity-attribute td input[type="text"],
+.attribute-create .entity-attribute td input[type="email"],
+.attribute-create .entity-attribute td input[type="password"], .attribute-edit .entity-attribute td input[type="text"], .attribute-edit .entity-attribute td input[type="email"], .attribute-edit .entity-attribute td input[type="password"], .user-edit .entity-attribute td input[type="text"], .user-edit .entity-attribute td input[type="email"], .user-edit .entity-attribute td input[type="password"] {
   width: 100%;
 }
 

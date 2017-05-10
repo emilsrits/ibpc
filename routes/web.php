@@ -175,6 +175,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         'uses' => 'UserController@edit',
         'as' => 'user.edit'
     ]);
+    Route::post('/user/update/{id}', [
+        'uses' => 'UserController@update',
+        'as' => 'user.update'
+    ]);
 
     /**
      * Role routes

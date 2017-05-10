@@ -38,6 +38,12 @@ class UserController extends Controller
         return view('admin.user.users', ['users' => $users]);
     }
 
+    /**
+     * Return user edit page
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $user = User::with('roles')->find($id);
@@ -47,6 +53,42 @@ class UserController extends Controller
             'user' => $user,
             'roles' => $roles
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Delete specification
+        if ($request['submit'] === 'delete') {
+            $user = new User();
+            $user->deleteUser($id);
+
+            $request->session()->flash('message-success', 'User deleted!');
+            return redirect()->route('user.index');
+        }
+
+        // Update specification
+        if ($request['submit'] === 'save') {
+            $user = User::find($id);
+
+            $user->save();
+
+            $request->session()->flash('message-success', 'User successfully updated!');
+            return redirect()->back();
+        }
+
+        $request->session()->flash('message-danger', 'Invalid form action!');
+        return redirect()->back();
+    }
+
+    /**
+     * Edit user
+     *
+     * @param $id
+     */
+    public function delete($id)
+    {
+        $user = new User();
+        $user->deleteUser($id);
     }
 
     /**
