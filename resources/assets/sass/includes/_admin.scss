@@ -3,10 +3,26 @@
     .admin-sections {
         li {
             font-family: Roboto-Regular, sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             letter-spacing: 0.4px;
             text-transform: uppercase;
+            a {
+                padding-right: 10px;
+                padding-left: 10px;
+            }
+        }
+        .dropdown-menu {
+            li {
+                font-size: 12px;
+                border-bottom: 1px solid $color_brownBlack;
+                a {
+                    padding: 10px;
+                }
+                &:last-of-type {
+                    border-bottom: none;
+                }
+            }
         }
     }
 }

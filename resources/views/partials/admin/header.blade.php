@@ -22,7 +22,35 @@
                     <!-- Left Side of Navbar -->
                     <ul class="nav navbar-nav admin-sections">
                         <li><a href="{{ url('/admin') }}">Dashboard</a></li>
-                        <li><a href="{{ url('/admin/catalog') }}">Catalog</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false"> Catalog
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('/admin/catalog') }}">Products Catalog</a></li>
+                                <li><a href="{{ url('/admin/categories') }}">Categories</a></li>
+                                <li><a href="{{ url('/admin/specifications') }}">Attributes</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false"> Sales
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('/admin/orders') }}">Orders List</a></li>
+                                <li><a href="{{ url('/admin/orders/pending') }}">Pending Orders</a></li>
+                                <li><a href="{{ url('/admin/orders/history') }}">Order History</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false"> Users
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url('/admin/users') }}">Users List</a></li>
+                                <li><a href="{{ url('/admin/roles') }}">Roles</a></li>
+                            </ul>
+                        </li>
                         <li><a href="{{ url('/admin/settings') }}">Configuration</a></li>
                     </ul>
                     <!-- Right Side Of Navbar -->
