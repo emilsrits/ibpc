@@ -201,7 +201,10 @@ Route::get('/product/{id}/{title}', [
  * User routes
  */
 Route::group(['namespace' => 'Auth'], function () {
-    Route::get('/user/login', 'LoginController@index');
+    Route::get('/user/login', [
+        'uses' => 'LoginController@index',
+        'as' => 'user.login'
+    ]);
 
     Route::post('/user/logout', 'LoginController@logout');
 
@@ -234,6 +237,14 @@ Route::get('/cart/remove/{id}', [
 Route::post('/cart/update', [
    'uses' => 'CartController@update',
     'as' => 'cart.update'
+]);
+
+/**
+ * Checkout routes
+ */
+Route::get('/cart/checkout/', [
+    'uses' => 'CheckoutController@index',
+    'as' => 'checkout.index'
 ]);
 
 /**

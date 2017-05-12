@@ -8988,9 +8988,9 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .flash-message .message-info {
-  color: #b3b13e;
-  background-color: #fafbde;
-  border: 1px solid #b3b13e;
+  color: #31708f;
+  background-color: #d9edf7;
+  border: 1px solid #31708f;
 }
 
 .flash-message .message-warning {
