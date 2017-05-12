@@ -51,10 +51,6 @@ Edit User
                             <td><label for="password">New Password</label></td>
                             <td><input type="password" name="password"></td>
                         </tr>
-                        <tr class="entity-attribute">
-                            <td><label for="auto_password">Generate Password?</label></td>
-                            <td><input type="checkbox" name="auto_password"></td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>

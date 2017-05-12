@@ -6,6 +6,7 @@ use App\User;
 use App\Role;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -57,7 +58,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Delete specification
+        // Delete user
         if ($request['submit'] === 'delete') {
             $user = new User();
             $user->deleteUser($id);
@@ -66,11 +67,58 @@ class UserController extends Controller
             return redirect()->route('user.index');
         }
 
-        // Update specification
+        // Update user
         if ($request['submit'] === 'save') {
             $user = User::find($id);
 
-            if (!$this->userValidate($request)) {
+            if (!$this->userValidate($user, $request)) {
+                return redirect()->back();
+            }
+
+            $user->name = $request['name'];
+            $user->surname = $request['surname'];
+            $user->email = $request['email'];
+            $user->country = $request['country'];
+            $user->city = $request['city'];
+            $user->address = $request['address'];
+            $user->postcode = $request['postcode'];
+
+            if (!Hash::check($request['password'], $user->password)) {
+                $user->password = bcrypt($request['password']);
+            }
+
+            if ($request['role']) {
+                // Attach new roles
+                $roles = collect($request['role'])->sortBy('id');
+                foreach ($roles as $role => $id) {
+                    foreach ($id as $key => $value) {
+                        $role = $user->roles->find($value);
+                        if (!$role) {
+                            $user->roles()->attach(['role_id' => ['role_id' => $value]]);
+                            continue;
+                        }
+                    }
+                }
+                // Remove unchecked roles
+                if ($user->roles->first()) {
+                    foreach ($user->roles as $role) {
+                        $roleId = $role->id;
+                        $matchFound = false;
+                        foreach ($roles as $role => $id) {
+                            foreach ($id as $key => $value) {
+                                if ((int)$value === $roleId) {
+                                    $matchFound = true;
+                                    continue;
+                                }
+                            }
+                        }
+                        if (!$matchFound) {
+                            $user->roles()->detach(['role_id' => ['role_id' => $roleId]]);
+                        }
+                    }
+                }
+            } else {
+                $request->session()->flash('message-danger', 'User must have a role!');
                 return redirect()->back();
             }
 
@@ -116,7 +164,14 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    protected function userValidate($request)
+    /**
+     * Validate user edit form
+     *
+     * @param $user
+     * @param $request
+     * @return bool
+     */
+    protected function userValidate($user, $request)
     {
         if (ctype_space($request['name']) || $request['name'] == "") {
             $request->session()->flash('message-danger', 'Missing name!');
@@ -129,9 +184,13 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'max:20',
             'surname' => 'max:20',
-            'email'  => 'email|max:255|unique:users,email',
             'password' => 'min:6'
         ]);
+        if ($user->email != $request['email']) {
+            $this->validate($request, [
+                'email'  => 'email|max:255|unique:users,email'
+            ]);
+        }
 
         return true;
     }
