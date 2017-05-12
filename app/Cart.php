@@ -100,6 +100,16 @@ class Cart extends Model
     }
 
     /**
+     * Returns session cart
+     *
+     * @return mixed
+     */
+    public function getCart()
+    {
+        return $cart = Session::get('cart');
+    }
+
+    /**
      * Check if cart is empty
      *
      * @return null

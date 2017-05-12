@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,6 +15,11 @@ class CheckoutController extends Controller
             return redirect()->route('user.login');
         }
 
-        return view('cart.checkout.index');
+        $user = Auth::user();
+
+        $cart = new Cart(null);
+        $cart = $cart->getCart();
+
+        return view('cart.checkout.index', ['user' => $user, 'cart' => $cart]);
     }
 }
