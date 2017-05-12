@@ -70,6 +70,10 @@ class UserController extends Controller
         if ($request['submit'] === 'save') {
             $user = User::find($id);
 
+            if (!$this->userValidate($request)) {
+                return redirect()->back();
+            }
+
             $user->save();
 
             $request->session()->flash('message-success', 'User successfully updated!');
@@ -110,5 +114,35 @@ class UserController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    protected function userValidate($request)
+    {
+        if (ctype_space($request['name']) || $request['name'] == "") {
+            $request->session()->flash('message-danger', 'Missing name!');
+            return false;
+        }
+        if (ctype_space($request['surname']) || $request['surname'] == "") {
+            $request->session()->flash('message-danger', 'Missing surname!');
+            return false;
+        }
+        $this->validate($request, [
+            'name' => 'max:20',
+            'surname' => 'max:20',
+            'email'  => 'email|max:255|unique:users,email',
+            'password' => 'min:6'
+        ]);
+
+        return true;
+    }
+
+    /**
+     * Check if user exists by email
+     *
+     * @param $email
+     * @return mixed
+     */
+    protected function userExists($email) {
+        return $user = User::where('email', $email)->exists();
     }
 }
