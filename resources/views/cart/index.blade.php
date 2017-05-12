@@ -49,11 +49,14 @@ Shopping Cart
                 </tbody>
             </table>
         </fieldset>
-        <div class="cart-total">
-            <strong>Total: {{ $cart->getTotalCartPrice() }}</strong>
-        </div>
         <div class="cart-update cf">
             <button class="btn btn-cart-update" type="submit" name="submit">Update Cart</button>
+        </div>
+        <div class="cart-checkout cf">
+            <div class="cart-total">
+                <strong>Total: {{ $cart->getTotalCartPrice() }}</strong>
+            </div>
+            <button class="btn btn-checkout" type="button" title="Checkout" onclick="window.location='{{ url('/cart/checkout') }}'">Checkout</button>
         </div>
     </form>
 </div>

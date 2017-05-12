@@ -967,6 +967,26 @@ body .btn-cart-add {
   line-height: 16px;
 }
 
+body .btn-checkout {
+  margin-top: 5px;
+  padding: 10px 25px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 1px solid #0d0d0d;
+  box-shadow: inset #303030 0 1px 20px 2px;
+  background: #67E824;
+  -webkit-transition: background ease-in-out .15s;
+  transition: background ease-in-out .15s;
+}
+
+body .btn-checkout:hover {
+  color: #fff;
+  background: #55bf1e;
+  box-shadow: inset #303030 0 1px 20px 2px;
+}
+
 body .btn-manage-back, body .btn-manage-add {
   display: inline-block;
   margin: 5px;
@@ -1058,6 +1078,9 @@ body .btn-manage-add a:hover, body .btn-manage-add a:focus {
   #shopping-cart-form #shopping-cart-table #qty {
     width: 40px;
     font-size: 14px;
+  }
+  #shopping-cart-form .cart-checkout {
+    margin: 15px auto;
   }
   .product-image input[type="file"] {
     width: 160px;
@@ -9283,7 +9306,7 @@ footer p {
 }
 
 #shopping-cart-form .cart-total {
-  margin: 20px 10px;
+  margin: 10px 10px 20px;
 }
 
 #shopping-cart-form .cart-total strong {
@@ -9291,7 +9314,14 @@ footer p {
 }
 
 #shopping-cart-form .cart-update {
+  margin-top: 10px;
   padding: 10px;
+}
+
+#shopping-cart-form .cart-checkout {
+  padding: 15px;
+  width: 300px;
+  text-align: center;
 }
 
 #shopping-cart-table {
@@ -9366,5 +9396,7 @@ footer p {
   color: #0d0d0d;
   background-color: #CC4040;
 }
+
+/* CHECKOUT */
 
 /*# sourceMappingURL=app.css.map */

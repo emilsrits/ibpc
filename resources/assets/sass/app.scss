@@ -409,13 +409,19 @@ footer {
         }
     }
     .cart-total {
-        margin: 20px 10px;
+        margin: 10px 10px 20px;
         strong {
             font-size: 16px;
         }
     }
     .cart-update {
+        margin-top: 10px;
         padding: 10px;
+    }
+    .cart-checkout {
+        padding: 15px;
+        width: 300px;
+        text-align: center;
     }
 }
 #shopping-cart-table {
@@ -481,3 +487,5 @@ footer {
         }
     }
 }
+
+/* CHECKOUT */

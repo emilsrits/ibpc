@@ -21,6 +21,23 @@ body {
         padding: 6px 10px;
         line-height: 16px;
     }
+    .btn-checkout {
+        margin-top: 5px;
+        padding: 10px 25px;
+        color: $color_white;
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: 1px solid $color_black;
+        box-shadow: inset $color_darkGray 0 1px 20px 2px;
+        background: $color_green;
+        transition: background ease-in-out .15s;
+        &:hover {
+            color: $color_white;
+            background: $color_darkGreen;
+            box-shadow: inset $color_darkGray 0 1px 20px 2px;
+        }
+    }
     .btn-manage-back, .btn-manage-add {
         display: inline-block;
         margin: 5px;
