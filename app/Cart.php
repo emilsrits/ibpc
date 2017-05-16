@@ -10,6 +10,7 @@ class Cart extends Model
     public $items = null;
     public $totalQty = 0;
     public $totalPrice = 0;
+    public $deliveryPrice = 0;
 
     /**
      * Cart constructor
@@ -100,6 +101,40 @@ class Cart extends Model
     }
 
     /**
+     * Add delivery cost to cart
+     *
+     * @param $deliveryOption
+     * @return Product|null
+     */
+    public function addDelivery($deliveryOption)
+    {
+        $delivery = null;
+
+        switch ($deliveryOption) {
+            case 'storage':
+                $delivery = new Product();
+                $delivery->id = 9000;
+                $delivery->title = 'Delivery to storage';
+                $delivery->code = 'DELIVERY';
+                $delivery->price = 0;
+                $this->items[$delivery->id] = $delivery;
+                $this->deliveryPrice = $delivery->price;
+                break;
+            case 'address':
+                $delivery = new Product();
+                $delivery->id = 9000;
+                $delivery->title = 'Delivery to address';
+                $delivery->code = 'DELIVERY';
+                $delivery->price = 2.99;
+                $this->items[$delivery->id] = $delivery;
+                $this->deliveryPrice = $delivery->price;
+                break;
+        }
+
+        return $delivery;
+    }
+
+    /**
      * Returns session cart
      *
      * @return mixed
@@ -131,6 +166,16 @@ class Cart extends Model
     public function getTotalCartPrice()
     {
         return $this->totalPrice . ' €';
+    }
+
+    /**
+     * Return total price with delivery price
+     *
+     * @return string
+     */
+    public function getPriceWithDelivery()
+    {
+        return $this->totalPrice + $this->deliveryPrice . ' €';
     }
 
     /**

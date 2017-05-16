@@ -7,6 +7,7 @@ Shopping Cart
 @section('content')
 @if(Session::has('cart'))
 <div class="lg-100 md-100 sm-100">
+    @include('partials.widgets.checkout_progress', ['page' => 1])
     <form id="shopping-cart-form" role="form" method="POST" action="{{ url('/cart/update') }}">
         {{ csrf_field() }}
         <fieldset>
@@ -23,6 +24,7 @@ Shopping Cart
                 </thead>
                 <tbody class="table-body">
                     @foreach($products as $product)
+                        @if($product['item']['id'])
                         <tr>
                             <td><a href="{{ url('/cart/remove', ['id' => $product['item']['id']]) }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                             <td class="cart-item-image hidden-xs">
@@ -36,7 +38,8 @@ Shopping Cart
                                 </a>
                             </td>
                             <td>
-                                <input id="qty" type="number" name="cart[{{ $product['item']['id'] }}][qty]" min="1" max="1000" value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
+                                <input id="qty" type="number" name="cart[{{ $product['item']['id'] }}][qty]" min="1" max="1000"
+                                       value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
                             </td>
                             <td class="cart-item-price hidden-xs">
                                 {{ $cart->getItemPrice($product['item']['id']) }}
@@ -45,6 +48,7 @@ Shopping Cart
                                 {{ $cart->getItemTotalPrice($product['item']['id']) }}
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
@@ -56,7 +60,7 @@ Shopping Cart
             <div class="cart-total">
                 <strong>Total: {{ $cart->getTotalCartPrice() }}</strong>
             </div>
-            <button class="btn btn-checkout" type="button" title="Checkout" onclick="window.location='{{ url('/cart/checkout') }}'">Checkout</button>
+            <button class="btn btn-checkout" type="button" title="Checkout" onclick="window.location='{{ url('/checkout') }}'">Checkout</button>
         </div>
     </form>
 </div>

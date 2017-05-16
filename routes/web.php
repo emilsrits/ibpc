@@ -210,7 +210,6 @@ Route::group(['namespace' => 'Auth'], function () {
 
     Route::get('/user/register', 'RegisterController@index');
 });
-
 Route::get('/user/profile', [
 	'uses' => 'UserController@show',
 	'as' => 'user.show'
@@ -223,17 +222,14 @@ Route::get('/cart', [
     'uses' => 'CartController@index',
     'as' => 'cart.index'
 ]);
-
 Route::post('/cart/add/{id}', [
     'uses' => 'CartController@store',
     'as' => 'cart.store'
 ]);
-
 Route::get('/cart/remove/{id}', [
     'uses' => 'CartController@delete',
     'as' => 'cart.delete'
 ]);
-
 Route::post('/cart/update', [
    'uses' => 'CartController@update',
     'as' => 'cart.update'
@@ -242,9 +238,28 @@ Route::post('/cart/update', [
 /**
  * Checkout routes
  */
-Route::get('/cart/checkout/', [
+Route::get('/checkout/', [
     'uses' => 'CheckoutController@index',
     'as' => 'checkout.index'
+]);
+Route::get('/checkout/delivery', [
+    'uses' => 'CheckoutController@getDelivery',
+    'as' => 'checkout.getDelivery'
+]);
+Route::get('/checkout/confirmation', [
+    'uses' => 'CheckoutController@show',
+    'as' => 'checkout.show'
+]);
+Route::post('/checkout/confirmation', [
+    'uses' => 'CheckoutController@show',
+    'as' => 'checkout.show'
+]);
+Route::get('/checkout/success', function () {
+    return redirect()->back();
+});
+Route::post('/checkout/confirm', [
+    'uses' => 'OrderController@store',
+    'as' => 'order.store'
 ]);
 
 /**

@@ -114,6 +114,17 @@
             }
         });
 
+        $('.checkout-delivery-storage, .checkout-delivery-address').click(function () {
+            var checkbox = $(this).find('input[type="checkbox"]');
+            checkbox.prop('checked', true);
+            $('input[type="checkbox"]').not(checkbox).prop('checked', false);
+        });
+
+        $('.checkout-delivery img').click(function () {
+           $(this).parent().find('input[type="checkbox"]').prop('checked', true);
+        });
+
+        $('input.example').not(this).prop('checked', false);
 
         /* ------AJAX------ */
         // Load category specifications when creating product

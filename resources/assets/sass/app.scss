@@ -539,3 +539,71 @@ footer {
         float: right;
     }
 }
+.checkout-delivery {
+    margin: 20px 0 0;
+    #checkout-delivery-form {
+        text-align: center;
+        .btn-checkout {
+            margin: 30px 0 0;
+        }
+    }
+    .checkout-delivery-storage, .checkout-delivery-address {
+        padding: 20px;
+        text-align: center;
+        border: 1px solid $color_gray;
+        cursor: pointer;
+        &:hover {
+            box-shadow: inset $color_darkGray 0 1px 10px 1px;
+        }
+        h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+        }
+        p {
+            margin: 20px 0 10px;
+            font-weight: bold;
+        }
+        input[type="checkbox"] {
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    }
+}
+.checkout-progress {
+    margin: 20px auto;
+    text-align: center;
+    ul {
+        display: inline-block;
+        text-align: center;
+        li {
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 40px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            border-top: 3px solid $color_lightGray;
+            border-left: 1px solid $color_red;
+            float: left;
+            &:first-of-type {
+                border-left: none;
+            }
+            a {
+                padding: 12px 20px;
+                color: $color_gray;
+                &:hover {
+                    color: $color_red;
+                }
+            }
+        }
+        .current {
+            border-top: 3px solid $color_red;
+            a {
+                color: $color_black;
+            }
+        }
+    }
+}

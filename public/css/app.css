@@ -871,11 +871,11 @@ body .btn-manage-add a {
 .grid-item {
   float: left; }
 
-.sm-50:before, .sm-50:after, .md-33:before, .md-33:after, .lg-15:before, .lg-15:after, .lg-25:before, .lg-25:after, .lg-40:before, .lg-40:after, .lg-65:before, .lg-65:after, .lg-60:before, .lg-60:after, .lg-85:before, .lg-85:after, .lg-100:before, .lg-100:after {
+.sm-50:before, .sm-50:after, .sm-100:before, .sm-100:after, .md-33:before, .md-33:after, .md-50:before, .md-50:after, .lg-15:before, .lg-15:after, .lg-25:before, .lg-25:after, .lg-40:before, .lg-40:after, .lg-50:before, .lg-50:after, .lg-60:before, .lg-60:after, .lg-65:before, .lg-65:after, .lg-85:before, .lg-85:after, .lg-100:before, .lg-100:after {
   content: "";
   display: table; }
 
-.sm-50:after, .md-33:after, .lg-15:after, .lg-25:after, .lg-40:after, .lg-65:after, .lg-60:after, .lg-85:after, .lg-100:after {
+.sm-50:after, .sm-100:after, .md-33:after, .md-50:after, .lg-15:after, .lg-25:after, .lg-40:after, .lg-50:after, .lg-60:after, .lg-65:after, .lg-85:after, .lg-100:after {
   clear: both; }
 
 @media only screen and (max-width: 767px) {
@@ -7131,5 +7131,58 @@ footer {
 .checkout-cart .btn-checkout {
   margin-top: 30px;
   float: right; }
+
+.checkout-delivery {
+  margin: 20px 0 0; }
+  .checkout-delivery #checkout-delivery-form {
+    text-align: center; }
+    .checkout-delivery #checkout-delivery-form .btn-checkout {
+      margin: 30px 0 0; }
+  .checkout-delivery .checkout-delivery-storage, .checkout-delivery .checkout-delivery-address {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #E6E6E6;
+    cursor: pointer; }
+    .checkout-delivery .checkout-delivery-storage:hover, .checkout-delivery .checkout-delivery-address:hover {
+      box-shadow: inset #303030 0 1px 10px 1px; }
+    .checkout-delivery .checkout-delivery-storage h4, .checkout-delivery .checkout-delivery-address h4 {
+      font-size: 14px;
+      text-transform: uppercase; }
+    .checkout-delivery .checkout-delivery-storage img, .checkout-delivery .checkout-delivery-address img {
+      max-width: 200px;
+      height: auto; }
+    .checkout-delivery .checkout-delivery-storage p, .checkout-delivery .checkout-delivery-address p {
+      margin: 20px 0 10px;
+      font-weight: bold; }
+    .checkout-delivery .checkout-delivery-storage input[type="checkbox"], .checkout-delivery .checkout-delivery-address input[type="checkbox"] {
+      margin-top: 10px;
+      cursor: pointer; }
+
+.checkout-progress {
+  margin: 20px auto;
+  text-align: center; }
+  .checkout-progress ul {
+    display: inline-block;
+    text-align: center; }
+    .checkout-progress ul li {
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 40px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      border-top: 3px solid #eee;
+      border-left: 1px solid #CC4040;
+      float: left; }
+      .checkout-progress ul li:first-of-type {
+        border-left: none; }
+      .checkout-progress ul li a {
+        padding: 12px 20px;
+        color: #E6E6E6; }
+        .checkout-progress ul li a:hover {
+          color: #CC4040; }
+    .checkout-progress ul .current {
+      border-top: 3px solid #CC4040; }
+      .checkout-progress ul .current a {
+        color: #0d0d0d; }
 
 /*# sourceMappingURL=app.css.map */
