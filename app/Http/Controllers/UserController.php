@@ -84,7 +84,9 @@ class UserController extends Controller
             $user->postcode = $request['postcode'];
 
             if (!Hash::check($request['password'], $user->password)) {
-                $user->password = bcrypt($request['password']);
+                if (!ctype_space($request['password']) && !$request['password'] == "") {
+                    $user->password = bcrypt($request['password']);
+                }
             }
 
             if ($request['role']) {
