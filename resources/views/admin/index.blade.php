@@ -41,8 +41,8 @@ Admin Panel
     </div>
     <div class="manage-section manage-settings">
         <h4>Settings</h4>
-        <div class="manage-tab settings-configuration">
-            <a href="{{ url('/admin/settings') }}"><i class="fa fa-cogs" aria-hidden="true"></i>Settings Configuration</a>
+        <div class="manage-tab system-configuration">
+            <a href="{{ url('/admin/settings') }}"><i class="fa fa-cogs" aria-hidden="true"></i>System Configuration</a>
         </div>
     </div>
 </div>
