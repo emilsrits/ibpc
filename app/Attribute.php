@@ -17,7 +17,7 @@ class Attribute extends Model
     }
 
     /**
-     * ManyToOne relationship with Specification class
+     * OneToMany inverse relationship with Specification class
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

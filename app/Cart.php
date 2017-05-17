@@ -65,11 +65,9 @@ class Cart extends Model
      */
     public function deleteCart()
     {
-        if (!Session::has('cart')) {
-            return view('cart.index');
+        if (Session::has('cart')) {
+            Session::forget('cart');
         }
-        Session::forget('cart');
-        return view('cart.index');
     }
 
     /**
@@ -153,6 +151,7 @@ class Cart extends Model
     {
         if (!$this->items) {
             $this->deleteCart();
+            return true;
         }  else {
             return null;
         }

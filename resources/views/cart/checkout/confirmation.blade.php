@@ -20,9 +20,11 @@ Checkout Confirmation
                     @endif
                 @endforeach
                 <tr class="checkout-cart-item">
-                    @if($cart->items[9000])
-                        <td>{{ $cart->items[9000]['title'] }}</td>
-                        <td>{{ $cart->getItemPrice($cart->items[9000]['id']) }}</td>
+                    @if(Session::has('delivery'))
+                        @if($cart->items[9000])
+                            <td>{{ $cart->items[9000]['title'] }}</td>
+                            <td>{{ $cart->getItemPrice($cart->items[9000]['id']) }}</td>
+                        @endif
                     @endif
                 </tr>
                 <tr>

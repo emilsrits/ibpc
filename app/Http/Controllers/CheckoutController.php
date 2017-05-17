@@ -49,7 +49,6 @@ class CheckoutController extends Controller
         }
 
         if (!Session::get('delivery')) {
-            $request->session()->flash('message-danger', 'Choose delivery option!');
             return view('cart.checkout.delivery');
         }
 

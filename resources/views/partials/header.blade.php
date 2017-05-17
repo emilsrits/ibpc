@@ -26,7 +26,8 @@
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span>
                                     @if (Session::has('cart'))
-                                        ({{ count(Session::get('cart')->items) }}) {{ Session::get('cart')->getTotalCartPrice() }}
+                                        ({{ Session::has('delivery') ? count(Session::get('cart')->items) - 1 : count(Session::get('cart')->items) }})
+                                        {{ Session::get('cart')->getTotalCartPrice() }}
                                     @else
                                         0
                                     @endif

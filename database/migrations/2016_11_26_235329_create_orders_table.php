@@ -19,7 +19,11 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamp('created_at')->useCurrent();
+            $table->decimal('price');
+            $table->decimal('discount')->nullable();
+            $table->string('delivery');
+            $table->string('status');
+            $table->timestamps();
         });
     }
 

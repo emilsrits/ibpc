@@ -37,6 +37,16 @@ class Product extends Model
     }
 
     /**
+     * ManyToMany relationship with Order class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function orders()
+    {
+        return $this->belongsToMany('App\Order');
+    }
+
+    /**
      * Delete a product
      *
      * @param $ids

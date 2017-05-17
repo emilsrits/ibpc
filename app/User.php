@@ -38,6 +38,16 @@ class User extends Authenticatable
     }
 
     /**
+     * OneToMany relationship with Order class
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    /**
      * Delete user
      *
      * @param $ids
