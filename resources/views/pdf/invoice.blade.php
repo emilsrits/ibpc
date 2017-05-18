@@ -8,7 +8,7 @@
         #invoice h4 {
             text-transform: uppercase;
         }
-        #invoice p, #invoice .invoice-header {
+        #invoice .invoice-header {
             font-weight: bold;
         }
         #invoice hr {
@@ -34,7 +34,6 @@
         #invoice .invoice-validity {
             margin-top: 15px;
             font-size: 10px;
-            font-weight: normal;
         }
         #invoice-products {
             width: 100%;

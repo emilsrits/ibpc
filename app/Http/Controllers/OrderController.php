@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -46,7 +47,7 @@ class OrderController extends Controller
 
         $this->invoice($user, $order);
 
-        $order->status = 'Processing';
+        $order->status = 'Pending';
         $order->save();
 
         $cart->deleteCart();
@@ -56,6 +57,12 @@ class OrderController extends Controller
         return redirect()->route('order.success', ['success' => true]);
     }
 
+    /**
+     * Return success page
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function success(Request $request)
     {
         if ($request['success']) {
@@ -64,10 +71,25 @@ class OrderController extends Controller
         return redirect()->route('shop.index');
     }
 
+    /**
+     * Create invoice file and send email to user
+     *
+     * @param $user
+     * @param $order
+     */
     protected function invoice($user, $order)
     {
         $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
         $now = Carbon::now();
         Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice.pdf', $pdf->output());
+
+        Mail::send('emails.invoice', ['user' => $user, 'order' => $order], function($message) use($pdf, $user, $order)
+        {
+            $message->from('noreply@ibpc.dev', 'IBPC.dev');
+
+            $message->to($user->email)->subject('Invoice for order #' . $order->id);
+
+            $message->attachData($pdf->output(), $order->id .'-invoice.pdf');
+        });
     }
 }
