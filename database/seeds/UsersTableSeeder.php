@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
 	            'surname' => 'Rits',
 	            'email' => 'admin@ibpc.dev',
 	            'address' => 'Brivibas gatve 229',
-	            'country' => 'Latvia',
+	            'country' => 'LV',
 	            'city' => 'Riga',
 	            'postcode' => 'LV-1050',
 	            'password' => Hash::make('ibpcadmin')

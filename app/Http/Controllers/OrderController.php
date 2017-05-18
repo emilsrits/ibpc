@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -24,6 +28,7 @@ class OrderController extends Controller
         $order->price = $cart->totalPrice + $cart->deliveryPrice;
         $order->discount = null;
         $order->delivery = Session::get('delivery');
+        $order->delivery_cost = $cart->deliveryPrice;
         $order->status = 'Processing';
         $order->save();
 
@@ -33,15 +38,48 @@ class OrderController extends Controller
                     'order_id' => $order->id,
                     'user_id' => $user->id,
                     'product_id' => $item['item']['id'],
-                    'quantity' => $item['qty']
+                    'quantity' => $item['qty'],
+                    'price' => $item['price']
                 ]]);
             }
         }
+
+        $this->invoice($user, $order);
+
+        $order->status = 'Processing';
+        $order->save();
 
         $cart->deleteCart();
         Session::forget('delivery');
 
         $request->session()->flash('message-success', 'Order successfully placed!');
-        return view('cart.checkout.success');
+        return redirect()->route('order.success', ['success' => true]);
+    }
+
+    public function success(Request $request)
+    {
+        if ($request['success']) {
+            return view('cart.checkout.success');
+        }
+        return redirect()->route('shop.index');
+    }
+
+    protected function invoice($user, $order)
+    {
+        $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
+        $now = Carbon::now();
+        Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice.pdf', $pdf->output());
+    }
+
+    // TODO: remove this
+    public function test()
+    {
+        $user = User::first();
+        $order = Order::first();
+
+        //return view('pdf.invoice', ['user' => $user, 'order' => $order]);
+
+        $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
+        Storage::put('orders/' . str_random(3) . '-invoice.pdf', $pdf->output());
     }
 }

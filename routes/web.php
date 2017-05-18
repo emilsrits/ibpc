@@ -238,31 +238,37 @@ Route::post('/cart/update', [
 /**
  * Checkout routes
  */
-Route::group(['prefix' => 'checkout', 'middleware' => ['auth', 'cart']], function () {
-    Route::get('/', [
-        'uses' => 'CheckoutController@index',
-        'as' => 'checkout.index'
+Route::group(['prefix' => 'checkout', 'middleware' => ['auth']], function () {
+    Route::get('/success', [
+        'uses' => 'OrderController@success',
+        'as' => 'order.success'
     ]);
-    Route::get('/delivery', [
-        'uses' => 'CheckoutController@getDelivery',
-        'as' => 'checkout.getDelivery'
-    ]);
-    Route::get('/confirmation', [
-        'uses' => 'CheckoutController@show',
-        'as' => 'checkout.show'
-    ]);
-    Route::post('/confirmation', [
-        'uses' => 'CheckoutController@show',
-        'as' => 'checkout.show'
-    ]);
-    Route::get('/success', function () {
-        return redirect()->back();
+    Route::group(['middleware' => ['cart']], function () {
+        Route::get('/', [
+            'uses' => 'CheckoutController@index',
+            'as' => 'checkout.index'
+        ]);
+        Route::get('/delivery', [
+            'uses' => 'CheckoutController@getDelivery',
+            'as' => 'checkout.getDelivery'
+        ]);
+        Route::get('/confirmation', [
+            'uses' => 'CheckoutController@show',
+            'as' => 'checkout.show'
+        ]);
+        Route::post('/confirmation', [
+            'uses' => 'CheckoutController@show',
+            'as' => 'checkout.show'
+        ]);
+        Route::post('/confirm', [
+            'uses' => 'OrderController@store',
+            'as' => 'order.store'
+        ]);
     });
-    Route::post('/confirm', [
-        'uses' => 'OrderController@store',
-        'as' => 'order.store'
-    ]);
 });
+
+// TODO: remove this
+Route::get('/test', 'OrderController@test');
 
 /**
  * Resource routes

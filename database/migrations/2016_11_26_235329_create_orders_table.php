@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('price');
             $table->decimal('discount')->nullable();
             $table->string('delivery');
+            $table->decimal('delivery_cost')->nullable();
             $table->string('status');
             $table->timestamps();
         });

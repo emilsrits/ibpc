@@ -118,4 +118,9 @@ class User extends Authenticatable
     {
         return $this->name . ' ' . $this->surname;
     }
+
+    public function getFullAddressAttribute()
+    {
+        return $this->city . ', ' . $this->address . ', ' . $this->postcode;
+    }
 }

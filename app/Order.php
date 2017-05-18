@@ -23,6 +23,32 @@ class Order extends Model
      */
     public function products()
     {
-        return $this->belongsToMany('App\Product');
+        return $this->belongsToMany('App\Product')->withPivot('order_id', 'user_id', 'product_id', 'quantity', 'price');
+    }
+
+    /**
+     * Get order price
+     *
+     * @return string
+     */
+    public function getTotalPriceAttribute()
+    {
+        if ($this->price)
+            return ($this->price) . ' €';
+        else
+            return  '';
+    }
+
+    /**
+     * Get order delivery cost
+     *
+     * @return string
+     */
+    public function getDeliveryPriceAttribute()
+    {
+        if ($this->delivery_cost)
+            return ($this->delivery_cost) . ' €';
+        else
+            return  '';
     }
 }

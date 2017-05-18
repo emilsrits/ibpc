@@ -43,7 +43,7 @@ class Product extends Model
      */
     public function orders()
     {
-        return $this->belongsToMany('App\Order');
+        return $this->belongsToMany('App\Order')->withPivot('order_id', 'user_id', 'product_id', 'quantity', 'price');
     }
 
     /**
@@ -114,6 +114,52 @@ class Product extends Model
         }
 
         return $value;
+    }
+
+    /**
+     * Get product price from a order
+     *
+     * @param $orderId
+     * @param $productId
+     * @return null|string
+     */
+    public function getOrderPriceById($orderId, $productId)
+    {
+        $order = $this->orders()->where([
+            ['order_id', '=', $orderId],
+            ['product_id', '=', $productId]
+        ])->first();
+
+        if ($order) {
+            $price = $order->pivot->price . ' €';
+        } else {
+            $price = null;
+        }
+
+        return $price;
+    }
+
+    /**
+     * Get product total price from a order
+     *
+     * @param $orderId
+     * @param $productId
+     * @return null|string
+     */
+    public function getOrderTotalPriceById($orderId, $productId)
+    {
+        $order = $this->orders()->where([
+            ['order_id', '=', $orderId],
+            ['product_id', '=', $productId]
+        ])->first();
+
+        if ($order) {
+            $price = ($order->pivot->price * $order->pivot->quantity) . ' €';
+        } else {
+            $price = null;
+        }
+
+        return $price;
     }
 
     /**
