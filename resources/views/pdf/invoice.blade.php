@@ -31,6 +31,11 @@
             color: #FF0000;
             font-size: 11px;
         }
+        #invoice .invoice-validity {
+            margin-top: 15px;
+            font-size: 10px;
+            font-weight: normal;
+        }
         #invoice-products {
             width: 100%;
         }
@@ -125,5 +130,6 @@
         </tbody>
     </table>
     <p class="invoice-important">When submitting payment, please, indicate invoice number.</p>
+    <p class="invoice-validity">The invoice was made electronically and is valid without a signature</p>
 </div>
 @endsection
