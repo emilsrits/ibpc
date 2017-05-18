@@ -267,9 +267,6 @@ Route::group(['prefix' => 'checkout', 'middleware' => ['auth']], function () {
     });
 });
 
-// TODO: remove this
-Route::get('/test', 'OrderController@test');
-
 /**
  * Resource routes
  */

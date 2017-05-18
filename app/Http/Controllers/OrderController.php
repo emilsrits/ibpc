@@ -70,16 +70,4 @@ class OrderController extends Controller
         $now = Carbon::now();
         Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice.pdf', $pdf->output());
     }
-
-    // TODO: remove this
-    public function test()
-    {
-        $user = User::first();
-        $order = Order::first();
-
-        //return view('pdf.invoice', ['user' => $user, 'order' => $order]);
-
-        $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
-        Storage::put('orders/' . str_random(3) . '-invoice.pdf', $pdf->output());
-    }
 }
