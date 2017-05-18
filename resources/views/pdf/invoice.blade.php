@@ -3,7 +3,7 @@
 @section('styles')
     <style>
         #invoice {
-            font-family: OpenSans-Regular, sans-serif;
+            font-family: "DejaVu Sans", sans-serif;
         }
         #invoice h4 {
             text-transform: uppercase;
@@ -29,7 +29,7 @@
         }
         #invoice .invoice-important {
             color: #FF0000;
-            font-size: 11px;
+            font-size: 10px;
         }
         #invoice .invoice-validity {
             margin-top: 15px;
@@ -123,7 +123,7 @@
             </tr>
         @endif
         <tr>
-            <td colspan="3">Total:</td>
+            <td colspan="3">Total, EUR:</td>
             <td>{{ $order->total_price }}</td>
         </tr>
         </tbody>

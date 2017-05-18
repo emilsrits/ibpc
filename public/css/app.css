@@ -6731,7 +6731,7 @@ button.close {
 
 /* GENERAL */
 body {
-  font-family: OpenSans-Regular, sans-serif;
+  font-family: 'OpenSans-Regular', sans-serif;
   background-color: #fff;
   line-height: 1.2; }
 
@@ -6961,7 +6961,7 @@ footer {
   #product-buy > h2 {
     margin: 20px 0 10px;
     padding-bottom: 10px;
-    font-family: Montserrat-Regular, sans-serif;
+    font-family: 'Montserrat-Regular', sans-serif;
     font-size: 20px;
     font-weight: bold;
     border-bottom: 1px solid #eee; }
@@ -7078,7 +7078,7 @@ footer {
   text-align: center; }
   .cart-empty > h2 {
     margin-bottom: 50px;
-    font-family: Montserrat-Regular, sans-serif;
+    font-family: 'Montserrat-Regular', sans-serif;
     font-size: 24px;
     text-transform: uppercase; }
   .cart-empty > a {
