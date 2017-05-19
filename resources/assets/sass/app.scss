@@ -573,6 +573,26 @@ footer {
         }
     }
 }
+.checkout-confirm {
+    margin: 20px 0 0;
+}
+.checkout-success {
+    margin: 20px 0 0;
+    padding: 15px;
+    .order-success-message {
+        margin-top: 40px;
+        ul {
+            list-style-position: inside;
+            li {
+                list-style-type: circle;
+                padding: 10px 0;
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
 .checkout-progress {
     margin: 20px auto;
     text-align: center;

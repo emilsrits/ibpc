@@ -901,6 +901,10 @@ body .btn-manage-add a {
     font-size: 14px; }
   #shopping-cart-form .cart-checkout {
     margin: 15px auto; }
+  .checkout-delivery #checkout-delivery-form .checkout-delivery-storage, .checkout-delivery #checkout-delivery-form .checkout-delivery-address {
+    height: auto; }
+    .checkout-delivery #checkout-delivery-form .checkout-delivery-storage img, .checkout-delivery #checkout-delivery-form .checkout-delivery-address img {
+      width: 80px; }
   .product-image input[type="file"] {
     width: 160px;
     color: transparent; }
@@ -7157,6 +7161,22 @@ footer {
     .checkout-delivery .checkout-delivery-storage input[type="checkbox"], .checkout-delivery .checkout-delivery-address input[type="checkbox"] {
       margin-top: 10px;
       cursor: pointer; }
+
+.checkout-confirm {
+  margin: 20px 0 0; }
+
+.checkout-success {
+  margin: 20px 0 0;
+  padding: 15px; }
+  .checkout-success .order-success-message {
+    margin-top: 40px; }
+    .checkout-success .order-success-message ul {
+      list-style-position: inside; }
+      .checkout-success .order-success-message ul li {
+        list-style-type: circle;
+        padding: 10px 0; }
+        .checkout-success .order-success-message ul li a {
+          text-decoration: underline; }
 
 .checkout-progress {
   margin: 20px auto;

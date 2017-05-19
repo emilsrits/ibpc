@@ -5,7 +5,7 @@ Checkout Confirmation
 @endsection
 
 @section('content')
-<div class="checkout-delivery lg-100 md-100 sm-100">
+<div class="checkout-confirm lg-100 md-100 sm-100">
     @include('partials.widgets.checkout_progress', ['page' => 4])
     <form id="checkout-confirm-form" role="form" method="POST" action="{{ url('/checkout/confirm') }}">
         {{ csrf_field() }}
