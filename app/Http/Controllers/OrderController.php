@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,14 +35,20 @@ class OrderController extends Controller
         $order->save();
 
         foreach ($cart->items as $item) {
-            if ($item['item']['id']) {
+            $productId = $item['item']['id'];
+            if ($productId) {
                 $order->products()->attach(['order_id' => [
                     'order_id' => $order->id,
                     'user_id' => $user->id,
-                    'product_id' => $item['item']['id'],
+                    'product_id' => $productId,
                     'quantity' => $item['qty'],
                     'price' => $item['price']
                 ]]);
+                $product = Product::find($productId);
+                if (!$product->updateStock(-1 * abs($item['qty']))) {
+                    $request->session()->flash('message-danger', 'Not enough of product ' . $product->title . ' in stock!');
+                    return redirect()->back();
+                }
             }
         }
 

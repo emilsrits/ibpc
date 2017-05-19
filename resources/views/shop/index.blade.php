@@ -26,7 +26,7 @@ IBPC
                             </div>
                         @else
                             <div class="stock-status low-stock">
-                                <div class="stock-text">Low Stock</div>
+                                <div class="stock-text">{{ $product->stock }} In Stock</div>
                             </div>
                         @endif
                         <div class="product-price">

@@ -87,6 +87,12 @@ class Product extends Model
         }
     }
 
+    /**
+     * Delete product image
+     *
+     * @param $id
+     * @return null
+     */
     public function deleteImage($id)
     {
         $product = Product::find($id);
@@ -96,6 +102,27 @@ class Product extends Model
         } else {
             return null;
         }
+    }
+
+    /**
+     * Update product stock
+     *
+     * @param $qty
+     * @return bool
+     */
+    public function updateStock($qty)
+    {
+        $this->stock += $qty;
+        if ($this->stock <= 0) {
+            $this->status = 0;
+            if ($this->stock < 0) {
+                $this->stock = 0;
+                return false;
+            }
+        }
+        $this->save();
+
+        return true;
     }
 
     /**
