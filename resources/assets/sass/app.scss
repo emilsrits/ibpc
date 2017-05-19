@@ -606,22 +606,24 @@ footer {
             letter-spacing: 0.4px;
             text-transform: uppercase;
             border-top: 3px solid $color_lightGray;
-            border-left: 1px solid $color_red;
+            border-left: 1px solid $color_lightGray;
             float: left;
             &:first-of-type {
                 border-left: none;
             }
-            a {
-                padding: 12px 20px;
+            span {
+                padding: 12px 10px 12px 20px;
                 color: $color_gray;
-                &:hover {
-                    color: $color_red;
-                }
+            }
+            i {
+                padding: 12px 20px 12px 0;
+                color: $color_gray;
             }
         }
         .current {
             border-top: 3px solid $color_red;
-            a {
+            border-left: 1px solid $color_red;
+            span, i {
                 color: $color_black;
             }
         }

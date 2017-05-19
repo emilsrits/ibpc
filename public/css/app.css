@@ -7191,18 +7191,20 @@ footer {
       letter-spacing: 0.4px;
       text-transform: uppercase;
       border-top: 3px solid #eee;
-      border-left: 1px solid #CC4040;
+      border-left: 1px solid #eee;
       float: left; }
       .checkout-progress ul li:first-of-type {
         border-left: none; }
-      .checkout-progress ul li a {
-        padding: 12px 20px;
+      .checkout-progress ul li span {
+        padding: 12px 10px 12px 20px;
         color: #E6E6E6; }
-        .checkout-progress ul li a:hover {
-          color: #CC4040; }
+      .checkout-progress ul li i {
+        padding: 12px 20px 12px 0;
+        color: #E6E6E6; }
     .checkout-progress ul .current {
-      border-top: 3px solid #CC4040; }
-      .checkout-progress ul .current a {
+      border-top: 3px solid #CC4040;
+      border-left: 1px solid #CC4040; }
+      .checkout-progress ul .current span, .checkout-progress ul .current i {
         color: #0d0d0d; }
 
 /*# sourceMappingURL=app.css.map */
