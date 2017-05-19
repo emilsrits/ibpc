@@ -114,14 +114,11 @@
             }
         });
 
+        // Uncheck other checkboxes when one of delivery options is selected
         $('.checkout-delivery-storage, .checkout-delivery-address').click(function () {
             var checkbox = $(this).find('input[type="checkbox"]');
             checkbox.prop('checked', true);
             $('input[type="checkbox"]').not(checkbox).prop('checked', false);
-        });
-
-        $('.checkout-delivery img').click(function () {
-           $(this).parent().find('input[type="checkbox"]').prop('checked', true);
         });
 
         $('input.example').not(this).prop('checked', false);
@@ -137,6 +134,24 @@
                 },
                 success: function (data) {
                     window.location.href = data.redirectUrl + data.category;
+                },
+                error: function(err) {
+                    console.log("error: " + err);
+                }
+            });
+        });
+
+        // Add a product to cart
+        $('.product-quick-add').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/cart/add/' + $(this).val(),
+                data: {
+                    productId: $(this).val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    $('#navbar-cart-items').html(data);
                 },
                 error: function(err) {
                     console.log("error: " + err);

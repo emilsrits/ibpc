@@ -222,6 +222,10 @@ Route::get('/cart', [
     'uses' => 'CartController@index',
     'as' => 'cart.index'
 ]);
+Route::get('/cart/add/{id}', [
+    'uses' => 'CartController@storeWithAjax',
+    'as' => 'cart.storeWithAjax'
+]);
 Route::post('/cart/add/{id}', [
     'uses' => 'CartController@store',
     'as' => 'cart.store'

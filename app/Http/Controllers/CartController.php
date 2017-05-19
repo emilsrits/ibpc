@@ -36,21 +36,57 @@ class CartController extends Controller
     public function store(Request $request, $id)
     {
         $qty = $request->input('qty');
-        if ($qty) {
-            $request->session()->flash('message-success', 'Product added to cart!');
-        } else {
+        if (!$qty) {
+            $qty = 1;
+        }
+
+        $product = Product::find($id);
+        if (!$product) {
             $request->session()->flash('message-danger', 'Product can not be added!');
             return redirect()->back();
         }
 
-        $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id, $qty);
 
         Session::put('cart', $cart);
 
+        $request->session()->flash('message-success', 'Product added to cart!');
         return redirect()->route('cart.index');
+    }
+
+    /**
+     * Add a single product to cart from AJAX response
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function storeWithAjax(Request $request)
+    {
+        $qty = 1;
+
+        $productId = $request['productId'];
+        $product = Product::find($productId);
+
+        if ($product) {
+            $oldCart = Session::has('cart') ? Session::get('cart') : null;
+            $cart = new Cart($oldCart);
+            $cart->add($product, $product->id, $qty);
+
+            Session::put('cart', $cart);
+
+            if (Session::has('cart')) {
+                $items = Session::has('delivery') ? count(Session::get('cart')->items) - 1 : count(Session::get('cart')->items);
+                $html = '(' . $items . ') ' . Session::get('cart')->getTotalCartPrice();
+            } else {
+                $html = 0;
+            }
+
+            return response()->json($html, 200);
+        } else {
+            return response()->json(null, 400);
+        }
     }
 
     /**

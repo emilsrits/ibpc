@@ -3,7 +3,6 @@
         <div class="container-inner">
             <div class="container-fluid">
                 <div class="navbar-header">
-
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
@@ -11,7 +10,6 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('images/logo.png') }}" alt="IBPC">
@@ -24,7 +22,7 @@
                         <li>
                             <a href="{{ url('/cart') }}">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span>
+                                <span id="navbar-cart-items">
                                     @if (Session::has('cart'))
                                         ({{ Session::has('delivery') ? count(Session::get('cart')->items) - 1 : count(Session::get('cart')->items) }})
                                         {{ Session::get('cart')->getTotalCartPrice() }}

@@ -35,6 +35,11 @@ IBPC
                             @endif
                             <div class="product-price-current">{{ $product->current_price }}</div>
                         </div>
+                        <div class="product-add-to-cart cf">
+                            <button class="btn product-quick-add" type="button" value="{{ $product->id }}">
+                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             @endforeach
