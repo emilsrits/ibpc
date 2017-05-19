@@ -105,6 +105,22 @@ class Product extends Model
     }
 
     /**
+     * Check if product has sufficient stock
+     *
+     * @param $qty
+     * @return bool
+     */
+    public function checkStock($qty)
+    {
+        $stockLeft = $this->stock + $qty;
+        if ($stockLeft < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Update product stock
      *
      * @param $qty

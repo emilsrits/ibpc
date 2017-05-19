@@ -32,6 +32,18 @@ class OrderController extends Controller
         $order->delivery = Session::get('delivery');
         $order->delivery_cost = $cart->deliveryPrice;
         $order->status = 'Processing';
+
+        foreach ($cart->items as $item) {
+            $productId = $item['item']['id'];
+            if ($productId) {
+                $product = Product::find($productId);
+                if (!$product->checkStock(-1 * abs($item['qty']))) {
+                    $request->session()->flash('message-danger', 'Not enough of product ' . $product->title . ' in stock!');
+                    return redirect()->back();
+                }
+            }
+        }
+
         $order->save();
 
         foreach ($cart->items as $item) {
@@ -47,6 +59,8 @@ class OrderController extends Controller
                 $product = Product::find($productId);
                 if (!$product->updateStock(-1 * abs($item['qty']))) {
                     $request->session()->flash('message-danger', 'Not enough of product ' . $product->title . ' in stock!');
+                    $order->status = 'Canceled';
+                    $order->save();
                     return redirect()->back();
                 }
             }
@@ -54,7 +68,7 @@ class OrderController extends Controller
 
         $this->invoice($user, $order);
 
-        $order->status = 'Pending';
+        $order->status = 'Invoiced';
         $order->save();
 
         $cart->deleteCart();
