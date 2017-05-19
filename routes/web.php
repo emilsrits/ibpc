@@ -187,6 +187,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         'uses' => 'RoleController@index',
         'as' => 'role.index'
     ]);
+
+    /**
+     * Order routes
+     */
+    Route::get('/orders', [
+        'uses' => 'OrderController@index',
+        'as' => 'order.index'
+    ]);
 });
 
 /**

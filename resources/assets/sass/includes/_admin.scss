@@ -137,7 +137,7 @@
 
 /* CATALOG, CATEGORIES, ATTRIBUTES */
 #catalog-form, #categories-form, #specifications-form,
-#attributes-form, #users-form, #roles-form {
+#attributes-form, #users-form, #roles-form, #orders-form {
     margin: 20px 0;
     overflow-x: auto;
     .catalog-action, .categories-action, .specifications-action, .attributes-action {
@@ -153,7 +153,7 @@
     }
 }
 #catalog-table, #categories-table, #specifications-table,
-#attributes-table, #users-table, #roles-table {
+#attributes-table, #users-table, #roles-table, #orders-table {
     width: 100%;
     th, td {
         text-align: left;
@@ -189,6 +189,9 @@
                 }
             }
         }
+        .has-currency {
+            white-space: nowrap;
+        }
     }
 }
 .attribute-content-section {
@@ -201,7 +204,7 @@
 .product-create, .product-edit,
 .category-create, .category-edit,
 .specification-create, .specification-edit,
-.attribute-create, .attribute-edit, .user-edit {
+.attribute-create, .attribute-edit, .user-edit, .order-edit {
     .entity-save, #entity-delete {
         margin: 5px;
         font-size: 13px;
@@ -247,7 +250,7 @@
         }
     }
     .product-table, .category-table, .specification-table,
-    .attribute-table, .user-table {
+    .attribute-table, .user-table, .order-table {
         width: 100%;
         margin: 10px 0 5px;
     }

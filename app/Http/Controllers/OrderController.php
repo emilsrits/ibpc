@@ -16,6 +16,18 @@ use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 {
     /**
+     * Return orders page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $orders = Order::with('user')->paginate(20);
+
+        return view('admin.order.orders', ['orders' => $orders]);
+    }
+
+    /**
      * Create an order
      *
      * @param Request $request
@@ -102,7 +114,7 @@ class OrderController extends Controller
     {
         $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
         $now = Carbon::now();
-        Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice.pdf', $pdf->output());
+        Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice-' . str_random(2) . '.pdf', $pdf->output());
 
         Mail::send('emails.invoice', ['user' => $user, 'order' => $order], function($message) use($pdf, $user, $order)
         {
