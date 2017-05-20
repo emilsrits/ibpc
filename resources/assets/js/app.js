@@ -102,11 +102,11 @@
         // Confirm user deletion
         $('#users-form').submit(function (e) {
             var massAction = $('#mass-action').val();
-            if (massAction === '1') {
+            if (massAction === '2') {
                 var numberOfChecked = $('.entity-select:checked').length;
 
                 if (numberOfChecked > 0) {
-                    return confirm('Delete ' + numberOfChecked + ' users?');
+                    return confirm('Disable ' + numberOfChecked + ' users?');
                 }
             }
             if (massAction === '0') {

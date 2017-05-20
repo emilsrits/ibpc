@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'email', 'phone', 'address', 'country', 'city', 'postcode', 'password',
+        'name', 'surname', 'email', 'phone', 'address', 'country', 'city', 'postcode', 'password', 'status',
     ];
 
     /**
@@ -48,46 +48,71 @@ class User extends Authenticatable
     }
 
     /**
-     * Delete user
+     * Update user status
      *
      * @param $ids
+     * @param $status
      */
-    public function deleteUser($ids)
+    public function setStatus($ids, $status)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
                 $user = User::find($id);
-                $user->destroy($id);
+                $user->status = $status;
+                $user->save();
             }
         } else {
             $user = User::findOrFail($ids);
-            $user->destroy($ids);
+            $user->status = $status;
+            $user->save();
         }
-
     }
 
-    // Checks if user has been given any role
+    /**
+     * Checks if user has been given any role
+     *
+     * @return bool
+     */
     public function hasRoleSet()
     {
         return ($this->roles()->count()) ? true : false;
     }
 
-    // Checks if user has a specific role
+    /**
+     * Checks if user has a specific role
+     *
+     * @param $role
+     * @return mixed
+     */
     public function hasRole($role)
     {
         return $this->roles->pluck('slug')->contains($role);
     }
 
-    private function getIdInArray($array, $term)
+    /**
+     * Check for existing roles
+     *
+     * @param $array
+     * @param $term
+     * @return int|string
+     * @throws \Exception
+     */
+    protected function getIdInArray($array, $term)
     {
         foreach ($array as $key => $value) {
             if ($value == $term) { // 1 => "admin", 2 => "moderator" ...
                 return $key;
             }
         }
-        throw new \Exception('Cant get the ID in array');
+        throw new \Exception('Can not get the ID in array');
     }
 
+    /**
+     * Assign a role to a user
+     *
+     * @param $title
+     * @throws \Exception
+     */
     public function assignRole($title)
     {
         $assignedRoles = array();
@@ -114,11 +139,21 @@ class User extends Authenticatable
         $this->roles()->sync($assignedRoles);
     }
 
+    /**
+     * Return users full name
+     *
+     * @return string
+     */
     public function getFullNameAttribute()
     {
         return $this->name . ' ' . $this->surname;
     }
 
+    /**
+     * Return users full adress
+     *
+     * @return string
+     */
     public function getFullAddressAttribute()
     {
         return $this->city . ', ' . $this->address . ', ' . $this->postcode;

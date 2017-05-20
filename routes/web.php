@@ -226,10 +226,12 @@ Route::group(['namespace' => 'Auth'], function () {
 
     Route::get('/user/register', 'RegisterController@index');
 });
-Route::get('/user/profile', [
-	'uses' => 'UserController@show',
-	'as' => 'user.show'
-]);
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::get('/profile', [
+        'uses' => 'UserController@show',
+        'as' => 'user.show'
+    ]);
+});
 
 /**
  * Cart routes

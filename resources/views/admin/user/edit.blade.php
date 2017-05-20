@@ -14,7 +14,6 @@ Edit User
                 <div class="btn-manage-back">
                     <a href="{{ url('/admin/users') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
-                <button id="entity-delete" type="submit" name="submit" value="delete" formnovalidate>Delete</button>
                 <button class="entity-save" type="submit" name="submit" value="save">Save</button>
             </div>
             <div class="user-content-section">

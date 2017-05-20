@@ -58,16 +58,6 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Delete user
-        if ($request['submit'] === 'delete') {
-            $user = new User();
-            $user->deleteUser($id);
-
-            $request->session()->flash('message-success', 'User deleted!');
-            return redirect()->route('user.index');
-        }
-
-        // Update user
         if ($request['submit'] === 'save') {
             $user = User::find($id);
 
@@ -158,8 +148,12 @@ class UserController extends Controller
 
         switch ($request->input('mass-action')) {
             case 1:
-                $user->deleteUser($userIds);
-                $request->session()->flash('message-success', 'User(s) deleted!');
+                $user->setStatus($userIds, 1);
+                $request->session()->flash('message-success', 'User(s) enabled!');
+                break;
+            case 2:
+                $user->setStatus($userIds, 0);
+                $request->session()->flash('message-success', 'User(s) disabled!');
                 break;
         }
 

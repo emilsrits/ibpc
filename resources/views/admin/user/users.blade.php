@@ -18,7 +18,8 @@ Users
             <div class="users-action">
                 <select id="mass-action" name="mass-action">
                     <option value="0"></option>
-                    <option value="1">Delete</option>
+                    <option value="1">Enable</option>
+                    <option value="2">Disable</option>
                 </select>
                 <button id="mass-action-run" type="submit" name="submit"><i class="fa fa-play" aria-hidden="true"></i></button>
             </div>
@@ -32,6 +33,7 @@ Users
                     <th>Id</th>
                     <th>Name</th>
                     <th>Role</th>
+                    <th>Status</th>
                     <th>Created at</th>
                     <th>Updated at</th>
                     <th></th>
@@ -47,6 +49,7 @@ Users
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->full_name }}</td>
                         <td>{{ $user->roles->first()->name }}</td>
+                        <td>{{ $user->status ? 'Active' : 'Disabled' }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->updated_at }}</td>
                         <td>
