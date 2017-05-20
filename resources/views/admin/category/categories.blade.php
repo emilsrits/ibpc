@@ -31,17 +31,17 @@ Categories
             <table id="categories-table">
                 <thead class="table-head">
                 <tr>
-                    <th>
+                    <th class="col-xs">
                         <input id="mass-select" type="checkbox" name="mass-select" value="yes">
                     </th>
-                    <th>Id</th>
+                    <th class="col-sm">Id</th>
                     <th>Title</th>
                     <th>Parent</th>
                     <th>Parent Id</th>
                     <th>Status</th>
-                    <th>Created at</th>
-                    <th>Updated at</th>
-                    <th></th>
+                    <th class="col-md">Created at</th>
+                    <th class="col-md">Updated at</th>
+                    <th class="col-xs"></th>
                 </tr>
                 </thead>
                 <tbody class="table-body">

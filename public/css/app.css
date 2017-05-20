@@ -609,6 +609,15 @@ th {
   #catalog-table .table-body .has-currency, #categories-table .table-body .has-currency, #specifications-table .table-body .has-currency,
   #attributes-table .table-body .has-currency, #users-table .table-body .has-currency, #roles-table .table-body .has-currency, #orders-table .table-body .has-currency {
     white-space: nowrap; }
+  #catalog-table .col-xs, #categories-table .col-xs, #specifications-table .col-xs,
+  #attributes-table .col-xs, #users-table .col-xs, #roles-table .col-xs, #orders-table .col-xs {
+    width: 50px; }
+  #catalog-table .col-sm, #categories-table .col-sm, #specifications-table .col-sm,
+  #attributes-table .col-sm, #users-table .col-sm, #roles-table .col-sm, #orders-table .col-sm {
+    width: 80px; }
+  #catalog-table .col-md, #categories-table .col-md, #specifications-table .col-md,
+  #attributes-table .col-md, #users-table .col-md, #roles-table .col-md, #orders-table .col-md {
+    width: 155px; }
 
 .attribute-content-section .btn-manage-add {
   margin: 25px 0 0; }
