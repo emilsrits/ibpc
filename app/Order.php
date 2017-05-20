@@ -35,12 +35,10 @@ class Order extends Model
     public function getPriceCurrency($price)
     {
         switch ($price) {
-            case 'total':
+            case 'price':
                 return $this->price . ' €';
-                break;
             case 'delivery':
                 return $this->delivery_cost . ' €';
-                break;
         }
     }
 }

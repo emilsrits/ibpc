@@ -40,7 +40,7 @@ Orders
                     </thead>
                     <tbody class="table-body">
                     @foreach($orders as $order)
-                        <tr>
+                            <tr>
                             <td>
                                 <input class="entity-select" type="checkbox"
                                        name="orders[{{ $order->id }}][id]" value="{{ $order->id }}">

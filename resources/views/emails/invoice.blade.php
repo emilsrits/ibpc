@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <td>Order total cost, incl VAT:</td>
-                <td>{{ $order->getPriceCurrency('total') }}</td>
+                <td>{{ $order->getPriceCurrency('price') }}</td>
             </tr>
             </tbody>
         </table>

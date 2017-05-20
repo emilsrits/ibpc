@@ -195,6 +195,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         'uses' => 'OrderController@index',
         'as' => 'order.index'
     ]);
+    Route::get('/order/edit/{id}', [
+        'uses' => 'OrderController@edit',
+        'as' => 'order.edit'
+    ]);
+    Route::post('/order/update/{id}', [
+        'uses' => 'OrderController@update',
+        'as' => 'order.update'
+    ]);
 });
 
 /**

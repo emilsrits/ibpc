@@ -750,6 +750,11 @@ th {
   .specification-create .entity-attribute td, .specification-edit .entity-attribute td,
   .attribute-create .entity-attribute td, .attribute-edit .entity-attribute td, .user-edit .entity-attribute td, .order-edit .entity-attribute td {
     padding: 10px; }
+    .product-create .entity-attribute td span, .product-edit .entity-attribute td span,
+    .category-create .entity-attribute td span, .category-edit .entity-attribute td span,
+    .specification-create .entity-attribute td span, .specification-edit .entity-attribute td span,
+    .attribute-create .entity-attribute td span, .attribute-edit .entity-attribute td span, .user-edit .entity-attribute td span, .order-edit .entity-attribute td span {
+      vertical-align: middle; }
     .product-create .entity-attribute td label, .product-edit .entity-attribute td label,
     .category-create .entity-attribute td label, .category-edit .entity-attribute td label,
     .specification-create .entity-attribute td label, .specification-edit .entity-attribute td label,
@@ -797,6 +802,17 @@ th {
   .category-create .category-table .entity-attribute .category-attribute-group label, .category-create .category-table .entity-attribute .user-role label, .category-create .user-table .entity-attribute .category-attribute-group label, .category-create .user-table .entity-attribute .user-role label, .category-edit .category-table .entity-attribute .category-attribute-group label, .category-edit .category-table .entity-attribute .user-role label, .category-edit .user-table .entity-attribute .category-attribute-group label, .category-edit .user-table .entity-attribute .user-role label, .user-edit .category-table .entity-attribute .category-attribute-group label, .user-edit .category-table .entity-attribute .user-role label, .user-edit .user-table .entity-attribute .category-attribute-group label, .user-edit .user-table .entity-attribute .user-role label {
     padding-left: 20px;
     line-height: 20px; }
+
+#edit-order-form {
+  overflow-x: auto; }
+
+.order-edit .entity-attribute .radio-block {
+  display: block;
+  margin: 0 0 10px;
+  width: 200px;
+  cursor: pointer; }
+  .order-edit .entity-attribute .radio-block:hover {
+    color: #CC4040; }
 
 /* BUTTONS */
 body .btn-cart-add, body .btn-cart-update {

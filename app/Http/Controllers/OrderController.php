@@ -43,7 +43,7 @@ class OrderController extends Controller
         $order->discount = null;
         $order->delivery = Session::get('delivery');
         $order->delivery_cost = $cart->deliveryPrice;
-        $order->status = 'Processing';
+        $order->status = 'pending';
 
         foreach ($cart->items as $item) {
             $productId = $item['item']['id'];
@@ -71,7 +71,7 @@ class OrderController extends Controller
                 $product = Product::find($productId);
                 if (!$product->updateStock(-1 * abs($item['qty']))) {
                     $request->session()->flash('message-danger', 'Not enough of product ' . $product->title . ' in stock!');
-                    $order->status = 'Canceled';
+                    $order->status = 'canceled';
                     $order->save();
                     return redirect()->back();
                 }
@@ -80,7 +80,7 @@ class OrderController extends Controller
 
         $this->invoice($user, $order);
 
-        $order->status = 'Invoiced';
+        $order->status = 'invoiced';
         $order->save();
 
         $cart->deleteCart();
@@ -88,6 +88,43 @@ class OrderController extends Controller
 
         $request->session()->flash('message-success', 'Order successfully placed!');
         return redirect()->route('order.success', ['success' => true]);
+    }
+
+    /**
+     * Return order edit view
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $order = Order::with('user')->find($id);
+
+        return view('admin.order.edit', [
+            'order' => $order
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        if ($request['submit'] === 'save') {
+            $order = Order::find($id);
+            $status = $request['status'];
+
+            if (!in_array($status, array('canceled','pending', 'invoiced', 'shipped', 'completed'), true )) {
+                $request->session()->flash('message-danger', 'Invalid order status!');
+                return redirect()->back();
+            }
+
+            $order->status = $status;
+            $order->save();
+
+            $request->session()->flash('message-success', 'Order successfully updated!');
+            return redirect()->back();
+        }
+
+        $request->session()->flash('message-danger', 'Invalid form action!');
+        return redirect()->back();
     }
 
     /**

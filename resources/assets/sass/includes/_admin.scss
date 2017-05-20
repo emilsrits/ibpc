@@ -273,6 +273,9 @@
         }
         td {
             padding: 10px;
+            span {
+                vertical-align: middle;
+            }
             label {
                 color: $color_black;
             }
@@ -309,6 +312,22 @@
                     padding-left: 20px;
                     line-height: 20px;
                 }
+            }
+        }
+    }
+}
+#edit-order-form {
+    overflow-x: auto;
+}
+.order-edit {
+    .entity-attribute {
+        .radio-block {
+            display: block;
+            margin: 0 0 10px;
+            width: 200px;
+            cursor: pointer;
+            &:hover {
+                color: $color_red;
             }
         }
     }

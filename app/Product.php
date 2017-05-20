@@ -160,60 +160,6 @@ class Product extends Model
     }
 
     /**
-     * Get product price from a order
-     *
-     * @param $orderId
-     * @param $productId
-     * @return null|string
-     */
-    public function getOrderPriceById($orderId, $productId, $currency)
-    {
-        $order = $this->orders()->where([
-            ['order_id', '=', $orderId],
-            ['product_id', '=', $productId]
-        ])->first();
-
-        if ($order) {
-            if ($currency) {
-                $price = $order->pivot->price . ' €';
-            } else {
-                $price = $order->pivot->price;
-            }
-        } else {
-            $price = null;
-        }
-
-        return $price;
-    }
-
-    /**
-     * Get product total price from a order
-     *
-     * @param $orderId
-     * @param $productId
-     * @return null|string
-     */
-    public function getOrderTotalPriceById($orderId, $productId, $currency)
-    {
-        $order = $this->orders()->where([
-            ['order_id', '=', $orderId],
-            ['product_id', '=', $productId]
-        ])->first();
-
-        if ($order) {
-            if ($currency) {
-                $price = ($order->pivot->price * $order->pivot->quantity) . ' €';
-            } else {
-                $price = ($order->pivot->price * $order->pivot->quantity);
-            }
-        } else {
-            $price = null;
-        }
-
-        return $price;
-    }
-
-    /**
      * Get related category ids
      *
      * @return \Illuminate\Support\Collection
@@ -239,6 +185,28 @@ class Product extends Model
     }
 
     /**
+     * Return price with currency
+     *
+     * @param $price
+     * @param null $orderId
+     * @param null $productId
+     * @return null|string
+     */
+    public function getPriceCurrency($price, $orderId = null, $productId = null)
+    {
+        switch ($price) {
+            case 'old':
+                return $this->price_old . ' €';
+            case 'current':
+                return $this->price . ' €';
+            case 'order':
+                return $this->getOrderPriceById($orderId, $productId, 1);
+            case 'order_total':
+                return $this->getOrderTotalPriceById($orderId, $productId, 1);
+        }
+    }
+
+    /**
      * Get product old price attribute
      *
      * @return string
@@ -246,7 +214,7 @@ class Product extends Model
     public function getOldPriceAttribute()
     {
     	if ($this->price_old)
-    		return ($this->price_old) . ' €';
+    		return ($this->price_old);
     	else 
     		return  '';
     }
@@ -258,6 +226,62 @@ class Product extends Model
      */
     public function getCurrentPriceAttribute()
     {
-    	return ($this->price) . ' €';
+    	return ($this->price);
+    }
+
+    /**
+     * Get product price from a order
+     *
+     * @param $orderId
+     * @param $productId
+     * @param null $currency
+     * @return null|string
+     */
+    public function getOrderPriceById($orderId, $productId, $currency = null)
+    {
+        $order = $this->orders()->where([
+            ['order_id', '=', $orderId],
+            ['product_id', '=', $productId]
+        ])->first();
+
+        if ($order) {
+            if ($currency) {
+                $price = $order->pivot->price . ' €';
+            } else {
+                $price = $order->pivot->price;
+            }
+        } else {
+            $price = null;
+        }
+
+        return $price;
+    }
+
+    /**
+     * Get product total price from a order
+     *
+     * @param $orderId
+     * @param $productId
+     * @param null $currency
+     * @return null|string
+     */
+    public function getOrderTotalPriceById($orderId, $productId, $currency = null)
+    {
+        $order = $this->orders()->where([
+            ['order_id', '=', $orderId],
+            ['product_id', '=', $productId]
+        ])->first();
+
+        if ($order) {
+            if ($currency) {
+                $price = ($order->pivot->price * $order->pivot->quantity) . ' €';
+            } else {
+                $price = ($order->pivot->price * $order->pivot->quantity);
+            }
+        } else {
+            $price = null;
+        }
+
+        return $price;
     }
 }

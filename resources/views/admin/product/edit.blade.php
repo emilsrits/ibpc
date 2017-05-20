@@ -26,7 +26,7 @@ Edit Product
                         <tbody>
                         <tr class="entity-attribute">
                             <td><label for="category">Category</label></td>
-                            <td>{{ $product->categories->first()->title }}</td>
+                            <td><span>{{ $product->categories->first()->title }}</span></td>
                         </tr>
                         <tr class="entity-attribute product-image">
                             <td><label for="image">Image</label></td>
