@@ -46,4 +46,15 @@ class LoginController extends Controller
     {
         return view('auth.login', ['user' => Auth::user()]);
     }
+
+    /**
+     * Allow only active users to login
+     *
+     * @param Request $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        return array_merge($request->only($this->username(), 'password'), ['status' => 1]);
+    }
 }
