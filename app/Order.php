@@ -27,6 +27,27 @@ class Order extends Model
     }
 
     /**
+     * Set order status
+     *
+     * @param $ids
+     * @param $status
+     */
+    public function setStatus($ids, $status)
+    {
+        if (is_array($ids)) {
+            foreach ($ids as $id => $value) {
+                $order = Order::find($id);
+                $order->status = $status;
+                $order->save();
+            }
+        } else {
+            $order = Order::findOrFail($ids);
+            $order->status = $status;
+            $order->save();
+        }
+    }
+
+    /**
      * Return price with currency symbol
      *
      * @param $price

@@ -105,6 +105,13 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Update order
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         if ($request['submit'] === 'save') {
@@ -124,6 +131,45 @@ class OrderController extends Controller
         }
 
         $request->session()->flash('message-danger', 'Invalid form action!');
+        return redirect()->back();
+    }
+
+    /**
+     * Order mass action
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function massAction(Request $request)
+    {
+        $orderIds = $request->input('orders');
+        $order = new Order();
+
+        if ($orderIds) {
+            switch ($request->input('mass-action')) {
+                case 1:
+                    $order->setStatus($orderIds, 'canceled');
+                    $request->session()->flash('message-success', 'Order(s) canceled!');
+                    break;
+                case 2:
+                    $order->setStatus($orderIds, 'pending');
+                    $request->session()->flash('message-success', 'Order(s) pending!');
+                    break;
+                case 3:
+                    $order->setStatus($orderIds, 'invoiced');
+                    $request->session()->flash('message-success', 'Order(s) invoiced!');
+                    break;
+                case 4:
+                    $order->setStatus($orderIds, 'shipped');
+                    $request->session()->flash('message-success', 'Order(s) shipped!');
+                    break;
+                case 5:
+                    $order->setStatus($orderIds, 'completed');
+                    $request->session()->flash('message-success', 'Order(s) completed!');
+                    break;
+            }
+        }
+
         return redirect()->back();
     }
 

@@ -573,6 +573,7 @@ th {
 
 #catalog-table, #categories-table, #specifications-table,
 #attributes-table, #users-table, #roles-table, #orders-table {
+  margin-top: 20px;
   width: 100%; }
   #catalog-table th, #catalog-table td, #categories-table th, #categories-table td, #specifications-table th, #specifications-table td,
   #attributes-table th,
@@ -582,9 +583,6 @@ th {
   #catalog-table .table-head, #categories-table .table-head, #specifications-table .table-head,
   #attributes-table .table-head, #users-table .table-head, #roles-table .table-head, #orders-table .table-head {
     padding: 5px 0; }
-    #catalog-table .table-head > tr, #categories-table .table-head > tr, #specifications-table .table-head > tr,
-    #attributes-table .table-head > tr, #users-table .table-head > tr, #roles-table .table-head > tr, #orders-table .table-head > tr {
-      line-height: 30px; }
     #catalog-table .table-head th, #categories-table .table-head th, #specifications-table .table-head th,
     #attributes-table .table-head th, #users-table .table-head th, #roles-table .table-head th, #orders-table .table-head th {
       padding: 10px;
@@ -609,6 +607,23 @@ th {
   #catalog-table .table-body .has-currency, #categories-table .table-body .has-currency, #specifications-table .table-body .has-currency,
   #attributes-table .table-body .has-currency, #users-table .table-body .has-currency, #roles-table .table-body .has-currency, #orders-table .table-body .has-currency {
     white-space: nowrap; }
+  #catalog-table .table-search, #categories-table .table-search, #specifications-table .table-search,
+  #attributes-table .table-search, #users-table .table-search, #roles-table .table-search, #orders-table .table-search {
+    line-height: 20px; }
+    #catalog-table .table-search td input, #categories-table .table-search td input, #specifications-table .table-search td input,
+    #attributes-table .table-search td input, #users-table .table-search td input, #roles-table .table-search td input, #orders-table .table-search td input {
+      padding: 0 5px;
+      width: 100%;
+      height: 100%;
+      font-size: 12px;
+      border: none;
+      outline: none; }
+      #catalog-table .table-search td input:hover, #catalog-table .table-search td input:focus, #categories-table .table-search td input:hover, #categories-table .table-search td input:focus, #specifications-table .table-search td input:hover, #specifications-table .table-search td input:focus,
+      #attributes-table .table-search td input:hover,
+      #attributes-table .table-search td input:focus, #users-table .table-search td input:hover, #users-table .table-search td input:focus, #roles-table .table-search td input:hover, #roles-table .table-search td input:focus, #orders-table .table-search td input:hover, #orders-table .table-search td input:focus {
+        -webkit-transition: box-shadow ease-in-out 0.25s;
+        transition: box-shadow ease-in-out 0.25s;
+        box-shadow: inset #303030 0 1px 1px 0; }
   #catalog-table .col-xs, #categories-table .col-xs, #specifications-table .col-xs,
   #attributes-table .col-xs, #users-table .col-xs, #roles-table .col-xs, #orders-table .col-xs {
     width: 50px; }

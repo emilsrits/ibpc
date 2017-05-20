@@ -18,7 +18,11 @@ Orders
             <div class="orders-action">
                 <select id="mass-action" name="mass-action">
                     <option value="0"></option>
-                    <option value="1">Delete</option>
+                    <option value="1">Canceled</option>
+                    <option value="2">Pending</option>
+                    <option value="3">Invoiced</option>
+                    <option value="4">Shipped</option>
+                    <option value="5">Completed</option>
                 </select>
                 <button id="mass-action-run" type="submit" name="submit"><i class="fa fa-play" aria-hidden="true"></i></button>
             </div>
@@ -38,9 +42,9 @@ Orders
                     <th class="col-xs"></th>
                 </tr>
                 </thead>
-                <tr>
+                <tr class="table-search">
                     <td></td>
-                    <td></td>
+                    <td><input type="number" name="searchId"></td>
                     <td></td>
                     <td></td>
                     <td></td>

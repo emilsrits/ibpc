@@ -195,6 +195,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'OrderController@index',
         'as' => 'order.index'
     ]);
+    Route::post('/orders/action', [
+        'uses' => 'OrderController@massAction',
+        'as' => 'order.massAction'
+    ]);
     Route::get('/order/edit/{id}', [
         'uses' => 'OrderController@edit',
         'as' => 'order.edit'

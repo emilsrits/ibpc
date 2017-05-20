@@ -154,6 +154,7 @@
 }
 #catalog-table, #categories-table, #specifications-table,
 #attributes-table, #users-table, #roles-table, #orders-table {
+    margin-top: 20px;
     width: 100%;
     th, td {
         text-align: left;
@@ -161,9 +162,6 @@
     }
     .table-head {
         padding: 5px 0;
-        > tr {
-            line-height: 30px;
-        }
         th {
             padding: 10px;
             font-weight: bold;
@@ -191,6 +189,23 @@
         }
         .has-currency {
             white-space: nowrap;
+        }
+    }
+    .table-search {
+        line-height: 20px;
+        td {
+            input {
+                padding: 0 5px;
+                width: 100%;
+                height: 100%;
+                font-size: 12px;
+                border: none;
+                outline: none;
+                &:hover, &:focus {
+                    transition: box-shadow ease-in-out 0.25s;
+                    box-shadow: inset $color_darkGray 0 1px 1px 0;
+                }
+            }
         }
     }
     .col-xs {
