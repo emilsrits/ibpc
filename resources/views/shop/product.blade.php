@@ -51,8 +51,8 @@
             <div id="product-buy" class="lg-35 md-35 sm-100">
                 <h2>{{ $product->title }}</h2>
                 <p class="product-code">{{ $product->code }}</p>
-                <p class="product-price-old"><s>{{ $product->old_price }}</s></p>
-                <p class="product-price-current">{{ $product->current_price }}</p>
+                <p class="product-price-old"><s>{{ $product->getPriceCurrency('old') }}</s></p>
+                <p class="product-price-current">{{ $product->getPriceCurrency('current') }}</p>
                 @if($product->status)
                     @if($product->stock > 5)
                         <div class="stock-status in-stock">

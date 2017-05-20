@@ -54,7 +54,7 @@ Catalog
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->title }}</td>
                         <td>{{ $product->code }}</td>
-                        <td>{{ $product->current_price }}</td>
+                        <td>{{ $product->getPriceCurrency('current') }}</td>
                         <td>{{ $product->stock }}</td>
                         <td>
                             @if($product->status)

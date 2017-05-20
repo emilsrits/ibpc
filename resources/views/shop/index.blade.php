@@ -31,9 +31,9 @@ IBPC
                         @endif
                         <div class="product-price">
                             @if($product->old_price)
-                                <div class="product-price-old">{{ $product->old_price }}</div>
+                                <div class="product-price-old">{{ $product->getPriceCurrency('old') }}</div>
                             @endif
-                            <div class="product-price-current">{{ $product->current_price }}</div>
+                            <div class="product-price-current">{{ $product->getPriceCurrency('current') }}</div>
                         </div>
                         <div class="product-add-to-cart cf">
                             <button class="btn product-quick-add" type="button" value="{{ $product->id }}">
