@@ -26,6 +26,9 @@
         #email table tbody tr td:first-of-type {
             width: 220px;
         }
+        #email .invoice-header{
+            font-weight: bold;
+        }
     </style>
 @endsection
 
@@ -52,6 +55,47 @@
             <tr>
                 <td>Order status:</td>
                 <td>{{ $order->status }}</td>
+            </tr>
+            <tr>
+                <td>Items ordered:</td>
+                <td>{{ count($order->products) }}</td>
+            </tr>
+            <tr>
+                <td>Order total cost, incl VAT:</td>
+                <td>{{ $order->getPriceCurrency('total') }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
+        <table>
+            <tbody>
+            <tr class="invoice-header">
+                <td>Recipient:</td>
+                <td>IBPC</td>
+            </tr>
+            <tr>
+                <td>VAT identification number:</td>
+                <td>LV40013214068</td>
+            </tr>
+            <tr>
+                <td>Registration number:</td>
+                <td>20003515031</td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>Riga, Brivibas gatve 229, LV-1050</td>
+            </tr>
+            <tr>
+                <td>Bank:</td>
+                <td>A/S Swedbank</td>
+            </tr>
+            <tr>
+                <td>Bank code:</td>
+                <td>HABALV22</td>
+            </tr>
+            <tr>
+                <td>Account:</td>
+                <td>LV41HABA0123456789012</td>
             </tr>
             </tbody>
         </table>

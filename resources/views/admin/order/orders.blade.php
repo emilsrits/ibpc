@@ -47,7 +47,7 @@ Orders
                             </td>
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->user->full_name }}</td>
-                            <td class="has-currency">{{ $order->getTotalPriceAttribute() }}</td>
+                            <td class="has-currency">{{ $order->getPriceCurrency('total') }}</td>
                             <td>{{ $order->status }}</td>
                             <td>{{ $order->created_at }}</td>
                             <td>{{ $order->updated_at }}</td>

@@ -27,28 +27,20 @@ class Order extends Model
     }
 
     /**
-     * Get order price
+     * Return price with currency symbol
      *
+     * @param $price
      * @return string
      */
-    public function getTotalPriceAttribute()
+    public function getPriceCurrency($price)
     {
-        if ($this->price)
-            return ($this->price) . ' €';
-        else
-            return  '';
-    }
-
-    /**
-     * Get order delivery cost
-     *
-     * @return string
-     */
-    public function getDeliveryPriceAttribute()
-    {
-        if ($this->delivery_cost)
-            return ($this->delivery_cost) . ' €';
-        else
-            return  '';
+        switch ($price) {
+            case 'total':
+                return $this->price . ' €';
+                break;
+            case 'delivery':
+                return $this->delivery_cost . ' €';
+                break;
+        }
     }
 }

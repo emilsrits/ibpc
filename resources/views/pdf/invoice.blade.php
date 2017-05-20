@@ -3,7 +3,7 @@
 @section('styles')
     <style>
         #invoice {
-            font-family: "DejaVu Sans", sans-serif;
+            font-family: DejaVu Sans, sans-serif;
         }
         #invoice h4 {
             text-transform: uppercase;
@@ -112,19 +112,19 @@
             <tr>
                 <td>{{ $product->title }}</td>
                 <td>{{ $product->pivot->quantity }}</td>
-                <td style="white-space: nowrap">{{ $product->getOrderPriceById($order->id, $product->id) }}</td>
-                <td style="white-space: nowrap">{{ $product->getOrderTotalPriceById($order->id, $product->id) }}</td>
+                <td style="white-space: nowrap">{{ $product->getOrderPriceById($order->id, $product->id, 0) }}</td>
+                <td style="white-space: nowrap">{{ $product->getOrderTotalPriceById($order->id, $product->id, 0) }}</td>
             </tr>
         @endforeach
         @if($order->delivery_cost)
             <tr>
                 <td colspan="3">Delivery cost:</td>
-                <td>{{ $order->delivery_price }}</td>
+                <td>{{ $order->delivery_cost }}</td>
             </tr>
         @endif
         <tr>
             <td colspan="3">Total, EUR:</td>
-            <td>{{ $order->total_price }}</td>
+            <td>{{ $order->price }}</td>
         </tr>
         </tbody>
     </table>

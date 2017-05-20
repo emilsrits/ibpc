@@ -166,7 +166,7 @@ class Product extends Model
      * @param $productId
      * @return null|string
      */
-    public function getOrderPriceById($orderId, $productId)
+    public function getOrderPriceById($orderId, $productId, $currency)
     {
         $order = $this->orders()->where([
             ['order_id', '=', $orderId],
@@ -174,7 +174,11 @@ class Product extends Model
         ])->first();
 
         if ($order) {
-            $price = $order->pivot->price . ' €';
+            if ($currency) {
+                $price = $order->pivot->price . ' €';
+            } else {
+                $price = $order->pivot->price;
+            }
         } else {
             $price = null;
         }
@@ -189,7 +193,7 @@ class Product extends Model
      * @param $productId
      * @return null|string
      */
-    public function getOrderTotalPriceById($orderId, $productId)
+    public function getOrderTotalPriceById($orderId, $productId, $currency)
     {
         $order = $this->orders()->where([
             ['order_id', '=', $orderId],
@@ -197,7 +201,11 @@ class Product extends Model
         ])->first();
 
         if ($order) {
-            $price = ($order->pivot->price * $order->pivot->quantity) . ' €';
+            if ($currency) {
+                $price = ($order->pivot->price * $order->pivot->quantity) . ' €';
+            } else {
+                $price = ($order->pivot->price * $order->pivot->quantity);
+            }
         } else {
             $price = null;
         }
