@@ -29,7 +29,7 @@ Route::get('/roles/create', 'RoleController@role');
 /**
  * Admin routes
  */
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']], function () {
     Route::get('/', 'AdminController@index');
 
     /**
@@ -226,7 +226,7 @@ Route::group(['namespace' => 'Auth'], function () {
 
     Route::get('/user/register', 'RegisterController@index');
 });
-Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'active']], function () {
     Route::get('/profile', [
         'uses' => 'UserController@show',
         'as' => 'user.show'
@@ -260,7 +260,7 @@ Route::post('/cart/update', [
 /**
  * Checkout routes
  */
-Route::group(['prefix' => 'checkout', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'checkout', 'middleware' => ['auth', 'active']], function () {
     Route::get('/success', [
         'uses' => 'OrderController@success',
         'as' => 'order.success'
