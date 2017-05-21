@@ -30,17 +30,26 @@ class Category extends Model
      * Delete a category
      *
      * @param $ids
+     * @return bool
      */
     public function deleteCategory($ids)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
                 $category = Category::find($id);
+                if ($category->products()->first()) {
+                    return false;
+                }
                 $category->destroy($id);
+                return true;
             }
         } else {
             $category = Category::findOrFail($ids);
+            if ($category->products()->first()) {
+                return false;
+            }
             $category->destroy($ids);
+            return true;
         }
     }
 

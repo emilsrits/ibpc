@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Specification;
-use Illuminate\Http\Request;
 use App\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -41,8 +42,7 @@ class CategoryController extends Controller
                 $request->session()->flash('message-success', 'Categories disabled!');
                 break;
             case 3:
-                $category->deleteCategory($categoryIds);
-                $request->session()->flash('message-success', 'Categories deleted!');
+                $this->delete($request, $categoryIds);
                 break;
         }
 
@@ -132,10 +132,11 @@ class CategoryController extends Controller
     {
         // Delete category
         if ($request['submit'] === 'delete') {
-            $category = new Category();
-            $category->deleteCategory($id);
+            $this->delete($request, $id);
 
-            $request->session()->flash('message-success', 'Category deleted!');
+            if (Session::has('message-danger')) {
+                return redirect()->back();
+            }
 
             return redirect()->route('category.index');
         }
@@ -215,12 +216,18 @@ class CategoryController extends Controller
     /**
      * Delete a category
      *
+     * @param Request $request
      * @param $id
      */
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
         $category = new Category();
-        $category->deleteCategory($id);
+
+        if ($category->deleteCategory($id)) {
+            $request->session()->flash('message-success', 'Category deleted!');
+        } else {
+            $request->session()->flash('message-danger', 'Cannot delete category with existing products!');
+        }
     }
 
     /**
