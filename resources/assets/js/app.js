@@ -121,7 +121,10 @@
             $('input[type="checkbox"]').not(checkbox).prop('checked', false);
         });
 
-        $('input.example').not(this).prop('checked', false);
+        // Disable order submit button after once click
+        $('#checkout-confirm-form').one('submit', function () {
+            $(this).find('#order-submit').css('opacity', '0.6').attr('onclick','return false;');
+        });
 
         /* ------AJAX------ */
         // Load category specifications when creating product

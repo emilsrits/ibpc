@@ -31,7 +31,7 @@ Checkout Confirmation
                     <td colspan="2">Total incl. VAT: {{ $cart->getPriceWithDelivery() }}</td>
                 </tr>
             </table>
-            <button class="btn btn-checkout" type="submit" title="Checkout">Order</button>
+            <button id="order-submit" class="btn btn-checkout" type="submit" title="Checkout">Order</button>
         </div>
     </form>
 </div>

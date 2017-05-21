@@ -114,7 +114,7 @@ class Cart extends Model
                 $delivery->id = 9000;
                 $delivery->title = 'Delivery to storage';
                 $delivery->code = 'DELIVERY';
-                $delivery->price = 0;
+                $delivery->price = 0.00;
                 $this->items[$delivery->id] = $delivery;
                 $this->deliveryPrice = $delivery->price;
                 break;
