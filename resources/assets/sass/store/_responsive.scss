@@ -1,0 +1,46 @@
+@media only screen and (max-width: $mobile-md - 1) {
+    #product-view {
+        display: flex;
+        flex-flow: column;
+        #product-buy {
+            order: 1;
+        }
+        #product-details {
+            order: 2;
+        }
+    }
+
+    #shopping-cart-form {
+        #shopping-cart-table {
+            .table-headers {
+                th {
+                    font-size: 13px;
+                }
+            }
+            .table-body {
+                td {
+                    padding: 15px 10px;
+                    font-size: 13px;
+                }
+            }
+            #qty {
+                width: 40px;
+                font-size: 14px;
+            }
+        }
+        .cart-checkout {
+            margin: 15px auto;
+        }
+    }
+
+    .checkout-delivery {
+        #checkout-delivery-form {
+            .checkout-delivery-storage, .checkout-delivery-address {
+                height: auto;
+                img {
+                    width: 80px;
+                }
+            }
+        }
+    }
+}

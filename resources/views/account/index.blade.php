@@ -9,7 +9,7 @@ My Account
     <div id="user-account">
         <h4>My Account</h4>
         <div class="lg-100 md-100 sm-100">
-            <div class="lg-20-md-10-sm-10">
+            <div class="lg-20 md-10 sm-10">
 
             </div>
         </div>
