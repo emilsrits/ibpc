@@ -14,11 +14,11 @@
 Auth::routes();
 
 /**
- * Base routes
+ * Store routes
  */
 Route::get('/', [
-    'uses' => 'ProductController@index',
-    'as' => 'shop.index'
+    'uses' => 'StoreController@index',
+    'as' => 'store.index'
 ]);
 
 /**
@@ -31,22 +31,17 @@ Route::get('/roles/create', 'RoleController@role');
  */
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']], function () {
     Route::get('/', 'AdminController@index');
-
-    /**
-     * Catalog routes
-     */
-    Route::get('/catalog', [
-        'uses' => 'CatalogController@index',
-        'as' => 'catalog.index'
-    ]);
-    Route::post('/catalog', [
-        'uses' => 'CatalogController@action',
-        'as' => 'catalog.action'
-    ]);
-
     /**
      * Product routes
      */
+    Route::get('/catalog', [
+        'uses' => 'ProductController@index',
+        'as' => 'product.index'
+    ]);
+    Route::post('/catalog', [
+        'uses' => 'ProductController@action',
+        'as' => 'product.action'
+    ]);
     Route::get('/product/create', [
         'uses' => 'ProductController@create',
         'as' => 'product.create'

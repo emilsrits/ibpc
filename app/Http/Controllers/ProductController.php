@@ -10,15 +10,44 @@ use App\Product;
 class ProductController extends Controller
 {
     /**
-     * Returns main shop view with all products
+     * Reurn admin catalog page
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $products = Product::where('status', '=', 1)->paginate(12);
+        $products = Product::with('categories')->paginate(20);
 
-        return view('shop.index', ['products' => $products]);
+        return view('admin.product.catalog', ['products' => $products]);
+    }
+
+    /**
+     * Catalog mass action
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function action(Request $request)
+    {
+        $productIds = $request->input('catalog');
+        $product = new Product();
+
+        switch ($request->input('mass-action')) {
+            case 1:
+                $product->setStatus($productIds, 1);
+                $request->session()->flash('message-success', 'Product(s) enabled!');
+                break;
+            case 2:
+                $product->setStatus($productIds, 0);
+                $request->session()->flash('message-success', 'Product(s) disabled!');
+                break;
+            case 3:
+                $product->deleteProduct($productIds);
+                $request->session()->flash('message-success', 'Product(s) deleted!');
+                break;
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -38,7 +67,7 @@ class ProductController extends Controller
             $specifications = null;
         }
 
-        return view('shop.product', ['product' => $product], ['specifications' => $specifications]);
+        return view('store.product', ['product' => $product], ['specifications' => $specifications]);
     }
 
     /**
