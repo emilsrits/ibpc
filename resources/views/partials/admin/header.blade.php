@@ -60,7 +60,7 @@
                                 <i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url('/admin/profile') }}">Profile</a></li>
+                                <li><a href="{{ url('/user/account') }}">Account</a></li>
                                 <li><a href="{{ url('/admin') }}">Admin Panel</a></li>
                                 <li role="separator" class="divider"></li>
                                 <!-- Authentication Links -->

@@ -44,7 +44,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 @if(Auth::check())
-                                    <li><a href="{{ url('/user/profile') }}">Profile</a></li>
+                                    <li><a href="{{ url('/user/account') }}">Account</a></li>
                                     @if(Auth::user()->hasRole('admin'))
                                         <li><a href="{{ url('/admin') }}">Admin Panel</a></li>
                                     @endif

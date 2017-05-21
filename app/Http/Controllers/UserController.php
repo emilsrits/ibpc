@@ -18,16 +18,6 @@ class UserController extends Controller
     }
 
     /**
-     * Return profile view
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show()
-    {
-        return view('user.profile', ['user' => Auth::user()]);
-    }
-
-    /**
      * Return users list view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

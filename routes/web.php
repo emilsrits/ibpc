@@ -215,21 +215,29 @@ Route::get('/product/{code}', [
 /**
  * User routes
  */
-Route::group(['namespace' => 'Auth'], function () {
-    Route::get('/user/login', [
-        'uses' => 'LoginController@index',
-        'as' => 'user.login'
-    ]);
+Route::group(['prefix' => 'user'], function () {
+    Route::group(['namespace' => 'Auth'], function () {
+        Route::get('/login', [
+            'uses' => 'LoginController@index',
+            'as' => 'user.login'
+        ]);
+        Route::post('/logout', 'LoginController@logout');
+        Route::get('/register', 'RegisterController@index');
+    });
 
-    Route::post('/user/logout', 'LoginController@logout');
-
-    Route::get('/user/register', 'RegisterController@index');
-});
-Route::group(['prefix' => 'user', 'middleware' => ['auth', 'active']], function () {
-    Route::get('/profile', [
-        'uses' => 'UserController@show',
-        'as' => 'user.show'
-    ]);
+    /**
+     * User account routes
+     */
+    Route::group(['middleware' => ['auth', 'active']], function () {
+        Route::get('/account', [
+            'uses' => 'AccountController@index',
+            'as' => 'account.index'
+        ]);
+        Route::get('/edit', [
+            'uses' => 'AccountController@edit',
+            'as' => 'account.edit'
+        ]);
+    });
 });
 
 /**
