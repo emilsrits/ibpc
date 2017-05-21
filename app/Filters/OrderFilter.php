@@ -22,15 +22,19 @@ class OrderFilter extends QueryFilter
     /**
      * Filter order by user name
      *
-     * @param $name
+     * @param $user
      * @return mixed
      */
-    public function name($name)
+    public function user($user)
     {
-        return $this->builder->whereHas('user', function ($query) use ($name) {
-           $query->where('name', $name)
-               ->orWhere('surname', $name)
-               ->orWhere(DB::raw('CONCAT_WS(" ", name, surname)'), 'like', $name);
+        if (is_numeric($user)) {
+            return $this->builder->where('id', $user);
+        }
+
+        return $this->builder->whereHas('user', function ($query) use ($user) {
+           $query->where('name', 'like', '%'.$user.'%')
+               ->orWhere('surname', 'like', '%'.$user.'%')
+               ->orWhere(DB::raw('CONCAT_WS(" ", name, surname)'), 'like', $user);
         });
     }
 

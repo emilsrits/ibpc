@@ -68,7 +68,7 @@ Orders
                 <tr id="table-search">
                     <td></td>
                     <td><input type="number" name="id" min="0" value="{{ $request['id'] ? $request['id'] : '' }}"></td>
-                    <td><input type="text" name="name" value="{{ $request['name'] ? $request['name'] : '' }}"></td>
+                    <td><input type="text" name="user" value="{{ $request['user'] ? $request['user'] : '' }}"></td>
                     <td></td>
                     <td>
                         <select name="status">

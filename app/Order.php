@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Filters\QueryFilter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -74,5 +75,15 @@ class Order extends Model
             case 'delivery':
                 return $this->delivery_cost . ' €';
         }
+    }
+
+    public function getCreatedAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('Y-m-d');
+    }
+
+    public function getUpdatedAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at)->format('Y-m-d');
     }
 }
