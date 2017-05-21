@@ -24,7 +24,52 @@ class OrderController extends Controller
     {
         $orders = Order::with('user')->paginate(20);
 
-        return view('admin.order.orders', ['orders' => $orders]);
+        return view('admin.order.orders', ['orders' => $orders, 'request' => null]);
+    }
+
+    /**
+     * Order mass action
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function action(Request $request)
+    {
+        $orderIds = $request->input('orders');
+        $order = new Order();
+
+        if ($orderIds) {
+            switch ($request->input('mass-action')) {
+                case 1:
+                    $order->setStatus($orderIds, 'canceled');
+                    $request->session()->flash('message-success', 'Order(s) canceled!');
+                    return redirect()->back();
+                case 2:
+                    $order->setStatus($orderIds, 'pending');
+                    $request->session()->flash('message-success', 'Order(s) pending!');
+                    return redirect()->back();
+                case 3:
+                    $order->setStatus($orderIds, 'invoiced');
+                    $request->session()->flash('message-success', 'Order(s) invoiced!');
+                    return redirect()->back();
+                case 4:
+                    $order->setStatus($orderIds, 'shipped');
+                    $request->session()->flash('message-success', 'Order(s) shipped!');
+                    return redirect()->back();
+                case 5:
+                    $order->setStatus($orderIds, 'completed');
+                    $request->session()->flash('message-success', 'Order(s) completed!');
+                    return redirect()->back();
+            }
+        }
+
+        if ($request->has('searchId')) {
+            $order = Order::where('id', $request['searchId'])->paginate(20);
+
+            return view('admin.order.orders', ['orders' => $order, 'request' => $request ]);
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -131,45 +176,6 @@ class OrderController extends Controller
         }
 
         $request->session()->flash('message-danger', 'Invalid form action!');
-        return redirect()->back();
-    }
-
-    /**
-     * Order mass action
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function massAction(Request $request)
-    {
-        $orderIds = $request->input('orders');
-        $order = new Order();
-
-        if ($orderIds) {
-            switch ($request->input('mass-action')) {
-                case 1:
-                    $order->setStatus($orderIds, 'canceled');
-                    $request->session()->flash('message-success', 'Order(s) canceled!');
-                    break;
-                case 2:
-                    $order->setStatus($orderIds, 'pending');
-                    $request->session()->flash('message-success', 'Order(s) pending!');
-                    break;
-                case 3:
-                    $order->setStatus($orderIds, 'invoiced');
-                    $request->session()->flash('message-success', 'Order(s) invoiced!');
-                    break;
-                case 4:
-                    $order->setStatus($orderIds, 'shipped');
-                    $request->session()->flash('message-success', 'Order(s) shipped!');
-                    break;
-                case 5:
-                    $order->setStatus($orderIds, 'completed');
-                    $request->session()->flash('message-success', 'Order(s) completed!');
-                    break;
-            }
-        }
-
         return redirect()->back();
     }
 

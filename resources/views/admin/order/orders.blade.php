@@ -13,7 +13,7 @@ Orders
                 <a href="{{ url('/admin') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
             </div>
         </div>
-        <form id="orders-form" role="form" method="POST" action="{{ url('/admin/orders/action') }}">
+        <form id="orders-form" role="form" method="POST" action="{{ url('/admin/orders') }}">
             {{ csrf_field() }}
             <div class="orders-action">
                 <select id="mass-action" name="mass-action">
@@ -44,7 +44,7 @@ Orders
                 </thead>
                 <tr class="table-search">
                     <td></td>
-                    <td><input type="number" name="searchId"></td>
+                    <td><input type="number" name="searchId" min="0" value="{{ $request['searchId'] ? $request['searchId'] : '' }}"></td>
                     <td></td>
                     <td></td>
                     <td></td>
