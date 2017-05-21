@@ -16,7 +16,7 @@ Categories
                 <a href="{{ url('/admin/category/create') }}">Add Category</a>
             </div>
         </div>
-        <form id="categories-form" role="form" method="POST" action="{{ url('/admin/categories/action') }}">
+        <form id="categories-form" role="form" method="POST" action="{{ url('/admin/categories') }}">
             {{ csrf_field() }}
             <div class="categories-action">
                 <select id="mass-action" name="mass-action">

@@ -16,7 +16,7 @@ Catalog
                 <a href="{{ url('/admin/product/create') }}">Add Product</a>
             </div>
         </div>
-        <form id="catalog-form" role="form" method="POST" action="{{ url('/admin/catalog/action') }}">
+        <form id="catalog-form" role="form" method="POST" action="{{ url('/admin/catalog') }}">
             {{ csrf_field() }}
             <div class="catalog-action">
                 <select id="mass-action" name="mass-action">

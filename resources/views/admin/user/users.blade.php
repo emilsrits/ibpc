@@ -13,7 +13,7 @@ Users
                 <a href="{{ url('/admin') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
             </div>
         </div>
-        <form id="users-form" role="form" method="POST" action="{{ url('/admin/users/action') }}">
+        <form id="users-form" role="form" method="POST" action="{{ url('/admin/users') }}">
             {{ csrf_field() }}
             <div class="users-action">
                 <select id="mass-action" name="mass-action">

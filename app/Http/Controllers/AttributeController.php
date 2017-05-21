@@ -8,6 +8,27 @@ use Illuminate\Http\Request;
 class AttributeController extends Controller
 {
     /**
+     * Attributes mass action
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function action(Request $request)
+    {
+        $attributeIds = $request->input('attributes');
+        $attribute = new Attribute();
+
+        switch ($request->input('mass-action')) {
+            case 1:
+                $attribute->deleteAttribute($attributeIds);
+                $request->session()->flash('message-success', 'Attribute(s) deleted!');
+                break;
+        }
+
+        return redirect()->back();
+    }
+
+    /**
      * Return attribute create view
      *
      * @param $specificationId
@@ -115,27 +136,6 @@ class AttributeController extends Controller
     {
         $attribute = new Attribute();
         $attribute->deleteAttribute($id);
-    }
-
-    /**
-     * Attributes mass action
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function massAction(Request $request)
-    {
-        $attributeIds = $request->input('attributes');
-        $attribute = new Attribute();
-
-        switch ($request->input('mass-action')) {
-            case 1:
-                $attribute->deleteAttribute($attributeIds);
-                $request->session()->flash('message-success', 'Attribute(s) deleted!');
-                break;
-        }
-
-        return redirect()->back();
     }
 
     /**

@@ -28,7 +28,7 @@ class CatalogController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function massAction(Request $request)
+    public function action(Request $request)
     {
         $productIds = $request->input('catalog');
         $product = new Product();

@@ -16,7 +16,7 @@ Attribute Groups
                 <a href="{{ url('/admin/specification/create') }}">Add Attribute Group</a>
             </div>
         </div>
-        <form id="specifications-form" role="form" method="POST" action="{{ url('/admin/specifications/action') }}">
+        <form id="specifications-form" role="form" method="POST" action="{{ url('/admin/specifications') }}">
             {{ csrf_field() }}
             <div class="specifications-action">
                 <select id="mass-action" name="mass-action">

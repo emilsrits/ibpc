@@ -39,9 +39,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'CatalogController@index',
         'as' => 'catalog.index'
     ]);
-    Route::post('/catalog/action', [
-        'uses' => 'CatalogController@massAction',
-        'as' => 'catalog.massAction'
+    Route::post('/catalog', [
+        'uses' => 'CatalogController@action',
+        'as' => 'catalog.action'
     ]);
 
     /**
@@ -79,9 +79,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'CategoryController@index',
         'as' => 'category.index'
     ]);
-    Route::post('/categories/action', [
-        'uses' => 'CategoryController@massAction',
-        'as' => 'category.massAction'
+    Route::post('/categories', [
+        'uses' => 'CategoryController@action',
+        'as' => 'category.action'
     ]);
     Route::get('/category/create', [
         'uses' => 'CategoryController@create',
@@ -111,9 +111,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'SpecificationController@index',
         'as' => 'specification.index'
     ]);
-    Route::post('/specifications/action', [
-        'uses' => 'SpecificationController@massAction',
-        'as' => 'specification.massAction'
+    Route::post('/specifications', [
+        'uses' => 'SpecificationController@action',
+        'as' => 'specification.action'
     ]);
     Route::get('/specification/create', [
         'uses' => 'SpecificationController@create',
@@ -139,9 +139,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
     /**
      * Attribute routes
      */
-    Route::post('/attributes/action', [
-        'uses' => 'AttributeController@massAction',
-        'as' => 'attribute.massAction'
+    Route::post('/attributes', [
+        'uses' => 'AttributeController@action',
+        'as' => 'attribute.action'
     ]);
     Route::get('/attribute/create/{specificationId}', [
         'uses' => 'AttributeController@create',
@@ -167,9 +167,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'UserController@index',
         'as' => 'user.index'
     ]);
-    Route::post('/users/action', [
-        'uses' => 'UserController@massAction',
-        'as' => 'user.massAction'
+    Route::post('/users', [
+        'uses' => 'UserController@action',
+        'as' => 'user.action'
     ]);
     Route::get('/user/edit/{id}', [
         'uses' => 'UserController@edit',

@@ -40,6 +40,31 @@ class UserController extends Controller
     }
 
     /**
+     * Users mass action
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function action(Request $request)
+    {
+        $userIds = $request->input('users');
+        $user = new User();
+
+        switch ($request->input('mass-action')) {
+            case 1:
+                $user->setStatus($userIds, 1);
+                $request->session()->flash('message-success', 'User(s) enabled!');
+                break;
+            case 2:
+                $user->setStatus($userIds, 0);
+                $request->session()->flash('message-success', 'User(s) disabled!');
+                break;
+        }
+
+        return redirect()->back();
+    }
+
+    /**
      * Return user edit page
      *
      * @param $id
@@ -133,31 +158,6 @@ class UserController extends Controller
     {
         $user = new User();
         $user->deleteUser($id);
-    }
-
-    /**
-     * Users mass action
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function massAction(Request $request)
-    {
-        $userIds = $request->input('users');
-        $user = new User();
-
-        switch ($request->input('mass-action')) {
-            case 1:
-                $user->setStatus($userIds, 1);
-                $request->session()->flash('message-success', 'User(s) enabled!');
-                break;
-            case 2:
-                $user->setStatus($userIds, 0);
-                $request->session()->flash('message-success', 'User(s) disabled!');
-                break;
-        }
-
-        return redirect()->back();
     }
 
     /**

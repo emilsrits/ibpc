@@ -21,6 +21,35 @@ class CategoryController extends Controller
     }
 
     /**
+     * Categories mass action
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function action(Request $request)
+    {
+        $categoryIds = $request->input('categories');
+        $category = new Category();
+
+        switch ($request->input('mass-action')) {
+            case 1:
+                $category->setStatus($categoryIds, 1);
+                $request->session()->flash('message-success', 'Categories enabled!');
+                break;
+            case 2:
+                $category->setStatus($categoryIds, 0);
+                $request->session()->flash('message-success', 'Categories disabled!');
+                break;
+            case 3:
+                $category->deleteCategory($categoryIds);
+                $request->session()->flash('message-success', 'Categories deleted!');
+                break;
+        }
+
+        return redirect()->back();
+    }
+
+    /**
      * Return category create view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -192,35 +221,6 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->deleteCategory($id);
-    }
-
-    /**
-     * Categories mass action
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function massAction(Request $request)
-    {
-        $categoryIds = $request->input('categories');
-        $category = new Category();
-
-        switch ($request->input('mass-action')) {
-            case 1:
-                $category->setStatus($categoryIds, 1);
-                $request->session()->flash('message-success', 'Categories enabled!');
-                break;
-            case 2:
-                $category->setStatus($categoryIds, 0);
-                $request->session()->flash('message-success', 'Categories disabled!');
-                break;
-            case 3:
-                $category->deleteCategory($categoryIds);
-                $request->session()->flash('message-success', 'Categories deleted!');
-                break;
-        }
-
-        return redirect()->back();
     }
 
     /**

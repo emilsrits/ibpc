@@ -21,6 +21,27 @@ class SpecificationController extends Controller
     }
 
     /**
+     * Specification mass action
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function action(Request $request)
+    {
+        $specificationIds = $request->input('specifications');
+        $specification = new Specification();
+
+        switch ($request->input('mass-action')) {
+            case 1:
+                $specification->deleteSpecification($specificationIds);
+                $request->session()->flash('message-success', 'Attribute groups deleted!');
+                break;
+        }
+
+        return redirect()->back();
+    }
+
+    /**
      * Return specification create view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -122,27 +143,6 @@ class SpecificationController extends Controller
     {
         $specification = new Specification();
         $specification->deleteSpecification($id);
-    }
-
-    /**
-     * Specification mass action
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function massAction(Request $request)
-    {
-        $specificationIds = $request->input('specifications');
-        $specification = new Specification();
-
-        switch ($request->input('mass-action')) {
-            case 1:
-                $specification->deleteSpecification($specificationIds);
-                $request->session()->flash('message-success', 'Attribute groups deleted!');
-                break;
-        }
-
-        return redirect()->back();
     }
 
     /**
