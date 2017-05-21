@@ -17,7 +17,7 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(20);
+        $products = Product::with('categories')->paginate(20);
 
         return view('admin.product.catalog', ['products' => $products]);
     }

@@ -604,8 +604,8 @@ th {
     #catalog-table .table-body td:last-of-type > a, #categories-table .table-body td:last-of-type > a, #specifications-table .table-body td:last-of-type > a,
     #attributes-table .table-body td:last-of-type > a, #users-table .table-body td:last-of-type > a, #roles-table .table-body td:last-of-type > a, #orders-table .table-body td:last-of-type > a {
       padding: 5px; }
-  #catalog-table .table-body .has-currency, #categories-table .table-body .has-currency, #specifications-table .table-body .has-currency,
-  #attributes-table .table-body .has-currency, #users-table .table-body .has-currency, #roles-table .table-body .has-currency, #orders-table .table-body .has-currency {
+  #catalog-table .table-body .no-wrap, #categories-table .table-body .no-wrap, #specifications-table .table-body .no-wrap,
+  #attributes-table .table-body .no-wrap, #users-table .table-body .no-wrap, #roles-table .table-body .no-wrap, #orders-table .table-body .no-wrap {
     white-space: nowrap; }
   #catalog-table .table-search, #categories-table .table-search, #specifications-table .table-search,
   #attributes-table .table-search, #users-table .table-search, #roles-table .table-search, #orders-table .table-search {

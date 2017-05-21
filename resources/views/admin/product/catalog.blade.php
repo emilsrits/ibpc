@@ -40,6 +40,7 @@ Catalog
                     <th>Price</th>
                     <th>Qty</th>
                     <th>Status</th>
+                    <th>Category</th>
                     <th class="col-md">Created at</th>
                     <th class="col-md">Updated at</th>
                     <th class="col-xs"></th>
@@ -52,9 +53,9 @@ Catalog
                             <input class="entity-select" type="checkbox" name="catalog[{{ $product->id }}][id]" value="{{ $product->id }}">
                         </td>
                         <td>{{ $product->id }}</td>
-                        <td>{{ $product->title }}</td>
-                        <td>{{ $product->code }}</td>
-                        <td>{{ $product->getPriceCurrency('current') }}</td>
+                        <td class="no-wrap">{{ $product->title }}</td>
+                        <td class="no-wrap">{{ $product->code }}</td>
+                        <td class="no-wrap">{{ $product->getPriceCurrency('current') }}</td>
                         <td>{{ $product->stock }}</td>
                         <td>
                             @if($product->status)
@@ -63,8 +64,9 @@ Catalog
                                 Disabled
                             @endif
                         </td>
-                        <td>{{ $product->created_at }}</td>
-                        <td>{{ $product->updated_at }}</td>
+                        <td>{{ $product->categories->first()->title }}</td>
+                        <td class="no-wrap">{{ $product->created_at }}</td>
+                        <td class="no-wrap">{{ $product->updated_at }}</td>
                         <td>
                             <a href="{{ url('/admin/product/edit', ['id' => $product->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                         </td>

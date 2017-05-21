@@ -97,8 +97,8 @@ Edit Order
                                 <td>{{ $product->title }}</td>
                                 <td>{{ $product->code }}</td>
                                 <td>{{ $product->pivot->quantity }}</td>
-                                <td class="has-currency">{{ $product->getPriceCurrency('order', $order->id, $product->id) }}</td>
-                                <td class="has-currency">{{ $product->getPriceCurrency('order_total', $order->id, $product->id) }}</td>
+                                <td class="no-wrap">{{ $product->getPriceCurrency('order', $order->id, $product->id) }}</td>
+                                <td class="no-wrap">{{ $product->getPriceCurrency('order_total', $order->id, $product->id) }}</td>
                             </tr>
                         @endforeach
                         </tbody>
