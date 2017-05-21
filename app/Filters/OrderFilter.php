@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use App\Filters\QueryFilter;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,7 +51,7 @@ class OrderFilter extends QueryFilter
     }
 
     /**
-     * Filter order by created date
+     * Sort order by created date
      *
      * @param string $order
      * @return mixed
@@ -61,7 +62,18 @@ class OrderFilter extends QueryFilter
     }
 
     /**
-     * Filter order by updated date
+     * Filter by created date
+     *
+     * @param $date
+     * @return mixed
+     */
+    public function createdAt($date)
+    {
+        return $this->builder->where('created_at', 'like', '%'.$date.'%');
+    }
+
+    /**
+     * Sort order by updated date
      *
      * @param string $order
      * @return mixed
@@ -69,5 +81,16 @@ class OrderFilter extends QueryFilter
     public function updated($order = 'desc')
     {
         return $this->builder->orderBy('updated_at', $order);
+    }
+
+    /**
+     * Filter by updated date
+     *
+     * @param $date
+     * @return mixed
+     */
+    public function updatedAt($date)
+    {
+        return $this->builder->where('updated_at', 'like', '%'.$date.'%');
     }
 }

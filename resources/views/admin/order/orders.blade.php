@@ -85,7 +85,9 @@ Orders
                                 Completed</option>
                         </select>
                     </td>
-                    <td colspan="3"></td>
+                    <td><input type="text" name="createdAt" value="{{ $request['createdAt'] ? $request['createdAt'] : '' }}"></td>
+                    <td><input type="text" name="updatedAt" value="{{ $request['updatedAt'] ? $request['updatedAt'] : '' }}"></td>
+                    <td></td>
                 </tr>
                 <tbody class="table-body">
                 @foreach($orders as $order)
