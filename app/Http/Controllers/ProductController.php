@@ -53,12 +53,12 @@ class ProductController extends Controller
     /**
      * Return product view
      *
-     * @param $id
+     * @param $code
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show($code)
     {
-        $product = Product::with('attributes.specification')->find($id);
+        $product = Product::with('attributes.specification')->where('code', $code)->first();
 
         if ($product->categories()->first()) {
             $categoryId = $product->categories()->first()->id;

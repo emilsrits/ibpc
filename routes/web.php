@@ -207,7 +207,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
 /**
  * Product routes
  */
-Route::get('/product/{id}/{title}', [
+Route::get('/product/{code}', [
     'uses' => 'ProductController@show',
     'as' => 'product.show'
 ]);
