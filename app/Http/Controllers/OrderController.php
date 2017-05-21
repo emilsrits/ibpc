@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\OrderFilter;
 use App\Order;
 use App\Product;
 use App\User;
@@ -31,9 +32,10 @@ class OrderController extends Controller
      * Order mass action
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param OrderFilter $filters
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function action(Request $request)
+    public function action(Request $request, OrderFilter $filters)
     {
         $orderIds = $request->input('orders');
         $order = new Order();
@@ -63,13 +65,9 @@ class OrderController extends Controller
             }
         }
 
-        if ($request->has('searchId')) {
-            $order = Order::where('id', $request['searchId'])->paginate(20);
+        $orders = Order::with('user')->filter($filters)->paginate(20);
 
-            return view('admin.order.orders', ['orders' => $order, 'request' => $request ]);
-        }
-
-        return redirect()->back();
+        return view('admin.order.orders', ['orders' => $orders, 'request' => $request ]);
     }
 
     /**

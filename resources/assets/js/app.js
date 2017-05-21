@@ -126,6 +126,20 @@
             $(this).find('#order-submit').css('opacity', '0.6').attr('onclick','return false;');
         });
 
+        // Clear all filters when clicked
+        $('#filters-clear').click(function () {
+            clearAllInputs($('#table-search'));
+        });
+        // Clear all filters from a admin panel table
+        function clearAllInputs(selector) {
+            $(selector).find(':input').each( function () {
+                $(this).val('');
+            });
+            $(selector).find('select').each( function () {
+                $(this).selectedIndex = 0;
+            });
+        }
+
         /* ------AJAX------ */
         // Load category specifications when creating product
         $('#category-select').change(function () {

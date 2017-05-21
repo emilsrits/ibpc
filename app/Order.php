@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -24,6 +25,18 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany('App\Product')->withPivot('order_id', 'user_id', 'product_id', 'quantity', 'price');
+    }
+
+    /**
+     * Order filters
+     *
+     * @param $query
+     * @param QueryFilter $filters
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
     }
 
     /**

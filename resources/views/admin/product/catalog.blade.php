@@ -57,13 +57,7 @@ Catalog
                         <td class="no-wrap">{{ $product->code }}</td>
                         <td class="no-wrap">{{ $product->getPriceCurrency('current') }}</td>
                         <td>{{ $product->stock }}</td>
-                        <td>
-                            @if($product->status)
-                                Enabled
-                            @else
-                                Disabled
-                            @endif
-                        </td>
+                        <td>{{ $product->status ? 'Enabled' : 'Disabled' }}</td>
                         <td>{{ $product->categories->first()->title }}</td>
                         <td class="no-wrap">{{ $product->created_at }}</td>
                         <td class="no-wrap">{{ $product->updated_at }}</td>
