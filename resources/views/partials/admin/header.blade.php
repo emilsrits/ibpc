@@ -38,8 +38,6 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url('/admin/orders') }}">Orders List</a></li>
-                                <li><a href="{{ url('/admin/orders/pending') }}">Pending Orders</a></li>
-                                <li><a href="{{ url('/admin/orders/history') }}">Order History</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
