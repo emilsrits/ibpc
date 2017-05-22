@@ -196,7 +196,11 @@ class Product extends Model
     {
         switch ($price) {
             case 'old':
-                return $this->price_old . ' €';
+                if ($this->price_old) {
+                    return $this->price_old . ' €';
+                } else {
+                    return null;
+                }
             case 'current':
                 return $this->price . ' €';
             case 'order':

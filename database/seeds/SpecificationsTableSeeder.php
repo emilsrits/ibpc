@@ -16,40 +16,64 @@ class SpecificationsTableSeeder extends Seeder
         DB::table('specifications')->truncate();
         // Specification table seeder
         $specification = new \App\Specification([
-            'slug' => 'Model',
+            'slug' => 'model',
             'name' => 'Model'
         ]);
-        $specification->save();
+        $specification->save(); // 1
 
         $specification = new \App\Specification([
-            'slug' => 'Interface',
+            'slug' => 'interface',
             'name' => 'Interface'
         ]);
-        $specification->save();
+        $specification->save(); // 2
 
         $specification = new \App\Specification([
-            'slug' => 'Chipset',
+            'slug' => 'chipset',
             'name' => 'Chipset'
         ]);
-        $specification->save();
+        $specification->save(); // 3
 
         $specification = new \App\Specification([
-            'slug' => 'Memory',
+            'slug' => 'memory',
             'name' => 'Memory'
         ]);
-        $specification->save();
+        $specification->save(); // 4
 
         $specification = new \App\Specification([
-            'slug' => 'Ports',
+            'slug' => 'ports',
             'name' => 'Ports'
         ]);
-        $specification->save();
+        $specification->save(); // 5
 
         $specification = new \App\Specification([
-            'slug' => 'Details',
+            'slug' => 'gpu details',
             'name' => 'Details'
         ]);
-        $specification->save();
+        $specification->save(); // 6
+
+        $specification = new \App\Specification([
+            'slug' => 'gpu dimensions',
+            'name' => 'Form Factor & Dimensions'
+        ]);
+        $specification->save(); // 7
+
+        $specification = new \App\Specification([
+            'slug' => 'cpu model',
+            'name' => 'Model'
+        ]);
+        $specification->save(); // 8
+
+        $specification = new \App\Specification([
+            'slug' => 'cpu socket type',
+            'name' => 'CPU Socket Type'
+        ]);
+        $specification->save(); // 9
+
+        $specification = new \App\Specification([
+            'slug' => 'cpu details',
+            'name' => 'Details'
+        ]);
+        $specification->save(); // 10
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

@@ -25,7 +25,7 @@ class ProductsTableSeeder extends Seeder
         	'stock' => 10,
         	'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 1
 
         $product = new \App\Product([
         	'image_path' => '/storage/images/products/4/000002.jpg',
@@ -37,7 +37,7 @@ class ProductsTableSeeder extends Seeder
         	'stock' => 5,
         	'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 2
 
         $product = new \App\Product([
         	'image_path' => '/storage/images/products/4/000003.jpg',
@@ -48,7 +48,7 @@ class ProductsTableSeeder extends Seeder
         	'stock' => 6,
         	'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 3
 
         $product = new \App\Product([
             'image_path' => '/storage/images/products/4/000004.jpg',
@@ -59,7 +59,7 @@ class ProductsTableSeeder extends Seeder
             'stock' => 2,
             'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 4
 
         $product = new \App\Product([
             'image_path' => '/storage/images/products/4/000005.jpg',
@@ -71,7 +71,7 @@ class ProductsTableSeeder extends Seeder
             'stock' => 6,
             'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 5
 
         $product = new \App\Product([
             'image_path' => '/storage/images/products/4/000006.jpg',
@@ -83,7 +83,7 @@ class ProductsTableSeeder extends Seeder
             'stock' => 3,
             'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 6
 
         $product = new \App\Product([
             'image_path' => '/storage/images/products/4/000007.jpg',
@@ -95,7 +95,7 @@ class ProductsTableSeeder extends Seeder
             'stock' => 3,
             'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 7
 
         $product = new \App\Product([
             'image_path' => '/storage/images/products/4/000008.jpg',
@@ -107,7 +107,7 @@ class ProductsTableSeeder extends Seeder
             'stock' => 1,
             'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 8
 
         $product = new \App\Product([
             'image_path' => '/storage/images/products/4/000009.jpg',
@@ -119,7 +119,39 @@ class ProductsTableSeeder extends Seeder
             'stock' => 5,
             'status' => 1
         ]);
-        $product->save();
+        $product->save(); // 9
+
+        $product = new \App\Product([
+            'image_path' => '/storage/images/products/1/000010.jpg',
+            'code' => 'CORE-I5-6600K',
+            'title' => 'Intel® Core™ i5-6600K 3.5GHz 6MB LGA1151',
+            'description' => 'Cooling device not included - Processor Only',
+            'price' => 250.00,
+            'stock' => 6,
+            'status' => 1
+        ]);
+        $product->save(); // 10
+
+        $product = new \App\Product([
+            'image_path' => '/storage/images/products/1/000011.jpg',
+            'code' => 'CORE-I5-7600K',
+            'title' => 'Intel® Core™ i5-7600K 3.8 GHz 6M LGA1151',
+            'price' => 255.00,
+            'stock' => 3,
+            'status' => 1
+        ]);
+        $product->save(); // 11
+
+        $product = new \App\Product([
+            'image_path' => '/storage/images/products/1/000012.jpg',
+            'code' => 'CORE-I5-7700K',
+            'title' => 'Intel® Core™ i7-7700K 4.2 GHz 8M LGA1151',
+            'price' => 356.42,
+            'price_old' => 361.58,
+            'stock' => 7,
+            'status' => 1
+        ]);
+        $product->save(); // 12
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
