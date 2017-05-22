@@ -1166,10 +1166,12 @@ th {
       #product-details .product-specifications tr.category > td {
         font-weight: bold; }
       #product-details .product-specifications tr.specification {
-        background-color: #E6E6E6; }
+        background-color: #eee; }
     #product-details .product-specifications td {
       padding: 4px 5px;
       color: #0d0d0d; }
+      #product-details .product-specifications td.attribute, #product-details .product-specifications td.value {
+        border-bottom: 1px solid #E6E6E6; }
       #product-details .product-specifications td.attribute {
         padding-left: 5px;
         width: 170px;
