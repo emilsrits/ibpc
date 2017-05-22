@@ -123,12 +123,14 @@ class ProductController extends Controller
     {
         $request->flash();
 
+        if (!$request['category']) {
+            $request->session()->flash('message-danger', 'Select a product category!');
+            return redirect()->back();
+        }
         if ($this->productExists($request['code'])) {
             $request->session()->flash('message-danger', 'Product with this code already exists!');
             return redirect()->back();
         }
-
-        // Check for missing values
         if ($this->productValidate($request)) {
             return redirect()->back();
         }
@@ -146,22 +148,21 @@ class ProductController extends Controller
         $product->status = $request['status'];
         $product->save();
 
-        if ($request['category']) {
-            $product->categories()->attach(['category_id' => $request['category']]);
 
-            $specifications = collect($request['attr']);
-            foreach ($specifications as $category => $attributes) {
-                foreach ($attributes as $attribute => $value) {
-                    if ($value) {
-                        $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                    }
+        $product->categories()->attach(['category_id' => $request['category']]);
+
+        $specifications = collect($request['attr']);
+        foreach ($specifications as $category => $attributes) {
+            foreach ($attributes as $attribute => $value) {
+                if ($value) {
+                    $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
                 }
             }
         }
 
         $request->session()->flash('message-success', 'Product successfully created!');
 
-        return redirect()->route('catalog.index');
+        return redirect()->route('product.index');
     }
 
     public function edit(Request $request, $id)
@@ -190,7 +191,7 @@ class ProductController extends Controller
 
             $request->session()->flash('message-success', 'Product deleted!');
 
-            return redirect()->route('catalog.index');
+            return redirect()->route('product.index');
         }
 
         // Update product
