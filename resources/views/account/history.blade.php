@@ -33,23 +33,29 @@ Order History
                 <table class="user-orders">
                     <thead>
                     <tr>
-                        <th>Id</th>
+                        <th class="col-sm">Id</th>
                         <th>Price</th>
                         <th>Delivery</th>
                         <th>Status</th>
-                        <th>Created</th>
-                        <th>Updated</th>
+                        <th class="col-md">Created</th>
+                        <th class="col-md">Updated</th>
+                        <th class="col-xs"></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($orders as $order)
                         <tr>
-                            <td class="col-sm">{{ $order->id }}</td>
+                            <td>{{ $order->id }}</td>
                             <td class="no-wrap">{{ $order->getPriceCurrency('price') }}</td>
                             <td>{{ $order->delivery }}</td>
                             <td>{{ $order->status }}</td>
-                            <td class="col-md no-wrap">{{ $order->created }}</td>
-                            <td class="col-md no-wrap">{{ $order->updated }}</td>
+                            <td class="no-wrap">{{ $order->created }}</td>
+                            <td class="no-wrap">{{ $order->updated }}</td>
+                            <td>
+                                <a href="{{ url('/user/order', ['id' => $order->id]) }}">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

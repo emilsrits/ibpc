@@ -233,6 +233,14 @@ Route::group(['prefix' => 'user'], function () {
             'uses' => 'AccountController@index',
             'as' => 'account.index'
         ]);
+        Route::get('/order/{id}', [
+            'uses' => 'AccountController@showOrder',
+            'as' => 'account.showOrder'
+        ]);
+        Route::get('/history', [
+            'uses' => 'AccountController@showHistory',
+            'as' => 'account.showHistory'
+        ]);
         Route::get('/edit', [
             'uses' => 'AccountController@edit',
             'as' => 'account.edit'
@@ -240,10 +248,6 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('/update/{id}', [
             'uses' => 'AccountController@update',
             'as' => 'account.update'
-        ]);
-        Route::get('/history', [
-            'uses' => 'AccountController@history',
-            'as' => 'account.history'
         ]);
     });
 });

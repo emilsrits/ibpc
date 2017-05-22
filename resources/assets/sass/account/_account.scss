@@ -85,6 +85,11 @@
         }
         .user-orders {
             width: 100%;
+            tr {
+                th, td {
+                    padding: 10px;
+                }
+            }
             thead {
                 th {
                     font-weight: bold;
@@ -94,10 +99,31 @@
                 tr {
                     border-top: 1px solid $color_lightGray;
                 }
+                td {
+                    &:last-of-type {
+                        > a {
+                            padding: 5px;
+                        }
+                    }
+                }
             }
-            tr {
-                th, td {
-                    padding: 10px;
+        }
+        .order-sumup {
+            margin: 20px 0;
+            td {
+                padding: 5px 10px;
+                &:first-of-type {
+                    font-weight: bold;
+                }
+            }
+        }
+        .order-view {
+            tbody {
+                td {
+                    vertical-align: middle;
+                    img {
+                        width: 60px;
+                    }
                 }
             }
         }

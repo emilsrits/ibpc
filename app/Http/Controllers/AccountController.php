@@ -28,6 +28,21 @@ class AccountController extends Controller
     }
 
     /**
+     * Return user order view
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showOrder($id)
+    {
+        $user = Auth::user();
+
+        $order = $user->orders()->find($id);
+
+        return view('account.order', ['user' => $user, 'order' => $order]);
+    }
+
+    /**
      * Return account edit view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -37,6 +52,13 @@ class AccountController extends Controller
         return view('account.edit', ['user' => Auth::user()]);
     }
 
+    /**
+     * Update user information
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         if ($request['submit'] === 'save') {
@@ -78,7 +100,7 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function history()
+    public function showHistory()
     {
         $user = Auth::user();
 
@@ -91,6 +113,13 @@ class AccountController extends Controller
         return view('account.history', ['user' => $user, 'orders' => $orders]);
     }
 
+    /**
+     * Validate user update form inputs
+     *
+     * @param $user
+     * @param $request
+     * @return bool
+     */
     protected function userValidate($user, $request)
     {
         $this->validate($request, [

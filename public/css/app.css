@@ -587,12 +587,24 @@ th {
       letter-spacing: 0.4px; }
     #user-account #account-panel .user-orders {
       width: 100%; }
+      #user-account #account-panel .user-orders tr th, #user-account #account-panel .user-orders tr td {
+        padding: 10px; }
       #user-account #account-panel .user-orders thead th {
         font-weight: bold; }
       #user-account #account-panel .user-orders tbody tr {
         border-top: 1px solid #eee; }
-      #user-account #account-panel .user-orders tr th, #user-account #account-panel .user-orders tr td {
-        padding: 10px; }
+      #user-account #account-panel .user-orders tbody td:last-of-type > a {
+        padding: 5px; }
+    #user-account #account-panel .order-sumup {
+      margin: 20px 0; }
+      #user-account #account-panel .order-sumup td {
+        padding: 5px 10px; }
+        #user-account #account-panel .order-sumup td:first-of-type {
+          font-weight: bold; }
+    #user-account #account-panel .order-view tbody td {
+      vertical-align: middle; }
+      #user-account #account-panel .order-view tbody td img {
+        width: 60px; }
   #user-account .account-content-section .content-section-toggle {
     margin: 15px 0 0;
     padding: 10px;
