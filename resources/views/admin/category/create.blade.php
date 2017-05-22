@@ -65,7 +65,7 @@ Create Category
                                 @foreach($chunk as $specification)
                                     <td class="category-attribute-group">
                                         <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}" value="{{ $specification->id }}">
-                                        <label for="{{ 'spec[' . $specification->id . '][id]' }}">{{ $specification->name }}</label>
+                                        <label for="{{ 'spec[' . $specification->id . '][id]' }}">{{ $specification->slug }}</label>
                                     </td>
                                 @endforeach
                             </tr>

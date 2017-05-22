@@ -68,7 +68,7 @@ Edit Category
                                                 <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}"
                                                        {{ $category->getSpecificationById($specification->id) ? 'checked' : '' }}
                                                        value="{{ $specification->id }}">
-                                                <label for="{{ 'spec[' . $specification->id . '][id]' }}">{{ $specification->name }}</label>
+                                                <label for="{{ 'spec[' . $specification->id . '][id]' }}">{{ $specification->slug }}</label>
                                             </td>
                                         @endforeach
                                     </tr>
