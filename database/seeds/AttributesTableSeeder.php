@@ -245,9 +245,51 @@ class AttributesTableSeeder extends Seeder
 
         $attribute = new \App\Attribute([
             'specification_id' => 10,
-            'name' => 'Thermal Design Power'
+            'name' => 'Hyper-Threading Support'
         ]);
         $attribute->save(); // 39
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 10,
+            'name' => 'Integrated Graphics'
+        ]);
+        $attribute->save(); // 40
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 10,
+            'name' => 'Graphics Base Frequency'
+        ]);
+        $attribute->save(); // 41
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 10,
+            'name' => 'Graphics Max Dynamic Frequency'
+        ]);
+        $attribute->save(); // 42
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 10,
+            'name' => 'PCI Express Revision'
+        ]);
+        $attribute->save(); // 43
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 10,
+            'name' => 'Max Number of PCI Express Lanes'
+        ]);
+        $attribute->save(); // 44
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 10,
+            'name' => 'Thermal Design Power'
+        ]);
+        $attribute->save(); // 45
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 10,
+            'name' => 'Cooling Device'
+        ]);
+        $attribute->save(); // 46
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

@@ -63,6 +63,14 @@ class CategoryProductTableSeeder extends Seeder
             [
                 'category_id' => 1,
                 'product_id' => 12
+            ],
+            [
+                'category_id' => 1,
+                'product_id' => 13
+            ],
+            [
+                'category_id' => 1,
+                'product_id' => 14
             ]
         ]);
 

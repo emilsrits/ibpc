@@ -125,7 +125,6 @@ class ProductsTableSeeder extends Seeder
             'image_path' => '/storage/images/products/1/000010.jpg',
             'code' => 'CORE-I5-6600K',
             'title' => 'Intel® Core™ i5-6600K 3.5GHz 6MB LGA1151',
-            'description' => 'Cooling device not included - Processor Only',
             'price' => 250.00,
             'stock' => 6,
             'status' => 1
@@ -152,6 +151,28 @@ class ProductsTableSeeder extends Seeder
             'status' => 1
         ]);
         $product->save(); // 12
+
+        $product = new \App\Product([
+            'image_path' => '/storage/images/products/1/000013.jpg',
+            'code' => 'RYZEN-7-1800X',
+            'title' => 'AMD Ryzen 7 1800X',
+            'price' => 450.65,
+            'price_old' => 472.31,
+            'stock' => 6,
+            'status' => 1
+        ]);
+        $product->save(); // 13
+
+        $product = new \App\Product([
+            'image_path' => '/storage/images/products/1/000014.jpg',
+            'code' => 'RYZEN-5-1600',
+            'title' => 'AMD Ryzen 5 1600',
+            'price' => 221.89,
+            'price_old' => 237.93,
+            'stock' => 3,
+            'status' => 1
+        ]);
+        $product->save(); // 14
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
