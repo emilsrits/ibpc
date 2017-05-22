@@ -7,7 +7,7 @@ Users
 @section('content')
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="users-list">
-        <h3>User List</h3>
+        <h3>Users List</h3>
         <div class="manage-btn-group">
             <div class="btn-manage-back">
                 <a href="{{ url('/admin') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
