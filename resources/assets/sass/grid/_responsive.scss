@@ -1,32 +1,8 @@
-/* GRID SYSTEM */
-.grid {
-    margin-bottom: 10px;
-}
-
-.grid-uniform {
-    margin: 0;
-    padding: 0;
-}
-
-.grid-item {
-    float: left;
-}
-
-.sm-10, .sm-50, .sm-100, .md-10, .md-20, .md-33, .md-50, .lg-15, .lg-20, .lg-25, .lg-40, .lg-50, .lg-60, .lg-65, .lg-85, .lg-100 {
-    &:before,
-    &:after {
-        content: "";
-        display: table;
-    }
-    &:after {
-        clear: both;
-    }
-}
-
 @media only screen and (max-width: $mobile-md - 1) {
     .sm-100 {  width: 100%;  }
     .sm-85 {  width: 85%;  }
     .sm-50 {  width: 50%  }
+    .sm-33 {  width: 33.33%  }
     .sm-25 {  width: 25%;  }
     .sm-15 {  width: 15%;  }
     .sm-10 { width: 10%; }
@@ -56,6 +32,6 @@
     .lg-35 {  width: 35%;  }
     .lg-33 {  width: 33.33%;  }
     .lg-25 {  width: 25%;  }
-    .lg-25 {  width: 20%;  }
+    .lg-20 {  width: 20%;  }
     .lg-15 {  width: 15%;  }
 }

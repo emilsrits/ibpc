@@ -439,11 +439,17 @@ th {
 .grid-item {
   float: left; }
 
-.sm-10:before, .sm-10:after, .sm-50:before, .sm-50:after, .sm-100:before, .sm-100:after, .md-10:before, .md-10:after, .md-20:before, .md-20:after, .md-33:before, .md-33:after, .md-50:before, .md-50:after, .lg-15:before, .lg-15:after, .lg-20:before, .lg-20:after, .lg-25:before, .lg-25:after, .lg-40:before, .lg-40:after, .lg-50:before, .lg-50:after, .lg-60:before, .lg-60:after, .lg-65:before, .lg-65:after, .lg-85:before, .lg-85:after, .lg-100:before, .lg-100:after {
+.sm-10:before, .sm-10:after, .sm-15:before, .sm-15:after, .sm-33:before, .sm-33:after, .sm-50:before, .sm-50:after, .sm-85:before, .sm-85:after, .sm-100:before, .sm-100:after,
+.md-10:before,
+.md-10:after, .md-15:before, .md-15:after, .md-20:before, .md-20:after, .md-33:before, .md-33:after, .md-50 .md-85:before, .md-50 .md-85:after,
+.lg-15:before,
+.lg-15:after, .lg-20:before, .lg-20:after, .lg-25:before, .lg-25:after, .lg-33:before, .lg-33:after, .lg-40:before, .lg-40:after, .lg-50:before, .lg-50:after, .lg-60:before, .lg-60:after, .lg-65:before, .lg-65:after, .lg-85:before, .lg-85:after, .lg-100:before, .lg-100:after {
   content: "";
   display: table; }
 
-.sm-10:after, .sm-50:after, .sm-100:after, .md-10:after, .md-20:after, .md-33:after, .md-50:after, .lg-15:after, .lg-20:after, .lg-25:after, .lg-40:after, .lg-50:after, .lg-60:after, .lg-65:after, .lg-85:after, .lg-100:after {
+.sm-10:after, .sm-15:after, .sm-33:after, .sm-50:after, .sm-85:after, .sm-100:after,
+.md-10:after, .md-15:after, .md-20:after, .md-33:after, .md-50 .md-85:after,
+.lg-15:after, .lg-20:after, .lg-25:after, .lg-33:after, .lg-40:after, .lg-50:after, .lg-60:after, .lg-65:after, .lg-85:after, .lg-100:after {
   clear: both; }
 
 @media only screen and (max-width: 767px) {
@@ -453,6 +459,8 @@ th {
     width: 85%; }
   .sm-50 {
     width: 50%; }
+  .sm-33 {
+    width: 33.33%; }
   .sm-25 {
     width: 25%; }
   .sm-15 {
@@ -503,10 +511,67 @@ th {
     width: 33.33%; }
   .lg-25 {
     width: 25%; }
-  .lg-25 {
+  .lg-20 {
     width: 20%; }
   .lg-15 {
     width: 15%; } }
+
+/* USER ACCOUNT */
+#user-account {
+  padding: 10px; }
+  #user-account > h4 {
+    margin: 10px 10px 20px;
+    font-family: Montserrat-Regular, sans-serif;
+    text-transform: uppercase; }
+  #user-account #account-nav .account-settings, #user-account #account-nav .account-orders, #user-account #account-nav .account-order-history {
+    position: relative;
+    display: -webkit-box;
+    display: flex;
+    height: 60px;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #eee;
+    -webkit-transition: color ease-in-out 0.2s, border ease-in-out 0.2s, background ease-in-out 0.1s;
+    transition: color ease-in-out 0.2s, border ease-in-out 0.2s, background ease-in-out 0.1s; }
+    #user-account #account-nav .account-settings:hover, #user-account #account-nav .account-orders:hover, #user-account #account-nav .account-order-history:hover {
+      border-color: #E6E6E6;
+      background-color: #eee;
+      box-shadow: inset #303030 0 1px 3px 0; }
+    #user-account #account-nav .account-settings a, #user-account #account-nav .account-orders a, #user-account #account-nav .account-order-history a {
+      display: -webkit-box;
+      display: flex;
+      padding: 10px;
+      width: 100%;
+      height: 100%;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center; }
+      #user-account #account-nav .account-settings a i, #user-account #account-nav .account-orders a i, #user-account #account-nav .account-order-history a i {
+        padding-right: 7px; }
+  #user-account #account-nav .active {
+    color: #CC4040; }
+    #user-account #account-nav .active:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 50%;
+      bottom: -1px;
+      border: 10px solid;
+      border-color: transparent transparent #eee transparent; }
+    #user-account #account-nav .active:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 50%;
+      bottom: -3px;
+      border: 10px solid;
+      border-color: transparent transparent #fff transparent; }
+    #user-account #account-nav .active:hover::before {
+      border-color: transparent transparent #E6E6E6 transparent; }
 
 /* ADMIN HEADER */
 #admin-header .admin-sections li {

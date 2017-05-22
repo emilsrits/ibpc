@@ -1,0 +1,70 @@
+/* USER ACCOUNT */
+#user-account {
+    padding: 10px;
+    > h4 {
+        margin: 10px 10px 20px;
+        font-family: Montserrat-Regular, sans-serif;
+        text-transform: uppercase;
+    }
+    #account-nav {
+        .account-settings, .account-orders, .account-order-history {
+            position: relative;
+            display: flex;
+            height: 60px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid $color_lightGray;
+            -webkit-transition: color ease-in-out 0.2s,
+                                border ease-in-out 0.2s,
+                                background ease-in-out 0.1s;
+            transition: color ease-in-out 0.2s,
+                        border ease-in-out 0.2s,
+                        background ease-in-out 0.1s;
+            &:hover {
+                border-color: $color_gray;
+                background-color: $color_lightGray;
+                box-shadow: inset $color_darkGray 0 1px 3px 0;
+            }
+            a {
+                display: flex;
+                padding: 10px;
+                width: 100%;
+                height: 100%;
+                -webkit-box-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                align-items: center;
+                i {
+                    padding-right: 7px;
+                }
+            }
+        }
+        .active {
+            color: $color_red;
+            &:before {
+                content: "";
+                position: absolute;
+                width: 0;
+                height: 0;
+                left: 50%;
+                bottom: -1px;
+                border: 10px solid;
+                border-color: transparent transparent $color_lightGray transparent;
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                width: 0;
+                height: 0;
+                left: 50%;
+                bottom: -3px;
+                border: 10px solid;
+                border-color: transparent transparent $color_white transparent;
+            }
+            &:hover::before {
+                border-color: transparent transparent $color_gray transparent;
+            }
+        }
+    }
+}
