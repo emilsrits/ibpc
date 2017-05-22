@@ -53,8 +53,8 @@ Catalog
                             <input class="entity-select" type="checkbox" name="catalog[{{ $product->id }}][id]" value="{{ $product->id }}">
                         </td>
                         <td>{{ $product->id }}</td>
-                        <td class="no-wrap">{{ $product->title }}</td>
-                        <td class="no-wrap">{{ $product->code }}</td>
+                        <td>{{ $product->title }}</td>
+                        <td>{{ $product->code }}</td>
                         <td class="no-wrap">{{ $product->getPriceCurrency('current') }}</td>
                         <td>{{ $product->stock }}</td>
                         <td>{{ $product->status ? 'Enabled' : 'Disabled' }}</td>
