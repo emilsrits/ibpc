@@ -82,10 +82,9 @@ class OrderController extends Controller
         $cart = Session::get('cart');
         $order = new Order();
         $order->user_id = $user->id;
-        $order->price = $cart->totalPrice + $cart->deliveryPrice;
-        $order->discount = null;
+        $order->price = $cart->totalPrice + $cart->deliveryCost;
         $order->delivery = Session::get('delivery');
-        $order->delivery_cost = $cart->deliveryPrice;
+        $order->delivery_cost = $cart->deliveryCost;
         $order->status = 'pending';
 
         foreach ($cart->items as $item) {
@@ -127,7 +126,6 @@ class OrderController extends Controller
         $order->save();
 
         $cart->deleteCart();
-        Session::forget('delivery');
 
         $request->session()->flash('message-success', 'Order successfully placed!');
         return redirect()->route('order.success', ['success' => true]);

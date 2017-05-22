@@ -10,7 +10,8 @@ class Cart extends Model
     public $items = null;
     public $totalQty = 0;
     public $totalPrice = 0;
-    public $deliveryPrice = 0;
+    public $delivery = [];
+    public $deliveryCost = 0;
 
     /**
      * Cart constructor
@@ -22,6 +23,8 @@ class Cart extends Model
             $this->items = $oldCart->items;
             $this->totalQty = $oldCart->totalQty;
             $this->totalPrice = $oldCart->totalPrice;
+            $this->delivery = $oldCart->delivery;
+            $this->deliveryCost = $oldCart->deliveryCost;
         }
     }
 
@@ -65,6 +68,9 @@ class Cart extends Model
      */
     public function deleteCart()
     {
+        if (Session::has('delivery')) {
+            Session::forget('delivery');
+        }
         if (Session::has('cart')) {
             Session::forget('cart');
         }
@@ -101,35 +107,24 @@ class Cart extends Model
     /**
      * Add delivery cost to cart
      *
-     * @param $deliveryOption
-     * @return Product|null
+     * @param $deliveryMethod
+     * @return mixed
      */
-    public function addDelivery($deliveryOption)
+    public function addDelivery($deliveryMethod)
     {
-        $delivery = null;
-
-        switch ($deliveryOption) {
+        switch ($deliveryMethod) {
             case 'storage':
-                $delivery = new Product();
-                $delivery->id = 9000;
-                $delivery->title = 'Delivery to storage';
-                $delivery->code = 'DELIVERY';
-                $delivery->price = 0.00;
-                $this->items[$delivery->id] = $delivery;
-                $this->deliveryPrice = $delivery->price;
+                $this->delivery['code'] = 'storage';
+                $this->delivery['cost'] = 0.00;
                 break;
             case 'address':
-                $delivery = new Product();
-                $delivery->id = 9000;
-                $delivery->title = 'Delivery to address';
-                $delivery->code = 'DELIVERY';
-                $delivery->price = 2.99;
-                $this->items[$delivery->id] = $delivery;
-                $this->deliveryPrice = $delivery->price;
+                $this->delivery['code'] = 'address';
+                $this->delivery['cost'] = 2.99;
                 break;
         }
+        $this->deliveryCost = $this->delivery['cost'];
 
-        return $delivery;
+        return $this->delivery;
     }
 
     /**
@@ -158,44 +153,69 @@ class Cart extends Model
     }
 
     /**
-     * Return price of all items in cart
+     * Return a price with currency symbol
      *
+     * @param $price
      * @return string
      */
-    public function getTotalCartPrice()
+    public function getPriceCurrency($price)
     {
-        return $this->totalPrice . ' €';
+        switch ($price) {
+            case 'total':
+                return $this->totalPrice . ' €';
+            case 'delivery':
+                return $this->deliveryCost . ' €';
+            case 'with_delivery':
+                return $this->totalPrice + $this->deliveryCost . ' €';
+            case 'item_total':
+                return $this->items[$id]['price'] * $this->items[$id]['qty'] . ' €';
+        }
     }
 
     /**
      * Return total price with delivery price
      *
-     * @return string
+     * @param null $currency
+     * @return int|string
      */
-    public function getPriceWithDelivery()
+    public function getPriceWithDelivery($currency = null)
     {
-        return $this->totalPrice + $this->deliveryPrice . ' €';
+        if ($currency) {
+            return $this->totalPrice + $this->deliveryCost . ' €';
+        } else {
+            return $this->totalPrice + $this->deliveryCost;
+        }
     }
 
     /**
      * Get total price of a product
      *
      * @param $id
+     * @param null $currency
      * @return string
      */
-    public function getItemTotalPrice($id)
+    public function getItemTotalPrice($id, $currency = null)
     {
-        return $this->items[$id]['price'] * $this->items[$id]['qty'] . ' €';
+        if ($currency) {
+            return $this->items[$id]['price'] * $this->items[$id]['qty'] . ' €';
+        } else {
+            return $this->items[$id]['price'] * $this->items[$id]['qty'];
+        }
     }
 
     /**
      * Get price of a product
      *
      * @param $id
+     * @param null $currency
      * @return string
      */
-    public function getItemPrice($id)
+    public function getItemPrice($id, $currency = null)
     {
-        return  $this->items[$id]['price'] . ' €';
+        if ($currency) {
+            return  $this->items[$id]['price'] . ' €';
+        } else {
+            return  $this->items[$id]['price'];
+        }
     }
 }

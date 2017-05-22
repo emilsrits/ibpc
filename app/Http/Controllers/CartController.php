@@ -77,8 +77,8 @@ class CartController extends Controller
             Session::put('cart', $cart);
 
             if (Session::has('cart')) {
-                $items = Session::has('delivery') ? count(Session::get('cart')->items) - 1 : count(Session::get('cart')->items);
-                $html = '(' . $items . ') ' . Session::get('cart')->getTotalCartPrice();
+                $items = count(Session::get('cart')->items);
+                $html = '(' . $items . ') ' . Session::get('cart')->getPriceCurrency('total');
             } else {
                 $html = 0;
             }

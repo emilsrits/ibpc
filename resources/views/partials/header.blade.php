@@ -24,8 +24,8 @@
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span id="navbar-cart-items">
                                     @if (Session::has('cart'))
-                                        ({{ Session::has('delivery') ? count(Session::get('cart')->items) - 1 : count(Session::get('cart')->items) }})
-                                        {{ Session::get('cart')->getTotalCartPrice() }}
+                                        ({{ count(Session::get('cart')->items) }})
+                                        {{ Session::get('cart')->getPriceCurrency('total') }}
                                     @else
                                         0
                                     @endif

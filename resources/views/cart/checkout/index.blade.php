@@ -31,12 +31,12 @@ Checkout
                 @if($item['item']['id'])
                 <tr class="checkout-cart-item">
                     <td>{{ $item['item']['title'] }}</td>
-                    <td>{{ $cart->getItemTotalPrice($item['item']['id']) }}</td>
+                    <td>{{ $cart->getItemTotalPrice($item['item']['id'], 1) }}</td>
                 </tr>
                 @endif
             @endforeach
             <tr>
-                <td colspan="2">Total incl. VAT: {{ $cart->getTotalCartPrice() }}</td>
+                <td colspan="2">Total incl. VAT: {{ $cart->getPriceCurrency('total') }}</td>
             </tr>
         </table>
         <button class="btn btn-checkout" type="button" title="Checkout" onclick="window.location='{{ url('/checkout/delivery') }}'">Continue</button>
