@@ -1,5 +1,5 @@
 {!! Form::select('country', array(
-'Select a Country' => 'Select a Country',
+'0' => 'Select a Country',
 'AT' => 'Austria',
 'BE' => 'Belgium',
 'BG' => 'Bulgaria',
