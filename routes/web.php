@@ -237,6 +237,14 @@ Route::group(['prefix' => 'user'], function () {
             'uses' => 'AccountController@edit',
             'as' => 'account.edit'
         ]);
+        Route::post('/update/{id}', [
+            'uses' => 'AccountController@update',
+            'as' => 'account.update'
+        ]);
+        Route::get('/history', [
+            'uses' => 'AccountController@history',
+            'as' => 'account.history'
+        ]);
     });
 });
 

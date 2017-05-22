@@ -5,33 +5,110 @@ Account Settings
 @endsection
 
 @section('content')
-    <section class="row new-post">
-        <div class="col-md-6 col-md-offset-3">
-            <header><h3>Your Account</h3></header>
-            <form method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="first_name">First Name</label>
-                    <input type="text" name="first_name" class="form-control" value="{{ $user->name }}" id="first_name">
+<div class="grid rlg-100 md-100 sm-100">
+    <div id="user-account">
+        <h4>My Account</h4>
+        <div class="grid-uniform lg-100 md-100 sm-100">
+            <div id="account-nav">
+                <div class="account-orders grid-item lg-33 md-33 sm-33">
+                    <a href="{{ url('/user/account') }}">
+                        <i class="fa fa-shopping-basket" aria-hidden="true"></i> My Orders
+                    </a>
                 </div>
-                <div class="form-group">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" name="last_name" class="form-control" value="{{ $user->surname }}" id="last_name">
+                <div class="account-order-history grid-item lg-33 md-33 sm-33">
+                    <a href="{{ url('/user/history') }}">
+                        <i class="fa fa-history" aria-hidden="true"></i> Order History
+                    </a>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" name="email" class="form-control" value="{{ $user->email }}" id="email">
+                <div class="account-settings grid-item lg-33 md-33 sm-33">
+                    <a class="active" href="{{ url('/user/edit') }}">
+                        <i class="fa fa-address-card" aria-hidden="true"></i> Update Account
+                    </a>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="text" name="password" class="form-control" value="" id="password">
+            </div>
+        </div>
+        <div id="account-panel" class="grid-item lg-10 md-100 sm-100">
+            <h4>Account settings</h4>
+            <form id="account--edit-form" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/update', ['id' => $user->id]) }}">
+                {{ csrf_field() }}
+                <div class="account-content-section">
+                    <div class="content-section-toggle">
+                        <strong>Contact information<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+                    </div>
+                    <div class="content-container">
+                        <div class="form-group">
+                            <label for="name">First Name</label>
+                            <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Last Name</label>
+                            <input type="text" name="surname" class="form-control" value="{{ $user->surname }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" class="form-control" value="{{ $user->email }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="password_again">Password Again</label>
-                    <input type="text" name="password_again" class="form-control" value="" id="password_again">
+                <div class="account-content-section">
+                    <div class="content-section-toggle">
+                        <strong>Password<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+                    </div>
+                    <div class="content-container user-account-password-section">
+                        <div class="form-group">
+                            <label for="password">New Password</label>
+                            <input type="password" name="password" class="form-control" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">New Password Again</label>
+                            <input type="password" name="password_confirmation" class="form-control" value="">
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Save Account</button>
-                <input type="hidden" value="{{ Session::token() }}" name="_token">
+                <div class="account-content-section">
+                    <div class="content-section-toggle">
+                        <strong>Address<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+                    </div>
+                    <div class="content-container">
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            @include('partials.widgets.countries', ['default' => $user->country])
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" name="city" class="form-control" value="{{ $user->city }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" name="address" class="form-control" value="{{ $user->address }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="postcode">Postcode</label>
+                            <input type="text" name="postcode" class="form-control" value="{{ $user->postcode }}">
+                        </div>
+                    </div>
+                </div>
+                <div id="account-update-confirm">
+                    <div class="form-group">
+                        <label for="current_password">Current Password</label>
+                        <input type="password" name="current_password" class="form-control" value="" required>
+                    </div>
+                    <button id="account-update-submit" class="btn" type="submit" name="submit" value="save">Save Account</button>
+                </div>
             </form>
         </div>
-    </section>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function () {
+        $('.user-account-password-section').hide();
+    });
+</script>
 @endsection

@@ -169,11 +169,14 @@
     }
     .table-head {
         padding: 5px 0;
-        th {
-            padding: 10px;
-            font-weight: bold;
-            &:first-of-type {
-                text-align: center;
+        tr {
+            line-height: 20px;
+            th {
+                padding: 10px;
+                font-weight: bold;
+                &:first-of-type {
+                    text-align: center;
+                }
             }
         }
     }
@@ -193,9 +196,6 @@
                     padding: 5px;
                 }
             }
-        }
-        .no-wrap {
-            white-space: nowrap;
         }
     }
     #sort-created, #sort-updated {
@@ -234,15 +234,6 @@
                 font-size: 14px;
             }
         }
-    }
-    .col-xs {
-        width: 50px;
-    }
-    .col-sm {
-        width: 80px;
-    }
-    .col-md {
-        width: 155px;
     }
 }
 .attribute-content-section {

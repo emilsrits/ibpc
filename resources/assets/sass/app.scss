@@ -64,6 +64,22 @@ input[type=number]::-webkit-inner-spin-button {
     zoom: 1; /* ie 6/7 */
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
+table {
+    .col-xs {
+        width: 50px;
+    }
+    .col-sm {
+        width: 80px;
+    }
+    .col-md {
+        width: 155px;
+    }
+}
+
 #wrapper {
     position: relative;
     margin: auto;

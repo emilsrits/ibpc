@@ -35,6 +35,10 @@ Edit User
                             <td><label for="email">Email</label></td>
                             <td><input type="email" name="email" value="{{ $user->email }}"></td>
                         </tr>
+                        <tr class="entity-attribute">
+                            <td><label for="phone">Phone</label></td>
+                            <td><input type="text" name="phone" value="{{ $user->phone }}"></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -110,9 +114,9 @@ Edit User
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function () {
-           $('.user-password-section').hide();
-        });
-    </script>
+<script>
+    $(document).ready(function () {
+       $('.user-password-section').hide();
+    });
+</script>
 @endsection

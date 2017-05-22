@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-My Orders
+Order History
 @endsection
 
 @section('content')
@@ -11,12 +11,12 @@ My Orders
         <div class="grid-uniform lg-100 md-100 sm-100">
             <div id="account-nav">
                 <div class="account-orders grid-item lg-33 md-33 sm-33">
-                    <a class="active" href="{{ url('/user/account') }}">
+                    <a href="{{ url('/user/account') }}">
                         <i class="fa fa-shopping-basket" aria-hidden="true"></i> My Orders
                     </a>
                 </div>
                 <div class="account-order-history grid-item lg-33 md-33 sm-33">
-                    <a href="{{ url('/user/history') }}">
+                    <a class="active" href="{{ url('/user/history') }}">
                         <i class="fa fa-history" aria-hidden="true"></i> Order History
                     </a>
                 </div>
@@ -28,7 +28,7 @@ My Orders
             </div>
         </div>
         <div id="account-panel" class="grid-item lg-10 md-100 sm-100">
-            <h4>Active orders</h4>
+            <h4>Order history</h4>
             @if(count($user->orders))
                 <table class="user-orders">
                     <thead>
@@ -55,9 +55,9 @@ My Orders
                     </tbody>
                 </table>
             @else
-                <p>You have no active orders</p>
+                <p>You have no previous orders</p>
             @endif
         </div>
     </div>
 </div>
-@endsection 
+@endsection

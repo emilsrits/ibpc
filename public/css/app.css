@@ -519,10 +519,13 @@ th {
 /* USER ACCOUNT */
 #user-account {
   padding: 10px; }
-  #user-account > h4 {
-    margin: 10px 10px 20px;
+  #user-account h1, #user-account h2, #user-account h3, #user-account h4 {
     font-family: Montserrat-Regular, sans-serif;
     text-transform: uppercase; }
+  #user-account p {
+    margin: 10px; }
+  #user-account > h4 {
+    margin: 10px 10px 20px; }
   #user-account #account-nav .account-settings, #user-account #account-nav .account-orders, #user-account #account-nav .account-order-history {
     position: relative;
     display: -webkit-box;
@@ -572,6 +575,58 @@ th {
       border-color: transparent transparent #fff transparent; }
     #user-account #account-nav .active:hover::before {
       border-color: transparent transparent #E6E6E6 transparent; }
+  #user-account #account-panel {
+    margin: 20px 0;
+    padding: 10px;
+    width: 100%;
+    overflow-x: auto; }
+    #user-account #account-panel > h4 {
+      margin: 0 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.4px; }
+    #user-account #account-panel .user-orders {
+      width: 100%; }
+      #user-account #account-panel .user-orders thead th {
+        font-weight: bold; }
+      #user-account #account-panel .user-orders tbody tr {
+        border-top: 1px solid #eee; }
+      #user-account #account-panel .user-orders tr th, #user-account #account-panel .user-orders tr td {
+        padding: 10px; }
+  #user-account .account-content-section .content-section-toggle {
+    margin: 15px 0 0;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee; }
+    #user-account .account-content-section .content-section-toggle strong {
+      color: #CC4040;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase; }
+      #user-account .account-content-section .content-section-toggle strong i {
+        padding-left: 5px; }
+  #user-account .form-group {
+    padding: 0 10px; }
+    #user-account .form-group label {
+      margin: 10px 0; }
+    #user-account .form-group select {
+      display: block; }
+  #user-account #account-update-confirm {
+    margin: 30px 0 0;
+    background-color: #eee; }
+  #user-account #account-update-submit {
+    margin: 20px 10px;
+    height: 45px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    border: 1px solid #0d0d0d;
+    background-color: #f37c34; }
+    #user-account #account-update-submit:hover {
+      background: #CC4040;
+      box-shadow: inset #303030 0 1px 20px 2px; }
 
 /* ADMIN HEADER */
 #admin-header .admin-sections li {
@@ -740,13 +795,16 @@ th {
   #catalog-table .table-head, #categories-table .table-head, #specifications-table .table-head,
   #attributes-table .table-head, #users-table .table-head, #roles-table .table-head, #orders-table .table-head {
     padding: 5px 0; }
-    #catalog-table .table-head th, #categories-table .table-head th, #specifications-table .table-head th,
-    #attributes-table .table-head th, #users-table .table-head th, #roles-table .table-head th, #orders-table .table-head th {
-      padding: 10px;
-      font-weight: bold; }
-      #catalog-table .table-head th:first-of-type, #categories-table .table-head th:first-of-type, #specifications-table .table-head th:first-of-type,
-      #attributes-table .table-head th:first-of-type, #users-table .table-head th:first-of-type, #roles-table .table-head th:first-of-type, #orders-table .table-head th:first-of-type {
-        text-align: center; }
+    #catalog-table .table-head tr, #categories-table .table-head tr, #specifications-table .table-head tr,
+    #attributes-table .table-head tr, #users-table .table-head tr, #roles-table .table-head tr, #orders-table .table-head tr {
+      line-height: 20px; }
+      #catalog-table .table-head tr th, #categories-table .table-head tr th, #specifications-table .table-head tr th,
+      #attributes-table .table-head tr th, #users-table .table-head tr th, #roles-table .table-head tr th, #orders-table .table-head tr th {
+        padding: 10px;
+        font-weight: bold; }
+        #catalog-table .table-head tr th:first-of-type, #categories-table .table-head tr th:first-of-type, #specifications-table .table-head tr th:first-of-type,
+        #attributes-table .table-head tr th:first-of-type, #users-table .table-head tr th:first-of-type, #roles-table .table-head tr th:first-of-type, #orders-table .table-head tr th:first-of-type {
+          text-align: center; }
   #catalog-table .table-body tr, #categories-table .table-body tr, #specifications-table .table-body tr,
   #attributes-table .table-body tr, #users-table .table-body tr, #roles-table .table-body tr, #orders-table .table-body tr {
     border-top: 1px solid #eee; }
@@ -761,9 +819,6 @@ th {
     #catalog-table .table-body td:last-of-type > a, #categories-table .table-body td:last-of-type > a, #specifications-table .table-body td:last-of-type > a,
     #attributes-table .table-body td:last-of-type > a, #users-table .table-body td:last-of-type > a, #roles-table .table-body td:last-of-type > a, #orders-table .table-body td:last-of-type > a {
       padding: 5px; }
-  #catalog-table .table-body .no-wrap, #categories-table .table-body .no-wrap, #specifications-table .table-body .no-wrap,
-  #attributes-table .table-body .no-wrap, #users-table .table-body .no-wrap, #roles-table .table-body .no-wrap, #orders-table .table-body .no-wrap {
-    white-space: nowrap; }
   #catalog-table #sort-created button, #catalog-table #sort-updated button, #categories-table #sort-created button, #categories-table #sort-updated button, #specifications-table #sort-created button, #specifications-table #sort-updated button,
   #attributes-table #sort-created button,
   #attributes-table #sort-updated button, #users-table #sort-created button, #users-table #sort-updated button, #roles-table #sort-created button, #roles-table #sort-updated button, #orders-table #sort-created button, #orders-table #sort-updated button {
@@ -804,15 +859,6 @@ th {
       -o-appearance: none;
       appearance: none;
       font-size: 14px; }
-  #catalog-table .col-xs, #categories-table .col-xs, #specifications-table .col-xs,
-  #attributes-table .col-xs, #users-table .col-xs, #roles-table .col-xs, #orders-table .col-xs {
-    width: 50px; }
-  #catalog-table .col-sm, #categories-table .col-sm, #specifications-table .col-sm,
-  #attributes-table .col-sm, #users-table .col-sm, #roles-table .col-sm, #orders-table .col-sm {
-    width: 80px; }
-  #catalog-table .col-md, #categories-table .col-md, #specifications-table .col-md,
-  #attributes-table .col-md, #users-table .col-md, #roles-table .col-md, #orders-table .col-md {
-    width: 155px; }
 
 .attribute-content-section .btn-manage-add {
   margin: 25px 0 0; }
@@ -7276,6 +7322,18 @@ input[type=number]::-webkit-inner-spin-button {
 .cf {
   zoom: 1;
   /* ie 6/7 */ }
+
+.no-wrap {
+  white-space: nowrap; }
+
+table .col-xs {
+  width: 50px; }
+
+table .col-sm {
+  width: 80px; }
+
+table .col-md {
+  width: 155px; }
 
 #wrapper {
   position: relative;

@@ -83,7 +83,10 @@ class UserController extends Controller
             $user->name = $request['name'];
             $user->surname = $request['surname'];
             $user->email = $request['email'];
-            $user->country = $request['country'];
+            $user->phone = $request['phone'];
+            if ($request['country']) {
+                $user->country = $request['country'];
+            }
             $user->city = $request['city'];
             $user->address = $request['address'];
             $user->postcode = $request['postcode'];
@@ -170,11 +173,12 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'max:20',
             'surname' => 'max:20',
+            'phone' => 'regex:/^\(?\+?\(?\d{0,3}\)?\s?\d{8}$/',
             'password' => 'min:6'
         ]);
         if ($user->email != $request['email']) {
             $this->validate($request, [
-                'email'  => 'email|max:255|unique:users,email'
+                'email'  => 'email|max:25|unique:users,email'
             ]);
         }
 
