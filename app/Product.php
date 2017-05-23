@@ -2,7 +2,10 @@
 
 namespace App;
 
+use App\Filters\QueryFilter;
+use Dompdf\Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,6 +50,18 @@ class Product extends Model
     }
 
     /**
+     * Product filters
+     *
+     * @param $query
+     * @param QueryFilter $filters
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
+    }
+
+    /**
      * Delete a product
      *
      * @param $ids
@@ -71,6 +86,7 @@ class Product extends Model
      *
      * @param $id
      * @param $status
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function setStatus($id, $status)
     {
@@ -80,10 +96,15 @@ class Product extends Model
                 $product->status = $status;
                 $product->save();
             }
-        } else {
-            $product = Product::findOrFail($id);
-            $product->status = $status;
-            $product->save();
+        }
+        if (!$id) {
+            try {
+                $product = Product::findOrFail($id);
+                $product->status = $status;
+                $product->save();
+            } catch (ModelNotFoundException $e) {
+                return redirect()->back();
+            }
         }
     }
 

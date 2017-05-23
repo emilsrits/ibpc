@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
+use App\Filters\ProductFilter;
 use App\Category;
 use App\Product;
 
@@ -18,16 +19,19 @@ class ProductController extends Controller
     {
         $products = Product::with('categories')->paginate(20);
 
-        return view('admin.product.catalog', ['products' => $products]);
+        $categories = Category::all();
+
+        return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => null]);
     }
 
     /**
      * Catalog mass action
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param ProductFilter $filters
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function action(Request $request)
+    public function action(Request $request, ProductFilter $filters)
     {
         $productIds = $request->input('catalog');
         $product = new Product();
@@ -47,7 +51,11 @@ class ProductController extends Controller
                 break;
         }
 
-        return redirect()->back();
+        $products = Product::with('categories')->filter($filters)->paginate(20);
+
+        $categories = Category::all();
+
+        return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => $request ]);
     }
 
     /**
