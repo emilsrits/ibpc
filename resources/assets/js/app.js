@@ -20,7 +20,7 @@
         });
 
         // Confirm product deletion in catalog
-        $('#catalog-form').submit(function (e) {
+        $('#catalog-form').submit(function () {
             var massAction = $('#mass-action').val();
             if (massAction === '3') {
                 var numberOfChecked = $('.entity-select:checked').length;
@@ -28,9 +28,6 @@
                 if (numberOfChecked > 0) {
                     return confirm('Delete ' + numberOfChecked + ' products?');
                 }
-            }
-            if (massAction === '0') {
-                e.preventDefault();
             }
         });
 
@@ -55,7 +52,7 @@
         });
 
         // Confirm category deletion in categories view
-        $('#categories-form').submit(function (e) {
+        $('#categories-form').submit(function () {
             var massAction = $('#mass-action').val();
             if (massAction === '3') {
                 var numberOfChecked = $('.entity-select:checked').length;
@@ -64,13 +61,10 @@
                     return confirm('Delete ' + numberOfChecked + ' categories?');
                 }
             }
-            if (massAction === '0') {
-                e.preventDefault();
-            }
         });
 
         // Confirm specification deletion in specifications view
-        $('#specifications-form').submit(function (e) {
+        $('#specifications-form').submit(function () {
             var massAction = $('#mass-action').val();
             if (massAction === '1') {
                 var numberOfChecked = $('.entity-select:checked').length;
@@ -79,13 +73,10 @@
                     return confirm('Delete ' + numberOfChecked + ' attribute groups?');
                 }
             }
-            if (massAction === '0') {
-                e.preventDefault();
-            }
         });
 
         // Confirm attribute deletion
-        $('#attributes-form').submit(function (e) {
+        $('#attributes-form').submit(function () {
             var massAction = $('#mass-action').val();
             if (massAction === '1') {
                 var numberOfChecked = $('.entity-select:checked').length;
@@ -94,13 +85,10 @@
                     return confirm('Delete ' + numberOfChecked + ' attributes?');
                 }
             }
-            if (massAction === '0') {
-                e.preventDefault();
-            }
         });
 
         // Confirm user deletion
-        $('#users-form').submit(function (e) {
+        $('#users-form').submit(function () {
             var massAction = $('#mass-action').val();
             if (massAction === '2') {
                 var numberOfChecked = $('.entity-select:checked').length;
@@ -108,9 +96,6 @@
                 if (numberOfChecked > 0) {
                     return confirm('Disable ' + numberOfChecked + ' users?');
                 }
-            }
-            if (massAction === '0') {
-                e.preventDefault();
             }
         });
 
