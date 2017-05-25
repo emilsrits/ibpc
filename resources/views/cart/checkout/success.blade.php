@@ -11,7 +11,7 @@ Order Successful
         <h4>Order created!</h4>
         <ul>
             <li>Email with an invoice attachment will be sent to you shortly</li>
-            <li>You can check your order progress under <a href="{{ url('/user/orders') }}">My Orders</a></li>
+            <li>You can check your order progress under <a href="{{ url('/user/account') }}">My Orders</a></li>
         </ul>
     </div>
 </div>
