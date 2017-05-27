@@ -15,7 +15,7 @@ Checkout Confirmation
                     @if($item['item']['id'])
                     <tr class="checkout-cart-item">
                         <td>{{ $item['item']['title'] }}</td>
-                        <td>{{ $cart->getItemTotalPrice($item['item']['id'], 1) }}</td>
+                        <td class="no-wrap">{{ $cart->getItemTotalPrice($item['item']['id'], 1) }}</td>
                     </tr>
                     @endif
                 @endforeach

@@ -1,0 +1,11 @@
+@media only screen and (max-width: $mobile-md - 1) {
+    #user-account {
+        #account-nav {
+            .active {
+                &:before, &:after {
+                    content: none;
+                }
+            }
+        }
+    }
+}

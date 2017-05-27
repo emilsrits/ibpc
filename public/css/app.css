@@ -793,6 +793,12 @@ th {
   box-shadow: inset #303030 0 1px 20px 2px;
 }
 
+@media only screen and (max-width: 767px) {
+  #user-account #account-nav .active:before, #user-account #account-nav .active:after {
+    content: none;
+  }
+}
+
 /* ADMIN HEADER */
 #admin-header .admin-sections li {
   font-family: "Roboto-Regular", sans-serif;
@@ -2009,6 +2015,12 @@ th {
   .checkout-delivery #checkout-delivery-form .checkout-delivery-storage img, .checkout-delivery #checkout-delivery-form .checkout-delivery-address img {
     width: 80px;
   }
+  .checkout-progress ul li span {
+    padding: 12px 10px 12px 13px;
+  }
+  .checkout-progress ul li i {
+    padding: 12px 13px 12px 0;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -2017,7 +2029,7 @@ th {
   }
   #categories-navigation {
     display: block;
-    height: auto;
+    height: auto !important;
   }
 }
 

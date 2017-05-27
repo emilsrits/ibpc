@@ -15,14 +15,14 @@ Checkout
         @endif
         @if(!$user->country || !$user->city || !$user->address || !$user->postcode)
             <h4>Please fill in missing shipping address information</h4>
-            <a href="{{ url('/user/profile') }}">Edit my account information</a>
+            <a href="{{ url('/user/edit') }}">Edit my account information</a>
         @else
             <h4>Shipping Address</h4>
             <p>{{ $user->country }}</p>
             <p>{{ $user->city }}</p>
             <p>{{ $user->address }}</p>
             <p>{{ $user->postcode }}</p>
-            <a class="checkout-edit" href="{{ url('/user/profile') }}">Edit my account information</a>
+            <a class="checkout-edit" href="{{ url('/user/edit') }}">Edit my account information</a>
         @endif
     </div>
     <div class="checkout-cart grid-item lg-60 md-100 sm-100">
@@ -31,7 +31,7 @@ Checkout
                 @if($item['item']['id'])
                 <tr class="checkout-cart-item">
                     <td>{{ $item['item']['title'] }}</td>
-                    <td>{{ $cart->getItemTotalPrice($item['item']['id'], 1) }}</td>
+                    <td class="no-wrap">{{ $cart->getItemTotalPrice($item['item']['id'], 1) }}</td>
                 </tr>
                 @endif
             @endforeach

@@ -63,6 +63,19 @@
             }
         }
     }
+
+    .checkout-progress {
+        ul {
+            li {
+                span {
+                    padding: 12px 10px 12px 13px;
+                }
+                i {
+                    padding: 12px 13px 12px 0;
+                }
+            }
+        }
+    }
 }
 @media only screen and (min-width: $mobile-md) {
     #categories-collapse {
@@ -70,6 +83,6 @@
     }
     #categories-navigation {
         display: block;
-        height: auto;
+        height: auto !important;
     }
 }
