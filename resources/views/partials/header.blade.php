@@ -17,6 +17,15 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                    <!-- Left Side Of Navbar -->
+                    <ul id="product-search" class="nav navbar-nav">
+                       <li class="product-search-container">
+                           <form id="product-search-form" role="form" method="GET" action="{{ url('/search/') }}">
+                               <input id="search" type="search" name="search">
+                               <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                           </form>
+                       </li>
+                    </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>

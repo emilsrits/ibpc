@@ -20,6 +20,10 @@ Route::get('/', [
     'uses' => 'StoreController@index',
     'as' => 'store.index'
 ]);
+Route::get('/search', [
+    'uses' => 'StoreController@search',
+    'as' => 'store.search'
+]);
 Route::get('/store/{parent}/{child}', [
     'uses' => 'StoreController@categorize',
     'as' => 'store.categorize'

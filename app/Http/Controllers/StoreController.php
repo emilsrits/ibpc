@@ -20,6 +20,18 @@ class StoreController extends Controller
         return view('store.index', ['products' => $products]);
     }
 
+    public function search(Request $request)
+    {
+        $input = $request['search'];
+
+        $products = Product::where('status', 1)->where(function ($query) use ($input) {
+            $query->where('title', 'like', '%'.$input.'%')
+                ->orWhere('code', 'like', '%'.$input.'%');
+        })->paginate(12);
+
+        return view('store.index', ['products' => $products ]);
+    }
+
     /**
      * Return store view with products from a category
      *

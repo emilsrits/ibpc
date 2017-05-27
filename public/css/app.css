@@ -1369,6 +1369,38 @@ th {
   }
 }
 
+/* PRODUCT SEARCH */
+#product-search {
+  margin-top: 14px;
+}
+
+#product-search .product-search-container:hover, #product-search .product-search-container:focus {
+  background-color: #303030;
+}
+
+#product-search #product-search-form input[type="search"] {
+  padding: 0 5px;
+  width: 200px;
+  color: #eee;
+  border: none;
+  outline: none;
+  background-color: #3e3e3e;
+}
+
+#product-search #product-search-form input[type="search"]:hover, #product-search #product-search-form input[type="search"]:focus {
+  box-shadow: #CC4040 0 0px 5px 0;
+}
+
+#product-search #product-search-form button {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+#product-search #product-search-form button:hover, #product-search #product-search-form button:focus {
+  color: #CC4040;
+}
+
 /* CATEGORY NAVIGATION */
 #categories-collapse {
   margin: 0 0 5px;
