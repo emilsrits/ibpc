@@ -23,42 +23,42 @@ class AttributeProductTableSeeder extends Seeder
             ],
             [
                 'product_id' => 1,
-                'attribute_id' => 2,
+                'attribute_id' => 3,
                 'value' => 'PCI Express 3.0'
             ],
             [
                 'product_id' => 1,
-                'attribute_id' => 3,
+                'attribute_id' => 4,
                 'value' => 'AMD'
             ],
             [
                 'product_id' => 1,
-                'attribute_id' => 4,
+                'attribute_id' => 5,
                 'value' => 'Radeon RX 470'
             ],
             [
                 'product_id' => 1,
-                'attribute_id' => 5,
+                'attribute_id' => 6,
                 'value' => '1270 MHz in OC mode'
             ],
             [
                 'product_id' => 1,
-                'attribute_id' => 6,
+                'attribute_id' => 7,
                 'value' => '6600 MHz'
             ],
             [
                 'product_id' => 1,
-                'attribute_id' => 7,
+                'attribute_id' => 8,
                 'value' => '4GB'
             ],
             [
                 'product_id' => 1,
-                'attribute_id' => 8,
+                'attribute_id' => 9,
                 'value' => '256-Bit'
             ],
             [
                 'product_id' => 1,
-                'attribute_id' => 9,
+                'attribute_id' => 10,
                 'value' => 'GDDR5'
             ]
         ]);
