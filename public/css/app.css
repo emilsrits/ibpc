@@ -992,7 +992,7 @@ th {
 
 #catalog-table, #categories-table, #specifications-table,
 #attributes-table, #users-table, #roles-table, #orders-table {
-  margin-top: 20px;
+  margin-top: 15px;
   width: 100%;
 }
 
@@ -9888,20 +9888,20 @@ table .col-md {
 }
 
 /* PAGINATION */
-.product-pagination .pagination {
-  margin: 22px 10px;
+.pagination-container .pagination {
+  margin: 10px;
   float: right;
 }
 
-.product-pagination .pagination a, .product-pagination .pagination a:hover {
+.pagination-container .pagination a, .pagination-container .pagination a:hover {
   color: #0d0d0d;
 }
 
-.product-pagination .pagination .page-first, .product-pagination .pagination .page-last {
+.pagination-container .pagination .page-first, .pagination-container .pagination .page-last {
   font-weight: bold;
 }
 
-.product-pagination .pagination > li {
+.pagination-container .pagination > li {
   display: inline-block;
   float: left;
 }

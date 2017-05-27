@@ -5,7 +5,7 @@
         if($start < 1) $start = 1;
         if($end >= $paginator->lastPage() ) $end = $paginator->lastPage(); // reset end to last page
     ?>
-    <div class="product-pagination clearfix">
+    <div class="pagination-container clearfix">
         <ul class="pagination">
             {{-- previous page --}}
             @if($paginator->currentPage() == 1)
