@@ -1,5 +1,8 @@
 @if($parentCategories && $childCategories)
-<div id="categories-navigation">
+<button id="categories-collapse" type="button" class="collapsed" data-toggle="collapse" data-target="#categories-navigation" aria-expanded="false">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+</button>
+<div id="categories-navigation" class="collapse">
     <div class="categories-container">
         <ul class="cf">
             @foreach($parentCategories as $parent)

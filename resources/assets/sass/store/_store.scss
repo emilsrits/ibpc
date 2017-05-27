@@ -1,4 +1,14 @@
 /* CATEGORY NAVIGATION */
+#categories-collapse {
+    margin: 0 0 5px;
+    padding: 5px 0;
+    width: 100%;
+    background: none;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}
 #categories-navigation {
     position: relative;
     margin: 20px auto 15px;
@@ -43,7 +53,7 @@
         position: absolute;
         border-color: $color_gray;
         background-color: $color_lightGray;
-        box-shadow: 4px -5px 5px -10px $color_gray, 4px 4px 10px -5px $color_gray;
+        box-shadow: 4px -5px 5px -10px $color_darkGray, 4px 4px 10px -5px $color_darkGray;
         z-index: 1;
         li {
             a {

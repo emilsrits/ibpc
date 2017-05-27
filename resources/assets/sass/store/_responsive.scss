@@ -1,4 +1,24 @@
 @media only screen and (max-width: $mobile-md - 1) {
+    #categories-navigation {
+        margin: 0 auto;
+        .categories-container {
+            width: 100%;
+            > ul {
+                width: 100%;
+            }
+            .dropdown-trigger {
+                display: block;
+                width: 100%;
+                float: none;
+                > a {
+                    display: block;
+                    padding: 0 15px;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
     #product-view {
         display: flex;
         flex-flow: column;
@@ -42,5 +62,14 @@
                 }
             }
         }
+    }
+}
+@media only screen and (min-width: $mobile-md) {
+    #categories-collapse {
+        display: none;
+    }
+    #categories-navigation {
+        display: block;
+        height: auto;
     }
 }
