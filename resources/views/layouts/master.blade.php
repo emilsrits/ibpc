@@ -27,6 +27,7 @@
 	<div id="wrapper">
         @yield('modal')
 		@include('partials.header')
+		@include('partials.widgets.category_navigation')
 
 		<main>
 			<div class="container-inner cf">

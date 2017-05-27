@@ -125,6 +125,20 @@
             });
         }
 
+        // Toggle dropdown for category navigation
+        $('.dropdown-trigger').click(function () {
+            toggleDropdown($(this));
+        });
+        function toggleDropdown(selector) {
+            $('.dropdown-content').hide();
+            $(selector).find('.dropdown-content').show();
+        }
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.dropdown-content').length && !$(e.target).closest('.dropdown-trigger').length) {
+                $('.dropdown-content').hide();
+            }
+        });
+
         /* ------AJAX------ */
         // Load category specifications when creating product
         $('#category-select').change(function () {

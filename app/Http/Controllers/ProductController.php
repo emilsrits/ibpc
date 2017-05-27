@@ -59,26 +59,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Return product view
-     *
-     * @param $code
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show($code)
-    {
-        $product = Product::with('attributes.specification')->where('code', $code)->first();
-
-        if ($product->categories()->first()) {
-            $categoryId = $product->categories()->first()->id;
-            $specifications = Category::with('specifications.attributes')->find($categoryId);
-        } else {
-            $specifications = null;
-        }
-
-        return view('store.product', ['product' => $product], ['specifications' => $specifications]);
-    }
-
-    /**
      * Return product creation view
      *
      * @param Request $request

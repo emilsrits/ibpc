@@ -20,6 +20,14 @@ Route::get('/', [
     'uses' => 'StoreController@index',
     'as' => 'store.index'
 ]);
+Route::get('/store/{parent}/{child}', [
+    'uses' => 'StoreController@categorize',
+    'as' => 'store.categorize'
+]);
+Route::get('/store/{code}', [
+    'uses' => 'StoreController@show',
+    'as' => 'store.show'
+]);
 
 /**
  * User role routes
@@ -203,14 +211,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'as' => 'order.update'
     ]);
 });
-
-/**
- * Product routes
- */
-Route::get('/product/{code}', [
-    'uses' => 'ProductController@show',
-    'as' => 'product.show'
-]);
 
 /**
  * User routes
