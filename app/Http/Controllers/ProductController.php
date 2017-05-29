@@ -66,7 +66,7 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
-        $categories = Category::all();
+        $categories = Category::where('parent', 0)->get();
 
         if ($request['category']) {
             $categoryId = json_decode($request['category']);
@@ -135,7 +135,6 @@ class ProductController extends Controller
         $product->stock = $request['stock'];
         $product->status = $request['status'];
         $product->save();
-
 
         $product->categories()->attach(['category_id' => $request['category']]);
 
