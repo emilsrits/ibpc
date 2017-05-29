@@ -64,10 +64,18 @@ class CheckoutController extends Controller
     /**
      * Return order checkout delivery page
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function getDelivery()
+    public function getDelivery(Request $request)
     {
+        $user = Auth::user();
+
+        if (!$user->address) {
+            $request->session()->flash('message-warning', 'Please add your shipping address to your account!');
+            return redirect()->back();
+        }
+
         return view('cart.checkout.delivery');
     }
 }
