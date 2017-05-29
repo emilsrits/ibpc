@@ -2,7 +2,7 @@
 
 **_CURRENTLY IN DEVELOPMENT_**
 
-Web shop for PC parts.
+Online store for PC parts.
 
 **Author:** @emilsrits - Emils Rits
 
