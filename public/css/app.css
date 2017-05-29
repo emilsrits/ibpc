@@ -604,6 +604,32 @@ th {
   }
 }
 
+#authorization {
+  margin-top: 25px;
+}
+
+#authorization .checkbox label input {
+  top: 5px;
+}
+
+#authorization .btn-primary {
+  border: 1px solid #303030;
+  background-color: #f37c34;
+}
+
+#authorization .btn-primary:hover {
+  box-shadow: inset #303030 0 1px 5px 0px;
+}
+
+#authorization .btn-link {
+  color: #0d0d0d;
+  text-decoration: underline;
+}
+
+#authorization .btn-link:hover {
+  color: #CC4040;
+}
+
 /* USER ACCOUNT */
 #user-account {
   padding: 10px;
