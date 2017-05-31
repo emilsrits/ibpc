@@ -75,16 +75,6 @@ class Category extends Model
     }
 
     /**
-     * Return category title slug
-     *
-     * @return string
-     */
-    public function getSlugAttribute()
-    {
-        return str_slug($this->title);
-    }
-
-    /**
      * Get a related specification by id
      *
      * @param $id

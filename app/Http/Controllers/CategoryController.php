@@ -77,6 +77,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->title = $request['title'];
+        $category->slug = str_slug($request['title']);
         if ($request['parent']) {
             $category->parent = $request['parent'];
         } else {
@@ -151,6 +152,7 @@ class CategoryController extends Controller
                     return redirect()->back();
                 } else {
                     $category->title = $request['title'];
+                    $category->slug = str_slug($request['title']);
                 }
             }
             if ($request['parent']) {
