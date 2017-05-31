@@ -20,7 +20,7 @@ class CreateAttributeProductPivotTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('attribute_id')->unsigned()->index();
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
-            $table->string('value');
+            $table->string('value', 50);
         });
     }
 

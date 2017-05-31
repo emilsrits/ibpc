@@ -21,9 +21,9 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->decimal('price');
             $table->decimal('discount')->nullable();
-            $table->string('delivery');
+            $table->string('delivery', 25);
             $table->decimal('delivery_cost')->nullable();
-            $table->string('status');
+            $table->string('status', 25);
             $table->timestamps();
         });
     }

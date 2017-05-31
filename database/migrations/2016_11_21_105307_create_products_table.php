@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             
             $table->increments('id');
             $table->string('image_path')->nullable();
-            $table->string('code')->unique();
-            $table->string('title');
+            $table->string('code', 50)->unique();
+            $table->string('title', 50);
             $table->text('description')->nullable();
             $table->decimal('price');
             $table->decimal('price_old')->nullable();

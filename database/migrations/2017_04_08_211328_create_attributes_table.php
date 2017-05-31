@@ -19,7 +19,7 @@ class CreateAttributesTable extends Migration
             $table->increments('id');
             $table->integer('specification_id')->unsigned();
             $table->foreign('specification_id')->references('id')->on('specifications')->onDelete('cascade');
-            $table->string('name');
+            $table->string('name', 50);
             $table->timestamps();
         });
     }
