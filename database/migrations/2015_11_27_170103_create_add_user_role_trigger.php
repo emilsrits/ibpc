@@ -15,7 +15,7 @@ class CreateAddUserRoleTrigger extends Migration
     {
         DB::unprepared('
         CREATE TRIGGER add_user_role AFTER INSERT ON `users` FOR EACH ROW BEGIN
-            INSERT INTO role_user (role_id, user_id) VALUES (4, NEW.id);
+            INSERT INTO role_user (role_id, user_id) VALUES (2, NEW.id);
         END
         ');
     }
