@@ -19,7 +19,25 @@ Install Composer, Node.js and make sure to add PHP to your %PATH% environment va
 
 Install the app's dependencies by running `composer install` using the terminal in the app root directory.
 
-Create and configure .env file for your database, run `php artisan key:generate` to generate APP_KEY value in .env file. Run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
+Create and configure .env file for your database, run `php artisan key:generate` to generate APP_KEY value in .env file. 
+
+Before running migration scripts comment out code inside AppServiceProvider.php `boot()` method. When migration script is done remove the commented out code.
+
+```
+public function boot()
+{
+    $parentCategories = Category::where('parent', 1)->where('status', 1)->get();
+    $childCategories = Category::where('parent', 0)->where('status', 1)->get();
+
+    View::share([
+        'parentCategories' => $parentCategories,
+        'childCategories' => $childCategories,
+        'errors' => null
+    ]);
+}
+```
+
+Run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
 
 Run `node -v` to ensure that Node.js is installed on your machine.
 
