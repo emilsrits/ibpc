@@ -23,20 +23,6 @@ class RolesTableSeeder extends Seeder
         $role->save();
 
         $role = new \App\Role([
-            'name' => 'moderator',
-            'slug' => 'mod',
-            'description' => 'has control over some parts of the site'
-        ]);
-        $role->save();
-
-        $role = new \App\Role([
-            'name' => 'supplier',
-            'slug' => 'sup',
-            'description' => 'manages its own products'
-        ]);
-        $role->save();
-
-        $role = new \App\Role([
             'name' => 'customer',
             'slug' => 'user',
             'description' => 'browses the shop and buys products'

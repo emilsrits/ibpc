@@ -100,11 +100,11 @@ class User extends Authenticatable
     protected function getIdInArray($array, $term)
     {
         foreach ($array as $key => $value) {
-            if ($value == $term) { // 1 => "admin", 2 => "moderator" ...
+            if ($value == $term) {
                 return $key;
             }
         }
-        throw new \Exception('Can not get the ID in array');
+        throw new \Exception('Can not find the role');
     }
 
     /**
@@ -123,17 +123,11 @@ class User extends Authenticatable
             case 'admin':
                 $assignedRoles[] = $this->getIdInArray($roles, 'admin');
                 break;
-            case 'mod':
-                $assignedRoles[] = $this->getIdInArray($roles, 'mod');
-                break;
-            case 'sup':
-                $assignedRoles[] = $this->getIdInArray($roles, 'sup');
-                break;
             case 'user':
                 $assignedRoles[] = $this->getIdInArray($roles, 'user');
                 break;
             default:
-                throw new \Exception('The role status entered does not exist');
+                throw new \Exception('The role entered does not exist');
         }
 
         $this->roles()->sync($assignedRoles);
