@@ -53,7 +53,12 @@ class AttributeController extends Controller
         if (!ctype_space($request['name']) && !$request['name'] == "") {
             $attribute = new Attribute();
             $attribute->specification_id = $specificationId;
-            $attribute->name = $request['name'];
+            if ($this->attributeExists($request['name'])) {
+                $request->session()->flash('message-danger', 'Attribute with this name already exists!');
+                return redirect()->back();
+            } else {
+                $attribute->name = $request['name'];
+            }
             $attribute->save();
 
             $request->session()->flash('message-success', 'Attribute successfully created!');
