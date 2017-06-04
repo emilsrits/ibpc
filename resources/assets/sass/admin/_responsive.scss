@@ -5,4 +5,15 @@
             color: transparent;
         }
     }
+    .category-create, .category-edit, .user-edit {
+        .category-table, .user-table {
+            .entity-attribute {
+                .category-attribute-group, .user-role {
+                    label {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+    }
 }

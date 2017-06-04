@@ -67,8 +67,8 @@ Categories
                                 Disabled
                             @endif
                         </td>
-                        <td>{{ $category->created_at }}</td>
-                        <td>{{ $category->updated_at }}</td>
+                        <td class="no-wrap">{{ $category->created_at }}</td>
+                        <td class="no-wrap">{{ $category->updated_at }}</td>
                         <td>
                             <a href="{{ url('/admin/category/edit', ['id' => $category->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                         </td>

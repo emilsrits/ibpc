@@ -78,7 +78,7 @@ Edit Order
                 <div class="content-section-toggle">
                     <strong>Order Items<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
                 </div>
-                <div class="content-container">
+                <div class="content-container of-x">
                     <table id="orders-table">
                         <thead class="table-head">
                         <tr>

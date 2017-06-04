@@ -57,15 +57,17 @@ Create Category
                 <div class="content-section-toggle">
                     <strong>Attribute groups<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
                 </div>
-                <div class="content-container">
+                <div class="content-container of-x">
                     <table class="category-table">
                         <tbody>
                         @foreach($specifications->chunk(3) as $chunk)
                             <tr class="entity-attribute">
                                 @foreach($chunk as $specification)
-                                    <td class="category-attribute-group">
-                                        <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}" value="{{ $specification->id }}">
-                                        <label for="{{ 'spec[' . $specification->id . '][id]' }}">{{ $specification->slug }}</label>
+                                    <td class="category-attribute-group no-wrap">
+                                        <label>
+                                            <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}" value="{{ $specification->id }}">
+                                            {{ $specification->slug }}
+                                        </label>
                                     </td>
                                 @endforeach
                             </tr>

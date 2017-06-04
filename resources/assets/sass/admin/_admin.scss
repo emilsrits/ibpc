@@ -349,17 +349,14 @@
                 input[type="checkbox"] {
                     position: relative;
                     top: 2px;
+                    margin-right: 5px;
                 }
                 label {
-                    padding-left: 20px;
                     line-height: 20px;
                 }
             }
         }
     }
-}
-#edit-order-form {
-    overflow-x: auto;
 }
 .order-edit {
     .entity-attribute {

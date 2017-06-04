@@ -50,8 +50,8 @@ Users
                         <td>{{ $user->full_name }}</td>
                         <td>{{ $user->roles->first()->name }}</td>
                         <td>{{ $user->status ? 'Active' : 'Disabled' }}</td>
-                        <td>{{ $user->created_at }}</td>
-                        <td>{{ $user->updated_at }}</td>
+                        <td class="no-wrap">{{ $user->created_at }}</td>
+                        <td class="no-wrap">{{ $user->updated_at }}</td>
                         <td>
                             <a href="{{ url('/admin/user/edit', ['id' => $user->id]) }}">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>

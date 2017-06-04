@@ -1366,15 +1366,11 @@ th {
 .category-create .category-table .entity-attribute .category-attribute-group input[type="checkbox"], .category-create .category-table .entity-attribute .user-role input[type="checkbox"], .category-create .user-table .entity-attribute .category-attribute-group input[type="checkbox"], .category-create .user-table .entity-attribute .user-role input[type="checkbox"], .category-edit .category-table .entity-attribute .category-attribute-group input[type="checkbox"], .category-edit .category-table .entity-attribute .user-role input[type="checkbox"], .category-edit .user-table .entity-attribute .category-attribute-group input[type="checkbox"], .category-edit .user-table .entity-attribute .user-role input[type="checkbox"], .user-edit .category-table .entity-attribute .category-attribute-group input[type="checkbox"], .user-edit .category-table .entity-attribute .user-role input[type="checkbox"], .user-edit .user-table .entity-attribute .category-attribute-group input[type="checkbox"], .user-edit .user-table .entity-attribute .user-role input[type="checkbox"] {
   position: relative;
   top: 2px;
+  margin-right: 5px;
 }
 
 .category-create .category-table .entity-attribute .category-attribute-group label, .category-create .category-table .entity-attribute .user-role label, .category-create .user-table .entity-attribute .category-attribute-group label, .category-create .user-table .entity-attribute .user-role label, .category-edit .category-table .entity-attribute .category-attribute-group label, .category-edit .category-table .entity-attribute .user-role label, .category-edit .user-table .entity-attribute .category-attribute-group label, .category-edit .user-table .entity-attribute .user-role label, .user-edit .category-table .entity-attribute .category-attribute-group label, .user-edit .category-table .entity-attribute .user-role label, .user-edit .user-table .entity-attribute .category-attribute-group label, .user-edit .user-table .entity-attribute .user-role label {
-  padding-left: 20px;
   line-height: 20px;
-}
-
-#edit-order-form {
-  overflow-x: auto;
 }
 
 .order-edit .entity-attribute .radio-block {
@@ -1392,6 +1388,9 @@ th {
   .product-image input[type="file"] {
     width: 160px;
     color: transparent;
+  }
+  .category-create .category-table .entity-attribute .category-attribute-group label, .category-create .category-table .entity-attribute .user-role label, .category-create .user-table .entity-attribute .category-attribute-group label, .category-create .user-table .entity-attribute .user-role label, .category-edit .category-table .entity-attribute .category-attribute-group label, .category-edit .category-table .entity-attribute .user-role label, .category-edit .user-table .entity-attribute .category-attribute-group label, .category-edit .user-table .entity-attribute .user-role label, .user-edit .category-table .entity-attribute .category-attribute-group label, .user-edit .category-table .entity-attribute .user-role label, .user-edit .user-table .entity-attribute .category-attribute-group label, .user-edit .user-table .entity-attribute .user-role label {
+    font-size: 11px;
   }
 }
 
@@ -9931,6 +9930,10 @@ input[type=number]::-webkit-inner-spin-button {
 
 .no-wrap {
   white-space: nowrap;
+}
+
+.of-x {
+  overflow-x: auto;
 }
 
 table .col-xs {
