@@ -99,7 +99,7 @@
             </tr>
             </tbody>
         </table>
-        <p>Order will be accepter once you have paid the bill, please, indicate order number #{{ $order->id }}</p>
+        <p>Order will be accepted once you have paid the bill, please, indicate order number #{{ $order->id }}</p>
         <p>When order will be ready to be received we will inform you and send an e-mail and SMS</p>
     </div>
 @endsection

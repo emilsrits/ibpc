@@ -10,7 +10,7 @@
                     <a href="#">{{ $parent->title }}</a>
                     <ul class="dropdown-content">
                         @foreach($childCategories as $child)
-                            @if($child->parent_id === $parent->id)
+                            @if((int)$child->parent_id === (int)$parent->id)
                                 <li>
                                     <a href="{{ url('/store', ['parent' => $parent->slug, 'child' => $child->slug]) }}">
                                         {{ $child->title }} <span>({{ count($child->products) }})</span>

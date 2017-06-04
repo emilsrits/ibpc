@@ -20,6 +20,12 @@ class StoreController extends Controller
         return view('store.index', ['products' => $products]);
     }
 
+    /**
+     * Product search
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(Request $request)
     {
         $input = $request['search'];

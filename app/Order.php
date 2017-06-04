@@ -77,11 +77,21 @@ class Order extends Model
         }
     }
 
+    /**
+     * Get formatted order creation date
+     *
+     * @return string
+     */
     public function getCreatedAttribute()
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('Y-m-d');
     }
 
+    /**
+     * Get formatted order update date
+     *
+     * @return string
+     */
     public function getUpdatedAttribute()
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->updated_at)->format('Y-m-d');

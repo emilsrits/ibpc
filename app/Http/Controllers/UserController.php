@@ -71,6 +71,13 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Update user
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         if ($request['submit'] === 'save') {
@@ -143,7 +150,7 @@ class UserController extends Controller
     }
 
     /**
-     * Edit user
+     * Delete user
      *
      * @param $id
      */

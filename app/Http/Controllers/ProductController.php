@@ -11,7 +11,7 @@ use App\Product;
 class ProductController extends Controller
 {
     /**
-     * Reurn admin catalog page
+     * Return admin catalog page
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -152,6 +152,13 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
+    /**
+     * Product edit view
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Request $request, $id)
     {
         $product = Product::with('categories.specifications.attributes')->find($id);
@@ -169,6 +176,13 @@ class ProductController extends Controller
         ]);
     }
 
+    /**
+     * Update product
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         // Delete product

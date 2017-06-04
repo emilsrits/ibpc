@@ -34,11 +34,6 @@ Route::get('/store/{code}', [
 ]);
 
 /**
- * User role routes
- */
-Route::get('/roles/create', 'RoleController@role');
-
-/**
  * Admin routes
  */
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']], function () {
