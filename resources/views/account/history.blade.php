@@ -30,36 +30,38 @@ Order History
         <div id="account-panel" class="grid-item lg-10 md-100 sm-100">
             <h4>Order history</h4>
             @if(count($user->orders))
-                <table class="user-orders">
-                    <thead>
-                    <tr>
-                        <th class="col-sm">Id</th>
-                        <th>Price</th>
-                        <th>Delivery</th>
-                        <th>Status</th>
-                        <th class="col-md">Created</th>
-                        <th class="col-md">Updated</th>
-                        <th class="col-xs"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($orders as $order)
+                <div class="table-items of-x">
+                    <table class="user-orders">
+                        <thead>
                         <tr>
-                            <td>{{ $order->id }}</td>
-                            <td class="no-wrap">{{ $order->getPriceCurrency('price') }}</td>
-                            <td>{{ $order->delivery }}</td>
-                            <td>{{ $order->status }}</td>
-                            <td class="no-wrap">{{ $order->created }}</td>
-                            <td class="no-wrap">{{ $order->updated }}</td>
-                            <td>
-                                <a href="{{ url('/user/order', ['id' => $order->id]) }}">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
-                            </td>
+                            <th class="col-sm">Id</th>
+                            <th>Price</th>
+                            <th>Delivery</th>
+                            <th>Status</th>
+                            <th class="col-md">Created</th>
+                            <th class="col-md">Updated</th>
+                            <th class="col-xs"></th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($orders as $order)
+                            <tr>
+                                <td>{{ $order->id }}</td>
+                                <td class="no-wrap">{{ $order->getPriceCurrency('price') }}</td>
+                                <td>{{ $order->delivery }}</td>
+                                <td>{{ $order->status }}</td>
+                                <td class="no-wrap">{{ $order->created }}</td>
+                                <td class="no-wrap">{{ $order->updated }}</td>
+                                <td>
+                                    <a href="{{ url('/user/order', ['id' => $order->id]) }}">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else
                 <p>You have no previous orders</p>
             @endif

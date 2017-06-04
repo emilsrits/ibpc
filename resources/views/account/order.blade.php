@@ -53,30 +53,32 @@ Order
                         <td>{{ $order->getPriceCurrency('price') }}</td>
                     </tr>
                 </table>
-                <table class="user-orders order-view">
-                    <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Title</th>
-                        <th>Code</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Subtotal</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($order->products as $product)
+                <div class="table-items of-x">
+                    <table class="user-orders order-view">
+                        <thead>
                         <tr>
-                            <td><img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}"></td>
-                            <td class="no-wrap">{{ $product->title }}</td>
-                            <td class="no-wrap">{{ $product->code }}</td>
-                            <td>{{ $product->pivot->quantity }}</td>
-                            <td class="no-wrap">{{ $product->getOrderPriceById($order->id, $product->id, 1) }}</td>
-                            <td class="no-wrap">{{ $product->getOrderTotalPriceById($order->id, $product->id, 1) }}</td>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Code</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Subtotal</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($order->products as $product)
+                            <tr>
+                                <td><img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}"></td>
+                                <td class="no-wrap">{{ $product->title }}</td>
+                                <td class="no-wrap">{{ $product->code }}</td>
+                                <td>{{ $product->pivot->quantity }}</td>
+                                <td class="no-wrap">{{ $product->getOrderPriceById($order->id, $product->id, 1) }}</td>
+                                <td class="no-wrap">{{ $product->getOrderTotalPriceById($order->id, $product->id, 1) }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
