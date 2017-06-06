@@ -27,6 +27,12 @@
         }
         #product-details {
             order: 2;
+            .product-image {
+                > img {
+                    margin: auto;
+                    max-height: 200px;
+                }
+            }
         }
     }
 

@@ -195,6 +195,7 @@
     .product-image {
         > img {
             margin: auto;
+            max-height: 300px;
         }
     }
     .product-specifications {

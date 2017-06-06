@@ -1609,6 +1609,7 @@ th {
 
 #product-details .product-image > img {
   margin: auto;
+  max-height: 300px;
 }
 
 #product-details .product-specifications {
@@ -2050,6 +2051,10 @@ th {
   #product-view #product-details {
     -webkit-box-ordinal-group: 3;
     order: 2;
+  }
+  #product-view #product-details .product-image > img {
+    margin: auto;
+    max-height: 200px;
   }
   #shopping-cart-form #shopping-cart-table .table-headers th {
     font-size: 13px;
