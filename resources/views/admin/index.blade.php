@@ -33,11 +33,5 @@ Admin Panel
             <a href="{{ url('/admin/roles') }}"><i class="fa fa-thumb-tack" aria-hidden="true"></i>Roles</a>
         </div>
     </div>
-    <div class="manage-section manage-settings">
-        <h4>Settings</h4>
-        <div class="manage-tab system-configuration">
-            <a href="{{ url('/admin/settings') }}"><i class="fa fa-cogs" aria-hidden="true"></i>System Configuration</a>
-        </div>
-    </div>
 </div>
 @endsection

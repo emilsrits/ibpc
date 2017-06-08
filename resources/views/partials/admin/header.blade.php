@@ -49,7 +49,6 @@
                                 <li><a href="{{ url('/admin/roles') }}">Roles</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ url('/admin/settings') }}">Configuration</a></li>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
