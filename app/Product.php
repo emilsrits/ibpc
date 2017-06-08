@@ -65,19 +65,28 @@ class Product extends Model
      * Delete a product
      *
      * @param $ids
+     * @return bool
      */
     public function deleteProduct($ids)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
                 $product = Product::find($id);
+                if ($product->orders()->first()) {
+                    return false;
+                }
                 $this->deleteImage($id);
                 $product->destroy($id);
+                return true;
             }
         } else {
             $product = Product::findOrFail($ids);
+            if ($product->orders()->first()) {
+                return false;
+            }
             $this->deleteImage($ids);
             $product->destroy($ids);
+            return true;
         }
     }
 

@@ -46,8 +46,11 @@ class ProductController extends Controller
                 $request->session()->flash('message-success', 'Product(s) disabled!');
                 break;
             case 3:
-                $product->deleteProduct($productIds);
-                $request->session()->flash('message-success', 'Product(s) deleted!');
+                if (!$product->deleteProduct($productIds)) {
+                    $request->session()->flash('message-danger', 'Can not delete products that are in active orders!');
+                } else {
+                    $request->session()->flash('message-success', 'Product(s) deleted!');
+                }
                 break;
         }
 
@@ -55,7 +58,7 @@ class ProductController extends Controller
 
         $categories = Category::all();
 
-        return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => $request ]);
+        return redirect()->route('product.index', ['products' => $products, 'categories' => $categories, 'request' => $request ]);
     }
 
     /**
@@ -188,7 +191,12 @@ class ProductController extends Controller
         // Delete product
         if ($request['submit'] === 'delete') {
             $product = new Product();
-            $product->deleteProduct($id);
+
+            if (!$product->deleteProduct($id)) {
+                $request->session()->flash('message-danger', 'Can not delete a product that is in active order!');
+
+                return redirect()->route('product.index');
+            }
 
             $request->session()->flash('message-success', 'Product deleted!');
 
