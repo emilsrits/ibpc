@@ -55,6 +55,46 @@ class CategorySpecificationTableSeeder extends Seeder
             [
                 'category_id' => 4,
                 'specification_id' => 10
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 11
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 12
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 13
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 14
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 15
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 16
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 17
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 18
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 19
+            ],
+            [
+                'category_id' => 5,
+                'specification_id' => 20
             ]
         ]);
 

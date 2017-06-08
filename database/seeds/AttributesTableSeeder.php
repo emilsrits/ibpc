@@ -291,6 +291,210 @@ class AttributesTableSeeder extends Seeder
         ]);
         $attribute->save(); // 46
 
+        $attribute = new \App\Attribute([
+            'specification_id' => 11,
+            'name' => 'CPU Socket Type'
+        ]);
+        $attribute->save(); // 47
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 11,
+            'name' => 'CPU Type'
+        ]);
+        $attribute->save(); // 48
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 12,
+            'name' => 'Chipset'
+        ]);
+        $attribute->save(); // 49
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 16,
+            'name' => 'Onboard Video Chipset'
+        ]);
+        $attribute->save(); // 50
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 13,
+            'name' => 'Number of Memory Slots'
+        ]);
+        $attribute->save(); // 51
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 13,
+            'name' => 'Memory Standard'
+        ]);
+        $attribute->save(); // 52
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 13,
+            'name' => 'Maximum Memory Supported'
+        ]);
+        $attribute->save(); // 53
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 13,
+            'name' => 'Channel Supported'
+        ]);
+        $attribute->save(); // 54
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 14,
+            'name' => 'PCI Express x1'
+        ]);
+        $attribute->save(); // 55
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 14,
+            'name' => 'PCI Express 2.0 x16'
+        ]);
+        $attribute->save(); // 56
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 14,
+            'name' => 'PCI Express 3.0 x16'
+        ]);
+        $attribute->save(); // 57
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 15,
+            'name' => 'SATA 1/2'
+        ]);
+        $attribute->save(); // 58
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 15,
+            'name' => 'SATA 3'
+        ]);
+        $attribute->save(); // 59
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 15,
+            'name' => 'SATA RAID'
+        ]);
+        $attribute->save(); // 60
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 17,
+            'name' => 'Audio Chipset'
+        ]);
+        $attribute->save(); // 61
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 17,
+            'name' => 'Audio Channels'
+        ]);
+        $attribute->save(); // 62
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 18,
+            'name' => 'LAN Chipset'
+        ]);
+        $attribute->save(); // 63
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 18,
+            'name' => 'Max LAN Speed'
+        ]);
+        $attribute->save(); // 64
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 18,
+            'name' => 'Wireless LAN'
+        ]);
+        $attribute->save(); // 65
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 18,
+            'name' => 'Bluetooth'
+        ]);
+        $attribute->save(); // 66
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'PS/2'
+        ]);
+        $attribute->save(); // 67
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'Video Ports'
+        ]);
+        $attribute->save(); // 68
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'HDMI'
+        ]);
+        $attribute->save(); // 69
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'RJ45'
+        ]);
+        $attribute->save(); // 70
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'DisplayPort'
+        ]);
+        $attribute->save(); // 71
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'USB 3.1'
+        ]);
+        $attribute->save(); // 72
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'USB 3.0'
+        ]);
+        $attribute->save(); // 73
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'USB 1.1/2.0'
+        ]);
+        $attribute->save(); // 74
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'S/PDIF Out'
+        ]);
+        $attribute->save(); // 75
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'Audio Ports'
+        ]);
+        $attribute->save(); // 76
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 19,
+            'name' => 'Antenna Connectors'
+        ]);
+        $attribute->save(); // 77
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 20,
+            'name' => 'Form Factor'
+        ]);
+        $attribute->save(); // 78
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 20,
+            'name' => 'Dimensions (W x L)'
+        ]);
+        $attribute->save(); // 79
+
+        $attribute = new \App\Attribute([
+            'specification_id' => 20,
+            'name' => 'Power Pin'
+        ]);
+        $attribute->save(); // 80
+
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

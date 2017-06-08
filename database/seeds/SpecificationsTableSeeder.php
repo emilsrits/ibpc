@@ -75,6 +75,66 @@ class SpecificationsTableSeeder extends Seeder
         ]);
         $specification->save(); // 10
 
+        $specification = new \App\Specification([
+            'slug' => 'mb supported cpu',
+            'name' => 'Supported CPU'
+        ]);
+        $specification->save(); // 11
+
+        $specification = new \App\Specification([
+            'slug' => 'mb chipset',
+            'name' => 'Chipsets'
+        ]);
+        $specification->save(); // 12
+
+        $specification = new \App\Specification([
+            'slug' => 'mb memory',
+            'name' => 'Memory'
+        ]);
+        $specification->save(); // 13
+
+        $specification = new \App\Specification([
+            'slug' => 'mb expansion slots',
+            'name' => 'Expansion Slots'
+        ]);
+        $specification->save(); // 14
+
+        $specification = new \App\Specification([
+            'slug' => 'mb storage',
+            'name' => 'Storage Devices'
+        ]);
+        $specification->save(); // 15
+
+        $specification = new \App\Specification([
+            'slug' => 'mb video',
+            'name' => 'Onboard Video'
+        ]);
+        $specification->save(); // 16
+
+        $specification = new \App\Specification([
+            'slug' => 'mb audio',
+            'name' => 'Onboard Audio'
+        ]);
+        $specification->save(); // 17
+
+        $specification = new \App\Specification([
+            'slug' => 'mb lan',
+            'name' => 'Onboard LAN'
+        ]);
+        $specification->save(); // 18
+
+        $specification = new \App\Specification([
+            'slug' => 'mb ports',
+            'name' => 'Rear Panel Ports'
+        ]);
+        $specification->save(); // 19
+
+        $specification = new \App\Specification([
+            'slug' => 'mb physical',
+            'name' => 'Physical Spec'
+        ]);
+        $specification->save(); // 20
+
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
