@@ -36,8 +36,9 @@ class CartController extends Controller
     public function store(Request $request, $id)
     {
         $qty = $request->input('qty');
-        if (!$qty) {
-            $qty = 1;
+        if ((int)$qty < 1) {
+            $request->session()->flash('message-warning', 'Invalid product quantity!');
+            return redirect()->back();
         }
 
         $product = Product::find($id);
@@ -120,13 +121,16 @@ class CartController extends Controller
         $cart = new Cart($oldCart);
 
         $cartItemsQty = $request->input('cart');
-        $cart->updateCart($request, $cartItemsQty);
+
+        if ($cart->updateCart($cartItemsQty) === false) {
+            $request->session()->flash('message-warning', 'Invalid product quantity!');
+        } else {
+            $request->session()->flash('message-success', 'Cart updated!');
+        }
 
         Session::put('cart', $cart);
-
         $cart->isEmpty();
 
-        $request->session()->flash('message-success', 'Cart updated!');
         return redirect()->route('cart.index');
     }
 }
