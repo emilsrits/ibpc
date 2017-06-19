@@ -21,7 +21,7 @@ Install the app's dependencies by running `composer install` using the terminal 
 
 Create and configure .env file for your database, run `php artisan key:generate` to generate APP_KEY value in .env file. 
 
-Before running migration scripts comment out code inside AppServiceProvider.php `boot()` method. When migration script is done remove the commented out code.
+Before running migration scripts comment out code inside AppServiceProvider.php `boot()` method. When migration script is done uncomment the code block.
 
 ```
 public function boot()
@@ -44,3 +44,5 @@ Run `node -v` to ensure that Node.js is installed on your machine.
 Pull Gulp as a global NPM package `npm install --global gulp` to mix .scss and .css with Laravel Elixir.
 
 Install Node dependencies by running `npm install` using the terminal in the app root directory.
+
+Run command `php artisan storage:link` to create symlink from `storage/app/public` to `public/storage` folder. This is needed for product images.
