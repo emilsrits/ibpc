@@ -23,7 +23,7 @@ class Specification extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'category_specification');
+        return $this->belongsToMany(Category::class, 'category_specification', 'specification_id', 'category_id');
     }
 
     /**

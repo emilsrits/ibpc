@@ -85,8 +85,8 @@ Edit Product
                     </table>
                 </div>
             </div>
-            @if($specifications)
-                @if($specifications->specifications->first())
+            @if($categories)
+                @if($categories->first()->specifications->first())
                     <div class="product-content-section">
                         <div class="content-section-toggle">
                             <strong>Specifications<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
@@ -94,17 +94,17 @@ Edit Product
                         <div class="content-container">
                             <table class="product-table">
                                 <tbody>
-                                @foreach($specifications->specifications as $category => $specifications)
-                                    @if($specifications->attributes->first())
+                                @foreach($categories->first()->specifications as $category => $specification)
+                                    @if($specification->attributes->first())
                                         <tr class="entity-specification">
-                                            <td colspan="2">{{ $specifications->name }}</td>
+                                            <td colspan="2">{{ $specification->name }}</td>
                                         </tr>
                                     @endif
-                                    @foreach($specifications->attributes as $attribute)
+                                    @foreach($specification->attributes as $attribute)
                                         <tr class="entity-attribute">
-                                            <td><label for="{{ 'attr[' . $specifications->id . '][' . $attribute->id . ']' }}">{{ $attribute->name }}</label></td>
+                                            <td><label for="{{ 'attr[' . $specification->id . '][' . $attribute->id . ']' }}">{{ $attribute->name }}</label></td>
                                             <td>
-                                                <input type="text" name="{{ 'attr[' . $specifications->id . '][' . $attribute->id . ']' }}"
+                                                <input type="text" name="{{ 'attr[' . $specification->id . '][' . $attribute->id . ']' }}"
                                                        value="{{ $product->getAttributeById($attribute->id) }}">
                                             </td>
                                         </tr>

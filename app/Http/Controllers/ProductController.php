@@ -168,14 +168,14 @@ class ProductController extends Controller
         $product = Product::with('categories.specifications.attributes')->find($id);
 
         if (!$product->getCategoryId()->isEmpty()) {
-            $specifications = Category::with('specifications.attributes')->find($product->getCategoryId());
+            $categories = Category::with('specifications.attributes')->find($product->getCategoryId());
         } else {
-            $specifications = null;
+            $categories = null;
         }
 
         return view('admin.product.edit', [
             'product' => $product,
-            'specifications' => $specifications,
+            'categories' => $categories,
             'request' => $request
         ]);
     }

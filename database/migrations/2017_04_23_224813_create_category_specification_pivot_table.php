@@ -30,6 +30,11 @@ class CreateCategorySpecificationPivotTable extends Migration
      */
     public function down()
     {
+        Schema::table('category_specification', function (Blueprint $table) {
+            $table->dropForeign('category_specification_category_id_foreign');
+            $table->dropForeign('category_specification_specification_id_foreign');
+        });
+
         Schema::drop('category_specification');
     }
 }

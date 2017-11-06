@@ -23,7 +23,7 @@ class Category extends Model
      */
     public function specifications()
     {
-        return $this->belongsToMany(Specification::class, 'category_specification');
+        return $this->belongsToMany(Specification::class, 'category_specification', 'category_id', 'specification_id');
     }
 
     /**
@@ -99,6 +99,6 @@ class Category extends Model
      */
     public function getSpecificationId()
     {
-        return $this->specifications()->getRelatedIds();
+        return $this->specifications()->allRelatedIds();
     }
 }
