@@ -58,7 +58,8 @@ class ProductController extends Controller
 
         $categories = Category::all();
 
-        return redirect()->route('product.index', ['products' => $products, 'categories' => $categories, 'request' => $request ]);
+        return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => $request ]);
+        //return redirect()->route('product.index', ['products' => $products, 'categories' => $categories, 'request' => $request ]);
     }
 
     /**
