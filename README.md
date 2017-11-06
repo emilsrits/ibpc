@@ -8,7 +8,7 @@ Online store for PC parts.
 
 ### Tools:
 
-  * Laravel     5.3
+  * Laravel     5.5
   * PHP         7.0.10
   * MySQL       5.7.14
   * jQuery      3.1.1
