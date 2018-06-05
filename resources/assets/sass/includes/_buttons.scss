@@ -1,5 +1,9 @@
 /* BUTTONS */
 body {
+  .btn:focus, .btn:active {
+    outline: none;
+    box-shadow: none;
+  }
   .btn-cart-add, .btn-cart-update {
     margin-top: 5px;
     color: $color_white;

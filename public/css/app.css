@@ -2098,6 +2098,11 @@ th {
 }
 
 /* BUTTONS */
+body .btn:focus, body .btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
 body .btn-cart-add, body .btn-cart-update {
   margin-top: 5px;
   color: #fff;

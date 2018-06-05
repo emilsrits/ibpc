@@ -15,18 +15,18 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->truncate();
         // add users to the database
-        DB::table('users')->insert([
-            [
-	            'name' => 'admin',
-	            'surname' => 'admin',
-	            'email' => 'admin@ibpc.dev',
-	            'country' => 'LV',
-	            'city' => 'Riga',
-                'address' => 'Brivibas gatve 229',
-	            'postcode' => 'LV-1050',
-	            'password' => Hash::make('ibpcadmin')
-            ]
-        ]);
+        $admin_email = env('ADMIN_EMAIL');
+        $admin_password = env('ADMIN_PASSWORD');
+        if ($admin_email && $admin_password) {
+            DB::table('users')->insert([
+                [
+                    'name' => 'admin',
+                    'surname' => 'admin',
+                    'email' => env('ADMIN_EMAIL'),
+                    'password' => Hash::make(env('ADMIN_PASSWORD'))
+                ]
+            ]);
+        }
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
