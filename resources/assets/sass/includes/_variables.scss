@@ -54,21 +54,21 @@ $panel-default-heading-bg: #fff;
 // Fonts
 @font-face {
   font-family: 'OpenSans-Regular';
-  src: url('../fonts/OpenSans-Regular-webfont.woff') format('woff');
+  src: url('/fonts/OpenSans-Regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Montserrat-Regular';
-  src: url('../fonts/montserrat-regular-webfont.woff2') format('woff2'),
-  url('../fonts/montserrat-regular-webfont.woff') format('woff');
+  src: url('/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+  url('/fonts/montserrat-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Roboto-Regular';
-  src: url('../fonts/roboto-regular-webfont.woff2') format('woff2'),
-  url('../fonts/roboto-regular-webfont.woff') format('woff');
+  src: url('/fonts/roboto-regular-webfont.woff2') format('woff2'),
+  url('/fonts/roboto-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
