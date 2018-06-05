@@ -1,245 +1,245 @@
 /* ADMIN HEADER */
 #admin-header {
-    .admin-sections {
-        li {
-            font-family: "Roboto-Regular", sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 0.4px;
-            text-transform: uppercase;
-            a {
-                padding-right: 10px;
-                padding-left: 10px;
-            }
-        }
-        .dropdown-menu {
-            li {
-                font-size: 12px;
-                border-bottom: 1px solid $color_brownBlack;
-                a {
-                    padding: 10px;
-                }
-                &:last-of-type {
-                    border-bottom: none;
-                }
-            }
-        }
+  .admin-sections {
+    li {
+      font-family: "Roboto-Regular", sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      a {
+        padding-right: 10px;
+        padding-left: 10px;
+      }
     }
+    .dropdown-menu {
+      li {
+        font-size: 12px;
+        border-bottom: 1px solid $color_brownBlack;
+        a {
+          padding: 10px;
+        }
+        &:last-of-type {
+          border-bottom: none;
+        }
+      }
+    }
+  }
 }
 
 /* ADMIN PAGE*/
 .admin-page {
-    h3 {
-        margin: 20px 10px;
-        font-family: "Montserrat-Regular", sans-serif;
-        font-size: 18px;
-        font-weight: bold;
-        letter-spacing: 0.4px;
-        text-transform: uppercase;
-    }
+  h3 {
+    margin: 20px 10px;
+    font-family: "Montserrat-Regular", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
 }
 
 /* MANAGE */
 .manage-section {
-    margin: 10px auto;
-    padding: 10px;
-    > h4 {
-        margin: 10px;
-        font-size: 14px;
-        font-weight: bold;
-        text-transform: uppercase;
+  margin: 10px auto;
+  padding: 10px;
+  > h4 {
+    margin: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .icon {
+    float: left;
+    i {
+      padding-right: 15px;
     }
-    .icon {
-        float: left;
-        i {
-            padding-right: 15px;
-        }
-    }
+  }
 }
 .manage-section:before,
 .manage-section:after {
-    content: "";
-    display: table;
+  content: "";
+  display: table;
 }
 .manage-section:after {
-    clear: both;
+  clear: both;
 }
 .manage-tab {
+  display: flex;
+  height: 70px;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $color_lightGray;
+  transition: color ease-in-out 0.2s,
+  border ease-in-out 0.2s,
+  background ease-in-out 0.2s;
+  &:hover, &:focus {
+    border-color: $color_gray;
+    background-color: $color_lightGray;
+    box-shadow: inset $color_darkGray 0 1px 12px 1px;
+  }
+  > a {
     display: flex;
-    height: 70px;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
-    border: 1px solid $color_lightGray;
-    transition: color ease-in-out 0.2s,
-    border ease-in-out 0.2s,
-    background ease-in-out 0.2s;
-    &:hover, &:focus {
-        border-color: $color_gray;
-        background-color: $color_lightGray;
-        box-shadow: inset $color_darkGray 0 1px 12px 1px;
+    word-break: break-all;
+    i {
+      padding-right: 15px;
     }
-    > a {
-        display: flex;
-        padding: 10px;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        word-break: break-all;
-        i {
-            padding-right: 15px;
-        }
-    }
+  }
 }
 .manage-catalog, .manage-users, .manage-settings, .manage-orders {
-    width: 100%;
-    .products-categories, .products-attributes,
-    .users-list, .users-roles, .orders-pending, .orders-history
-    {
-        width: 50%;
-        float: left;
-    }
+  width: 100%;
+  .products-categories, .products-attributes,
+  .users-list, .users-roles, .orders-pending, .orders-history
+  {
+    width: 50%;
+    float: left;
+  }
 }
 .manage-btn-group {
-    width: 100%;
-    text-align: right;
+  width: 100%;
+  text-align: right;
 }
 
 /* MANAGE CATALOG */
 .manage-catalog {
-    > h4 {
-        color: #800080;
-    }
+  > h4 {
+    color: #800080;
+  }
 }
 
 /* MANAGE USERS */
 .manage-users {
-    > h4 {
-        color: #1c98ff;
-    }
+  > h4 {
+    color: #1c98ff;
+  }
 }
 
 .manage-orders {
-    > h4 {
-        color: #ff9234;
-    }
+  > h4 {
+    color: #ff9234;
+  }
 }
 
 /* MANAGE-SETTINGS */
 .manage-settings {
-    > h4 {
-        color: #268d2e;
-    }
+  > h4 {
+    color: #268d2e;
+  }
 }
 
 /* CATALOG, CATEGORIES, ATTRIBUTES */
 #catalog-form, #categories-form, #specifications-form,
 #attributes-form, #users-form, #roles-form, #orders-form {
-    margin: 20px 0;
-    overflow-x: auto;
-    .catalog-action, .categories-action, .specifications-action, .attributes-action, .users-action, .orders-action {
-        margin: 0 10px 10px;
-        select {
-            height: 25px;
-            width: 115px;
-            vertical-align: middle;
-        }
-        button {
-            height: 25px;
-            vertical-align: middle;
-        }
-        #filters-clear {
-            display: block;
-            margin: 10px 0 5px;
-            width: 115px;
-            font-weight: bold;
-        }
+  margin: 20px 0;
+  overflow-x: auto;
+  .catalog-action, .categories-action, .specifications-action, .attributes-action, .users-action, .orders-action {
+    margin: 0 10px 10px;
+    select {
+      height: 25px;
+      width: 115px;
+      vertical-align: middle;
     }
+    button {
+      height: 25px;
+      vertical-align: middle;
+    }
+    #filters-clear {
+      display: block;
+      margin: 10px 0 5px;
+      width: 115px;
+      font-weight: bold;
+    }
+  }
 }
 #catalog-table, #categories-table, #specifications-table,
 #attributes-table, #users-table, #roles-table, #orders-table {
-    margin-top: 15px;
-    width: 100%;
-    th, td {
-        text-align: left;
-        vertical-align: middle;
+  margin-top: 15px;
+  width: 100%;
+  th, td {
+    text-align: left;
+    vertical-align: middle;
+  }
+  .table-head {
+    padding: 5px 0;
+    tr {
+      line-height: 20px;
+      th {
+        padding: 10px;
+        font-weight: bold;
+        &:first-of-type {
+          text-align: center;
+        }
+      }
     }
-    .table-head {
-        padding: 5px 0;
-        tr {
-            line-height: 20px;
-            th {
-                padding: 10px;
-                font-weight: bold;
-                &:first-of-type {
-                    text-align: center;
-                }
-            }
-        }
+  }
+  .table-body {
+    tr {
+      border-top: 1px solid $color_lightGray;
     }
-    .table-body {
-        tr {
-            border-top: 1px solid $color_lightGray;
+    td {
+      padding: 10px;
+      max-width: 300px;
+      line-height: 20px;
+      &:first-of-type {
+        text-align: center;
+      }
+      &:last-of-type {
+        > a {
+          padding: 5px;
         }
-        td {
-            padding: 10px;
-            max-width: 300px;
-            line-height: 20px;
-            &:first-of-type {
-                text-align: center;
-            }
-            &:last-of-type {
-                > a {
-                    padding: 5px;
-                }
-            }
-        }
+      }
     }
-    #sort-created, #sort-updated {
-        button {
-            border: none;
-            outline: none;
-            background: none;
-        }
-        i {
-            padding-left: 5px;
-        }
+  }
+  #sort-created, #sort-updated {
+    button {
+      border: none;
+      outline: none;
+      background: none;
     }
-    #table-search {
-        line-height: 20px;
-        td {
-            input, select {
-                padding: 0 10px;
-                width: 100%;
-                height: 100%;
-                border: none;
-                outline: none;
-                &:hover, &:focus {
-                    transition: box-shadow ease-in-out 0.25s;
-                    box-shadow: inset $color_darkGray 0 1px 1px 0;
-                }
-            }
-            input {
-                font-size: 12px;
-            }
-            select {
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                -ms-appearance: none;
-                -o-appearance: none;
-                appearance: none;
-                font-size: 14px;
-            }
-        }
+    i {
+      padding-left: 5px;
     }
+  }
+  #table-search {
+    line-height: 20px;
+    td {
+      input, select {
+        padding: 0 10px;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        &:hover, &:focus {
+          transition: box-shadow ease-in-out 0.25s;
+          box-shadow: inset $color_darkGray 0 1px 1px 0;
+        }
+      }
+      input {
+        font-size: 12px;
+      }
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        font-size: 14px;
+      }
+    }
+  }
 }
 .attribute-content-section {
-    .btn-manage-add {
-        margin: 25px 0 0;
-    }
+  .btn-manage-add {
+    margin: 25px 0 0;
+  }
 }
 
 /* CREATE, EDIT ENTITIES */
@@ -247,127 +247,130 @@
 .category-create, .category-edit,
 .specification-create, .specification-edit,
 .attribute-create, .attribute-edit, .user-edit, .order-edit {
-    .entity-save, #entity-delete {
-        margin: 5px;
-        font-size: 13px;
-        font-weight: bold;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        border: 1px solid $color_black;
-        border-radius: 4px;
-        transition: box-shadow ease-in-out .15s;
-        &:hover, &:focus {
-            box-shadow: inset $color_darkGray 0 1px 10px 1px;
-        }
+  .entity-save, #entity-delete {
+    margin: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    border: 1px solid $color_black;
+    border-radius: 4px;
+    transition: box-shadow ease-in-out .15s;
+    &:hover, &:focus {
+      box-shadow: inset $color_darkGray 0 1px 10px 1px;
     }
-    .entity-save {
-        padding: 10px 30px;
-        color: $color_white;
-        background-color: $color_orange;
+  }
+  .entity-save {
+    padding: 10px 30px;
+    color: $color_white;
+    background-color: $color_orange;
+  }
+  #entity-delete {
+    padding: 10px 15px;
+    color: $color_black;
+    background-color: $color_red;
+  }
+  .content-section-toggle {
+    margin: 15px 0 0;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid $color_lightGray;
+    > strong {
+      color: $color_red;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      i {
+        padding-left: 10px;
+      }
     }
-    #entity-delete {
-        padding: 10px 15px;
+  }
+  .content-container {
+    transition: all ease-in-out 0.2s;
+    .product-specification-attributes {
+      display: none;
+    }
+  }
+  .product-table, .category-table, .specification-table,
+  .attribute-table, .user-table, .order-table {
+    width: 100%;
+    margin: 10px 0 5px;
+  }
+  .entity-specification {
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    border-left: 1px solid $color_orange;
+    > td {
+      padding: 15px 10px;
+      color: $color_black;
+      text-transform: uppercase;
+    }
+  }
+  .entity-attribute {
+    height: 60px;
+    td:first-child {
+      width: 110px;
+      font-size: 13px;
+      vertical-align: top;
+    }
+    td {
+      padding: 10px;
+      span {
+        vertical-align: middle;
+      }
+      label {
         color: $color_black;
-        background-color: $color_red;
-    }
-    .content-section-toggle {
-        margin: 15px 0 0;
-        padding: 10px;
-        cursor: pointer;
-        border-bottom: 1px solid $color_lightGray;
-        > strong {
-            color: $color_red;
-            font-size: 15px;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            i {
-                padding-left: 10px;
-            }
-        }
-    }
-    .content-container {
-        transition: all ease-in-out 0.2s;
-        .product-specification-attributes {
-            display: none;
-        }
-    }
-    .product-table, .category-table, .specification-table,
-    .attribute-table, .user-table, .order-table {
+      }
+      input {
+        padding: 2px 3px;
+        line-height: 20px;
+      }
+      input[type="text"], input[type="email"], input[type="password"] {
         width: 100%;
-        margin: 10px 0 5px;
+      }
+      input[type="number"] {
+        width: 150px;
+      }
+      textarea {
+        width: 100%;
+        resize: none;
+      }
+      select {
+        width: 150px;
+      }
     }
-    .entity-specification {
-        font-weight: bold;
-        letter-spacing: 0.2px;
-        border-left: 1px solid $color_orange;
-        > td {
-            padding: 15px 10px;
-            color: $color_black;
-            text-transform: uppercase;
-        }
-    }
-    .entity-attribute {
-        height: 60px;
-        td:first-child {
-            width: 110px;
-            font-size: 13px;
-            vertical-align: top;
-        }
-        td {
-            padding: 10px;
-            span {
-                vertical-align: middle;
-            }
-            label {
-                color: $color_black;
-            }
-            input {
-                padding: 2px 3px;
-                line-height: 20px;
-            }
-            input[type="text"], input[type="email"], input[type="password"] {
-                width: 100%;
-            }
-            input[type="number"] {
-                width: 150px;
-            }
-            textarea {
-                width: 100%;
-                resize: none;
-            }
-            select {
-                width: 150px;
-            }
-        }
-    }
+  }
 }
 .category-create, .category-edit, .user-edit {
-    .category-table, .user-table {
-        .entity-attribute {
-            .category-attribute-group, .user-role {
-                width: 200px;
-                input[type="checkbox"] {
-                    position: relative;
-                    top: 2px;
-                    margin-right: 5px;
-                }
-                label {
-                    line-height: 20px;
-                }
-            }
+  .category-table, .user-table {
+    .entity-attribute {
+      .category-attribute-group, .user-role {
+        width: 200px;
+        input[type="checkbox"] {
+          position: relative;
+          top: 2px;
+          margin-right: 5px;
         }
+        label {
+          line-height: 20px;
+        }
+      }
     }
+  }
 }
 .order-edit {
-    .entity-attribute {
-        .radio-block {
-            display: block;
-            margin: 0 0 10px;
-            width: 200px;
-            cursor: pointer;
-            &:hover {
-                color: $color_red;
-            }
-        }
+  .entity-attribute {
+    .radio-block {
+      display: block;
+      margin: 0 0 10px;
+      width: 200px;
+      cursor: pointer;
+      &:hover {
+        color: $color_red;
+      }
     }
+  }
 }
+
+/* RESPONSIVE STYLES */
+@import "responsive";

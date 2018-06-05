@@ -1,175 +1,178 @@
 /* USER ACCOUNT */
 #user-account {
-    padding: 10px;
-    h1, h2, h3, h4 {
-        font-family: Montserrat-Regular, sans-serif;
-        text-transform: uppercase;
-    }
-    p {
-        margin: 10px;
-    }
-    > h4 {
-        margin: 10px 10px 20px;
-    }
-    #account-nav {
-        .account-settings, .account-orders, .account-order-history {
-            position: relative;
-            display: flex;
-            height: 60px;
-            font-size: 13px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: 1px solid $color_lightGray;
-            -webkit-transition: color ease-in-out 0.2s,
-                                border ease-in-out 0.2s,
-                                background ease-in-out 0.1s;
-            transition: color ease-in-out 0.2s,
-                        border ease-in-out 0.2s,
-                        background ease-in-out 0.1s;
-            &:hover {
-                border-color: $color_gray;
-                background-color: $color_lightGray;
-                box-shadow: inset $color_darkGray 0 1px 3px 0;
-            }
-            a {
-                display: flex;
-                padding: 10px;
-                width: 100%;
-                height: 100%;
-                -webkit-box-pack: center;
-                justify-content: center;
-                -webkit-box-align: center;
-                align-items: center;
-                i {
-                    padding-right: 7px;
-                }
-            }
-        }
-        .active {
-            color: $color_red;
-            &:before {
-                content: "";
-                position: absolute;
-                width: 0;
-                height: 0;
-                left: 50%;
-                bottom: -1px;
-                border: 10px solid;
-                border-color: transparent transparent $color_lightGray transparent;
-            }
-            &:after {
-                content: "";
-                position: absolute;
-                width: 0;
-                height: 0;
-                left: 50%;
-                bottom: -3px;
-                border: 10px solid;
-                border-color: transparent transparent $color_white transparent;
-            }
-            &:hover::before {
-                border-color: transparent transparent $color_gray transparent;
-            }
-        }
-    }
-    #account-panel {
-        margin: 20px 0;
+  padding: 10px;
+  h1, h2, h3, h4 {
+    font-family: Montserrat-Regular, sans-serif;
+    text-transform: uppercase;
+  }
+  p {
+    margin: 10px;
+  }
+  > h4 {
+    margin: 10px 10px 20px;
+  }
+  #account-nav {
+    .account-settings, .account-orders, .account-order-history {
+      position: relative;
+      display: flex;
+      height: 60px;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: 1px solid $color_lightGray;
+      -webkit-transition: color ease-in-out 0.2s,
+      border ease-in-out 0.2s,
+      background ease-in-out 0.1s;
+      transition: color ease-in-out 0.2s,
+      border ease-in-out 0.2s,
+      background ease-in-out 0.1s;
+      &:hover {
+        border-color: $color_gray;
+        background-color: $color_lightGray;
+        box-shadow: inset $color_darkGray 0 1px 3px 0;
+      }
+      a {
+        display: flex;
         padding: 10px;
         width: 100%;
-        > h4 {
-            margin: 0 10px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 0.4px;
+        height: 100%;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        i {
+          padding-right: 7px;
         }
-        .user-orders {
-            width: 100%;
-            tr {
-                th, td {
-                    padding: 10px;
-                }
-            }
-            thead {
-                th {
-                    font-weight: bold;
-                }
-            }
-            tbody {
-                tr {
-                    border-top: 1px solid $color_lightGray;
-                }
-                td {
-                    &:last-of-type {
-                        > a {
-                            padding: 5px;
-                        }
-                    }
-                }
-            }
-        }
-        .order-sumup {
-            margin: 20px 0;
-            td {
-                padding: 5px 10px;
-                &:first-of-type {
-                    font-weight: bold;
-                }
-            }
-        }
-        .order-view {
-            tbody {
-                td {
-                    vertical-align: middle;
-                    img {
-                        width: 60px;
-                    }
-                }
-            }
-        }
+      }
     }
-    .account-content-section {
-        .content-section-toggle {
-            margin: 15px 0 0;
-            padding: 10px;
-            cursor: pointer;
-            border-bottom: 1px solid $color_lightGray;
-            strong {
-                color: $color_red;
-                font-size: 15px;
-                letter-spacing: 0.3px;
-                text-transform: uppercase;
-                i {
-                    padding-left: 5px;
-                }
+    .active {
+      color: $color_red;
+      &:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: 50%;
+        bottom: -1px;
+        border: 10px solid;
+        border-color: transparent transparent $color_lightGray transparent;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: 50%;
+        bottom: -3px;
+        border: 10px solid;
+        border-color: transparent transparent $color_white transparent;
+      }
+      &:hover::before {
+        border-color: transparent transparent $color_gray transparent;
+      }
+    }
+  }
+  #account-panel {
+    margin: 20px 0;
+    padding: 10px;
+    width: 100%;
+    > h4 {
+      margin: 0 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.4px;
+    }
+    .user-orders {
+      width: 100%;
+      tr {
+        th, td {
+          padding: 10px;
+        }
+      }
+      thead {
+        th {
+          font-weight: bold;
+        }
+      }
+      tbody {
+        tr {
+          border-top: 1px solid $color_lightGray;
+        }
+        td {
+          &:last-of-type {
+            > a {
+              padding: 5px;
             }
+          }
         }
+      }
     }
-    .form-group {
-        padding: 0 10px;
-        label {
-            margin: 10px 0;
+    .order-sumup {
+      margin: 20px 0;
+      td {
+        padding: 5px 10px;
+        &:first-of-type {
+          font-weight: bold;
         }
-        select {
-            display: block;
+      }
+    }
+    .order-view {
+      tbody {
+        td {
+          vertical-align: middle;
+          img {
+            width: 60px;
+          }
         }
+      }
     }
-    #account-update-confirm {
-        margin: 30px 0 0;
-        background-color: $color_lightGray;
-    }
-    #account-update-submit {
-        margin: 20px 10px;
-        height: 45px;
-        color: $color_white;
-        font-size: 14px;
-        font-weight: bold;
-        letter-spacing: 0.4px;
+  }
+  .account-content-section {
+    .content-section-toggle {
+      margin: 15px 0 0;
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid $color_lightGray;
+      strong {
+        color: $color_red;
+        font-size: 15px;
+        letter-spacing: 0.3px;
         text-transform: uppercase;
-        border: 1px solid $color_black;
-        background-color: $color_orange;
-        &:hover {
-            background: $color_red;
-            box-shadow: inset $color_darkGray 0 1px 20px 2px;
+        i {
+          padding-left: 5px;
         }
+      }
     }
+  }
+  .form-group {
+    padding: 0 10px;
+    label {
+      margin: 10px 0;
+    }
+    select {
+      display: block;
+    }
+  }
+  #account-update-confirm {
+    margin: 30px 0 0;
+    background-color: $color_lightGray;
+  }
+  #account-update-submit {
+    margin: 20px 10px;
+    height: 45px;
+    color: $color_white;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    border: 1px solid $color_black;
+    background-color: $color_orange;
+    &:hover {
+      background: $color_red;
+      box-shadow: inset $color_darkGray 0 1px 20px 2px;
+    }
+  }
 }
+
+/* RESPONSIVE STYLES */
+@import "responsive";

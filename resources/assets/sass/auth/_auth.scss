@@ -1,24 +1,24 @@
 #authorization {
-    margin-top: 25px;
-    .checkbox {
-        label {
-            input {
-                top: 5px;
-            }
-        }
+  margin-top: 25px;
+  .checkbox {
+    label {
+      input {
+        top: 5px;
+      }
     }
-    .btn-primary {
-        border: 1px solid $color_darkGray;
-        background-color: $color_orange;
-        &:hover {
-            box-shadow: inset $color_darkGray 0 1px 5px 0px;
-        }
+  }
+  .btn-primary {
+    border: 1px solid $color_darkGray;
+    background-color: $color_orange;
+    &:hover {
+      box-shadow: inset $color_darkGray 0 1px 5px 0px;
     }
-    .btn-link {
-        color: $color_black;
-        text-decoration: underline;
-        &:hover {
-            color: $color_red;
-        }
+  }
+  .btn-link {
+    color: $color_black;
+    text-decoration: underline;
+    &:hover {
+      color: $color_red;
     }
+  }
 }
