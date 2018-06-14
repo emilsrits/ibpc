@@ -11,7 +11,6 @@
 	<title>@yield('title')</title>
 
 	<!-- Styles -->
-	<link rel="stylesheet" href="{{ URL::to('/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::to('/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::to('/css/app.css') }}">
 	@yield('styles')

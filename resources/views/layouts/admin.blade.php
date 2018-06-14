@@ -11,12 +11,11 @@
     <title>@yield('title')</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ URL::to('/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('/css/app.css') }}">
-@yield('styles')
+    @yield('styles')
 
-<!-- Scripts -->
+    <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -24,18 +23,18 @@
     </script>
 </head>
 <body>
-<div id="wrapper">
-    @yield('modal')
-    @include('partials.admin.header')
+    <div id="wrapper">
+        @yield('modal')
+        @include('partials.admin.header')
 
-    <main>
-        <div class="container-inner cf">
-            @yield('content')
-        </div>
-    </main>
+        <main>
+            <div class="container-inner cf">
+                @yield('content')
+            </div>
+        </main>
 
-    @include('partials.footer')
-</div>
+        @include('partials.footer')
+    </div>
 
 <!-- Scripts -->
 <script type="text/javascript" src="{{ URL::to('/js/jquery.min.js') }}"></script>
