@@ -3,7 +3,7 @@
 @section('styles')
     <style>
         #email {
-            font-family: OpenSans-Regular, sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
         #email p {
             font-size: 12px;
