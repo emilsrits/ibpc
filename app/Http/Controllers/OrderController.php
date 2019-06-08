@@ -215,8 +215,6 @@ class OrderController extends Controller
     protected function invoice($user, $order)
     {
         $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
-        $now = Carbon::now();
-        Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice-' . str_random(2) . '.pdf', $pdf->output());
 
         Mail::send('emails.invoice', ['user' => $user, 'order' => $order], function($message) use($pdf, $user, $order)
         {
@@ -224,5 +222,10 @@ class OrderController extends Controller
 
             $message->attachData($pdf->output(), $order->id .'-invoice.pdf');
         });
+
+        if (config('constants.invoice_storage')) {
+            $now = Carbon::now();
+            Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice-' . str_random(2) . '.pdf', $pdf->output());
+        }
     }
 }
