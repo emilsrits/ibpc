@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Document</title>
 
 @yield('styles')
 
-</head>
-<body>
+</head><body>
 
 @yield('content')
 
-</body>
-</html>
+</body></html>
