@@ -87,6 +87,7 @@ class OrderController extends Controller
         $order->delivery_cost = $cart->deliveryCost;
         $order->status = 'pending';
 
+        // Check for item stock
         foreach ($cart->items as $item) {
             $productId = $item['item']['id'];
             if ($productId) {
@@ -100,6 +101,7 @@ class OrderController extends Controller
 
         $order->save();
 
+        // Attach items to order and update their stock
         foreach ($cart->items as $item) {
             $productId = $item['item']['id'];
             if ($productId) {
@@ -155,6 +157,21 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request['submit'] === 'invoice') {
+            $order = Order::with('user')->find($id);
+            $user = User::find($order->user->id);
+
+            $this->invoice($user, $order);
+
+            if ($order->status === 'pending') {
+                $order->status = 'invoiced';
+            }
+            $order->save();
+
+            $request->session()->flash('message-success', 'Invoice successfully sent!');
+            return redirect()->back();
+        }
+
         if ($request['submit'] === 'save') {
             $order = Order::find($id);
             $status = $request['status'];
@@ -203,8 +220,6 @@ class OrderController extends Controller
 
         Mail::send('emails.invoice', ['user' => $user, 'order' => $order], function($message) use($pdf, $user, $order)
         {
-            $message->from('noreply@ibpc.dev', 'IBPC.dev');
-
             $message->to($user->email)->subject('Invoice for order #' . $order->id);
 
             $message->attachData($pdf->output(), $order->id .'-invoice.pdf');

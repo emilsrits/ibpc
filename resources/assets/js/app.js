@@ -108,7 +108,7 @@
 
         // Disable order submit button after once click
         $('#checkout-confirm-form').one('submit', function() {
-            $(this).find('#order-submit').css('opacity', '0.6').attr('onclick','return false;');
+            $(this).find('#order-submit').addClass('disabled').attr('onclick','return false;');
         });
 
         // Clear all filters when clicked

@@ -123,7 +123,7 @@
             </tr>
         @endif
         <tr>
-            <td colspan="3">Total, EUR:</td>
+            <td colspan="3">Total, {{ config('constants.currency') }}:</td>
             <td>{{ $order->price }}</td>
         </tr>
         </tbody>

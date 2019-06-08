@@ -24,14 +24,22 @@ Edit Order
                             <td><label for="user">User</label></td>
                             <td><span>{{ $order->user->full_name }}</span></td>
                         </tr>
+                        <tr class="entity-attribute">
+                            <td><label for="created">Created</label></td>
+                            <td><span>{{ $order->created_at }}</span></td>
+                        </tr>
+                        <tr class="entity-attribute">
+                            <td><label for="updated">Updated</label></td>
+                            <td><span>{{ $order->updated_at }}</span></td>
+                        </tr>
                         @if($order->delivery_cost > 0)
                             <tr class="entity-attribute">
-                                <td><label for="user">Delivery cost</label></td>
+                                <td><label for="delivery">Delivery cost</label></td>
                                 <td><span>{{ $order->getPriceCurrency('delivery') }}</span></td>
                             </tr>
                         @endif
                         <tr class="entity-attribute">
-                            <td><label for="user">Total cost</label></td>
+                            <td><label for="cost">Total cost</label></td>
                             <td><span>{{ $order->getPriceCurrency('price') }}</span></td>
                         </tr>
                         </tbody>
@@ -104,6 +112,13 @@ Edit Order
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </form>
+
+        <form id="send-invoice-form" role="form" method="POST" action="{{ url('/admin/order/update', ['id' => $order->id]) }}">
+            {{ csrf_field() }}
+            <div class="manage-btn-group">
+                <button class="entity-save" type="submit" name="submit" value="invoice">Resend Invoice</button>
             </div>
         </form>
     </div>

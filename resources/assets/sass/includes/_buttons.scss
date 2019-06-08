@@ -34,7 +34,6 @@ body {
     letter-spacing: 0.4px;
     text-transform: uppercase;
     border: 1px solid $color_black;
-    border-radius: 0;
     background: $color_green;
     transition: background ease-in-out .15s;
     &:hover {
@@ -42,6 +41,10 @@ body {
       background: $color_darkGreen;
       box-shadow: inset $color_darkGray 0 1px 20px 2px;
     }
+  }
+  #order-submit.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
   .btn-manage-back, .btn-manage-add {
     display: inline-block;
