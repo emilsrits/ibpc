@@ -181,6 +181,10 @@
   .table-body {
     tr {
       border-top: 1px solid $color_lightGray;
+      &:hover {
+        background-color: $color_lightGray;
+        box-shadow: inset 0 1px 12px 1px #303030;
+      }
     }
     td {
       padding: 10px;
@@ -215,9 +219,11 @@
         height: 100%;
         border: none;
         outline: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
         &:hover, &:focus {
-          transition: box-shadow ease-in-out 0.25s;
-          box-shadow: inset $color_darkGray 0 1px 1px 0;
+          background-color: $color_lightGray;
         }
       }
       input {
@@ -357,15 +363,18 @@
   }
 }
 .order-edit {
-  .entity-attribute {
-    .radio-block {
-      display: block;
-      margin: 0 0 10px;
-      width: 200px;
-      cursor: pointer;
-      &:hover {
-        color: $color_red;
-      }
+  .entity-attribute .radio-block {
+    display: block;
+    margin: 0 0 10px;
+    width: 200px;
+    cursor: pointer;
+    &:hover {
+      color: $color_red;
+    }
+
+    input {
+      margin-bottom: 3px;
+      vertical-align: middle;
     }
   }
 }

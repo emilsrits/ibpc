@@ -17,8 +17,6 @@ Page not found
         font-size: 50px;
         font-weight: bold;
         text-align: center;
-        background: url({{ asset("/images/pepe.png") }}) no-repeat center;
-        background-size: contain;
     }
 </style>
 @endsection

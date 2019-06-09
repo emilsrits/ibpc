@@ -18,9 +18,7 @@ class AccountController extends Controller
     {
         $user = Auth::user();
 
-        $orderStatuses = [
-          'pending', 'invoiced', 'shipped'
-        ];
+        $orderStatuses = config('constants.order_status_active');
 
         $orders = $user->orders()->whereIn('status', $orderStatuses)->get();
 
@@ -104,9 +102,7 @@ class AccountController extends Controller
     {
         $user = Auth::user();
 
-        $orderStatuses = [
-            'canceled', 'completed'
-        ];
+        $orderStatuses = config('constants.order_status_finished');
 
         $orders = $user->orders()->whereIn('status', $orderStatuses)->get();
 

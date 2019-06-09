@@ -56,26 +56,12 @@ Edit Order
                         <tr class="entity-attribute">
                             <td><label for="status">Status</label></td>
                             <td>
-                                <label class="radio-block">
-                                    <input type="radio" name="status" value="canceled"
-                                            {{ $order->status === 'canceled' ? 'checked' : '' }}> Canceled
-                                </label>
-                                <label class="radio-block">
-                                    <input type="radio" name="status" value="pending"
-                                            {{ $order->status === 'pending' ? 'checked' : '' }}> Pending
-                                </label>
-                                <label class="radio-block">
-                                    <input type="radio" name="status" value="invoiced"
-                                            {{ $order->status === 'invoiced' ? 'checked' : '' }}> Invoiced
-                                </label>
-                                <label class="radio-block">
-                                    <input type="radio" name="status" value="shipped"
-                                            {{ $order->status === 'shipped' ? 'checked' : '' }}> Shipped
-                                </label>
-                                <label class="radio-block">
-                                    <input type="radio" name="status" value="completed"
-                                            {{ $order->status === 'completed' ? 'checked' : '' }}> Completed
-                                </label>
+                                @foreach(config('constants.order_status') as $key => $value)
+                                    <label class="radio-block">
+                                        <input type="radio" name="status" value="{{ $value  }}"
+                                                {{ $order->status === $value ? 'checked' : '' }}> {{ $value }}
+                                    </label>
+                                @endforeach
                             </td>
                         </tr>
                         </tbody>

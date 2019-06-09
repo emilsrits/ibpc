@@ -18,11 +18,9 @@ Orders
             <div class="orders-action">
                 <select id="mass-action" name="mass-action">
                     <option value="0"></option>
-                    <option value="1">Canceled</option>
-                    <option value="2">Pending</option>
-                    <option value="3">Invoiced</option>
-                    <option value="4">Shipped</option>
-                    <option value="5">Completed</option>
+                    @foreach(config('constants.order_status') as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
                 </select>
                 <button id="mass-action-run" type="submit" name="submit"><i class="fa fa-play" aria-hidden="true"></i></button>
                 <button id="filters-clear" type="button" name="clear"><i class="fa fa-refresh" aria-hidden="true"></i> Clear Filters</button>
@@ -72,17 +70,11 @@ Orders
                     <td></td>
                     <td>
                         <select name="status">
-                            <option value="0"></option>
-                            <option value="canceled" {{ $request['status'] === 'canceled' ? 'selected' : '' }}>
-                                Canceled</option>
-                            <option value="pending" {{ $request['status'] === 'pending' ? 'selected' : '' }}>
-                                Pending</option>
-                            <option value="invoiced" {{ $request['status'] === 'invoiced' ? 'selected' : '' }}>
-                                Invoiced</option>
-                            <option value="shipped" {{ $request['status'] === 'shipped' ? 'selected' : '' }}>
-                                Shipped</option>
-                            <option value="completed" {{ $request['status'] === 'completed' ? 'selected' : '' }}>
-                                Completed</option>
+                            <option value=""></option>
+                            @foreach(config('constants.order_status') as $key => $value)
+                                <option value="{{ $key }}" {{ $request['status'] === $value ? 'selected' : '' }}>
+                                    {{ $value }}</option>
+                            @endforeach
                         </select>
                     </td>
                     <td><input type="text" name="createdAt" value="{{ $request['createdAt'] ? $request['createdAt'] : '' }}"></td>

@@ -6,6 +6,7 @@ use App\Filters\OrderFilter;
 use App\Order;
 use App\Product;
 use App\User;
+use Dompdf\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -41,27 +42,11 @@ class OrderController extends Controller
         $order = new Order();
 
         if ($orderIds) {
-            switch ($request->input('mass-action')) {
-                case 1:
-                    $order->setStatus($orderIds, 'canceled');
-                    $request->session()->flash('message-success', 'Order(s) canceled!');
-                    return redirect()->back();
-                case 2:
-                    $order->setStatus($orderIds, 'pending');
-                    $request->session()->flash('message-success', 'Order(s) pending!');
-                    return redirect()->back();
-                case 3:
-                    $order->setStatus($orderIds, 'invoiced');
-                    $request->session()->flash('message-success', 'Order(s) invoiced!');
-                    return redirect()->back();
-                case 4:
-                    $order->setStatus($orderIds, 'shipped');
-                    $request->session()->flash('message-success', 'Order(s) shipped!');
-                    return redirect()->back();
-                case 5:
-                    $order->setStatus($orderIds, 'completed');
-                    $request->session()->flash('message-success', 'Order(s) completed!');
-                    return redirect()->back();
+            $case = $request->input('mass-action');
+            if (in_array($case, config('constants.order_status'))) {
+                $order->setStatus($orderIds, $case);
+                $request->session()->flash('message-success', 'Order(s) ' . $case . '!');
+                return redirect()->back();
             }
         }
 
@@ -85,7 +70,7 @@ class OrderController extends Controller
         $order->price = $cart->totalPrice + $cart->deliveryCost;
         $order->delivery = Session::get('delivery');
         $order->delivery_cost = $cart->deliveryCost;
-        $order->status = 'pending';
+        $order->status = config('constants.order_status.pending');
 
         // Check for item stock
         foreach ($cart->items as $item) {
@@ -115,16 +100,16 @@ class OrderController extends Controller
                 $product = Product::find($productId);
                 if (!$product->updateStock(-1 * abs($item['qty']))) {
                     $request->session()->flash('message-danger', 'Not enough of product ' . $product->title . ' in stock!');
-                    $order->status = 'canceled';
+                    $order->status = config('constants.order_status.canceled');
                     $order->save();
                     return redirect()->back();
                 }
             }
         }
 
+        $order->status = config('constants.order_status.invoiced');
         $this->invoice($user, $order);
 
-        $order->status = 'invoiced';
         $order->save();
 
         $cart->deleteCart();
@@ -163,8 +148,8 @@ class OrderController extends Controller
 
             $this->invoice($user, $order);
 
-            if ($order->status === 'pending') {
-                $order->status = 'invoiced';
+            if ($order->status === config('constants.order_status.pending')) {
+                $order->status = config('constants.order_status.invoiced');
             }
             $order->save();
 
@@ -176,7 +161,7 @@ class OrderController extends Controller
             $order = Order::find($id);
             $status = $request['status'];
 
-            if (!in_array($status, array('canceled','pending', 'invoiced', 'shipped', 'completed'), true )) {
+            if (!in_array($status, config('constants.order_status'), true )) {
                 $request->session()->flash('message-danger', 'Invalid order status!');
                 return redirect()->back();
             }
@@ -222,6 +207,7 @@ class OrderController extends Controller
 
             $message->attachData($pdf->output(), $order->id .'-invoice.pdf');
         });
+
 
         if (config('constants.invoice_storage')) {
             $now = Carbon::now();
