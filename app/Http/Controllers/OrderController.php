@@ -41,7 +41,7 @@ class OrderController extends Controller
         $status = $request->input('mass-action');
         $order = new Order();
 
-        if ($orderIds && $status != '0') {
+        if ($orderIds && validStatus($status)) {
             $flash = $this->checkStatus($orderIds, $status);
             if ($flash === null) {
                 $order->setStatus($orderIds, $status);
@@ -214,7 +214,7 @@ class OrderController extends Controller
 
         if (is_array($id)) {
             // Check if status is valid
-            if (!in_array($status, config('constants.order_status'))) {
+            if (!validStatus($status)) {
                 $flash = array(
                     'type'      => 'message-danger',
                     'message'   => 'Invalid order status!'
@@ -240,7 +240,7 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         // Check if status is valid
-        if (!in_array($status, config('constants.order_status'))) {
+        if (!validStatus($status)) {
             $flash = array(
                 'type'      => 'message-danger',
                 'message'   => 'Invalid order status!'
