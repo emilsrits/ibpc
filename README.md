@@ -44,5 +44,5 @@ Run command `php artisan storage:link` to create symlink from `storage/app/publi
 ### Tools:
 
   * Laravel     5.5
-  * PHP         7.0.10
-  * MySQL       5.7.14
+  * PHP         >=7.1.0
+  * MySQL       >=5.6
