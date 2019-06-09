@@ -25,6 +25,10 @@ Edit Order
                             <td><span>{{ $order->user->full_name }}</span></td>
                         </tr>
                         <tr class="entity-attribute">
+                            <td><label for="status">Current status</label></td>
+                            <td><span>{{ $order->status }}</span></td>
+                        </tr>
+                        <tr class="entity-attribute">
                             <td><label for="created">Created</label></td>
                             <td><span>{{ $order->created_at }}</span></td>
                         </tr>
@@ -46,28 +50,30 @@ Edit Order
                     </table>
                 </div>
             </div>
-            <div class="order-content-section">
-                <div class="content-section-toggle">
-                    <strong>Order Status<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+            @if(!in_array($order->status, config('constants.order_status_finished')))
+                <div class="order-content-section">
+                    <div class="content-section-toggle">
+                        <strong>Order Status<i class="fa fa-angle-down" aria-hidden="true"></i></strong>
+                    </div>
+                    <div class="content-container" style="display: none;">
+                        <table class="order-table">
+                            <tbody>
+                            <tr class="entity-attribute">
+                                <td><label for="status">Status</label></td>
+                                <td>
+                                    @foreach(config('constants.order_status') as $key => $value)
+                                        <label class="radio-block">
+                                            <input type="radio" name="status" value="{{ $value  }}"
+                                                    {{ $order->status === $value ? 'checked' : '' }}> {{ $value }}
+                                        </label>
+                                    @endforeach
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="content-container">
-                    <table class="order-table">
-                        <tbody>
-                        <tr class="entity-attribute">
-                            <td><label for="status">Status</label></td>
-                            <td>
-                                @foreach(config('constants.order_status') as $key => $value)
-                                    <label class="radio-block">
-                                        <input type="radio" name="status" value="{{ $value  }}"
-                                                {{ $order->status === $value ? 'checked' : '' }}> {{ $value }}
-                                    </label>
-                                @endforeach
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            @endif
             <div class="order-content-section">
                 <div class="content-section-toggle">
                     <strong>Order Items<i class="fa fa-angle-up" aria-hidden="true"></i></strong>

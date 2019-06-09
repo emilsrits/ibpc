@@ -6,7 +6,6 @@ use App\Filters\OrderFilter;
 use App\Order;
 use App\Product;
 use App\User;
-use Dompdf\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -39,13 +38,17 @@ class OrderController extends Controller
     public function action(Request $request, OrderFilter $filters)
     {
         $orderIds = $request->input('orders');
+        $status = $request->input('mass-action');
         $order = new Order();
 
-        if ($orderIds) {
-            $case = $request->input('mass-action');
-            if (in_array($case, config('constants.order_status'))) {
-                $order->setStatus($orderIds, $case);
-                $request->session()->flash('message-success', 'Order(s) ' . $case . '!');
+        if ($orderIds && $status != '0') {
+            $flash = $this->checkStatus($orderIds, $status);
+            if ($flash === null) {
+                $order->setStatus($orderIds, $status);
+                $request->session()->flash('message-success', 'Order(s) ' . $status . '!');
+                return redirect()->back();
+            } else {
+                $request->session()->flash($flash['type'], $flash['message']);
                 return redirect()->back();
             }
         }
@@ -161,8 +164,15 @@ class OrderController extends Controller
             $order = Order::find($id);
             $status = $request['status'];
 
-            if (!in_array($status, config('constants.order_status'), true )) {
-                $request->session()->flash('message-danger', 'Invalid order status!');
+            // Cancel update if there is nothing to update
+            if (!$status) {
+                $request->session()->flash('message-warning', 'Nothing to update.');
+                return redirect()->back();
+            }
+
+            $flash = $this->checkStatus($id, $status);
+            if ($flash != null) {
+                $request->session()->flash($flash['type'], $flash['message']);
                 return redirect()->back();
             }
 
@@ -189,6 +199,65 @@ class OrderController extends Controller
             return view('cart.checkout.success');
         }
         return redirect()->route('shop.index');
+    }
+
+    /**
+     * Check if order status can be updated
+     *
+     * @param array|int $id
+     * @param string $status
+     * @return null|array
+     */
+    protected function checkStatus($id, string $status)
+    {
+        $flash = null;
+
+        if (is_array($id)) {
+            // Check if status is valid
+            if (!in_array($status, config('constants.order_status'))) {
+                $flash = array(
+                    'type'      => 'message-danger',
+                    'message'   => 'Invalid order status!'
+                );
+                return $flash;
+            }
+
+            // Check if order is finished
+            foreach ($id as $key => $value) {
+                $order = Order::find($key);
+                if (in_array($order->status, config('constants.order_status_finished'))) {
+                    $flash = array(
+                        'type'      => 'message-danger',
+                        'message'   => 'Can not change status of a finished order!'
+                    );
+                    return $flash;
+                }
+            }
+
+            return $flash;
+        }
+
+        $order = Order::find($id);
+
+        // Check if status is valid
+        if (!in_array($status, config('constants.order_status'))) {
+            $flash = array(
+                'type'      => 'message-danger',
+                'message'   => 'Invalid order status!'
+            );
+            return $flash;
+        }
+
+        // Check if order is finished
+        if (in_array($order->status, config('constants.order_status_finished'))) {
+            $flash = array(
+                'type'      => 'message-danger',
+                'message'   => 'Can not change status of a finished order!'
+            );
+            return $flash;
+        }
+
+        return $flash;
     }
 
     /**

@@ -85,8 +85,10 @@ Orders
                 @foreach($orders as $order)
                     <tr>
                         <td>
-                            <input class="entity-select" type="checkbox"
-                                   name="orders[{{ $order->id }}][id]" value="{{ $order->id }}">
+                            @if(!in_array($order->status, config('constants.order_status_finished')))
+                                <input class="entity-select" type="checkbox"
+                                       name="orders[{{ $order->id }}][id]" value="{{ $order->id }}">
+                            @endif
                         </td>
                         <td>{{ $order->id }}</td>
                         <td class="no-wrap">{{ $order->user->full_name }}</td>
@@ -103,7 +105,7 @@ Orders
                 @endforeach
                 </tbody>
             </table>
-            @if($orders->count() > 20)
+            @if($orders->count() >= 20)
                 {{ $orders->appends(Request::except('page'))->links() }}
             @endif
         </form>

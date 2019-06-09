@@ -43,8 +43,8 @@ class Order extends Model
     /**
      * Set order status
      *
-     * @param $ids
-     * @param $status
+     * @param array|int $ids
+     * @param string $status
      */
     public function setStatus($ids, $status)
     {
