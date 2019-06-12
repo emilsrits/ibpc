@@ -15,7 +15,7 @@ Create and configure .env file for your database, run `php artisan key:generate`
 Add `ADMIN_EMAIL=` and `ADMIN_PASSWORD=` to your .env file before seeding tables. This will create admin user for you to access administrator panel.
 Example:
 ```
-ADMIN_EMAIL=admin@email.invalid
+ADMIN_EMAIL=admin@example.test
 ADMIN_PASSWORD=admin
 ```
 
