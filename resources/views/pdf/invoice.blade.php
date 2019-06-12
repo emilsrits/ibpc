@@ -54,31 +54,31 @@
         <tbody>
         <tr class="invoice-header">
             <td>Recipient:</td>
-            <td>IBPC</td>
+            <td>{{ config('constants.recipient.name') }}</td>
         </tr>
         <tr>
-            <td>VAT identification number:</td>
-            <td>LV40013214068</td>
+            <td>Identification number:</td>
+            <td>{{ config('constants.recipient.id') }}</td>
         </tr>
         <tr>
             <td>Registration number:</td>
-            <td>20003515031</td>
+            <td>{{ config('constants.recipient.reg') }}</td>
         </tr>
         <tr>
             <td>Address:</td>
-            <td>Riga, Brivibas gatve 229, LV-1050</td>
+            <td>{{ config('constants.recipient.address') }}</td>
         </tr>
         <tr>
             <td>Bank:</td>
-            <td>A/S Swedbank</td>
+            <td>{{ config('constants.recipient.bank') }}</td>
         </tr>
         <tr>
             <td>Bank code:</td>
-            <td>HABALV22</td>
+            <td>{{ config('constants.recipient.code') }}</td>
         </tr>
         <tr>
             <td>Account:</td>
-            <td>LV41HABA0123456789012</td>
+            <td>{{ config('constants.recipient.account') }}</td>
         </tr>
         </tbody>
     </table>
