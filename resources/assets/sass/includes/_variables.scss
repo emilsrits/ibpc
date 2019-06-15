@@ -1,5 +1,5 @@
 // Body
-$body-bg: #f5f8fa;
+$body-bg: #fff;
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
@@ -16,9 +16,9 @@ $brand-warning: #cbb956;
 $brand-danger:  #bf5329;
 
 // Typography
-$font-family-sans-serif: "Raleway", sans-serif;
+$font-family-sans-serif: 'Roboto', sans-serif;
 $font-size-base: 14px;
-$line-height-base: 1.6;
+$line-height-base: 1.2;
 $text-color: #636b6f;
 
 // Color variables
@@ -49,9 +49,6 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
-
-// Fonts
-$font_body: 'Roboto', sans-serif;
 
 // Breakpoints
 $desktop-lg: 1024px;

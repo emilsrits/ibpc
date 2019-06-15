@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Specification;
-use App\Attribute;
-use Illuminate\Http\Request;
+use App\Http\Requests\Specification\SpecificationStoreRequest;
+use App\Actions\Specification\SpecificationStoreAction;
+use App\Http\Requests\Specification\SpecificationActionRequest;
+use App\Actions\Specification\SpecificationActionAction;
+use App\Actions\Specification\SpecificationUpdateAction;
 
 class SpecificationController extends Controller
 {
@@ -23,19 +26,14 @@ class SpecificationController extends Controller
     /**
      * Specification mass action
      *
-     * @param Request $request
+     * @param \App\Http\Requests\Specification\SpecificationActionRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function action(Request $request)
+    public function action(SpecificationActionRequest $request, SpecificationActionAction $action)
     {
-        $specificationIds = $request->input('specifications');
-        $specification = new Specification();
-
-        switch ($request->input('mass-action')) {
-            case 1:
-                $specification->deleteSpecification($specificationIds);
-                $request->session()->flash('message-success', 'Attribute groups deleted!');
-                break;
+        $flash = $action->execute($request->all());
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
         }
 
         return redirect()->back();
@@ -54,29 +52,21 @@ class SpecificationController extends Controller
     /**
      * Save a specification
      *
-     * @param Request $request
+     * @param \App\Http\Requests\Specification\SpecificationStoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(SpecificationStoreRequest $request, SpecificationStoreAction $action)
     {
-        if ($this->specificationValidate($request)) {
-            return redirect()->back();
-        }
+        $flash = $action->execute($request->all());
 
-        $specification = new Specification();
-        $specification->slug = $request['slug'];
-        $specification->name = $request['name'];
-        $specification->save();
-
-        $request->session()->flash('message-success', 'Attribute group successfully created!');
-
+        $request->session()->flash($flash['type'], $flash['message']);
         return redirect()->route('specification.index');
     }
 
     /**
      * Return specification edit view
      *
-     * @param $id
+     * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
@@ -91,92 +81,30 @@ class SpecificationController extends Controller
     /**
      * Update specification
      *
-     * @param Request $request
-     * @param $id
+     * @param \App\Http\Requests\Specification\SpecificationStoreRequest $request
+     * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(SpecificationStoreRequest $request, SpecificationUpdateAction $action, $id)
     {
-        // Delete specification
-        if ($request['submit'] === 'delete') {
-            $specification = new Specification();
-            $specification->deleteSpecification($id);
-
-            $request->session()->flash('message-success', 'Attribute group deleted!');
-            return redirect()->route('specification.index');
-        }
-
-        // Update specification
-        if ($request['submit'] === 'save') {
-            $specification = Specification::find($id);
-
-            if ($request['slug'] != $specification->slug) {
-                if ($this->specificationExists($request['slug'])) {
-                    $request->session()->flash('message-danger', 'Specification with this slug already exists!');
-                    return redirect()->back();
-                } else {
-                    $specification->slug = $request['slug'];
-                }
-            }
-            if (!ctype_space($request['name']) && !$request['name'] == "") {
-                $specification->name = $request['name'];
-            } else {
-                $request->session()->flash('message-danger', 'Attribute group needs a display name!');
-                return redirect()->back();
-            }
-            $specification->save();
-
-            $request->session()->flash('message-success', 'Attribute group successfully updated!');
+        $flash = $action->execute($request->all(), $id);
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-danger', 'Invalid form action!');
-        return redirect()->back();
+        $request->session()->flash('message-success', 'Attribute group deleted!');
+        return redirect()->route('specification.index');
     }
 
     /**
      * Delete specification
      *
-     * @param $id
+     * @param string $id
      */
     public function delete($id)
     {
         $specification = new Specification();
         $specification->deleteSpecification($id);
-    }
-
-    /**
-     * Validate form input fields when creating a new specification
-     *
-     * @param $request
-     * @return bool
-     */
-    protected function specificationValidate($request)
-    {
-        if (!ctype_space($request['slug']) && !$request['slug'] == "") {
-            $request->session()->flash('message-danger', 'Missing attribute group slug!');
-            return true;
-        } else {
-            if ($this->specificationExists($request['slug'])) {
-                $request->session()->flash('message-danger', 'Specification with this slug already exists!');
-                return true;
-            }
-        }
-        if (!ctype_space($request['name']) && !$request['name'] == "") {
-            $request->session()->flash('message-danger', 'Missing attribute group name!');
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if specification exists
-     *
-     * @param $slug
-     * @return mixed
-     */
-    protected function specificationExists($slug) {
-        return $specification = Specification::where('slug', $slug)->exists();
     }
 }

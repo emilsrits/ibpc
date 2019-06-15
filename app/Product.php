@@ -137,7 +137,7 @@ class Product extends Model
     /**
      * Check if product has sufficient stock
      *
-     * @param $qty
+     * @param float|int $qty
      * @return bool
      */
     public function checkStock($qty)
@@ -153,7 +153,7 @@ class Product extends Model
     /**
      * Update product stock
      *
-     * @param $qty
+     * @param float|int $qty
      * @return bool
      */
     public function updateStock($qty)

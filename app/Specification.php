@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Specification extends Model
 {
     /**
+     * The attributes that are mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'slug', 'name'
+    ];
+
+    /**
      * OneToMany relationship with Attribute class
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

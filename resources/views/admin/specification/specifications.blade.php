@@ -60,7 +60,7 @@ Attribute Groups
                 @endforeach
                 </tbody>
             </table>
-            @if($specifications->count() > 20)
+            @if($specifications->count() >= 20)
                 {{ $specifications->appends(Request::except('page'))->links() }}
             @endif
         </form>

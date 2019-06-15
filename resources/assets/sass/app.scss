@@ -1,5 +1,4 @@
 /* IMPORTS */
-@import "includes/reset";
 @import "includes/normalize";
 @import "includes/variables";
 @import "includes/mixins";
@@ -15,9 +14,11 @@
 
 /* GENERAL */
 body {
-  font-family: $font_body;
-  background-color: $color_white;
-  line-height: 1.2;
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+  color: $text-color;
+  background-color: $body-bg;
+  line-height: $line-height-base;
 }
 
 main {
@@ -32,6 +33,14 @@ a {
     color: $color_red;
     text-decoration: none;
   }
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+  vertical-align: baseline;
 }
 
 input[type=number] {

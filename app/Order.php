@@ -45,17 +45,24 @@ class Order extends Model
      *
      * @param array|int $ids
      * @param string $status
+     * @return void|bool
      */
     public function setStatus($ids, $status)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
                 $order = Order::find($id);
+                if (orderStatusFinished($order->status)) {
+                    return false;
+                }
                 $order->status = $status;
                 $order->save();
             }
         } else {
             $order = Order::findOrFail($ids);
+            if (orderStatusFinished($order->status)) {
+                return false;
+            }
             $order->status = $status;
             $order->save();
         }

@@ -2,8 +2,12 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -15,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'email', 'phone', 'address', 'country', 'city', 'postcode', 'password', 'status',
+        'name', 'surname', 'email', 'phone', 'address', 'country', 'city', 'postcode', 'password', 'status'
     ];
 
     /**
@@ -65,6 +69,31 @@ class User extends Authenticatable
             $user = User::findOrFail($ids);
             $user->status = $status;
             $user->save();
+        }
+    }
+
+    /**
+     * Create invoice file and send email to user about the order
+     *
+     * @param \Illuminate\Support\Facades\Auth $user
+     * @param \App\Order $order
+     */
+    public function invoice($user, $order)
+    {
+        // Generate PDF invoice file
+        $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
+
+        // Send mail with order info and attached invoice
+        Mail::send('emails.invoice', ['user' => $user, 'order' => $order], function($message) use($pdf, $user, $order)
+        {
+            $message->to($user->email)->subject('Invoice for order #' . $order->id);
+            $message->attachData($pdf->output(), $order->id .'-invoice.pdf');
+        });
+
+        // Save copy of invoice locally
+        if (config('constants.invoice_storage')) {
+            $now = Carbon::now();
+            Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice-' . str_random(2) . '.pdf', $pdf->output());
         }
     }
 
@@ -151,5 +180,17 @@ class User extends Authenticatable
     public function getFullAddressAttribute()
     {
         return $this->city . ', ' . $this->address . ', ' . $this->postcode;
+    }
+
+    /**
+     * Accept valid password and hash it before saving
+     *
+     * @param string $password
+     */
+    public function setPasswordAttribute($password)
+    {
+        if ($password !== null && $password !== "") {
+            $this->attributes['password'] = bcrypt($password);
+        }
     }
 }

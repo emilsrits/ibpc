@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
-use Illuminate\Http\Request;
+use App\Http\Requests\Store\StoreSearchRequest;
 
 class StoreController extends Controller
 {
@@ -23,10 +23,10 @@ class StoreController extends Controller
     /**
      * Product search
      *
-     * @param Request $request
+     * @param \App\Http\Requests\Store\StoreSearchRequest $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function search(Request $request)
+    public function search(StoreSearchRequest $request)
     {
         $input = $request['search'];
 
@@ -49,7 +49,7 @@ class StoreController extends Controller
     {
         $category = Category::where('slug', $child)->first();
         $categoryId = $category->id;
-
+        // Get products with matching categories
         $products = Product::whereHas('categories', function ($query) use ($categoryId) {
             $query->where('category_id', $categoryId);
         })->paginate(12);
@@ -66,7 +66,7 @@ class StoreController extends Controller
     public function show($code)
     {
         $product = Product::with('attributes.specification')->where('code', $code)->first();
-
+        // Get product attributes associated with its category
         if ($product->categories()->first()) {
             $categoryId = $product->categories()->first()->id;
             $specifications = Category::with('specifications.attributes')->find($categoryId);
