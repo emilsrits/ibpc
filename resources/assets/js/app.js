@@ -19,23 +19,6 @@
             }
         });
 
-        // Confirm product deletion in catalog
-        $('#catalog-form').submit(function() {
-            var massAction = $('#mass-action').val();
-            if (massAction === '3') {
-                var numberOfChecked = $('.entity-select:checked').length;
-
-                if (numberOfChecked > 0) {
-                    return confirm('Delete ' + numberOfChecked + ' products?');
-                }
-            }
-        });
-
-        // Confirm entity delete
-        $('#entity-delete').click(function() {
-            return confirm('Delete this?');
-        });
-
         // Toggle specifications sections when creating product
         $('.content-section-toggle').click(function() {
             $('i', this).toggleClass('fa-angle-up fa-angle-down');
@@ -51,6 +34,22 @@
            }
         });
 
+        // Confirm entity delete
+        $('#entity-delete').click(function() {
+            return confirm('Delete this?');
+        });
+
+        // Confirm product deletion in catalog
+        $('#catalog-form').submit(function() {
+            var massAction = $('#mass-action').val();
+            if (massAction === '3') {
+                var numberOfChecked = $('.entity-select:checked').length;
+
+                if (numberOfChecked > 0) {
+                    return confirm('Delete ' + numberOfChecked + ' products?');
+                }
+            }
+        });
         // Confirm category deletion in categories view
         $('#categories-form').submit(function() {
             var massAction = $('#mass-action').val();
@@ -62,7 +61,6 @@
                 }
             }
         });
-
         // Confirm specification deletion in specifications view
         $('#specifications-form').submit(function() {
             var massAction = $('#mass-action').val();
@@ -74,7 +72,6 @@
                 }
             }
         });
-
         // Confirm attribute deletion
         $('#attributes-form').submit(function() {
             var massAction = $('#mass-action').val();
@@ -86,8 +83,7 @@
                 }
             }
         });
-
-        // Confirm user deletion
+        // Confirm user disable
         $('#users-form').submit(function() {
             var massAction = $('#mass-action').val();
             if (massAction === '2') {
@@ -106,7 +102,7 @@
             $('input[type="checkbox"]').not(checkbox).prop('checked', false);
         });
 
-        // Disable order submit button after once click
+        // Disable order submit button after one click
         $('#checkout-confirm-form').one('submit', function() {
             $(this).find('#order-submit').addClass('disabled').attr('onclick','return false;');
         });
@@ -140,6 +136,13 @@
         });
 
         /* ------AJAX------ */
+        // Set AJAX defaults
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         // Load category specifications when creating product
         $('#category-select').change(function() {
             $.ajax({
@@ -160,14 +163,32 @@
         // Add a product to cart
         $('.product-quick-add').click(function() {
             $.ajax({
-                type: 'GET',
-                url: '/cart/add/' + $(this).val(),
+                type: 'POST',
+                url: '/cart/add',
                 data: {
                     productId: $(this).val()
                 },
                 dataType: 'json',
                 success: function(data) {
                     $('#navbar-cart-items').html(data);
+                },
+                error: function(err) {
+                    console.log("error: " + err);
+                }
+            });
+        });
+
+        // Remove a product from cart
+        $('.cart-item-remove').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/cart/remove',
+                data: {
+                    productId: $(this).val()
+                },
+                dataType: 'json',
+                success: function(data) {
+                    window.location.href = data.redirectUrl;
                 },
                 error: function(err) {
                     console.log("error: " + err);

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Account;
 
-use App\Rules\User\UserValidUpdate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,7 +27,6 @@ class AccountUpdateRequest extends FormRequest
         $id = $this->user()->id;
 
         return [
-            'submit' => new UserValidUpdate,
             'name' => 'required|max:20',
             'surname' => 'required|max:20',
             'email'  => 'required|email|max:25|unique:users,email,'.$id,

@@ -36,8 +36,8 @@ Categories
                     </th>
                     <th class="col-sm">Id</th>
                     <th>Title</th>
-                    <th>Parent</th>
-                    <th>Parent Id</th>
+                    <th>Top Category</th>
+                    <th>Parent ID</th>
                     <th>Status</th>
                     <th class="col-md">Created at</th>
                     <th class="col-md">Updated at</th>

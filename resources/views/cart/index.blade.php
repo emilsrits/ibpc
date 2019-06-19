@@ -26,7 +26,11 @@ Shopping Cart
                     @foreach($products as $product)
                         @if($product['item']['id'])
                         <tr>
-                            <td><a href="{{ url('/cart/remove', ['id' => $product['item']['id']]) }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td>
+                                <button class="btn-clean cart-item-remove" type="button" value="{{ $product['item']['id'] }}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </td>
                             <td class="cart-item-image hidden-xs">
                                 <a href="{{ url('/store', ['code' => $product['item']['code']]) }}">
                                     <img src="{{ asset($product['item']['image']) }}" alt="{{ $product['item']['code'] }}">

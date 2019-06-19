@@ -31,7 +31,7 @@ class AccountController extends Controller
     public function showOrder($id)
     {
         $user = Auth::user();
-        $order = $user->orders()->find($id);
+        $order = $user->orders()->findOrFail($id);
 
         return view('account.order', ['user' => $user, 'order' => $order]);
     }
@@ -50,6 +50,7 @@ class AccountController extends Controller
      * Update user information
      *
      * @param \App\Http\Requests\Account\AccountUpdateRequest $request
+     * @param \App\Actions\User\UserUpdateAction $action
      * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */

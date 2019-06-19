@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Attribute;
-use Illuminate\Http\Request;
+use App\Http\Requests\Specification\SpecificationActionRequest;
+use App\Actions\Attribute\AttributeActionAction;
+use App\Http\Requests\Attribute\AttributeUpdateRequest;
+use App\Actions\Attribute\AttributeStoreAction;
+use App\Actions\Attribute\AttributeUpdateAction;
 
 class AttributeController extends Controller
 {
     /**
      * Attributes mass action
      *
-     * @param Request $request
+     * @param \App\Http\Requests\Specification\SpecificationActionRequest $request
+     * @param \App\Actions\Attribute\AttributeActionAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function action(Request $request)
+    public function action(SpecificationActionRequest $request, AttributeActionAction $action)
     {
-        $attributeIds = $request->input('attributes');
-        $attribute = new Attribute();
-
-        switch ($request->input('mass-action')) {
-            case 1:
-                $attribute->deleteAttribute($attributeIds);
-                $request->session()->flash('message-success', 'Attribute(s) deleted!');
-                break;
+        $flash = $action->execute($request->all());
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
         }
 
         return redirect()->back();
@@ -44,41 +44,29 @@ class AttributeController extends Controller
     /**
      * Save attribute
      *
-     * @param Request $request
-     * @param $specificationId
+     * @param \App\Http\Requests\Attribute\AttributeUpdateRequest $request
+     * @param \App\Actions\Attribute\AttributeStoreAction $action
+     * @param string $specificationId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, $specificationId)
+    public function store(AttributeUpdateRequest $request, AttributeStoreAction $action, $specificationId)
     {
-        if (!ctype_space($request['name']) && !$request['name'] == "") {
-            $attribute = new Attribute();
-            $attribute->specification_id = $specificationId;
-            if ($this->attributeExists($request['name'])) {
-                $request->session()->flash('message-danger', 'Attribute with this name already exists!');
-                return redirect()->back();
-            } else {
-                $attribute->name = $request['name'];
-            }
-            $attribute->save();
+        $flash = $action->execute($request->all(), $specificationId);
 
-            $request->session()->flash('message-success', 'Attribute successfully created!');
-        } else {
-            $request->session()->flash('message-danger', 'Missing attribute name!');
-        }
-
+        $request->session()->flash($flash['type'], $flash['message']);
         return redirect()->route('specification.edit', ['specificationId' => $specificationId]);
     }
 
     /**
      * Return attribute edit view
      *
-     * @param $specificationId
-     * @param $id
+     * @param string $specificationId
+     * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($specificationId, $id)
     {
-        $attribute = Attribute::find($id);
+        $attribute = Attribute::findOrFail($id);
 
         return view('admin.attribute.edit', [
             'specificationId' => $specificationId,
@@ -89,68 +77,21 @@ class AttributeController extends Controller
     /**
      * Update attribute
      *
-     * @param Request $request
-     * @param $specificationId
-     * @param $id
+     * @param \App\Http\Requests\Attribute\AttributeUpdateRequest $request
+     * @param \App\Actions\Attribute\AttributeUpdateAction $action
+     * @param string $specificationId
+     * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $specificationId, $id)
+    public function update(AttributeUpdateRequest $request, AttributeUpdateAction $action, $specificationId, $id)
     {
-        // Delete attribute
-        if ($request['submit'] === 'delete') {
-            $attribute = new Attribute();
-            $attribute->deleteAttribute($id);
-
-            $request->session()->flash('message-success', 'Attribute deleted!');
-            return redirect()->route('specification.edit', ['specificationId' => $specificationId]);
-        }
-
-        // Update attribute
-        if ($request['submit'] === 'save') {
-            $attribute = Attribute::find($id);
-
-            if (!ctype_space($request['name']) && !$request['name'] == "") {
-                if ($request['name'] != $attribute->name) {
-                    if ($this->attributeExists($request['name'])) {
-                        $request->session()->flash('message-danger', 'Attribute with this name already exists!');
-                        return redirect()->back();
-                    } else {
-                        $attribute->name = $request['name'];
-                    }
-                }
-                $attribute->save();
-            } else {
-                $request->session()->flash('message-danger', 'Missing attribute group name!');
-                return redirect()->back();
-            }
-
-            $request->session()->flash('message-success', 'Attribute successfully updated!');
+        $flash = $action->execute($request->all(), $id);
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-danger', 'Invalid form action!');
-        return redirect()->back();
-    }
-
-    /**
-     * Delete attribute
-     *
-     * @param $id
-     */
-    public function delete($id)
-    {
-        $attribute = new Attribute();
-        $attribute->deleteAttribute($id);
-    }
-
-    /**
-     * Check if attribute exists
-     *
-     * @param $name
-     * @return mixed
-     */
-    protected function attributeExists($name)
-    {
-        return $attribute = Attribute::where('name', $name)->exists();
+        $request->session()->flash('message-success', 'Attribute deleted!');
+        return redirect()->route('specification.edit', ['specificationId' => $specificationId]);
     }
 }

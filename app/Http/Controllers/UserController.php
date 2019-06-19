@@ -34,6 +34,7 @@ class UserController extends Controller
      * Users mass action
      *
      * @param \App\Http\Requests\User\UserActionRequest $request
+     * @param \App\Actions\User\UserActionAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
     public function action(UserActionRequest $request, UserActionAction $action)
@@ -67,6 +68,7 @@ class UserController extends Controller
      * Update user
      *
      * @param \App\Http\Requests\User\UserUpdateRequest $request
+     * @param \App\Actions\User\UserUpdateAction $action
      * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */

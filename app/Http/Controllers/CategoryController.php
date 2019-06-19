@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Specification;
 use App\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use App\Http\Requests\Category\CategoryActionRequest;
+use App\Actions\Category\CategoryActionAction;
+use App\Http\Requests\Category\CategoryStoreRequest;
+use App\Actions\Category\CategoryStoreAction;
+use App\Http\Requests\Category\CategoryUpdateRequest;
+use App\Actions\Category\CategoryUpdateAction;
 
 class CategoryController extends Controller
 {
@@ -24,26 +28,16 @@ class CategoryController extends Controller
     /**
      * Categories mass action
      *
-     * @param Request $request
+     * @param \App\Http\Requests\Category\CategoryActionRequest $request
+     * @param \App\Actions\Category\CategoryActionAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function action(Request $request)
+    public function action(CategoryActionRequest $request, CategoryActionAction $action)
     {
-        $categoryIds = $request->input('categories');
-        $category = new Category();
-
-        switch ($request->input('mass-action')) {
-            case 1:
-                $category->setStatus($categoryIds, 1);
-                $request->session()->flash('message-success', 'Categories enabled!');
-                break;
-            case 2:
-                $category->setStatus($categoryIds, 0);
-                $request->session()->flash('message-success', 'Categories disabled!');
-                break;
-            case 3:
-                $this->delete($request, $categoryIds);
-                break;
+        $flash = $action->execute($request->all());
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
+            return redirect()->back();
         }
 
         return redirect()->back();
@@ -66,53 +60,27 @@ class CategoryController extends Controller
     /**
      * Save a category
      *
-     * @param Request $request
+     * @param \App\Http\Requests\Category\CategoryStoreRequest $request
+     * @param \App\Actions\Category\CategoryStoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request, CategoryStoreAction $action)
     {
-        if ($this->categoryValidate($request)) {
-            return redirect()->back();
-        }
+        $flash = $action->execute($request->all());
 
-        $category = new Category();
-        $category->title = $request['title'];
-        $category->slug = str_slug($request['title']);
-        if ($request['parent']) {
-            $category->parent = $request['parent'];
-        } else {
-            if ($request['parent_id']) {
-                $category->parent_id = $request['parent_id'];
-            }
-        }
-        $category->status = $request['status'];
-        $category->save();
-
-        if ($request['spec']) {
-            $specificationsGroup = collect($request['spec'])->sortBy('id');
-            foreach ($specificationsGroup as $specifications => $specification) {
-                foreach ($specification as $key => $value) {
-                    if ($value) {
-                        $category->specifications()->attach(['specification_id' => ['specification_id' => $value]]);
-                    }
-                }
-            }
-        }
-
-        $request->session()->flash('message-success', 'Category successfully created!');
-
+        $request->session()->flash($flash['type'], $flash['message']);
         return redirect()->route('category.index');
     }
 
     /**
      * Return edit category page
      *
-     * @param $id
+     * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        $category = Category::with('specifications')->find($id);
+        $category = Category::with('specifications')->findOrFail($id);
 
         $specifications = Specification::orderBy('name', 'asc')->get();
 
@@ -125,141 +93,20 @@ class CategoryController extends Controller
     /**
      * Update category
      *
-     * @param Request $request
-     * @param $id
+     * @param \App\Http\Requests\Category\CategoryUpdateRequest $request
+     * @param \App\Actions\Category\CategoryUpdateAction $action
+     * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(CategoryUpdateRequest $request, CategoryUpdateAction $action, $id)
     {
-        // Delete category
-        if ($request['submit'] === 'delete') {
-            $this->delete($request, $id);
-
-            if (Session::has('message-danger')) {
-                return redirect()->back();
-            }
-
-            return redirect()->route('category.index');
-        }
-
-        // Update category
-        if ($request['submit'] === 'save') {
-            $category = Category::find($id);
-
-            if ($request['title'] != $category->title) {
-                if ($this->categoryExists($request['title'])) {
-                    $request->session()->flash('message-danger', 'Category with this title already exists!');
-                    return redirect()->back();
-                } else {
-                    $category->title = $request['title'];
-                    $category->slug = str_slug($request['title']);
-                }
-            }
-            if ($request['parent']) {
-                $category->parent = $request['parent'];
-            } else {
-                if ($request['parent_id']) {
-                    $category->parent_id = $request['parent_id'];
-                }
-            }
-            $category->status = $request['status'];
-            $category->save();
-
-            if ($request['spec']) {
-                // Attach new specifications
-                $specificationsGroup = collect($request['spec'])->sortBy('id');
-                foreach ($specificationsGroup as $specifications => $specification) {
-                    foreach ($specification as $key => $value) {
-                        $categorySpec = $category->specifications->find($value);
-                        if (!$categorySpec) {
-                            $category->specifications()->attach(['specification_id' => ['specification_id' => $value]]);
-                            continue;
-                        }
-                    }
-                }
-                // Remove unchecked values
-                if ($category->specifications->first()) {
-                    foreach ($category->specifications as $categorySpecs) {
-                        $specId = $categorySpecs->id;
-                        $matchFound = false;
-                        foreach ($specificationsGroup as $specifications => $specification) {
-                            foreach ($specification as $key => $value) {
-                                if ((int)$value === $specId) {
-                                    $matchFound = true;
-                                    continue;
-                                }
-                            }
-                        }
-                        if (!$matchFound) {
-                            $category->specifications()->detach(['specification_id' => ['specification_id' => $specId]]);
-                        }
-                    }
-                }
-            } else {
-                // Remove all specifications
-                if ($category->specifications->first()) {
-                    foreach ($category->specifications as $categorySpecs) {
-                        $specId = $categorySpecs->id;
-                        $category->specifications()->detach(['specification_id' => ['specification_id' => $specId]]);
-                    }
-                }
-            }
-
-            $request->session()->flash('message-success', 'Category successfully updated!');
-
+        $flash = $action->execute($request->all(), $id);
+        if ($flash['type'] != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-danger', 'Invalid form action!');
-
-        return redirect()->back();
-    }
-
-    /**
-     * Delete a category
-     *
-     * @param Request $request
-     * @param $id
-     */
-    public function delete(Request $request, $id)
-    {
-        $category = new Category();
-
-        if ($category->deleteCategory($id)) {
-            $request->session()->flash('message-success', 'Category deleted!');
-        } else {
-            $request->session()->flash('message-danger', 'Cannot delete category with existing products!');
-        }
-    }
-
-    /**
-     * Validate category save
-     *
-     * @param $request
-     * @return bool
-     */
-    protected function categoryValidate($request)
-    {
-        if (!$request['title']) {
-            $request->session()->flash('message-danger', 'Missing category title!');
-            return true;
-        } else {
-            if ($this->categoryExists($request['title'])) {
-                $request->session()->flash('message-danger', 'Category with this title already exists!');
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    /**
-     * Check if category exists
-     *
-     * @param $title
-     * @return mixed
-     */
-    protected function categoryExists($title) {
-        return $category = Category::where('title', $title)->exists();
+        $request->session()->flash('message-success', 'Category deleted!');
+        return redirect()->route('category.index');
     }
 }

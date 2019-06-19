@@ -32,7 +32,7 @@ class Cart extends Model
      * Add an item to cart
      *
      * @param $item
-     * @param $id
+     * @param string $id
      * @param $qty
      */
     public function add($item, $id, $qty)
@@ -52,7 +52,7 @@ class Cart extends Model
     /**
      * Remove an item from cart
      *
-     * @param $id
+     * @param string $id
      */
     public function remove($id)
     {
@@ -100,6 +100,8 @@ class Cart extends Model
                 return false;
             }
         }
+
+        return true;
     }
 
     /**
@@ -117,7 +119,7 @@ class Cart extends Model
                 break;
             case 'address':
                 $this->delivery['code'] = 'address';
-                $this->delivery['cost'] = 2.99;
+                $this->delivery['cost'] = 6.99;
                 break;
         }
         $this->deliveryCost = $this->delivery['cost'];
@@ -132,13 +134,13 @@ class Cart extends Model
      */
     public function getCart()
     {
-        return $cart = Session::get('cart');
+        return Session::get('cart');
     }
 
     /**
-     * Check if cart is empty
+     * Check if cart is empty, delete it if it is empty
      *
-     * @return null
+     * @return null|bool
      */
     public function isEmpty()
     {
@@ -165,8 +167,6 @@ class Cart extends Model
                 return $this->deliveryCost . ' €';
             case 'with_delivery':
                 return $this->totalPrice + $this->deliveryCost . ' €';
-            case 'item_total':
-                return $this->items[$id]['price'] * $this->items[$id]['qty'] . ' €';
         }
     }
 
@@ -188,7 +188,7 @@ class Cart extends Model
     /**
      * Get total price of a product
      *
-     * @param $id
+     * @param string $id
      * @param null $currency
      * @return string
      */
@@ -204,8 +204,8 @@ class Cart extends Model
     /**
      * Get price of a product
      *
-     * @param $id
-     * @param null $currency
+     * @param string $id
+     * @param null|string $currency
      * @return string
      */
     public function getItemPrice($id, $currency = null)

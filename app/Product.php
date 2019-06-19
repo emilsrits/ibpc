@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Filters\QueryFilter;
-use Dompdf\Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
@@ -64,7 +63,7 @@ class Product extends Model
     /**
      * Delete a product
      *
-     * @param $ids
+     * @param array|string $ids
      * @return bool
      */
     public function deleteProduct($ids)
@@ -91,9 +90,51 @@ class Product extends Model
     }
 
     /**
+     * Set product attributes
+     * 
+     * @param array $data
+     */
+    public function setAttributes(array $data)
+    {
+        $specifications = collect($data);
+
+        // If the product has any attributes attached
+        if ($this->attributes()->first()) {
+            foreach ($specifications as $category => $attributes) {
+                foreach ($attributes as $attribute => $value) {
+                    $productAttr = $this->attributes->find($attribute);
+                    if ($productAttr) {
+                        if (!ctype_space($value) && !$value == "") {
+                            // Update attribute
+                            $this->attributes()->detach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                            $this->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                        } else {
+                            // Remove attribute
+                            $this->attributes()->detach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                        }
+                    } else {
+                        if (!ctype_space($value) && !$value == "") {
+                            // Add attribute
+                            $this->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                        }
+                    }
+                }
+            }
+        } else {
+            foreach ($specifications as $category => $attributes) {
+                foreach ($attributes as $attribute => $value) {
+                    if ($value) {
+                        $this->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Change product status
      *
-     * @param $id
+     * @param array|string $id
      * @param $status
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -118,15 +159,34 @@ class Product extends Model
     }
 
     /**
+     * Store product image
+     * 
+     * @param $img
+     * @param $code
+     * @param $category
+     * @return null|string
+     */
+    public function storeImage($img, $code, $category)
+    {
+        if ($img) {
+            $imgExt =  $img->guessClientExtension();
+            $imgName = $code . str_random(20) . '.' . $imgExt;
+            $img->storeAs('/public/images/products/' . $category . '/' , $imgName);
+            // Return image path
+            return Product::STORAGE_PRODUCT_IMAGE_PATH . $category . '/' . $imgName;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Delete product image
      *
-     * @param $id
      * @return null
      */
-    public function deleteImage($id)
+    public function deleteImage()
     {
-        $product = Product::find($id);
-        $productImage = str_replace('/storage', '', $product->image_path);
+        $productImage = str_replace('/storage', '', $this->image_path);
         if ($productImage) {
             Storage::delete('/public' . $productImage);
         } else {
@@ -174,7 +234,7 @@ class Product extends Model
     /**
      * Get product attribute by id
      *
-     * @param $id
+     * @param string $id
      * @return null
      */
     public function getAttributeById($id)
@@ -226,7 +286,7 @@ class Product extends Model
     {
         switch ($price) {
             case 'old':
-                if ($this->price_old) {
+                if ($this->price_old > $this->price) {
                     return $this->price_old . ' €';
                 } else {
                     return null;

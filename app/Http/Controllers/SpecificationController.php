@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Specification;
-use App\Http\Requests\Specification\SpecificationStoreRequest;
+use App\Http\Requests\Specification\SpecificationUpdateRequest;
 use App\Actions\Specification\SpecificationStoreAction;
 use App\Http\Requests\Specification\SpecificationActionRequest;
 use App\Actions\Specification\SpecificationActionAction;
@@ -27,6 +27,7 @@ class SpecificationController extends Controller
      * Specification mass action
      *
      * @param \App\Http\Requests\Specification\SpecificationActionRequest $request
+     * @param \App\Actions\Specification\SpecificationActionAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
     public function action(SpecificationActionRequest $request, SpecificationActionAction $action)
@@ -52,10 +53,11 @@ class SpecificationController extends Controller
     /**
      * Save a specification
      *
-     * @param \App\Http\Requests\Specification\SpecificationStoreRequest $request
+     * @param \App\Http\Requests\Specification\SpecificationUpdateRequest $request
+     * @param \App\Actions\Specification\SpecificationStoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(SpecificationStoreRequest $request, SpecificationStoreAction $action)
+    public function store(SpecificationUpdateRequest $request, SpecificationStoreAction $action)
     {
         $flash = $action->execute($request->all());
 
@@ -71,7 +73,7 @@ class SpecificationController extends Controller
      */
     public function edit($id)
     {
-        $specification = Specification::with('attributes')->find($id);
+        $specification = Specification::with('attributes')->findOrFail($id);
 
         return view('admin.specification.edit', [
             'specification' => $specification
@@ -81,11 +83,12 @@ class SpecificationController extends Controller
     /**
      * Update specification
      *
-     * @param \App\Http\Requests\Specification\SpecificationStoreRequest $request
+     * @param \App\Http\Requests\Specification\SpecificationUpdateRequest $request
+     * @param \App\Actions\Specification\SpecificationUpdateAction $action
      * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SpecificationStoreRequest $request, SpecificationUpdateAction $action, $id)
+    public function update(SpecificationUpdateRequest $request, SpecificationUpdateAction $action, $id)
     {
         $flash = $action->execute($request->all(), $id);
         if ($flash != null) {
@@ -95,16 +98,5 @@ class SpecificationController extends Controller
 
         $request->session()->flash('message-success', 'Attribute group deleted!');
         return redirect()->route('specification.index');
-    }
-
-    /**
-     * Delete specification
-     *
-     * @param string $id
-     */
-    public function delete($id)
-    {
-        $specification = new Specification();
-        $specification->deleteSpecification($id);
     }
 }

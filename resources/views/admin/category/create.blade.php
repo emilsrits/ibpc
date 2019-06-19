@@ -25,27 +25,27 @@ Create Category
                         <tbody>
                         <tr class="entity-attribute">
                             <td><label for="title">Title</label></td>
-                            <td><input type="text" name="title" required></td>
+                            <td><input type="text" name="title" required value="{{ old('title') }}"></td>
                         </tr>
                         <tr class="entity-attribute">
-                            <td><label for="parent">Parent Category</label></td>
+                            <td><label for="parent">Top Category</label></td>
                             <td>
                                 <select id="category-parent" name="parent" required>
                                     <option value="0">No</option>
-                                    <option value="1">Yes</option>
+                                    <option value="1" {{ old('parent') === '1' ? 'selected' : '' }}>Yes</option>
                                 </select>
                             </td>
                         </tr>
                         <tr id="category-parent-id" class="entity-attribute">
-                            <td><label for="parent_id">Parent</label></td>
-                            <td><input type="number" min="1" max="1000" name="parent_id"></td>
+                            <td><label for="parent_id">Parent ID</label></td>
+                            <td><input type="number" min="1" max="1000" name="parent_id" value="{{ old('parent_id') }}"></td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="status">Status</label></td>
                             <td>
                                 <select name="status" required>
                                     <option value="0">Disabled</option>
-                                    <option value="1">Enabled</option>
+                                    <option value="1" {{ old('status') === '1' ? 'selected' : '' }}>Enabled</option>
                                 </select>
                             </td>
                         </tr>
@@ -65,7 +65,9 @@ Create Category
                                 @foreach($chunk as $specification)
                                     <td class="category-attribute-group no-wrap">
                                         <label>
-                                            <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}" value="{{ $specification->id }}">
+                                            <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}" 
+                                                {{ is_array(old('spec.'.$specification->id)) ? 'checked' : '' }}
+                                                value="{{ $specification->id }}">
                                             {{ $specification->slug }}
                                         </label>
                                     </td>

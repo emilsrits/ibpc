@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
 use App\Cart;
+use App\Actions\Cart\CartStoreAction;
+use App\Actions\Cart\CartDeleteAction;
+use App\Actions\Cart\CartUpdateAction;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Request;
+use App\Actions\Cart\CartStoreAjaxAction;
+use App\Http\Requests\Cart\CartStoreRequest;
+use App\Http\Requests\Cart\CartDeleteRequest;
+use App\Http\Requests\Cart\CartUpdateRequest;
+use App\Http\Requests\Cart\CartStoreAjaxRequest;
 
 class CartController extends Controller
 {
@@ -29,108 +35,69 @@ class CartController extends Controller
     /**
      * Adds product to cart and redirects to main shop view
      *
-     * @param Request $request
-     * @param $id
+     * @param CartStoreRequest $request
+     * @param CartStoreAction $action
+     * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, $id)
+    public function store(CartStoreRequest $request, CartStoreAction $action, $id)
     {
-        $qty = $request->input('qty');
-        if ((int)$qty < 1) {
-            $request->session()->flash('message-warning', 'Invalid product quantity!');
-            return redirect()->back();
+        $flash = $action->execute($request->all(), $id);
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
+            return redirect()->route('cart.index');
         }
 
-        $product = Product::find($id);
-        if (!$product) {
-            $request->session()->flash('message-danger', 'Product can not be added!');
-            return redirect()->back();
-        }
-
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->add($product, $product->id, $qty);
-
-        Session::put('cart', $cart);
-
-        $request->session()->flash('message-success', 'Product added to cart!');
-        return redirect()->route('cart.index');
+        $request->session()->flash('message-warning', 'Product could not get added.');
+        return redirect()->back();
     }
 
     /**
      * Add a single product to cart from AJAX response
      *
-     * @param Request $request
+     * @param CartStoreAjaxRequest $request,
+     * @param CartStoreAjaxAction $action
      * @return \Illuminate\Http\JsonResponse
      */
-    public function storeWithAjax(Request $request)
+    public function storeWithAjax(CartStoreAjaxRequest $request, CartStoreAjaxAction $action)
     {
-        $qty = 1;
-
-        $productId = $request['productId'];
-        $product = Product::find($productId);
-
-        if ($product) {
-            $oldCart = Session::has('cart') ? Session::get('cart') : null;
-            $cart = new Cart($oldCart);
-            $cart->add($product, $product->id, $qty);
-
-            Session::put('cart', $cart);
-
-            if (Session::has('cart')) {
-                $items = count(Session::get('cart')->items);
-                $html = '(' . $items . ') ' . Session::get('cart')->getPriceCurrency('total');
-            } else {
-                $html = 0;
-            }
-
-            return response()->json($html, 200);
+        $response = $action->execute($request->all());
+        if ($response !== null) {
+            return response()->json($response, 200);
         } else {
-            return response()->json(null, 400);
+            return response()->json($response, 400);
         }
     }
 
     /**
      * Remove product from cart
      *
-     * @param $id
+     * @param CartDeleteRequest $request
+     * @param CartDeleteAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($id)
+    public function delete(CartDeleteRequest $request, CartDeleteAction $action)
     {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->remove($id);
-
-        Session::put('cart', $cart);
-
-        $cart->isEmpty();
-
-        return redirect()->route('cart.index');
+        $response = $action->execute($request->all());
+        if ($response !== null) {
+            return response()->json($response, 200);
+        } else {
+            return response()->json($response , 400);
+        }
     }
 
     /**
      * Update cart
      *
-     * @param Request $request
+     * @param CartUpdateRequest $request
+     * @param CartUpdateAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function update(CartUpdateRequest $request, CartUpdateAction $action)
     {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $flash = $action->execute($request->all());
 
-        $cartItemsQty = $request->input('cart');
-
-        if ($cart->updateCart($cartItemsQty) === false) {
-            $request->session()->flash('message-warning', 'Invalid product quantity!');
-        } else {
-            $request->session()->flash('message-success', 'Cart updated!');
-        }
-
-        Session::put('cart', $cart);
-        $cart->isEmpty();
-
+        $request->session()->flash($flash['type'], $flash['message']);
         return redirect()->route('cart.index');
     }
 }

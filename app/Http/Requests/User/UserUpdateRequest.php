@@ -3,7 +3,6 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\User\UserValidUpdate;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -27,7 +26,6 @@ class UserUpdateRequest extends FormRequest
         $id = $this->route('id');
 
         return [
-            'submit' => new UserValidUpdate,
             'name' => 'required|max:20',
             'surname' => 'required|max:20',
             'email'  => 'required|email|max:25|unique:users,email,'.$id,

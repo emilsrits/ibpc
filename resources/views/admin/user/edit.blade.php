@@ -99,8 +99,8 @@ Edit User
                                 <td class="user-role">
                                     <label>
                                         <input type="checkbox" name="{{ 'role[' . $role->id . '][id]' }}"
-                                               {{ $user->hasRole($role->slug) ? 'checked' : '' }}
-                                               value="{{ $role->id }}">
+                                            value="{{ $role->id }}"
+                                            {{ $user->hasRole($role->slug) ? 'checked' : '' }}>
                                         {{ $role->name }}
                                     </label>
                                 </td>

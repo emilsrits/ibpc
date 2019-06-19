@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Filters\OrderFilter;
 use Illuminate\Http\Request;
-use App\Actions\Order\OrderActionAction;
 use App\Actions\Order\OrderStoreAction;
-use App\Http\Requests\Order\OrderUpdateRequest;
+use App\Actions\Order\OrderActionAction;
 use App\Actions\Order\OrderUpdateAction;
+use App\Http\Requests\Order\OrderActionRequest;
+use App\Http\Requests\Order\OrderUpdateRequest;
 
 class OrderController extends Controller
 {
@@ -27,11 +28,12 @@ class OrderController extends Controller
     /**
      * Order mass action
      *
-     * @param Request $request
+     * @param \App\Http\Requests\Order\OrderActionRequest $request
+     * @param \App\Actions\Order\OrderActionAction $action
      * @param OrderFilter $filters
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function action(OrderUpdateRequest $request, OrderActionAction $action, OrderFilter $filters)
+    public function action(OrderActionRequest $request, OrderActionAction $action, OrderFilter $filters)
     {
         $flash = $action->execute($request->all());
         if ($flash != null) {
@@ -48,6 +50,7 @@ class OrderController extends Controller
      * Create an order
      *
      * @param Request $request
+     * @param \App\Actions\Order\OrderStoreAction $action
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(Request $request, OrderStoreAction $action)
@@ -65,12 +68,12 @@ class OrderController extends Controller
     /**
      * Return order edit view
      *
-     * @param $id
+     * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        $order = Order::with('user')->find($id);
+        $order = Order::with('user')->findOrFail($id);
 
         return view('admin.order.edit', [
             'order' => $order
@@ -80,8 +83,9 @@ class OrderController extends Controller
     /**
      * Update order
      *
-     * @param Request $request
-     * @param $id
+     * @param \App\Http\Requests\Order\OrderUpdateRequest $request
+     * @param \App\Actions\Order\OrderUpdateAction $action
+     * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(OrderUpdateRequest $request, OrderUpdateAction $action, $id)
@@ -103,6 +107,7 @@ class OrderController extends Controller
         if ($request['success']) {
             return view('cart.checkout.success');
         }
+        
         return redirect()->route('shop.index');
     }
 }

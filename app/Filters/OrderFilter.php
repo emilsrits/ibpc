@@ -12,7 +12,7 @@ class OrderFilter extends QueryFilter
     /**
      * Filter order by id
      *
-     * @param $id
+     * @param string $id
      * @return mixed
      */
     public function id($id)

@@ -4,7 +4,6 @@ namespace App\Http\Requests\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\Order\OrderValidStatus;
-use App\Rules\Order\OrderValidUpdate;
 
 class OrderUpdateRequest extends FormRequest
 {
@@ -26,9 +25,7 @@ class OrderUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'submit' => new OrderValidUpdate,
-            'mass-action' => new OrderValidStatus,
-            'status' => new OrderValidStatus
+            'mass-action' => new OrderValidStatus
         ];
     }
 }

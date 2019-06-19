@@ -12,7 +12,7 @@ class ProductFilter extends QueryFilter
     /**
      * Filter product by id
      *
-     * @param $id
+     * @param string $id
      * @return mixed
      */
     public function id($id)

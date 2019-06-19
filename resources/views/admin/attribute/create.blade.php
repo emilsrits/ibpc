@@ -26,7 +26,7 @@ Create Attribute
                         <input type="hidden" value="{{ $specificationId }}">
                         <tr class="entity-attribute">
                             <td><label for="name">Name</label></td>
-                            <td><input type="text" name="name" required></td>
+                            <td><input type="text" name="name" required value="{{ old('name') }}"></td>
                         </tr>
                         </tbody>
                     </table>

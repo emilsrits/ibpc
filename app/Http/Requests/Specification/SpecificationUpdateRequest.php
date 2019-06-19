@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Specification;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Specification\SpecificationValidUpdate;
 
-class SpecificationStoreRequest extends FormRequest
+class SpecificationUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +26,6 @@ class SpecificationStoreRequest extends FormRequest
         $id = $this->route('id');
 
         return [
-            'submit' => new SpecificationValidUpdate,
             'slug' => 'required|string|max:20|unique:specifications,slug,'.$id,
             'name' => 'required|string|max:20'
         ];

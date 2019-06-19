@@ -380,6 +380,12 @@
       line-height: 20px;
     }
   }
+  .cart-item-remove {
+    color: $color_black;
+    &:hover {
+      color: $color_red;
+    }
+  }
   .cart-item-image {
     img {
       margin: auto;

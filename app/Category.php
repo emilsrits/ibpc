@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     /**
+     * The attributes that are mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'parent', 'parent_id', 'status' 
+    ];
+
+    /**
      * ManyToMany relationship with Product class
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -29,7 +38,7 @@ class Category extends Model
     /**
      * Delete a category
      *
-     * @param $ids
+     * @param array|string $ids
      * @return bool
      */
     public function deleteCategory($ids)
@@ -56,7 +65,7 @@ class Category extends Model
     /**
      * Set category status
      *
-     * @param $id
+     * @param array|string $id
      * @param $status
      */
     public function setStatus($id, $status)
@@ -75,9 +84,83 @@ class Category extends Model
     }
 
     /**
+     * Set specifications of a category
+     * 
+     * @param array $data
+     */
+    public function setSpecifications(array $data)
+    {
+        $specificationsGroup = collect($data)->sortBy('id');
+        // Attach specifications to category
+        foreach ($specificationsGroup as $specifications => $specification) {
+            foreach ($specification as $key => $value) {
+                if ($value) {
+                    $this->specifications()->attach(['specification_id' => ['specification_id' => $value]]);
+                }
+            }
+        }
+    }
+
+    /**
+     * Update specifications of a category
+     * 
+     * @param array $data
+     */
+    public function updateSpecifications(array $data)
+    {
+        if ($data) {
+            // Attach new specifications
+            $specificationsGroup = collect($data)->sortBy('id');
+            foreach ($specificationsGroup as $specifications => $specification) {
+                foreach ($specification as $key => $value) {
+                    $categorySpec = $this->specifications->find($value);
+                    if (!$categorySpec) {
+                        $this->specifications()->attach(['specification_id' => ['specification_id' => $value]]);
+                        continue;
+                    }
+                }
+            }
+            // Remove unchecked values
+            if ($this->specifications->first()) {
+                foreach ($this->specifications as $categorySpecs) {
+                    $specId = $categorySpecs->id;
+                    $matchFound = false;
+                    foreach ($specificationsGroup as $specifications => $specification) {
+                        foreach ($specification as $key => $value) {
+                            if ((int)$value === $specId) {
+                                $matchFound = true;
+                                continue;
+                            }
+                        }
+                    }
+                    if (!$matchFound) {
+                        $this->specifications()->detach(['specification_id' => ['specification_id' => $specId]]);
+                    }
+                }
+            }
+        } else {
+            // Remove all specifications
+            $this->removeSpecifications();
+        }
+    }
+
+    /**
+     * Remove specifications of a category
+     */
+    public function removeSpecifications()
+    {
+        if ($this->specifications->first()) {
+            foreach ($this->specifications as $categorySpecs) {
+                $specId = $categorySpecs->id;
+                $this->specifications()->detach(['specification_id' => ['specification_id' => $specId]]);
+            }
+        }
+    }
+
+    /**
      * Get a related specification by id
      *
-     * @param $id
+     * @param string $id
      * @return mixed|null
      */
     public function getSpecificationById($id)
@@ -100,5 +183,19 @@ class Category extends Model
     public function getSpecificationId()
     {
         return $this->specifications()->allRelatedIds();
+    }
+
+    /**
+     * Set parent_id depending on parent status
+     * 
+     * @param integer $parent_id
+     */
+    public function setParentIdAttribute($parent_id)
+    {
+        if ($this->attributes['parent'] == 1) {
+            $this->attributes['parent_id'] = null;
+        } else {
+            $this->attributes['parent_id'] = $parent_id;
+        }
     }
 }

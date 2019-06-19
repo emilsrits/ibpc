@@ -26,27 +26,27 @@ Edit Category
                         <tbody>
                         <tr class="entity-attribute">
                             <td><label for="title">Title</label></td>
-                            <td><input type="text" name="title" required value="{{ $category->title }}"></td>
+                            <td><input type="text" name="title" required value="{{ old('title', $category->title) }}"></td>
                         </tr>
                         <tr class="entity-attribute">
-                            <td><label for="parent">Parent Category</label></td>
+                            <td><label for="parent">Top Category</label></td>
                             <td>
                                 <select id="category-parent" name="parent" required>
                                     <option value="0">No</option>
-                                    <option value="1" {{ $category->parent === 1 ? 'selected' : '' }}>Yes</option>
+                                    <option value="1" {{ old('parent', $category->parent) === 1 ? 'selected' : '' }}>Yes</option>
                                 </select>
                             </td>
                         </tr>
                         <tr id="category-parent-id" class="entity-attribute">
-                            <td><label for="parent_id">Parent</label></td>
-                            <td><input type="number" min="1" max="1000" name="parent_id" value="{{ $category->parent_id }}"></td>
+                            <td><label for="parent_id">Parent ID</label></td>
+                            <td><input type="number" min="1" max="1000" name="parent_id" value="{{ old('parent_id', $category->parent_id) }}"></td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="status">Status</label></td>
                             <td>
                                 <select name="status" required>
                                     <option value="0">Disabled</option>
-                                    <option value="1" {{ $category->status == 1 ? 'selected' : '' }}>Enabled</option>
+                                    <option value="1" {{ old('status', $category->status) === 1 ? 'selected' : '' }}>Enabled</option>
                                 </select>
                             </td>
                         </tr>
@@ -67,8 +67,9 @@ Edit Category
                                             <td class="category-attribute-group no-wrap">
                                                 <label>
                                                     <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}"
-                                                           {{ $category->getSpecificationById($specification->id) ? 'checked' : '' }}
-                                                           value="{{ $specification->id }}">
+                                                        value="{{ $specification->id }}"
+                                                        {{ is_array(old('spec.'.$specification->id)) ? 'checked' : '' }}
+                                                        {{ !is_array(old('spec')) && $category->getSpecificationById($specification->id) ? 'checked' : '' }}>
                                                     {{ $specification->slug }}
                                                 </label>
                                             </td>

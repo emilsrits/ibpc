@@ -21,6 +21,6 @@ class Cart
             return $next($request);
         }
 
-        return redirect()->route('shop.index');
+        return redirect()->route('store.index');
     }
 }

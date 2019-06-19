@@ -29,7 +29,7 @@ class Attribute extends Model
     /**
      * Delete attributes
      *
-     * @param $ids
+     * @param array|string $ids
      */
     public function deleteAttribute($ids)
     {

@@ -121,7 +121,7 @@ Catalog
                 @endforeach
                 </tbody>
             </table>
-            @if($products->count() > 20)
+            @if($products->count() >= 20)
                 {{ $products->appends(Request::except('page'))->links() }}
             @endif
         </form>

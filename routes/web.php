@@ -69,10 +69,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'ProductController@update',
         'as' => 'product.update'
     ]);
-    Route::post('/product/delete/{id}', [
-        'uses' => 'ProductController@delete',
-        'as' => 'product.delete'
-    ]);
 
     /**
      * Category routes
@@ -101,10 +97,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'CategoryController@update',
         'as' => 'category.update'
     ]);
-    Route::post('/category/delete/{id}', [
-        'uses' => 'CategoryController@delete',
-        'as' => 'category.delete'
-    ]);
 
     /**
      * Specification / Attribute Group routes
@@ -132,10 +124,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
     Route::post('/specification/update/{id}', [
         'uses' => 'SpecificationController@update',
         'as' => 'specification.update'
-    ]);
-    Route::post('/specification/delete/{id}', [
-        'uses' => 'SpecificationController@delete',
-        'as' => 'specification.delete'
     ]);
 
     /**
@@ -258,7 +246,7 @@ Route::get('/cart', [
     'uses' => 'CartController@index',
     'as' => 'cart.index'
 ]);
-Route::get('/cart/add/{id}', [
+Route::post('/cart/add', [
     'uses' => 'CartController@storeWithAjax',
     'as' => 'cart.storeWithAjax'
 ]);
@@ -266,7 +254,7 @@ Route::post('/cart/add/{id}', [
     'uses' => 'CartController@store',
     'as' => 'cart.store'
 ]);
-Route::get('/cart/remove/{id}', [
+Route::post('/cart/remove', [
     'uses' => 'CartController@delete',
     'as' => 'cart.delete'
 ]);

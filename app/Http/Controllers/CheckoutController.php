@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
-use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -13,18 +12,11 @@ class CheckoutController extends Controller
     /**
      * Return checkout page
      *
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        if (!Auth::check()) {
-            $request->session()->flash('message-info', 'Please login or register!');
-            return redirect()->route('user.login');
-        }
-
         $user = Auth::user();
-
         $cart = new Cart(null);
         $cart = $cart->getCart();
 
@@ -53,7 +45,6 @@ class CheckoutController extends Controller
         }
 
         $user = Auth::user();
-
         $cart = new Cart(null);
         $cart = $cart->getCart();
         $cart->addDelivery($request['delivery']);

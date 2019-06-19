@@ -3,7 +3,6 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\User\UserValidAction;
 
 class UserActionRequest extends FormRequest
 {
@@ -25,7 +24,7 @@ class UserActionRequest extends FormRequest
     public function rules()
     {
         return [
-            'mass-action' => new UserValidAction
+            'mass-action' => 'integer|in:0,1,2'
         ];
     }
 }

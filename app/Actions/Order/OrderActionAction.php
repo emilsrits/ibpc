@@ -36,8 +36,8 @@ class OrderActionAction
                 
                 return $flash;
             }
-        } else {
-            return;
         }
+        
+        return;
     }
 }

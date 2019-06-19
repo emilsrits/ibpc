@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Specification;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Specification\SpecificationValidAction;
 
 class SpecificationActionRequest extends FormRequest
 {
@@ -25,7 +24,7 @@ class SpecificationActionRequest extends FormRequest
     public function rules()
     {
         return [
-            'mass-action' => new SpecificationValidAction
+            'mass-action' => 'integer|in:0,1'
         ];
     }
 }

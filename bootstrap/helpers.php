@@ -40,3 +40,15 @@ if (!function_exists('orderStatusFinished')) {
         return true;
     }
 }
+
+if (!function_exists('sessionOldCart')) {
+    /**
+     * Get the previous cart instance
+     * 
+     * @return Cart|null
+     */
+    function sessionOldCart()
+    {
+        return Session::has('cart') ? Session::get('cart') : null;
+    }
+}

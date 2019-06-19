@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
 use App\Filters\ProductFilter;
 use App\Category;
 use App\Product;
+use App\Http\Requests\Product\ProductActionRequest;
+use App\Actions\Product\ProductActionAction;
+use App\Http\Requests\Product\ProductStoreRequest;
+use App\Actions\Product\ProductStoreAction;
+use App\Http\Requests\Product\ProductUpdateRequest;
+use App\Actions\Product\ProductUpdateAction;
 
 class ProductController extends Controller
 {
@@ -18,7 +23,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('categories')->paginate(20);
-
         $categories = Category::all();
 
         return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => null]);
@@ -27,35 +31,20 @@ class ProductController extends Controller
     /**
      * Catalog mass action
      *
-     * @param Request $request
+     * @param ProductActionRequest $request
+     * @param ProductActionAction $action
      * @param ProductFilter $filters
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function action(Request $request, ProductFilter $filters)
+    public function action(ProductActionRequest $request, ProductActionAction $action, ProductFilter $filters)
     {
-        $productIds = $request->input('catalog');
-        $product = new Product();
-
-        switch ($request->input('mass-action')) {
-            case 1:
-                $product->setStatus($productIds, 1);
-                $request->session()->flash('message-success', 'Product(s) enabled!');
-                break;
-            case 2:
-                $product->setStatus($productIds, 0);
-                $request->session()->flash('message-success', 'Product(s) disabled!');
-                break;
-            case 3:
-                if (!$product->deleteProduct($productIds)) {
-                    $request->session()->flash('message-danger', 'Can not delete products that are in active orders!');
-                } else {
-                    $request->session()->flash('message-success', 'Product(s) deleted!');
-                }
-                break;
+        $flash = $action->execute($request->all());
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
+            return redirect()->back();
         }
 
         $products = Product::with('categories')->filter($filters)->paginate(20);
-
         $categories = Category::all();
 
         return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => $request ]);
@@ -94,8 +83,7 @@ class ProductController extends Controller
     public function createWithCategory(Request $request)
     {
         $categoryId = $request['selectFieldValue'];
-
-        $category = Category::find($categoryId);
+        $category = Category::findOrFail($categoryId);
 
         if ($category) {
             return response()->json(array('category' => json_encode($categoryId), 'redirectUrl'=> '/admin/product/create?category='), 200);
@@ -107,59 +95,27 @@ class ProductController extends Controller
     /**
      * Save created product
      *
-     * @param Request $request
+     * @param ProductStoreRequest $request
+     * @param ProductStoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request, ProductStoreAction $action)
     {
-        $request->flash();
-
-        if (!$request['category']) {
-            $request->session()->flash('message-danger', 'Select a product category!');
-            return redirect()->back();
-        }
-        if ($this->productExists($request['code'])) {
-            $request->session()->flash('message-danger', 'Product with this code already exists!');
-            return redirect()->back();
-        }
-        if ($this->productValidate($request)) {
-            return redirect()->back();
+        $flash = $action->execute($request->all());
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
+            return redirect()->route('product.index');
         }
 
-        $img = request()->file('image');
-        $imgPath = $this->storeImage($img, $request['code'], $request['category']);
-
-        $product = new Product();
-        $product->image_path = $imgPath;
-        $product->code = $request['code'];
-        $product->title = $request['title'];
-        $product->description = $request['description'];
-        $product->price = $request['price'];
-        $product->stock = $request['stock'];
-        $product->status = $request['status'];
-        $product->save();
-
-        $product->categories()->attach(['category_id' => $request['category']]);
-
-        $specifications = collect($request['attr']);
-        foreach ($specifications as $category => $attributes) {
-            foreach ($attributes as $attribute => $value) {
-                if ($value) {
-                    $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                }
-            }
-        }
-
-        $request->session()->flash('message-success', 'Product successfully created!');
-
-        return redirect()->route('product.index');
+        $request->session()->flash('message-danger', 'Invalid form action!');
+        return redirect()->back();
     }
 
     /**
      * Product edit view
      *
      * @param Request $request
-     * @param $id
+     * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Request $request, $id)
@@ -182,156 +138,20 @@ class ProductController extends Controller
     /**
      * Update product
      *
-     * @param Request $request
-     * @param $id
+     * @param ProductUpdateRequest $request
+     * @param ProductUpdateAction $action
+     * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, ProductUpdateAction $action, $id)
     {
-        // Delete product
-        if ($request['submit'] === 'delete') {
-            $product = new Product();
-
-            if (!$product->deleteProduct($id)) {
-                $request->session()->flash('message-danger', 'Can not delete a product that is in active order!');
-
-                return redirect()->route('product.index');
-            }
-
-            $request->session()->flash('message-success', 'Product deleted!');
-
-            return redirect()->route('product.index');
-        }
-
-        // Update product
-        if ($request['submit'] === 'save') {
-            $request->flash();
-
-            $product = Product::find($id);
-
-            if ($request['code'] != $product->code) {
-                if ($this->productExists($request['code'])) {
-                    $request->session()->flash('message-danger', 'Product with this code already exists!');
-                    return redirect()->back();
-                } else {
-                    $product->code = $request['code'];
-                }
-            }
-
-            $img = request()->file('image');
-            if ($img) {
-                $imgPath = $this->storeImage($img, $request['code'], $product->categories->first()->id);
-
-                if ($product->image_path) {
-                    $product->deleteImage($id);
-                }
-
-                $product->image_path = $imgPath;
-            }
-
-            $product->title = $request['title'];
-            $product->description = $request['description'];
-            $product->price = $request['price'];
-            $product->stock = $request['stock'];
-            $product->status = $request['status'];
-            $product->save();
-
-
-            $specifications = collect($request['attr']);
-            foreach ($specifications as $category => $attributes) {
-                foreach ($attributes as $attribute => $value) {
-                    $productAttr = $product->attributes->find($attribute);
-                    if ($productAttr) {
-                        if (!ctype_space($value) && !$value == "") {
-                            $product->attributes()->detach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                            $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                        } else {
-                            $product->attributes()->detach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                        }
-                    } else {
-                        if (!ctype_space($value) && !$value == "") {
-                            $product->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                        }
-                    }
-                }
-            }
-
-            $request->session()->flash('message-success', 'Product successfully updated!');
-
+        $flash = $action->execute($request->all(), $id);
+        if ($flash != null) {
+            $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-danger', 'Invalid form action!');
-
-        return redirect()->back();
-    }
-
-    /**
-     * Delete a product
-     *
-     * @param $id
-     */
-    public function delete($id)
-    {
-        $product = new Product();
-        $product->deleteProduct($id);
-    }
-
-    /**
-     * Store image
-     *
-     * @param $img
-     * @param $code
-     * @param $category
-     * @return null|string
-     */
-    protected function storeImage($img, $code, $category)
-    {
-        if ($img) {
-            $imgExt =  $img->guessClientExtension();
-            $imgName = $code . str_random(20) . '.' . $imgExt;
-            $img->storeAs('/public/images/products/' . $category . '/' , $imgName);
-            return Product::STORAGE_PRODUCT_IMAGE_PATH . $category . '/' . $imgName;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Check for missing fields on created product
-     *
-     * @param $request
-     * @return bool
-     */
-    protected function productValidate($request)
-    {
-        $errors = 0;
-
-        if (!$request['code']) {
-            $errors++;
-        }
-        if (!$request['price']) {
-            $errors++;
-        }
-        if (!$request['stock']) {
-            $errors++;
-        }
-
-        if ($errors) {
-            $request->session()->flash('message-danger', 'Invalid form data!');
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Check if product exists
-     *
-     * @param $code
-     * @return mixed
-     */
-    protected function productExists($code) {
-        return $product = Product::where('code', $code)->exists();
+        $request->session()->flash('message-success', 'Product deleted!');
+        return redirect()->route('product.index');
     }
 }
