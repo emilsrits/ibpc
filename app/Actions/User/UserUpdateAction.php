@@ -15,7 +15,7 @@ class UserUpdateAction
      */
     public function execute(array $data, $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         $user->name = $data['name'];
         $user->surname = $data['surname'];
@@ -63,7 +63,7 @@ class UserUpdateAction
 
         $flash = [
             'type' => 'message-success',
-            'message' => 'Account successfully updated!'
+            'message' => 'User successfully updated!'
         ];
 
         return $flash;

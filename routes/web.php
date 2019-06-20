@@ -215,7 +215,7 @@ Route::group(['prefix' => 'user'], function () {
     /**
      * User account routes
      */
-    Route::group(['middleware' => ['auth', 'active']], function () {
+    Route::group(['middleware' => ['auth', 'active', 'owner']], function () {
         Route::get('/account', [
             'uses' => 'AccountController@index',
             'as' => 'account.index'

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Actions\Account\AccountUpdateAction;
 use App\Http\Requests\Account\AccountUpdateRequest;
-use App\Actions\User\UserUpdateAction;
 
 class AccountController extends Controller
 {
@@ -50,11 +50,11 @@ class AccountController extends Controller
      * Update user information
      *
      * @param \App\Http\Requests\Account\AccountUpdateRequest $request
-     * @param \App\Actions\User\UserUpdateAction $action
+     * @param \App\Actions\User\AccountUpdateAction $action
      * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(AccountUpdateRequest $request, UserUpdateAction $action, $id)
+    public function update(AccountUpdateRequest $request, AccountUpdateAction $action, $id)
     {
         $flash = $action->execute($request->all(), $id);
 
