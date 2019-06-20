@@ -62,8 +62,8 @@ class CheckoutController extends Controller
     {
         $user = Auth::user();
 
-        if (!$user->address) {
-            $request->session()->flash('message-warning', 'Please add your shipping address to your account!');
+        if (!$user->canMakeOrder()) {
+            $request->session()->flash('message-warning', 'Please fill in missing shipping address information!');
             return redirect()->back();
         }
 

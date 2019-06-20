@@ -192,7 +192,7 @@ class Category extends Model
      */
     public function setParentIdAttribute($parent_id)
     {
-        if ($this->attributes['parent'] == 1) {
+        if ($this->attributes['parent'] == '1') {
             $this->attributes['parent_id'] = null;
         } else {
             $this->attributes['parent_id'] = $parent_id;

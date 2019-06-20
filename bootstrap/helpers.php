@@ -52,3 +52,22 @@ if (!function_exists('sessionOldCart')) {
         return Session::has('cart') ? Session::get('cart') : null;
     }
 }
+
+if (!function_exists('countryFromCode')) {
+    /**
+     * Return country based on its code
+     * 
+     * @param string $code
+     * @return string|null
+     */
+    function countryFromCode(string $code)
+    {
+        $countries = config('constants.countries');
+        
+        if (isset($countries[$code])) {
+            return $countries[$code];
+        } else {
+            return null;
+        }
+    }
+}

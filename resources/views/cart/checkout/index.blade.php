@@ -13,12 +13,12 @@ Checkout
         @if($user->phone)
             <p>{{ $user->phone }}</p>
         @endif
-        @if(!$user->country || !$user->city || !$user->address || !$user->postcode)
+        @if(!$user->canMakeOrder())
             <h4>Please fill in missing shipping address information</h4>
             <a href="{{ url('/user/edit') }}">Edit my account information</a>
         @else
             <h4>Shipping Address</h4>
-            <p>{{ $user->country }}</p>
+            <p>{{ countryFromCode($user->country) }}</p>
             <p>{{ $user->city }}</p>
             <p>{{ $user->address }}</p>
             <p>{{ $user->postcode }}</p>

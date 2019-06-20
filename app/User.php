@@ -98,6 +98,20 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if user is allowed to make an order
+     * 
+     * @return bool
+     */
+    public function canMakeOrder()
+    {
+        if (!$this->country || !$this->city || !$this->address || !$this->postcode) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Checks if user has been given any role
      *
      * @return bool
@@ -179,7 +193,22 @@ class User extends Authenticatable
      */
     public function getFullAddressAttribute()
     {
-        return $this->city . ', ' . $this->address . ', ' . $this->postcode;
+        $arr = [];
+        if ($this->country) {
+            array_push($arr, countryFromCode($this->country));
+        }
+        if ($this->city) {
+            array_push($arr, $this->city);
+        }
+        if ($this->address) {
+            array_push($arr, $this->address);
+        }
+        if ($this->postcode) {
+            array_push($arr, $this->postcode);
+        }
+        $fullAdress = implode(', ', $arr);
+
+        return $fullAdress;
     }
 
     /**
@@ -191,6 +220,20 @@ class User extends Authenticatable
     {
         if ($password !== null && $password !== "") {
             $this->attributes['password'] = bcrypt($password);
+        }
+    }
+    
+    /**
+     * Set users country attribute depending on its value
+     * 
+     * @param string $country
+     */
+    public function setCountryAttribute($country)
+    {
+        if ($country == '0') {
+            $this->attributes['country'] = null;
+        } else {
+            $this->attributes['country'] = $country;
         }
     }
 }

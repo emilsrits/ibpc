@@ -18,6 +18,15 @@ class OrderStoreAction
     public function execute()
     {
         $user = Auth::user();
+        if (!$user->canMakeOrder()) {
+            $flash = [
+                'type' => 'message-warning',
+                'message' => 'Please fill in missing shipping address information!'
+            ];
+
+            return $flash;
+        }
+
         $cart = Session::get('cart');
         $order = new Order();
         $order->user_id = $user->id;

@@ -115,11 +115,11 @@ class Cart extends Model
         switch ($deliveryMethod) {
             case 'storage':
                 $this->delivery['code'] = 'storage';
-                $this->delivery['cost'] = 0.00;
+                $this->delivery['cost'] = config('constants.delivery_cost.storage');
                 break;
             case 'address':
                 $this->delivery['code'] = 'address';
-                $this->delivery['cost'] = 6.99;
+                $this->delivery['cost'] = config('constants.delivery_cost.address');
                 break;
         }
         $this->deliveryCost = $this->delivery['cost'];
