@@ -17,9 +17,9 @@ class AccountController extends Controller
     {
         $user = Auth::user();
         $orderStatuses = config('constants.order_status_active');
-        $orders = $user->orders()->whereIn('status', $orderStatuses)->get();
+        $orders = $user->orders()->whereIn('status', $orderStatuses)->paginate(20);
 
-        return view('account.index', ['user' => $user, 'orders' => $orders]);
+        return view('account.index', ['orders' => $orders]);
     }
 
     /**
@@ -71,8 +71,8 @@ class AccountController extends Controller
     {
         $user = Auth::user();
         $orderStatuses = config('constants.order_status_finished');
-        $orders = $user->orders()->whereIn('status', $orderStatuses)->get();
+        $orders = $user->orders()->whereIn('status', $orderStatuses)->paginate(20);
 
-        return view('account.history', ['user' => $user, 'orders' => $orders]);
+        return view('account.history', ['orders' => $orders]);
     }
 }

@@ -1,5 +1,5 @@
 <footer>
     <div class="container-inner">
-        <p>© Emīls Rīts</p>
+        <p>© {{ env('APP_NAME') }}</p>
     </div>
 </footer>

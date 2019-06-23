@@ -7,6 +7,7 @@ return [
     // Displayed currency in mail, PDF templates
     'currency' => 'EUR',
 
+    // Delivery cost
     'delivery_cost' => [
         'storage' => 0.00,
         'address' => 6.99
@@ -47,6 +48,7 @@ return [
         'account'   => 'WQ34556363464'
     ],
 
+    // Array with supported countries
     'countries' => [
         '0' => 'Select a Country',
         'AT' => 'Austria',
