@@ -43,7 +43,7 @@ Catalog
                     <th>Status</th>
                     <th>Category</th>
                     <th id="sort-created" class="col-md">
-                        <button type="submit" name="created" value="{{ $request['created'] === 'desc' ? 'asc' : 'desc' }}">
+                        <button class="btn-sort" type="submit" name="created" value="{{ $request['created'] === 'desc' ? 'asc' : 'desc' }}">
                             Created at
                             @if($request['created'] === 'asc')
                                 <i class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -55,7 +55,7 @@ Catalog
                         </button>
                     </th>
                     <th id="sort-updated" class="col-md">
-                        <button type="submit" name="updated" value="{{ $request['updated'] === 'desc' ? 'asc' : 'desc' }}">
+                        <button class="btn-sort" type="submit" name="updated" value="{{ $request['updated'] === 'desc' ? 'asc' : 'desc' }}">
                             Updated at
                             @if($request['updated'] === 'asc')
                                 <i class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -71,7 +71,7 @@ Catalog
                 </thead>
                 <tr id="table-search">
                     <td></td>
-                    <td><input type="number" name="id" min="0" value="{{ $request['id'] ? $request['id'] : '' }}"></td>
+                    <td><input type="number" name="id" min="1" value="{{ $request['id'] ? $request['id'] : '' }}"></td>
                     <td><input type="text" name="title" value="{{ $request['title'] ? $request['title'] : '' }}"></td>
                     <td><input type="text" name="code" value="{{ $request['code'] ? $request['code'] : '' }}"></td>
                     <td colspan="2"></td>

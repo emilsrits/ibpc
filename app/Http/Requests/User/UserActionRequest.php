@@ -24,7 +24,13 @@ class UserActionRequest extends FormRequest
     public function rules()
     {
         return [
-            'mass-action' => 'integer|in:0,1,2'
+            'mass-action' => 'integer|in:0,1,2',
+            'id' => 'nullable|integer',
+            'user' => 'nullable|string',
+            'role' => 'nullable|integer',
+            'status' => 'nullable|integer',
+            'createdAt' => 'nullable|string',
+            'updatedAt' => 'nullable|string'
         ];
     }
 }

@@ -5,10 +5,10 @@ namespace App\Filters;
 use App\Filters\QueryFilter;
 use Illuminate\Support\Facades\DB;
 
-class OrderFilter extends QueryFilter
+class UserFilter extends QueryFilter
 {
     /**
-     * Filter order by id
+     * Filter user by id
      *
      * @param string $id
      * @return mixed
@@ -19,7 +19,7 @@ class OrderFilter extends QueryFilter
     }
 
     /**
-     * Filter order by user name
+     * Filter user by user name
      *
      * @param $user
      * @return mixed
@@ -30,26 +30,37 @@ class OrderFilter extends QueryFilter
             return $this->builder->where('id', $user);
         }
 
-        return $this->builder->whereHas('user', function ($query) use ($user) {
-           $query->where('name', 'like', '%'.$user.'%')
+        return $this->builder->where('name', 'like', '%'.$user.'%')
                ->orWhere('surname', 'like', '%'.$user.'%')
                ->orWhere(DB::raw('CONCAT_WS(" ", name, surname)'), 'like', $user);
+    }
+
+    /**
+     * Filter user by role
+     * 
+     * @param $role
+     * @return mixed
+     */
+    public function role($role)
+    {
+        return $this->builder->whereHas('roles', function ($query) use ($role) {
+           $query->where('role_id', $role);
         });
     }
 
     /**
-     * Filter order by status
+     * Filter user by status
      *
      * @param $status
      * @return mixed
      */
     public function status($status)
     {
-        return $this->builder->where('status', strtolower($status));
+        return $this->builder->where('status', $status);
     }
 
     /**
-     * Sort order by created date
+     * Sort user by created date
      *
      * @param string $order
      * @return mixed
@@ -60,7 +71,7 @@ class OrderFilter extends QueryFilter
     }
 
     /**
-     * Filter by created date
+     * Filter user by created date
      *
      * @param $date
      * @return mixed
@@ -71,7 +82,7 @@ class OrderFilter extends QueryFilter
     }
 
     /**
-     * Sort order by updated date
+     * Sort user by updated date
      *
      * @param string $order
      * @return mixed
@@ -82,7 +93,7 @@ class OrderFilter extends QueryFilter
     }
 
     /**
-     * Filter by updated date
+     * Filter user by updated date
      *
      * @param $date
      * @return mixed

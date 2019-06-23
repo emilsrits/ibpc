@@ -3,11 +3,12 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\Filters\QueryFilter;
 use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -49,6 +50,18 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany('App\Order');
+    }
+
+    /**
+     * User filters
+     *
+     * @param $query
+     * @param UserFilter $filters
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
     }
 
     /**

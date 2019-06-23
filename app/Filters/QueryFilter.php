@@ -32,8 +32,8 @@ abstract class QueryFilter
 
         foreach ($this->filters() as $name => $value) {
             if (method_exists($this, $name)) {
-                if ($value) {
-                    call_user_func_array([$this, $name], array_filter([$value]));
+                if ($value || $value === '0') {
+                    call_user_func_array([$this, $name], array_filter([$value], 'strlen'));
                 }
             }
         }
@@ -48,6 +48,6 @@ abstract class QueryFilter
      */
     public function filters()
     {
-        return $this->request->all();
+        return $this->request->except('_token', 'submit', 'mass-action');
     }
 }

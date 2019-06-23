@@ -8,6 +8,7 @@ use App\Actions\User\UserActionAction;
 use App\Actions\User\UserUpdateAction;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Requests\User\UserActionRequest;
+use App\Filters\UserFilter;
 
 class UserController extends Controller
 {
@@ -27,7 +28,7 @@ class UserController extends Controller
     {
         $users = User::with('roles')->orderBy('id', 'Asc')->paginate(20);
 
-        return view('admin.user.users', ['users' => $users]);
+        return view('admin.user.users', ['users' => $users, 'request' => null]);
     }
 
     /**
@@ -35,16 +36,19 @@ class UserController extends Controller
      *
      * @param \App\Http\Requests\User\UserActionRequest $request
      * @param \App\Actions\User\UserActionAction $action
+     * @param UserFilter $filters
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function action(UserActionRequest $request, UserActionAction $action)
+    public function action(UserActionRequest $request, UserActionAction $action, UserFilter $filters)
     {
         $flash = $action->execute($request->all());
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
         }
 
-        return redirect()->back();
+        $users = User::with('roles')->filter($filters)->paginate(20);
+
+        return view('admin.user.users', ['users' => $users, 'request' => $request ]);
     }
 
     /**

@@ -13,6 +13,12 @@ return [
         'address' => 6.99
     ],
 
+    // User roles
+    'user_roles' => [
+        '1' => 'administrator',
+        '2' => 'customer'
+    ],
+
     // Order statuses
     'order_status' => [
         'canceled'  => 'canceled',
