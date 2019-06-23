@@ -215,7 +215,7 @@ Route::group(['prefix' => 'user'], function () {
     /**
      * User account routes
      */
-    Route::group(['middleware' => ['auth', 'active', 'owner']], function () {
+    Route::group(['middleware' => ['auth', 'active']], function () {
         Route::get('/account', [
             'uses' => 'AccountController@index',
             'as' => 'account.index'
@@ -235,7 +235,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('/update/{id}', [
             'uses' => 'AccountController@update',
             'as' => 'account.update'
-        ]);
+        ])->middleware('owner');
     });
 });
 
