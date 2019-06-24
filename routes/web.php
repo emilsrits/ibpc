@@ -65,6 +65,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'ProductController@edit',
         'as' => 'product.edit'
     ]);
+    Route::post('/product/update', [
+        'uses' => 'ProductController@updateWithAjax',
+        'as' => 'product.updateWithAjax'
+    ]);
     Route::post('/product/update/{id}', [
         'uses' => 'ProductController@update',
         'as' => 'product.update'
@@ -242,26 +246,28 @@ Route::group(['prefix' => 'user'], function () {
 /**
  * Cart routes
  */
-Route::get('/cart', [
-    'uses' => 'CartController@index',
-    'as' => 'cart.index'
-]);
-Route::post('/cart/add', [
-    'uses' => 'CartController@storeWithAjax',
-    'as' => 'cart.storeWithAjax'
-]);
-Route::post('/cart/add/{id}', [
-    'uses' => 'CartController@store',
-    'as' => 'cart.store'
-]);
-Route::post('/cart/remove', [
-    'uses' => 'CartController@delete',
-    'as' => 'cart.delete'
-]);
-Route::post('/cart/update', [
-   'uses' => 'CartController@update',
-    'as' => 'cart.update'
-]);
+Route::group(['prefix' => 'cart'], function () {
+    Route::get('/', [
+        'uses' => 'CartController@index',
+        'as' => 'cart.index'
+    ]);
+    Route::post('/add', [
+        'uses' => 'CartController@storeWithAjax',
+        'as' => 'cart.storeWithAjax'
+    ]);
+    Route::post('/add/{id}', [
+        'uses' => 'CartController@store',
+        'as' => 'cart.store'
+    ]);
+    Route::post('/remove', [
+        'uses' => 'CartController@delete',
+        'as' => 'cart.delete'
+    ]);
+    Route::post('/update', [
+       'uses' => 'CartController@update',
+        'as' => 'cart.update'
+    ]);
+});
 
 /**
  * Checkout routes

@@ -4,6 +4,11 @@ namespace DummyNamespace;
 
 class DummyClass
 {
+    /**
+     * Process the action
+     * 
+     * @param array $data
+     */
     public function execute(array $data)
     {
         //

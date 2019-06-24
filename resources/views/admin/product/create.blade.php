@@ -41,7 +41,10 @@ Create Product
                         </tr>
                         <tr class="entity-attribute product-image">
                             <td><label for="image">Image</label></td>
-                            <td><input type="file" name="image" accept="image/gif, image/jpeg, image/png"></td>
+                            <td>
+                                <div id="product-image-preview"></div>
+                                <input id="product-image-upload" type="file" name="image" accept="image/gif, image/jpeg, image/png">
+                            </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="code">Code</label></td>

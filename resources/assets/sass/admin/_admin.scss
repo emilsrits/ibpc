@@ -379,6 +379,19 @@
   }
 }
 
+/* MISC */
+#product-image-preview {
+  position: relative;
+  margin: 5px 0 15px;
+  max-width: 200px;
+
+  .product-image-remove {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
+
 #send-invoice-form {
   margin-top: 30px;
 }

@@ -92,4 +92,13 @@ body {
   .btn-sort {
     padding: 0;
   }
+  .btn-label {
+    color: $color_white;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 0;
+    border-top-left-radius: 5px;
+    &:hover {
+      color: $color_red;
+    }
+  }
 }

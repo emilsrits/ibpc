@@ -26,7 +26,8 @@ class ProductUpdateRequest extends FormRequest
         $id = $this->route('id');
 
         return [
-            'image' => 'nullable|file',
+            'submit' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'code' => 'required|string|unique:products,code,'.$id,
             'title' => 'required|string',
             'description' => 'nullable|string',

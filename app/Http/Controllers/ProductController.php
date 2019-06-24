@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Filters\ProductFilter;
-use App\Category;
-use App\Product;
-use App\Http\Requests\Product\ProductActionRequest;
-use App\Actions\Product\ProductActionAction;
-use App\Http\Requests\Product\ProductStoreRequest;
 use App\Actions\Product\ProductStoreAction;
-use App\Http\Requests\Product\ProductUpdateRequest;
+use App\Actions\Product\ProductActionAction;
 use App\Actions\Product\ProductUpdateAction;
+use App\Actions\Product\ProductUpdateAjaxAction;
+use App\Http\Requests\Product\ProductStoreRequest;
+use App\Http\Requests\Product\ProductActionRequest;
+use App\Http\Requests\Product\ProductUpdateRequest;
+use App\Http\Requests\Product\ProductUpdateAjaxRequest;
 
 class ProductController extends Controller
 {
@@ -153,5 +155,22 @@ class ProductController extends Controller
 
         $request->session()->flash('message-success', 'Product deleted!');
         return redirect()->route('product.index');
+    }
+
+    /**
+     * Update product with AJAX
+     *
+     * @param ProductUpdateAjaxRequest $request
+     * @param ProductUpdateAjaxAction $action
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateWithAjax(ProductUpdateAjaxRequest $request, ProductUpdateAjaxAction $action)
+    {
+        $response = $action->execute($request->all());
+        if ($response) {
+            return response()->json(null, 200);
+        } else {
+            return response()->json(null, 400);
+        }
     }
 }

@@ -30,46 +30,44 @@ Edit Product
                         </tr>
                         <tr class="entity-attribute product-image">
                             <td><label for="image">Image</label></td>
-                            <td><input type="file" name="image" accept="image/gif, image/jpeg, image/png"></td>
+                            <td>
+                                <div id="product-image-preview">
+                                    @if($product->image_path)
+                                        <img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}">
+                                        <button class="btn btn-label product-image-remove" data-id="{{ $product->id }}"><i class="fa fa-trash"></i></button>
+                                    @endif
+                                </div>
+                                <input id="product-image-upload" class="{{ $product->image_path ? 'hidden' : '' }}" type="file" name="image" accept="image/gif, image/jpeg, image/png">
+                            </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="code">Code</label></td>
-                            <td><input type="text" name="code" required value="{{
-                                $request->old('code') ?
-                                $request->old('code') :
-                                $product->code }}">
+                            <td>
+                                <input type="text" name="code" required value="{{ $request->old('code') ? $request->old('code') : $product->code }}">
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="title">Title</label></td>
-                            <td><input type="text" name="title" required value="{{
-                                $request->old('title') ?
-                                $request->old('title') :
-                                $product->title }}">
+                            <td>
+                                <input type="text" name="title" required value="{{ $request->old('title') ? $request->old('title') : $product->title }}">
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="description">Description</label></td>
-                            <td><textarea name="description" cols="20" rows="10">{{
-                                $request->old('description') ?
-                                $request->old('description') :
-                                $product->description }}</textarea>
+                            <td>
+                                <textarea name="description" cols="20" rows="10">{{ $request->old('description') ? $request->old('description') : $product->description }}</textarea>
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="price">Price</label></td>
-                            <td><input type="text" name="price" required pattern="^[0-9]*\.[0-9]{2}|[0-9]*$" value="{{
-                                $request->old('price') ?
-                                $request->old('price') :
-                                $product->price }}">
+                            <td>
+                                <input type="text" name="price" required pattern="^[0-9]*\.[0-9]{2}|[0-9]*$" value="{{ $request->old('price') ? $request->old('price') : $product->price }}">
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="stock">Stock</label></td>
-                            <td><input type="number" min="0" max="1000" name="stock" required value="{{
-                                $request->old('stock') ?
-                                $request->old('stock') :
-                                $product->stock }}">
+                            <td>
+                                <input type="number" min="0" max="1000" name="stock" required value="{{ $request->old('stock') ? $request->old('stock') : $product->stock }}">
                             </td>
                         </tr>
                         <tr class="entity-attribute">
@@ -105,7 +103,7 @@ Edit Product
                                             <td><label for="{{ 'attr[' . $specification->id . '][' . $attribute->id . ']' }}">{{ $attribute->name }}</label></td>
                                             <td>
                                                 <input type="text" name="{{ 'attr[' . $specification->id . '][' . $attribute->id . ']' }}"
-                                                       value="{{ $product->getAttributeById($attribute->id) }}">
+                                                    value="{{ $product->getAttributeById($attribute->id) }}">
                                             </td>
                                         </tr>
                                     @endforeach

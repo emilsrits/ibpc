@@ -170,7 +170,7 @@ class Product extends Model
     {
         if ($img) {
             $imgExt =  $img->guessClientExtension();
-            $imgName = $code . str_random(20) . '.' . $imgExt;
+            $imgName = $code . str_random(10) . '.' . $imgExt;
             $img->storeAs('/public/images/products/' . $category . '/' , $imgName);
             // Return image path
             return Product::STORAGE_PRODUCT_IMAGE_PATH . $category . '/' . $imgName;
@@ -182,7 +182,7 @@ class Product extends Model
     /**
      * Delete product image
      *
-     * @return null
+     * @return void|null
      */
     public function deleteImage()
     {
