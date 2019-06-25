@@ -55,7 +55,6 @@
     }
   }
   .dropdown-trigger {
-    display: inline-block;
     float: left;
     font-size: 12px;
     font-weight: bold;
@@ -103,7 +102,7 @@
   height: 320px;
   background-color: $color_white;
   border: 1px solid $color_gray;
-  .product-image {
+  .product-media {
     margin: 5px auto;
     width: 80%;
     height: 120px;
@@ -191,7 +190,7 @@
 #product-details {
   padding: 10px 10px;
   float: left;
-  .product-image {
+  .product-media {
     > img {
       margin: auto;
       max-height: 300px;
@@ -386,7 +385,7 @@
       color: $color_red;
     }
   }
-  .cart-item-image {
+  .cart-item-media {
     img {
       margin: auto;
       width: auto;

@@ -27,7 +27,7 @@ class ProductUpdateRequest extends FormRequest
 
         return [
             'submit' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'code' => 'required|string|unique:products,code,'.$id,
             'title' => 'required|string',
             'description' => 'nullable|string',

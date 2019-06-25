@@ -2,19 +2,17 @@
 
 namespace App;
 
+use App\Media;
 use App\Filters\QueryFilter;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Product extends Model
 {
-    const STORAGE_PRODUCT_IMAGE_PATH = '/storage/images/products/';
-    const DEFAULT_PRODUCT_IMAGE_PATH = '/images/products/default.png';
-
     protected $fillable = [
-        'category_id', 'image_path', 'code', 'title', 'description', 'price',
+        'category_id', 'code', 'title', 'description', 'price',
         'price_old', 'stock', 'status', 'created_at', 'updated_at'
     ];
 
@@ -49,6 +47,14 @@ class Product extends Model
     }
 
     /**
+     * OneToMany relationship with Media class
+     */
+    public function media()
+    {
+        return $this->hasMany(Media::class);
+    }
+
+    /**
      * Product filters
      *
      * @param $query
@@ -74,7 +80,7 @@ class Product extends Model
                 if ($product->orders()->first()) {
                     return false;
                 }
-                $this->deleteImage($id);
+                $product->deleteMedia();
                 $product->destroy($id);
                 return true;
             }
@@ -83,7 +89,7 @@ class Product extends Model
             if ($product->orders()->first()) {
                 return false;
             }
-            $this->deleteImage($ids);
+            $product->deleteMedia();
             $product->destroy($ids);
             return true;
         }
@@ -102,7 +108,7 @@ class Product extends Model
         if ($this->attributes()->first()) {
             foreach ($specifications as $category => $attributes) {
                 foreach ($attributes as $attribute => $value) {
-                    $productAttr = $this->attributes->find($attribute);
+                    $productAttr = $this->attributes()->find($attribute);
                     if ($productAttr) {
                         if (!ctype_space($value) && !$value == "") {
                             // Update attribute
@@ -159,36 +165,15 @@ class Product extends Model
     }
 
     /**
-     * Store product image
-     * 
-     * @param $img
-     * @param $code
-     * @param $category
-     * @return null|string
-     */
-    public function storeImage($img, $code, $category)
-    {
-        if ($img) {
-            $imgExt =  $img->guessClientExtension();
-            $imgName = $code . str_random(10) . '.' . $imgExt;
-            $img->storeAs('/public/images/products/' . $category . '/' , $imgName);
-            // Return image path
-            return Product::STORAGE_PRODUCT_IMAGE_PATH . $category . '/' . $imgName;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Delete product image
+     * Delete product media
      *
      * @return void|null
      */
-    public function deleteImage()
+    protected function deleteMedia()
     {
-        $productImage = str_replace('/storage', '', $this->image_path);
-        if ($productImage) {
-            Storage::delete('/public' . $productImage);
+        $productMedia = str_replace('/storage', '', $this->media->first()->path);
+        if ($productMedia) {
+            Storage::delete('/public' . $productMedia);
         } else {
             return null;
         }
@@ -260,17 +245,21 @@ class Product extends Model
     }
 
     /**
-     * Get product image attribute
+     * Get product media attribute
      *
-     * @return mixed|string
+     * @return null|string
      */
     public function getImageAttribute()
     {
-        $imagePath = $this->image_path;
-        if ($imagePath && File::exists(public_path($imagePath))) {
-            return $imagePath;
+        if ($this->media()->first()) {
+            $mediaPath = $this->media()->first()->path;
+            if ($mediaPath && File::exists(public_path($mediaPath))) {
+                return $mediaPath;
+            } else {
+                return Media::DEFAULT_PRODUCT_MEDIA_PATH;
+            }
         } else {
-            return self::DEFAULT_PRODUCT_IMAGE_PATH;
+            return Media::DEFAULT_PRODUCT_MEDIA_PATH;
         }
     }
 

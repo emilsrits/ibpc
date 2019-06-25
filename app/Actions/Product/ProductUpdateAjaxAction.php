@@ -18,9 +18,8 @@ class ProductUpdateAjaxAction
         $product = Product::findOrFail($productId);
 
         if ($product) {
-            $product->deleteImage();
-            $product->image_path = null;
-            $product->save();
+            // Delete product media files
+            $product->media->first()->delete();
 
             return true;
         } else {

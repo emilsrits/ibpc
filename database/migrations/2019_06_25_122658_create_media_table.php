@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreateMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            
+
             $table->increments('id');
-            $table->string('code', 50)->unique();
-            $table->string('title', 50);
-            $table->text('description')->nullable();
-            $table->decimal('price');
-            $table->decimal('price_old')->nullable();
-            $table->integer('stock');
-            $table->integer('status');
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->string('path', 100);
+            $table->string('caption')->nullable();
+            $table->string('type', 10);
             $table->timestamps();
         });
     }
@@ -37,7 +35,7 @@ class CreateProductsTable extends Migration
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
 
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('media');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }

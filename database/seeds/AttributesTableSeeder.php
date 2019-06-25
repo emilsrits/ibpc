@@ -14,7 +14,7 @@ class AttributesTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         DB::table('attributes')->truncate();
-        // Specification table seeder
+        // Attributes table seeder
         $attribute = new \App\Attribute([
             'specification_id' => 1,
             'name' => 'Brand'

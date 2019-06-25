@@ -14,7 +14,7 @@ class SpecificationsTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         DB::table('specifications')->truncate();
-        // Specification table seeder
+        // Specifications table seeder
         $specification = new \App\Specification([
             'slug' => 'model',
             'name' => 'Model'

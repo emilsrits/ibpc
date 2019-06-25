@@ -39,11 +39,11 @@ Create Product
                                 </select>
                             </td>
                         </tr>
-                        <tr class="entity-attribute product-image">
-                            <td><label for="image">Image</label></td>
+                        <tr class="entity-attribute product-media">
+                            <td><label for="media">Media</label></td>
                             <td>
-                                <div id="product-image-preview"></div>
-                                <input id="product-image-upload" type="file" name="image" accept="image/gif, image/jpeg, image/png">
+                                <div id="product-media-preview"></div>
+                                <input id="product-media-upload" type="file" name="media" accept="image/gif, image/jpeg, image/png">
                             </td>
                         </tr>
                         <tr class="entity-attribute">

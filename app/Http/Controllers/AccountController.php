@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Actions\Account\AccountUpdateAction;
 use App\Http\Requests\Account\AccountUpdateRequest;
@@ -39,18 +40,22 @@ class AccountController extends Controller
     /**
      * Return account edit view
      *
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('account.edit', ['user' => Auth::user()]);
+        return view('account.edit', [
+            'user' => Auth::user(),
+            'request' => $request
+        ]);
     }
 
     /**
      * Update user information
      *
      * @param \App\Http\Requests\Account\AccountUpdateRequest $request
-     * @param \App\Actions\User\AccountUpdateAction $action
+     * @param AccountUpdateAction $action
      * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */

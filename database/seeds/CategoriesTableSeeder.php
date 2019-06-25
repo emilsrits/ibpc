@@ -42,6 +42,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'CPUs / Processors',
             'slug' => 'cpus-processors',
+            'parent' => 0,
             'parent_id' => 1,
             'status' => 1
         ]);
@@ -50,6 +51,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'Motherboards',
             'slug' => 'motherboards',
+            'parent' => 0,
             'parent_id' => 1,
             'status' => 1
         ]);
@@ -58,6 +60,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'Memory',
             'slug' => 'memory',
+            'parent' => 0,
             'parent_id' => 1,
             'status' => 1
         ]);
@@ -66,6 +69,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'Video Cards',
             'slug' => 'video-cards',
+            'parent' => 0,
             'parent_id' => 1,
             'status' => 1
         ]);
@@ -74,6 +78,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'Computer Cases',
             'slug' => 'computer-cases',
+            'parent' => 0,
             'parent_id' => 2,
             'status' => 1
         ]);
@@ -82,6 +87,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'Power Supplies',
             'slug' => 'power-supplies',
+            'parent' => 0,
             'parent_id' => 1,
             'status' => 1
         ]);
@@ -90,6 +96,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'Fans & PC Cooling',
             'slug' => 'fans-pc-cooling',
+            'parent' => 0,
             'parent_id' => 2,
             'status' => 1
         ]);
@@ -98,6 +105,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'SSDs',
             'slug' => 'ssds',
+            'parent' => 0,
             'parent_id' => 3,
             'status' => 1
         ]);
@@ -106,6 +114,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'HDDs',
             'slug' => 'hdds',
+            'parent' => 0,
             'parent_id' => 3,
             'status' => 1
         ]);
@@ -114,6 +123,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'CD / DVD / Blu-Ray Burners & Media',
             'slug' => 'cd-dvd-blu-ray-burners-media',
+            'parent' => 0,
             'parent_id' => 3,
             'status' => 1
         ]);
@@ -122,6 +132,7 @@ class CategoriesTableSeeder extends Seeder
         $category = new \App\Category([
             'title' => 'Sound Cards',
             'slug' => 'sound-cards',
+            'parent' => 0,
             'parent_id' => 1,
             'status' => 1
         ]);

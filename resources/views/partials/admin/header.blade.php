@@ -14,7 +14,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset('images/logo.png') }}" alt="IBPC">
+                        <img src="{{ asset('media/logo.png') }}" alt="IBPC">
                     </a>
                 </div>
 

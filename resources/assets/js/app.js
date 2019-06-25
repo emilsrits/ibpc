@@ -4,8 +4,8 @@
         var 
             itemAdd = $('.product-quick-add'),
             itemRemove = $('.cart-item-remove');
-            imageRemove = $('#product-image-preview').find('.product-image-remove');
-            imageUpload = $('#product-image-upload');
+            mediaRemove = $('#product-media-preview').find('.product-media-remove');
+            mediaUpload = $('#product-media-upload');
 
         // Hide flash message
         $('.message-close').css('display', 'inline-block').click(function () {
@@ -141,30 +141,30 @@
             }
         });
 
-        // Preview uploaded product image
-        $('#product-image-upload').on('change', function () {
+        // Preview uploaded product media
+        $('#product-media-upload').on('change', function () {
             var imgPath = $(this)[0].value;
             var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
             
             if (extn == "jpg" || extn == "png" || extn == "jpeg" || extn == "gif") {
                 if (typeof (FileReader) != "undefined") {
-                    var imagePreview = $('#product-image-preview');
-                    imagePreview.empty();
+                    var mediaPreview = $('#product-media-preview');
+                    mediaPreview.empty();
 
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         $("<img />", {
                             "src": e.target.result,
                             "class": "img-responsive"
-                        }).appendTo(imagePreview);
+                        }).appendTo(mediaPreview);
                     }
-                    imagePreview.show();
+                    mediaPreview.show();
                     reader.readAsDataURL($(this)[0].files[0]);
                 } else {
                     console.log('This browser does not support FileReader');
                 }
             } else {
-                console.log('Invalid image type');
+                console.log('Invalid media type');
             }
         });
 
@@ -229,8 +229,8 @@
             });
         });
 
-        // Remove product image
-        imageRemove.on('click', function(e) {
+        // Remove product media
+        mediaRemove.on('click', function(e) {
             var el = $(this);
             e.preventDefault();
             el.addClass('disabled');
@@ -243,7 +243,7 @@
                 dataType: 'json',
                 success: function() {
                     el.parent().empty();
-                    imageUpload.removeClass('hidden');
+                    mediaUpload.removeClass('hidden');
                 },
                 error: function(err) {
                     el.removeClass('disabled');

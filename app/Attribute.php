@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model
 {
     /**
+     * The attributes that are mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name'
+    ];
+    
+    /**
      * ManyToMany relationship with Product class
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

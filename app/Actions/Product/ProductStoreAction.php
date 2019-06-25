@@ -3,6 +3,7 @@
 namespace App\Actions\Product;
 
 use App\Product;
+use App\Media;
 
 class ProductStoreAction
 {
@@ -15,11 +16,6 @@ class ProductStoreAction
     public function execute(array $data)
     {
         $product = new Product();
-
-        $img = isset($data['image']) ? $data['image'] : null;
-        // Store product image and get its path
-        $imgPath = $product->storeImage($img, $data['code'], $data['category']);
-        $product->image_path = $imgPath;
         $product->code = $data['code'];
         $product->title = $data['title'];
         $product->description = $data['description'];
@@ -32,6 +28,16 @@ class ProductStoreAction
         $product->categories()->attach(['category_id' => $data['category']]);
         if (isset($data['attr'])) {
             $product->setAttributes($data['attr']);
+        }
+
+        // Store product media files
+        $file = isset($data['media']) ? $data['media'] : null;
+        if ($file) {
+            $media = new Media();
+            $media->type = $file->guessClientExtension();
+            $filePath = $media->storeMedia($file, $product);
+            $media->path = $filePath;
+            $product->media()->save($media);
         }
 
         $flash = [

@@ -19,19 +19,19 @@ Account Settings
                     <div class="content-container">
                         <div class="form-group">
                             <label for="name">First Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                            <input type="text" name="name" class="form-control" value="{{ $request->old('name') ? $request->old('name') : $user->name }}">
                         </div>
                         <div class="form-group">
                             <label for="surname">Last Name</label>
-                            <input type="text" name="surname" class="form-control" value="{{ $user->surname }}">
+                            <input type="text" name="surname" class="form-control" value="{{ $request->old('surname') ? $request->old('surname') : $user->surname }}">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" name="email" class="form-control" value="{{ $user->email }}">
+                            <input type="text" name="email" class="form-control" value="{{ $request->old('email') ? $request->old('email') : $user->email }}">
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="text" name="phone" class="form-control" value="{{ $user->phone }}">
+                            <input type="text" name="phone" class="form-control" value="{{ $request->old('phone') ? $request->old('phone') : $user->phone }}">
                         </div>
                     </div>
                 </div>
@@ -61,15 +61,15 @@ Account Settings
                         </div>
                         <div class="form-group">
                             <label for="city">City</label>
-                            <input type="text" name="city" class="form-control" value="{{ $user->city }}">
+                            <input type="text" name="city" class="form-control" value="{{ $request->old('city') ? $request->old('city') : $user->city }}">
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" name="address" class="form-control" value="{{ $user->address }}">
+                            <input type="text" name="address" class="form-control" value="{{ $request->old('address') ? $request->old('address') : $user->address }}">
                         </div>
                         <div class="form-group">
                             <label for="postcode">Postcode</label>
-                            <input type="text" name="postcode" class="form-control" value="{{ $user->postcode }}">
+                            <input type="text" name="postcode" class="form-control" value="{{ $request->old('postcode') ? $request->old('postcode') : $user->postcode }}">
                         </div>
                     </div>
                 </div>

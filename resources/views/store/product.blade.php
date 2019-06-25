@@ -9,7 +9,7 @@
     <div class="lg-100">
         <div id="product-view" class="cf">
             <div id="product-details" class="lg-65 md-65 sm-100">
-                <div class="product-image">
+                <div class="product-media">
                     <img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}">
                 </div>
                 <table class="product-specifications">

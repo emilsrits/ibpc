@@ -28,16 +28,16 @@ Edit Product
                             <td><label for="category">Category</label></td>
                             <td><span>{{ $product->categories->first()->title }}</span></td>
                         </tr>
-                        <tr class="entity-attribute product-image">
-                            <td><label for="image">Image</label></td>
+                        <tr class="entity-attribute product-media">
+                            <td><label for="media">Media</label></td>
                             <td>
-                                <div id="product-image-preview">
-                                    @if($product->image_path)
+                                <div id="product-media-preview">
+                                    @if($product->media->first())
                                         <img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}">
-                                        <button class="btn btn-label product-image-remove" data-id="{{ $product->id }}"><i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-label product-media-remove" data-id="{{ $product->id }}"><i class="fa fa-trash"></i></button>
                                     @endif
                                 </div>
-                                <input id="product-image-upload" class="{{ $product->image_path ? 'hidden' : '' }}" type="file" name="image" accept="image/gif, image/jpeg, image/png">
+                                <input id="product-media-upload" class="{{ $product->media->first() ? 'hidden' : '' }}" type="file" name="media" accept="image/gif, image/jpeg, image/png">
                             </td>
                         </tr>
                         <tr class="entity-attribute">

@@ -34,7 +34,7 @@
 
 @section('content')
     <div id="email">
-        <img src="{{ asset('/images/logo.png') }}" alt="logo">
+        <img src="{{ asset('/media/logo.png') }}" alt="logo">
         <h4>Hello, {{ $user->full_name }}!</h4>
         <p>We have sent you invoice for your order, see bill in attachment</p>
         <hr>

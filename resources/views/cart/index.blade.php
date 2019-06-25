@@ -31,7 +31,7 @@ Shopping Cart
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </td>
-                            <td class="cart-item-image hidden-xs">
+                            <td class="cart-item-media hidden-xs">
                                 <a href="{{ url('/store', ['code' => $product['item']['code']]) }}">
                                     <img src="{{ asset($product['item']['image']) }}" alt="{{ $product['item']['code'] }}">
                                 </a>

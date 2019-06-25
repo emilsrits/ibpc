@@ -2,6 +2,7 @@
 
 namespace App\Actions\Product;
 
+use App\Media;
 use App\Product;
 
 class ProductUpdateAction
@@ -32,16 +33,6 @@ class ProductUpdateAction
 
         if ($data['submit'] === 'save') {
             $product = Product::findOrFail($id);
-
-            $img = isset($data['image']) ? $data['image'] : null;
-            // Store product image and get its path
-            if ($img) {
-                if ($product->image_path) {
-                    $product->deleteImage();
-                }
-                $imgPath = $product->storeImage($img, $data['code'], $product->categories->first()->id);
-                $product->image_path = $imgPath;
-            }
             $product->code = $data['code'];
             $product->title = $data['title'];
             $product->description = $data['description'];
@@ -53,6 +44,19 @@ class ProductUpdateAction
             // Update product attributes
             if (isset($data['attr'])) {
                 $product->setAttributes($data['attr']);
+            }
+
+            // Update product media
+            $file = isset($data['media']) ? $data['media'] : null;
+            if ($file) {
+                if ($product->media->first()) {
+                    $product->media->first()->delete();
+                }
+                $media = new Media();
+                $media->type = $file->guessClientExtension();
+                $filePath = $media->storeMedia($file, $product);
+                $media->path = $filePath;
+                $product->media()->save($media);
             }
 
             $flash = [

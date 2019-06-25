@@ -12,7 +12,7 @@ IBPC
             @foreach($products as $product)
                 <div class="grid-item lg-25 md-33 sm-50">
                     <div class="product-grid">
-                        <div class="product-image">
+                        <div class="product-media">
                             <a href="{{ url('/store', ['code' => $product->code]) }}">
                                 <img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}">
                             </a>
