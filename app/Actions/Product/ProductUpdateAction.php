@@ -47,16 +47,15 @@ class ProductUpdateAction
             }
 
             // Update product media
-            $file = isset($data['media']) ? $data['media'] : null;
-            if ($file) {
-                if ($product->media->first()) {
-                    $product->media->first()->delete();
+            $files = isset($data['media']) ? $data['media'] : null;
+            if ($files) {
+                foreach ($files as $file) {
+                    $media = new Media();
+                    $media->type = $file->guessClientExtension();
+                    $filePath = $media->storeMedia($file, $product);
+                    $media->path = $filePath;
+                    $product->media()->save($media);
                 }
-                $media = new Media();
-                $media->type = $file->guessClientExtension();
-                $filePath = $media->storeMedia($file, $product);
-                $media->path = $filePath;
-                $product->media()->save($media);
             }
 
             $flash = [

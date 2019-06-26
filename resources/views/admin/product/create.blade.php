@@ -43,7 +43,7 @@ Create Product
                             <td><label for="media">Media</label></td>
                             <td>
                                 <div id="product-media-preview"></div>
-                                <input id="product-media-upload" type="file" name="media" accept="image/gif, image/jpeg, image/png">
+                                <input id="product-media-upload" type="file" name="media[]" accept="image/gif, image/jpeg, image/png" multiple="multiple">
                             </td>
                         </tr>
                         <tr class="entity-attribute">

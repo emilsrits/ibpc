@@ -167,15 +167,15 @@ class Product extends Model
     /**
      * Delete product media
      *
-     * @return void|null
+     * @return void
      */
     protected function deleteMedia()
     {
-        $productMedia = str_replace('/storage', '', $this->media->first()->path);
-        if ($productMedia) {
-            Storage::delete('/public' . $productMedia);
-        } else {
-            return null;
+        foreach($this->media as $media) {
+            $file = str_replace('/storage', '', $media->path);
+            if ($file && Storage::exists('/public' . $file)) {
+                Storage::delete('/public' . $file);
+            }
         }
     }
 

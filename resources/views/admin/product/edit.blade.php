@@ -33,11 +33,17 @@ Edit Product
                             <td>
                                 <div id="product-media-preview">
                                     @if($product->media->first())
-                                        <img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}">
-                                        <button class="btn btn-label product-media-remove" data-id="{{ $product->id }}"><i class="fa fa-trash"></i></button>
+                                        @foreach($product->media as $media)
+                                            <div class="media-item">
+                                                <img class="img-responsive" src="{{ $media->path }}" alt="{{ $product->code }}">
+                                                <button class="btn btn-label product-media-remove" data-id="{{ $media->id }}" data-product_id="{{ $product->id }}">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        @endforeach
                                     @endif
                                 </div>
-                                <input id="product-media-upload" class="{{ $product->media->first() ? 'hidden' : '' }}" type="file" name="media" accept="image/gif, image/jpeg, image/png">
+                                <input id="product-media-upload" type="file" name="media[]" accept="image/gif, image/jpeg, image/png" multiple="multiple">
                             </td>
                         </tr>
                         <tr class="entity-attribute">

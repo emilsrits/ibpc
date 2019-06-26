@@ -15,11 +15,12 @@ class ProductUpdateAjaxAction
     public function execute(array $data)
     {
         $productId = $data['productId'];
+        $mediaId = $data['mediaId'];
         $product = Product::findOrFail($productId);
 
         if ($product) {
             // Delete product media files
-            $product->media->first()->delete();
+            $product->media->find($mediaId)->delete();
 
             return true;
         } else {

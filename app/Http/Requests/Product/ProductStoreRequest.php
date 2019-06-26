@@ -25,7 +25,8 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'category' => 'required|integer|exists:categories,id',
-            'media' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'media' => 'nullable',
+            'media.*' => 'mimes:jpeg,png,jpg,gif|max:2048',
             'code' => 'required|string|unique:products,code',
             'title' => 'required|string',
             'description' => 'nullable|string',

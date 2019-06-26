@@ -143,28 +143,35 @@
 
         // Preview uploaded product media
         $('#product-media-upload').on('change', function () {
-            var imgPath = $(this)[0].value;
-            var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
-            
-            if (extn == "jpg" || extn == "png" || extn == "jpeg" || extn == "gif") {
-                if (typeof (FileReader) != "undefined") {
-                    var mediaPreview = $('#product-media-preview');
-                    mediaPreview.empty();
+            var mediaPreview = $('#product-media-preview');
+            var media = $(this)[0].files;
 
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $("<img />", {
-                            "src": e.target.result,
-                            "class": "img-responsive"
-                        }).appendTo(mediaPreview);
+            for (var i = 0; i < media.length; i++) {
+                var mediaPath = media[i].name;
+                var extn = mediaPath.substring(mediaPath.lastIndexOf('.') + 1).toLowerCase();
+
+                if (extn == 'jpg' || extn == 'jpeg' || extn == 'png' || extn == 'gif') {
+                    if (typeof (FileReader) != 'undefined') {
+                        mediaPreview.find('.media-item.new').remove();
+    
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('<div />', {
+                                'class': 'media-item new'
+                            }).append(
+                                $('<img />', {
+                                    'src': e.target.result,
+                                    'class': 'img-responsive'
+                                })
+                            ).appendTo(mediaPreview);
+                        }
+                        reader.readAsDataURL(media[i]);
+                    } else {
+                        console.log('This browser does not support FileReader');
                     }
-                    mediaPreview.show();
-                    reader.readAsDataURL($(this)[0].files[0]);
                 } else {
-                    console.log('This browser does not support FileReader');
+                    console.log('Invalid media type');
                 }
-            } else {
-                console.log('Invalid media type');
             }
         });
 
@@ -238,12 +245,12 @@
                 type: 'POST',
                 url: '/admin/product/update',
                 data: {
-                    productId: el.data('id')
+                    mediaId: el.data('id'),
+                    productId: el.data('product_id')
                 },
                 dataType: 'json',
                 success: function() {
-                    el.parent().empty();
-                    mediaUpload.removeClass('hidden');
+                    el.parent().remove();
                 },
                 error: function(err) {
                     el.removeClass('disabled');

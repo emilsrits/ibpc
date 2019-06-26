@@ -381,15 +381,31 @@
 
 /* MISC */
 #product-media-preview {
-  position: relative;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  align-items: end;
+  justify-items: center;
   margin: 5px 0 15px;
-  max-width: 200px;
+
+  .media-item {
+    position: relative;
+    display: inline-block;
+    &.new {
+      border: 1px solid $color_orange;
+    }
+  }
 
   .product-media-remove {
     position: absolute;
     right: 0;
     bottom: 0;
   }
+}
+
+#product-media-upload {
+  padding: 6px;
+  border: 3px dashed #d0ecf5;
 }
 
 #send-invoice-form {

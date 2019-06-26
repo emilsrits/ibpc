@@ -31,13 +31,15 @@ class ProductStoreAction
         }
 
         // Store product media files
-        $file = isset($data['media']) ? $data['media'] : null;
-        if ($file) {
-            $media = new Media();
-            $media->type = $file->guessClientExtension();
-            $filePath = $media->storeMedia($file, $product);
-            $media->path = $filePath;
-            $product->media()->save($media);
+        $files = isset($data['media']) ? $data['media'] : null;
+        if ($files) {
+            foreach ($files as $file) {
+                $media = new Media();
+                $media->type = $file->guessClientExtension();
+                $filePath = $media->storeMedia($file, $product);
+                $media->path = $filePath;
+                $product->media()->save($media);
+            }
         }
 
         $flash = [
