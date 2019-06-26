@@ -141,6 +141,19 @@
             }
         });
 
+        // Magnific Popup initialize on product images
+        $('.product-media-item > img').magnificPopup({
+            type: 'image',
+            gallery: {
+                enabled:true
+            },
+            callbacks: {
+                elementParse: function(item) {
+                    item.src = item.el.attr('src');
+                }
+            }
+        });
+
         // Preview uploaded product media
         $('#product-media-upload').on('change', function () {
             var mediaPreview = $('#product-media-preview');

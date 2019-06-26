@@ -2,6 +2,8 @@
 
 namespace App\Actions\Specification;
 
+use App\Specification;
+
 class SpecificationUpdateAction
 {
     /**

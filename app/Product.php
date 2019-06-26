@@ -264,6 +264,19 @@ class Product extends Model
     }
 
     /**
+     * Get specific amount of media items
+     * 
+     * @param integer $count
+     * @return Collection
+     */
+    public function getImages($count = 1)
+    {
+        $items = $this->media->take($count);
+
+        return $items;
+    }
+
+    /**
      * Return price with currency
      *
      * @param $price

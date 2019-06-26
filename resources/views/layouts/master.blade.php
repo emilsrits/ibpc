@@ -12,6 +12,7 @@
 
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ URL::to('/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ URL::to('/css/magnific-popup.min.css') }}">
 	<link rel="stylesheet" href="{{ URL::to('/css/app.css') }}">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
 	@yield('styles')
@@ -41,6 +42,7 @@
 	<!-- Scripts -->
 	<script type="text/javascript" src="{{ URL::to('/js/jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::to('/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::to('/js/magnific-popup.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::to('/js/app.js') }}"></script>
 	@yield('scripts')
 </body>
