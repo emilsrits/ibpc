@@ -9,19 +9,20 @@
     <div class="lg-100">
         <div id="product-view" class="cf">
             <div id="product-details" class="lg-65 md-65 sm-100">
-                @if($product->media->first())
-                    <div id="product-media-gallery">
-                        @foreach($product->getImages(5) as $image)
-                            <div class="product-media-item">
-                                <img src="{{ $image->path }}" alt="{{ $image->id }}">
-                            </div>
-                        @endforeach
-                    </div>
-                @else
-                    <div id="product-media">
+                <div id="product-media-gallery">
+                    <div class="product-media-item">
                         <img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}">
                     </div>
-                @endif
+                    @if(count($product->media) > 1)
+                        <div class="product-media-thumbs">
+                            @foreach($product->getImages(4, 1) as $image)
+                                <div class="product-media-item">
+                                    <img src="{{ $image->path }}" alt="{{ $image->id }}">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
                 <table class="product-specifications">
                     <tbody>
                     @if($specifications)

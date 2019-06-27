@@ -267,11 +267,17 @@ class Product extends Model
      * Get specific amount of media items
      * 
      * @param integer $count
+     * @param integer $index
      * @return Collection
      */
-    public function getImages($count = 1)
+    public function getImages($count = 1, $index = null)
     {
-        $items = $this->media->take($count);
+        if ($index) {
+            $items = $this->media->take($count);
+            $items = $items->slice($index);
+        } else {
+            $items = $this->media->take($count);
+        }
 
         return $items;
     }
