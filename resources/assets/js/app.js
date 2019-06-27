@@ -6,7 +6,8 @@
             itemRemove = $('.cart-item-remove'),
             mediaRemove = $('#product-media-preview').find('.product-media-remove'),
             mediaUpload = $('#product-media-upload'),
-            specifications = $('#specifications');
+            specifications = $('#specifications'),
+            massAction = $('#mass-action');
 
         // Hide flash message
         $('.message-close').css('display', 'inline-block').click(function () {
@@ -55,66 +56,66 @@
            }
         });
 
-        // Confirm entity delete
+        // Confirm single entity delete
         $('#entity-delete').on('click', function() {
             return confirm('Delete this?');
         });
 
-        // Confirm product deletion in catalog
-        $('#catalog-form').on('submit', function() {
-            var massAction = $('#mass-action').val();
-            if (massAction === '3') {
-                var numberOfChecked = $('.entity-select:checked').length;
-
-                if (numberOfChecked > 0) {
-                    return confirm('Delete ' + numberOfChecked + ' products?');
+        // Confirm mass action on a entity
+        confirmAction = function(actions) {
+            var items = Object.values(actions);
+            for (let item of items) {
+                // If element is empty skip to next iteration
+                if ($.isEmptyObject(item.element)) {
+                    continue;
                 }
-            }
-        });
-        // Confirm category deletion in categories view
-        $('#categories-form').on('submit', function() {
-            var massAction = $('#mass-action').val();
-            if (massAction === '3') {
-                var numberOfChecked = $('.entity-select:checked').length;
+                item.element.on('submit', function() {
+                    var event = massAction.val();
+                    if (event === item.id) {
+                        var numberOfChecked = $('.entity-select:checked').length;
 
-                if (numberOfChecked > 0) {
-                    return confirm('Delete ' + numberOfChecked + ' categories?');
-                }
+                        if (numberOfChecked > 0) {
+                            var actionCapitalized = item.action.charAt(0).toUpperCase() + item.action.slice(1);
+                            return confirm(actionCapitalized + ' ' + numberOfChecked + ' ' + item.entity + '?');
+                        }
+                    }
+                });
+                
             }
-        });
-        // Confirm specification deletion in specifications view
-        $('#specifications-form').on('submit', function() {
-            var massAction = $('#mass-action').val();
-            if (massAction === '1') {
-                var numberOfChecked = $('.entity-select:checked').length;
-
-                if (numberOfChecked > 0) {
-                    return confirm('Delete ' + numberOfChecked + ' attribute groups?');
-                }
+        }
+        var actionsCollection = {
+            product: {
+                element: $('#catalog-form'),
+                id: '3',
+                action: 'delete',
+                entity: 'products'
+            },
+            category: {
+                element: $('#categories-form'),
+                id: '3',
+                action: 'delete',
+                entity: 'categories'
+            },
+            specification: {
+                element: $('#specifications-form'),
+                id: '1',
+                action: 'delete',
+                entity: 'attribute groups'
+            },
+            attribute: {
+                element: $('#attributes-form'),
+                id: '1',
+                action: 'delete',
+                entity: 'attributes'
+            },
+            user: {
+                element: $('#users-form'),
+                id: '2',
+                action: 'disable',
+                entity: 'users'
             }
-        });
-        // Confirm attribute deletion
-        $('#attributes-form').on('submit', function() {
-            var massAction = $('#mass-action').val();
-            if (massAction === '1') {
-                var numberOfChecked = $('.entity-select:checked').length;
-
-                if (numberOfChecked > 0) {
-                    return confirm('Delete ' + numberOfChecked + ' attributes?');
-                }
-            }
-        });
-        // Confirm user disable
-        $('#users-form').on('submit', function() {
-            var massAction = $('#mass-action').val();
-            if (massAction === '2') {
-                var numberOfChecked = $('.entity-select:checked').length;
-
-                if (numberOfChecked > 0) {
-                    return confirm('Disable ' + numberOfChecked + ' users?');
-                }
-            }
-        });
+        };
+        confirmAction(actionsCollection);
 
         // Uncheck other checkboxes when one of delivery options is selected
         $('.checkout-delivery-storage, .checkout-delivery-address').on('click', function() {
@@ -160,7 +161,7 @@
             var mediaPreview = $('#product-media-preview');
             var media = $(this)[0].files;
 
-            for (var i = 0; i < media.length; i++) {
+            for (let i = 0; i < media.length; i++) {
                 var mediaPath = media[i].name;
                 var extn = mediaPath.substring(mediaPath.lastIndexOf('.') + 1).toLowerCase();
 
