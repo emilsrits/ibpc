@@ -79,32 +79,9 @@ Create Product
                     </table>
                 </div>
             </div>
-            @if($specifications)
-                @if($specifications->specifications->first())
-                    <div class="product-content-section">
-                        <div class="content-section-toggle">
-                            <strong>Specifications<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
-                        </div>
-                        <div class="content-container">
-                            <table class="product-table">
-                                @foreach($specifications->specifications as $category => $specifications)
-                                    @if($specifications->attributes->first())
-                                        <tr class="entity-specification">
-                                            <td colspan="2">{{ $specifications->name }}</td>
-                                        </tr>
-                                    @endif
-                                    @foreach($specifications->attributes as $attribute)
-                                        <tr class="entity-attribute">
-                                            <td><label for="{{ 'attr[' . $specifications->id . '][' . $attribute->id . ']' }}">{{ $attribute->name }}</label></td>
-                                            <td><input type="text" name="{{ 'attr[' . $specifications->id . '][' . $attribute->id . ']' }}"></td>
-                                        </tr>
-                                    @endforeach
-                                @endforeach
-                            </table>
-                        </div>
-                    </div>
-                @endif
-            @endif
+            <div id="specifications" class="product-content-section">
+                @include('partials.admin.product.specifications')
+            </div>
         </form>
     </div>
 </div>

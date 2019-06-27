@@ -49,7 +49,7 @@ class ProductController extends Controller
         $products = Product::with('categories')->filter($filters)->paginate(20);
         $categories = Category::all();
 
-        return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => $request ]);
+        return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => $request]);
     }
 
     /**
@@ -62,18 +62,14 @@ class ProductController extends Controller
     {
         $categories = Category::where('parent', 0)->get();
 
-        if ($request['category']) {
-            $categoryId = json_decode($request['category']);
-            $specifications = Category::with('specifications.attributes')->find($categoryId);
+        if ($request->old('category')) {
+            $category = Category::with('specifications.attributes')->find($request->old('category'));
         } else {
-            $specifications = null;
+            $category = null;
         }
 
-        return view('admin.product.create', [
-            'categories' => $categories,
-            'specifications' => $specifications,
-            'request' => $request
-        ]);
+
+        return view('admin.product.create', ['categories' => $categories, 'category' => $category, 'request' => $request]);
     }
 
     /**
@@ -84,13 +80,13 @@ class ProductController extends Controller
      */
     public function createWithCategory(Request $request)
     {
-        $categoryId = $request['selectFieldValue'];
-        $category = Category::findOrFail($categoryId);
+        $category = Category::with('specifications.attributes')->find($request['selectFieldValue']);
+        $view = view('partials.admin.product.specifications', ['category'=> $category])->render();
 
-        if ($category) {
-            return response()->json(array('category' => json_encode($categoryId), 'redirectUrl'=> '/admin/product/create?category='), 200);
+        if ($view) {
+            return response()->json($view, 200);
         } else {
-            return response()->json(array('category' => json_encode($categoryId)), 400);
+            return response()->json(null, 400);
         }
     }
 
@@ -125,14 +121,14 @@ class ProductController extends Controller
         $product = Product::with('categories.specifications.attributes')->find($id);
 
         if (!$product->getCategoryId()->isEmpty()) {
-            $categories = Category::with('specifications.attributes')->find($product->getCategoryId());
+            $category = Category::with('specifications.attributes')->find($product->getCategoryId());
         } else {
-            $categories = null;
+            $category = null;
         }
 
         return view('admin.product.edit', [
             'product' => $product,
-            'categories' => $categories,
+            'category' => $category,
             'request' => $request
         ]);
     }

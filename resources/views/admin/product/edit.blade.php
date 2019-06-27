@@ -89,8 +89,8 @@ Edit Product
                     </table>
                 </div>
             </div>
-            @if($categories)
-                @if($categories->first()->specifications->first())
+            @if($category)
+                @if($category->first()->specifications->first())
                     <div class="product-content-section">
                         <div class="content-section-toggle">
                             <strong>Specifications<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
@@ -98,7 +98,7 @@ Edit Product
                         <div class="content-container">
                             <table class="product-table">
                                 <tbody>
-                                @foreach($categories->first()->specifications as $category => $specification)
+                                @foreach($category->first()->specifications as $key => $specification)
                                     @if($specification->attributes->first())
                                         <tr class="entity-specification">
                                             <td colspan="2">{{ $specification->name }}</td>
@@ -109,7 +109,9 @@ Edit Product
                                             <td><label for="{{ 'attr[' . $specification->id . '][' . $attribute->id . ']' }}">{{ $attribute->name }}</label></td>
                                             <td>
                                                 <input type="text" name="{{ 'attr[' . $specification->id . '][' . $attribute->id . ']' }}"
-                                                    value="{{ $product->getAttributeById($attribute->id) }}">
+                                                    value="{{ is_array(old('attr.'.$specification->id)) 
+                                                        ? old('attr.'.$specification->id.'.'.$attribute->id.'') 
+                                                        : $product->getAttributeById($attribute->id) }}">
                                             </td>
                                         </tr>
                                     @endforeach

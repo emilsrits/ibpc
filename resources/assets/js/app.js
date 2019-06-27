@@ -3,16 +3,17 @@
     $(document).ready(function() {
         var 
             itemAdd = $('.product-quick-add'),
-            itemRemove = $('.cart-item-remove');
-            mediaRemove = $('#product-media-preview').find('.product-media-remove');
-            mediaUpload = $('#product-media-upload');
+            itemRemove = $('.cart-item-remove'),
+            mediaRemove = $('#product-media-preview').find('.product-media-remove'),
+            mediaUpload = $('#product-media-upload'),
+            specifications = $('#specifications');
 
         // Hide flash message
         $('.message-close').css('display', 'inline-block').click(function () {
             $('.flash-message').fadeOut(500);
         });
 
-        // Check all checkboxes in catalog for mass action
+        // Check all checkboxes in table for mass action
         $('#mass-select').on('click', function() {
             if ($(this).is(':checked')) {
                 $('.entity-select').each(function () {
@@ -25,7 +26,21 @@
             }
         });
 
-        // Toggle specifications sections when creating product
+        // Clear all filters when clicked
+        $('#filters-clear').on('click', function() {
+            clearAllInputs($('#table-search'));
+        });
+        // Clear all filters from a admin panel table
+        function clearAllInputs(selector) {
+            $(selector).find(':input').each(function() {
+                $(this).val('');
+            });
+            $(selector).find('select').each(function () {
+                $(this).selectedIndex = 0;
+            });
+        }
+
+        // Toggle form sections
         $('.content-section-toggle').on('click', function() {
             $('i', this).toggleClass('fa-angle-up fa-angle-down');
             $(this).parent().find('.content-container').slideToggle();
@@ -113,20 +128,6 @@
             $(this).find('#order-submit').addClass('disabled').attr('onclick','return false;');
         });
 
-        // Clear all filters when clicked
-        $('#filters-clear').on('click', function() {
-            clearAllInputs($('#table-search'));
-        });
-        // Clear all filters from a admin panel table
-        function clearAllInputs(selector) {
-            $(selector).find(':input').each(function() {
-                $(this).val('');
-            });
-            $(selector).find('select').each(function () {
-                $(this).selectedIndex = 0;
-            });
-        }
-
         // Toggle dropdown for category navigation
         $('.dropdown-trigger').on('click', function() {
             toggleDropdown($(this));
@@ -155,7 +156,7 @@
         });
 
         // Preview uploaded product media
-        $('#product-media-upload').on('change', function () {
+        mediaUpload.on('change', function () {
             var mediaPreview = $('#product-media-preview');
             var media = $(this)[0].files;
 
@@ -197,7 +198,7 @@
         });
 
         // Load category specifications when creating product
-        $('#category-select').change(function() {
+        $('#category-select').on('change', function() {
             $.ajax({
                 type: 'GET',
                 url: '/admin/product/categories',
@@ -205,10 +206,10 @@
                     selectFieldValue: $(this).val()
                 },
                 success: function(data) {
-                    window.location.href = data.redirectUrl + data.category;
+                    specifications.html(data);
                 },
-                error: function(err) {
-                    console.log("error: " + err);
+                error: function() {
+                    specifications.empty();
                 }
             });
         });
