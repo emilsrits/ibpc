@@ -47,15 +47,7 @@ class ProductFilter extends QueryFilter
      */
     public function status($status)
     {
-        if ($status) {
-            if ($status === 'enabled') {
-                $status = 1;
-            }
-            if ($status === 'disabled') {
-                $status = 0;
-            }
-        }
-        return $this->builder->where('status', strtolower($status));
+        return $this->builder->where('status', $status);
     }
 
     /**

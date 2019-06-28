@@ -77,16 +77,16 @@ Catalog
                     <td colspan="2"></td>
                     <td>
                         <select name="status">
-                            <option value="0"></option>
-                            <option value="enabled" {{ $request['status'] === 'enabled' ? 'selected' : '' }}>
+                            <option value=""></option>
+                            <option value="1" {{ $request['status'] === '1' ? 'selected' : '' }}>
                                 Enabled</option>
-                            <option value="disabled" {{ $request['status'] === 'disabled' ? 'selected' : '' }}>
+                            <option value="0" {{ $request['status'] === '0' ? 'selected' : '' }}>
                                 Disabled</option>
                         </select>
                     </td>
                     <td>
                         <select name="category">
-                            <option value="0"></option>
+                            <option value=""></option>
                             @foreach($categories as $category)
                                 @if(!$category->parent)
                                     <option value="{{ $category->id }}"
