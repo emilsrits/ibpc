@@ -14,7 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
-            ['store.*', 'cart.*', 'account.*', 'auth.*'], 
+            ['store.*', 'cart.*', 'account.*', 'auth.*', 'errors.*'], 
             'App\Http\ViewComposers\CategoryComposer'
         );
     }
