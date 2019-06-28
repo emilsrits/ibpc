@@ -19,22 +19,6 @@ ADMIN_EMAIL=admin@example.test
 ADMIN_PASSWORD=admin
 ```
 
-Before running migration scripts comment out code inside AppServiceProvider.php `boot()` method. When migration script is done uncomment the code block.
-
-```
-public function boot()
-{
-    $parentCategories = Category::where('parent', 1)->where('status', 1)->get();
-    $childCategories = Category::where('parent', 0)->where('status', 1)->get();
-
-    View::share([
-        'parentCategories' => $parentCategories,
-        'childCategories' => $childCategories,
-        'errors' => null
-    ]);
-}
-```
-
 Run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
 
 Install Node dependencies by running `npm install` using the terminal in the app root directory.
