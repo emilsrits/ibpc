@@ -7,6 +7,8 @@ use App\Category;
 use App\Observers\MediaObserver;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Order;
+use App\Observers\OrderObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,8 @@ class AppServiceProvider extends ServiceProvider
 
         // Media event observer
         Media::observe(MediaObserver::class);
+        // Order eventt observer
+        Order::observe(OrderObserver::class);
     }
 
     /**

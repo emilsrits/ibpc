@@ -11,7 +11,7 @@ class OrderUpdateAction
      * Process the order update action
      *
      * @param array $data
-     * @return array
+     * @return array|null
      */
     public function execute(array $data, $id)
     {
@@ -33,9 +33,12 @@ class OrderUpdateAction
             ];
 
             return $flash;
-        } else {
+        } 
+        
+        if ($data['submit'] === 'save') {
+            $order = Order::find($id);
+
             if (isset($data['status'])) {
-                $order = Order::find($id);
                 $status = $data['status'];
 
                 $result = $order->setStatus($id, $status);
@@ -52,13 +55,24 @@ class OrderUpdateAction
                     ];
                 }
             } else {
-                $flash = [
-                    'type' => 'message-danger',
-                    'message' => 'Order must have a status!'
-                ];
+                if (!orderStatusFinished($order->status)) {
+                    $flash = [
+                        'type' => 'message-danger',
+                        'message' => 'Order must have a status!'
+                    ];
+                } else {
+                    $flash = null;
+                }
             }
 
             return $flash;
         }
+
+        $flash = [
+            'type' => 'message-danger',
+            'message' => 'Invalid form action!'
+        ];
+
+        return $flash;
     }
 }

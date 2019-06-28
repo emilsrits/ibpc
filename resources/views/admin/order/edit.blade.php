@@ -7,14 +7,14 @@ Edit Order
 @section('content')
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="order-edit">
-        <h3>#{{ $order->id }}</h3>
+        <h3>#{{ $order->id }}</h3>  
         <form id="edit-order-form" role="form" method="POST" action="{{ url('/admin/order/update', ['id' => $order->id]) }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
                     <a href="{{ url('/admin/orders') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
-                <button class="entity-save" type="submit" name="submit" value="save">Save</button>
+                <button class="entity-save {{ $closed ? 'hidden' : '' }}" type="submit" name="submit" value="save">Save</button>
             </div>
             <div class="order-content-section">
                 <div class="content-container">
@@ -50,7 +50,7 @@ Edit Order
                     </table>
                 </div>
             </div>
-            @if(!in_array($order->status, config('constants.order_status_finished')))
+            @if(!$closed)
                 <div class="order-content-section">
                     <div class="content-section-toggle">
                         <strong>Order Status<i class="fa fa-angle-down" aria-hidden="true"></i></strong>

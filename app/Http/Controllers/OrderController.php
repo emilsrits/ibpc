@@ -43,7 +43,7 @@ class OrderController extends Controller
 
         $orders = Order::with('user')->filter($filters)->paginate(20);
 
-        return view('admin.order.orders', ['orders' => $orders, 'request' => $request ]);
+        return view('admin.order.orders', ['orders' => $orders, 'request' => $request]);
     }
 
     /**
@@ -74,10 +74,9 @@ class OrderController extends Controller
     public function edit($id)
     {
         $order = Order::with('user')->findOrFail($id);
+        $closed = in_array($order->status, config('constants.order_status_finished'));
 
-        return view('admin.order.edit', [
-            'order' => $order
-        ]);
+        return view('admin.order.edit', ['order' => $order, 'closed' => $closed]);
     }
 
     /**
@@ -91,8 +90,10 @@ class OrderController extends Controller
     public function update(OrderUpdateRequest $request, OrderUpdateAction $action, $id)
     {
         $flash = $action->execute($request->all(), $id);
+        if ($flash !== null) {
+            $request->session()->flash($flash['type'], $flash['message']);
+        }
 
-        $request->session()->flash($flash['type'], $flash['message']);
         return redirect()->back();
     }
 
