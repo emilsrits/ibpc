@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttributeProductPivotTable extends Migration
+class CreateAttributeProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,6 +21,7 @@ class CreateAttributeProductPivotTable extends Migration
             $table->integer('attribute_id')->unsigned()->index();
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
             $table->string('value', 50);
+            $table->timestamps();
         });
     }
 

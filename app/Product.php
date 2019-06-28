@@ -23,7 +23,7 @@ class Product extends Model
      */
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_product')->withPivot('attribute_id', 'value');
+        return $this->belongsToMany(Attribute::class, 'attribute_product')->withPivot('attribute_id', 'value')->withTimestamps();
     }
 
     /**
@@ -106,7 +106,7 @@ class Product extends Model
 
         // If the product has any attributes attached
         if ($this->attributes()->first()) {
-            foreach ($specifications as $category => $attributes) {
+            foreach ($specifications as $key => $attributes) {
                 foreach ($attributes as $attribute => $value) {
                     $productAttr = $this->attributes()->find($attribute);
                     if ($productAttr) {
@@ -127,7 +127,8 @@ class Product extends Model
                 }
             }
         } else {
-            foreach ($specifications as $category => $attributes) {
+            // Add attributes
+            foreach ($specifications as $key => $attributes) {
                 foreach ($attributes as $attribute => $value) {
                     if ($value) {
                         $this->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);

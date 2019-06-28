@@ -14,6 +14,13 @@ class Attribute extends Model
     protected $fillable = [
         'name'
     ];
+
+    /**
+     * All of the relationships to be touched
+     *
+     * @var array
+     */
+    protected $touches = ['specification'];
     
     /**
      * ManyToMany relationship with Product class

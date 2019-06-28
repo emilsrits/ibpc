@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategorySpecificationPivotTable extends Migration
+class CreateCategorySpecificationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,6 +20,7 @@ class CreateCategorySpecificationPivotTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->integer('specification_id')->unsigned()->index();
             $table->foreign('specification_id')->references('id')->on('specifications')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
