@@ -36,7 +36,7 @@ Users
                     <th>Role</th>
                     <th>Status</th>
                     <th id="sort-created" class="col-md">
-                        <button class="btn-sort" type="submit" name="created" value="{{ $request['created'] === 'desc' ? 'asc' : 'desc' }}">
+                        <button class="btn-sort" type="submit" name="created" value="{{ sortEntry($request['created']) }}">
                             Created at
                             @if($request['created'] === 'asc')
                                 <i class="fa fa-sort-asc" aria-hidden="true"></i>
@@ -48,7 +48,7 @@ Users
                         </button>
                     </th>
                     <th id="sort-updated" class="col-md">
-                        <button class="btn-sort" type="submit" name="updated" value="{{ $request['updated'] === 'desc' ? 'asc' : 'desc' }}">
+                        <button class="btn-sort" type="submit" name="updated" value="{{ sortEntry($request['updated']) }}">
                             Updated at
                             @if($request['updated'] === 'asc')
                                 <i class="fa fa-sort-asc" aria-hidden="true"></i>

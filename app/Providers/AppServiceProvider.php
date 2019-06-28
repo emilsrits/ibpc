@@ -3,9 +3,7 @@
 namespace App\Providers;
 
 use App\Media;
-use App\Category;
 use App\Observers\MediaObserver;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Order;
 use App\Observers\OrderObserver;

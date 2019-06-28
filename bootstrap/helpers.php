@@ -71,3 +71,22 @@ if (!function_exists('countryFromCode')) {
         }
     }
 }
+
+if (!function_exists('sortEntry')) {
+    /**
+     * Return the next direction of sorting entry
+     * 
+     * @param string|null $entry
+     * @return string|null
+     */
+    function sortEntry($entry = null) {
+        switch ($entry) {
+            case null:
+                return 'desc';
+            case 'desc':
+                return 'asc';
+            default:
+                return null;
+        }
+    }
+}
