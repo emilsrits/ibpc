@@ -46,12 +46,12 @@ return [
     // Recipient info
     'recipient' => [
         'name'      => 'Example',
-        'id'        => 435345345123453,
-        'reg'       => 34535345345,
-        'address'   => 'Salt Lake City, 4657 Tori Lane, 84116',
+        'id'        => 1234567890,
+        'reg'       => 987654321231,
+        'address'   => 'Example',
         'bank'      => 'Testbank',
-        'code'      => 'TB34545',
-        'account'   => 'WQ34556363464'
+        'code'      => '90876504321',
+        'account'   => 'RND0M123'
     ],
 
     // Array with supported countries
