@@ -70,8 +70,8 @@ Users
                         <select name="role">
                             <option value=""></option>
                             @foreach(config('constants.user_roles') as $key => $value)
-                                <option value="{{ $key }}" {{ $request['role'] === $value ? 'selected' : '' }}>
-                                    {{ $value }}</option>
+                                <option value="{{ $value }}" {{ $request['role'] === $value ? 'selected' : '' }}>
+                                    {{ $key }}</option>
                             @endforeach
                         </select>
                     </td>
@@ -95,7 +95,7 @@ Users
                         </td>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->full_name }}</td>
-                        <td>{{ $user->roles->min()->name }}</td>
+                        <td>{{ $user->roles->min()->slug }}</td>
                         <td>{{ $user->status ? 'Active' : 'Disabled' }}</td>
                         <td class="no-wrap">{{ $user->created_at }}</td>
                         <td class="no-wrap">{{ $user->updated_at }}</td>

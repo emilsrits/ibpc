@@ -94,18 +94,18 @@ Edit User
                 <div class="content-container">
                     <table class="user-table">
                         <tbody>
-                        <tr class="entity-attribute">
                             @foreach($roles as $role)
-                                <td class="user-role">
-                                    <label>
-                                        <input type="checkbox" name="{{ 'role[' . $role->id . '][id]' }}"
-                                            value="{{ $role->id }}"
-                                            {{ $user->hasRole($role->slug) ? 'checked' : '' }}>
-                                        {{ $role->name }}
-                                    </label>
-                                </td>
+                                <tr class="entity-attribute">
+                                    <td class="user-role">
+                                        <label>
+                                            <input type="checkbox" name="{{ 'role[' . $role->id . '][id]' }}"
+                                                value="{{ $role->id }}"
+                                                {{ $user->hasRole($role->slug) ? 'checked' : '' }}>
+                                            {{ $role->slug }}
+                                        </label>
+                                    </td>
+                                </tr>
                             @endforeach
-                        </tr>
                         </tbody>
                     </table>
                 </div>

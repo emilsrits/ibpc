@@ -15,8 +15,8 @@ return [
 
     // User roles
     'user_roles' => [
-        '1' => 'administrator',
-        '2' => 'customer'
+        'admin' => '1',
+        'user' => '2'
     ],
 
     // Order statuses
