@@ -13,7 +13,7 @@ class Register extends Page
      */
     public function url()
     {
-        return '/user/register';
+        return '/register';
     }
 
     /**

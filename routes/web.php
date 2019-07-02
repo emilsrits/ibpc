@@ -206,25 +206,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
 /**
  * User routes
  */
-Route::group(['prefix' => 'user'], function () {
-    Route::group(['namespace' => 'Auth'], function () {
-        Route::get('/login', [
-            'uses' => 'LoginController@index',
-            'as' => 'user.login'
-        ]);
-        Route::post('/logout', [
-            'uses' => 'LoginController@logout',
-            'as' => 'user.logout'
-        ]);
-        Route::get('/register', [
-            'uses' => 'RegisterController@index',
-            'as' => 'user.register'
-        ]);
-    });
-
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
     /**
      * User account routes
      */
+Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => ['auth', 'active']], function () {
         Route::get('/account', [
             'uses' => 'AccountController@index',

@@ -62,11 +62,11 @@
                                 <li role="separator" class="divider"></li>
                                 <!-- Authentication Links -->
                                 <li>
-                                    <a href="{{ url('/user/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out
                                     </a>
                                 </li>
-                                <form id="logout-form" action="{{ url('/user/logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </ul>
