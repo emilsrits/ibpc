@@ -1,4 +1,4 @@
-## **IBPC** 
+# **IBPC** 
 
 **_IN DEVELOPMENT_**
 
@@ -6,13 +6,13 @@ Online store in Laravel framework
 
 **Author:** @emilsrits
 
-### Installation
+## Installation
 
 Install the app's dependencies by running `composer install` using the terminal in the app root directory.
 
-Create and configure .env file for your database, run `php artisan key:generate` to generate APP_KEY value in .env file. 
+Create and configure **.env** file for your database, run `php artisan key:generate` to generate APP_KEY value in .env file. 
 
-Add `ADMIN_EMAIL=` and `ADMIN_PASSWORD=` to your .env file before seeding tables. This will create admin user for you to access administrator panel.
+Add `ADMIN_EMAIL=` and `ADMIN_PASSWORD=` to your **.env** file before seeding tables. This will create admin user for you to access administrator panel.
 Example:
 ```
 ADMIN_EMAIL=admin@example.test
@@ -25,8 +25,15 @@ Install Node dependencies by running `npm install` using the terminal in the app
 
 Run command `php artisan storage:link` to create symlink from `storage/app/public` to `public/storage` folder. This is needed for product images.
 
-### Tools:
+## Tools:
 
-  * Laravel     5.6
+  * Laravel     5.6.39
   * PHP         >=7.1.3
   * MySQL       >=5.6
+
+## Testing:
+### PHPUnit
+Create and configure **.env.testing** file to use different database for unit/feature tests.
+### Laravel Dusk
+Create and configure **.env.dusk.local** file to use different database for browser tests.
+
