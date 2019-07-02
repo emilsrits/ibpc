@@ -223,18 +223,6 @@ class User extends Authenticatable
 
         return $fullAdress;
     }
-
-    /**
-     * Accept valid password and hash it before saving
-     *
-     * @param string $password
-     */
-    public function setPasswordAttribute($password)
-    {
-        if ($password !== null && $password !== "") {
-            $this->attributes['password'] = bcrypt($password);
-        }
-    }
     
     /**
      * Set users country attribute depending on its value

@@ -1,6 +1,12 @@
 <?php
 
 return [
+    // Admin seed
+    'admin' => [
+        'email' => env('ADMIN_EMAIL'),
+        'password' => env('ADMIN_PASSWORD')
+    ],
+
     // Save a copy of invoice inside storage directory
     'invoice_storage' => true,
 

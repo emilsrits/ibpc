@@ -21,7 +21,7 @@ class AccountUpdateAction
         $user->surname = $data['surname'];
         $user->email = $data['email'];
         $user->phone = $data['phone'];
-        $user->password = $data['password'];
+        $user->password = bcrypt($data['password']);
         $user->country = $data['country'];
         $user->city = $data['city'];
         $user->address = $data['address'];

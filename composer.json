@@ -19,7 +19,9 @@
         "symfony/dom-crawler": "3.1.*",
         "laracasts/generators": "^1.1",
         "laravelcollective/html": "5.*",
-        "filp/whoops": "~2.0"
+        "filp/whoops": "~2.0",
+        "laravel/dusk": "^4.0",
+        "staudenmeir/dusk-updater": "^1.1"
     },
     "autoload": {
         "classmap": [
@@ -33,9 +35,9 @@
         ]
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [

@@ -15,15 +15,15 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->truncate();
         // add users to the database
-        $admin_email = env('ADMIN_EMAIL');
-        $admin_password = env('ADMIN_PASSWORD');
+        $admin_email = config('constants.admin.email');
+        $admin_password = config('constants.admin.password');
         if ($admin_email && $admin_password) {
             DB::table('users')->insert([
                 [
                     'name' => 'admin',
                     'surname' => 'admin',
-                    'email' => env('ADMIN_EMAIL'),
-                    'password' => Hash::make(env('ADMIN_PASSWORD'))
+                    'email' => $admin_email,
+                    'password' => Hash::make($admin_password)
                 ]
             ]);
         }

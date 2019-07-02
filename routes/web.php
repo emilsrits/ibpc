@@ -212,8 +212,14 @@ Route::group(['prefix' => 'user'], function () {
             'uses' => 'LoginController@index',
             'as' => 'user.login'
         ]);
-        Route::post('/logout', 'LoginController@logout');
-        Route::get('/register', 'RegisterController@index');
+        Route::post('/logout', [
+            'uses' => 'LoginController@logout',
+            'as' => 'user.logout'
+        ]);
+        Route::get('/register', [
+            'uses' => 'RegisterController@index',
+            'as' => 'user.register'
+        ]);
     });
 
     /**
