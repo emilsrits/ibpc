@@ -24,12 +24,12 @@ Edit User
                     <table class="user-table">
                         <tbody>
                         <tr class="entity-attribute">
-                            <td><label for="name">Name</label></td>
-                            <td><input type="text" name="name" value="{{ $user->name }}"></td>
+                            <td><label for="first_name">First Name</label></td>
+                            <td><input type="text" name="first_name" value="{{ $user->first_name }}"></td>
                         </tr>
                         <tr class="entity-attribute">
-                            <td><label for="surname">Surname</label></td>
-                            <td><input type="text" name="surname" value="{{ $user->surname }}"></td>
+                            <td><label for="last_name">Last Name</label></td>
+                            <td><input type="text" name="last_name" value="{{ $user->last_name }}"></td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="email">Email</label></td>

@@ -18,12 +18,12 @@ Account Settings
                     </div>
                     <div class="content-container">
                         <div class="form-group">
-                            <label for="name">First Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ $request->old('name') ? $request->old('name') : $user->name }}">
+                            <label for="first_name">First Name</label>
+                            <input type="text" name="first_name" class="form-control" value="{{ $request->old('first_name') ? $request->old('first_name') : $user->first_name }}">
                         </div>
                         <div class="form-group">
-                            <label for="surname">Last Name</label>
-                            <input type="text" name="surname" class="form-control" value="{{ $request->old('surname') ? $request->old('surname') : $user->surname }}">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" name="last_name" class="form-control" value="{{ $request->old('last_name') ? $request->old('last_name') : $user->last_name }}">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>

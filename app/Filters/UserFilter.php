@@ -30,9 +30,9 @@ class UserFilter extends QueryFilter
             return $this->builder->where('id', $user);
         }
 
-        return $this->builder->where('name', 'like', '%'.$user.'%')
-               ->orWhere('surname', 'like', '%'.$user.'%')
-               ->orWhere(DB::raw('CONCAT_WS(" ", name, surname)'), 'like', $user);
+        return $this->builder->where('first_name', 'like', '%'.$user.'%')
+               ->orWhere('last_name', 'like', '%'.$user.'%')
+               ->orWhere(DB::raw('CONCAT_WS(" ", first_name, last_name)'), 'like', $user);
     }
 
     /**

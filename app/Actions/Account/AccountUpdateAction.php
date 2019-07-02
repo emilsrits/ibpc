@@ -17,11 +17,13 @@ class AccountUpdateAction
     {
         $user = User::findOrFail($id);
 
-        $user->name = $data['name'];
-        $user->surname = $data['surname'];
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
         $user->email = $data['email'];
         $user->phone = $data['phone'];
-        $user->password = bcrypt($data['password']);
+        if ($data['password'] !== null && $data['password'] !== "") {
+            $user->password = bcrypt($data['password']);
+        }
         $user->country = $data['country'];
         $user->city = $data['city'];
         $user->address = $data['address'];

@@ -27,9 +27,9 @@ class AccountUpdateRequest extends FormRequest
         $id = $this->user()->id;
 
         return [
-            'name' => 'required|max:20',
-            'surname' => 'required|max:20',
-            'email'  => 'required|email|max:25|unique:users,email,'.$id,
+            'first_name' => 'required|max:20',
+            'last_name' => 'required|max:20',
+            'email'  => 'required|email|max:45|unique:users,email,'.$id,
             'phone' => 'regex:/^\(?\+?\(?\d{0,3}\)?\s?\d{8}$/',
             'password' => 'min:6|string|confirmed',
             'country' => 'string',

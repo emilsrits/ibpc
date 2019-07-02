@@ -35,8 +35,8 @@ class Register extends Page
     public function elements()
     {
         return [
-            '@firstname' => 'input[name=name]',
-            '@lastname' => 'input[name=surname]',
+            '@firstname' => 'input[name=first_name]',
+            '@lastname' => 'input[name=last_name]',
             '@email' => 'input[name=email]',
             '@password' => 'input[name=password]',
             '@confirm' => 'input[name=password_confirmation]',

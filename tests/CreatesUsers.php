@@ -9,8 +9,8 @@ trait CreatesUsers
     protected function makeUserWithNoRole(array $attributes = [])
     {
         return factory(User::class)->make(array_merge([
-            'name' => 'John',
-            'surname' => 'Doe',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password'),
         ], $attributes));
@@ -19,8 +19,8 @@ trait CreatesUsers
     protected function createUser(array $attributes = [])
     {
         return factory(User::class)->states('user')->create(array_merge([
-            'name' => 'John',
-            'surname' => 'Doe',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password'),
         ], $attributes));
@@ -29,8 +29,8 @@ trait CreatesUsers
     protected function createAdmin(array $attributes = [])
     {
         return factory(User::class)->states('admin')->create(array_merge([
-            'name' => 'John',
-            'surname' => 'Doe',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password'),
         ], $attributes));
@@ -39,8 +39,8 @@ trait CreatesUsers
     protected function makeUser(array $attributes = [])
     {
         return factory(User::class)->states('user')->make(array_merge([
-            'name' => 'John',
-            'surname' => 'Doe',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password'),
         ], $attributes));
@@ -49,8 +49,8 @@ trait CreatesUsers
     protected function makeAdmin(array $attributes = [])
     {
         return factory(User::class)->states('admin')->make(array_merge([
-            'name' => 'John',
-            'surname' => 'Doe',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password'),
         ], $attributes));

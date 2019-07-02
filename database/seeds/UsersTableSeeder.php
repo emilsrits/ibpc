@@ -20,10 +20,14 @@ class UsersTableSeeder extends Seeder
         if ($admin_email && $admin_password) {
             DB::table('users')->insert([
                 [
-                    'name' => 'admin',
-                    'surname' => 'admin',
+                    'first_name' => 'admin',
+                    'last_name' => 'admin',
                     'email' => $admin_email,
-                    'password' => Hash::make($admin_password)
+                    'password' => Hash::make($admin_password),
+                    'country' => 'LV',
+                    'city' => 'Test',
+                    'address' => 'Example',
+                    'postcode' => 'EG-1234'
                 ]
             ]);
         }

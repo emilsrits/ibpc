@@ -47,7 +47,7 @@
                                 @if (Auth::guest())
                                     User
                                 @else
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->first_name }}
                                 @endif
                                 <span class="caret"></span>
                             </a>

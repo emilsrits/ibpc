@@ -31,9 +31,9 @@ class OrderFilter extends QueryFilter
         }
 
         return $this->builder->whereHas('user', function ($query) use ($user) {
-           $query->where('name', 'like', '%'.$user.'%')
-               ->orWhere('surname', 'like', '%'.$user.'%')
-               ->orWhere(DB::raw('CONCAT_WS(" ", name, surname)'), 'like', $user);
+           $query->where('first_name', 'like', '%'.$user.'%')
+               ->orWhere('last_name', 'like', '%'.$user.'%')
+               ->orWhere(DB::raw('CONCAT_WS(" ", first_name, last_name)'), 'like', $user);
         });
     }
 

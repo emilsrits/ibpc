@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'surname', 'email', 'phone', 'address', 'country', 'city', 'postcode', 'password', 'status'
+        'first_name', 'last_name', 'email', 'phone', 'address', 'country', 'city', 'postcode', 'password', 'status'
     ];
 
     /**
@@ -196,7 +196,7 @@ class User extends Authenticatable
      */
     public function getFullNameAttribute()
     {
-        return $this->name . ' ' . $this->surname;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     /**

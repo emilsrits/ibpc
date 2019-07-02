@@ -22,8 +22,8 @@ class AuthTest extends TestCase
         $user = $this->makeUserWithNoRole();
 
         $response = $this->post('/register', [
-            'name' => $user->name,
-            'surname' => $user->surname,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
             'email' => $user->email,
             'password' => 'password',
             'password_confirmation' => 'password'
@@ -40,8 +40,8 @@ class AuthTest extends TestCase
         $user = $this->makeUserWithNoRole();
 
         $response = $this->post('/register', [
-            'name' => $user->name,
-            'surname' => $user->surname,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
             'email' => $user->email,
             'password' => 'password',
             'password_confirmation' => 'invalid'
