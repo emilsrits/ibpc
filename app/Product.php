@@ -387,4 +387,15 @@ class Product extends Model
 
         return $price;
     }
+
+    public function setPriceAttribute($price)
+    {
+        if ($price !== $this->price_old) {
+            $this->attributes['price_old'] = $this->price;
+        }
+        if ($price >= $this->price_old) {
+            $this->attributes['price_old'] = null;
+        }
+        $this->attributes['price'] = $price;
+    }
 }
