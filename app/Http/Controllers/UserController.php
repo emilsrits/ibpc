@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Role;
+use App\Models\User;
+use App\Models\Role;
 use App\Actions\User\UserActionAction;
 use App\Actions\User\UserUpdateAction;
 use App\Http\Requests\User\UserUpdateRequest;

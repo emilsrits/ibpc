@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Media;
+use App\Models\Media;
 use App\Observers\MediaObserver;
 use Illuminate\Support\ServiceProvider;
-use App\Order;
+use App\Models\Order;
 use App\Observers\OrderObserver;
 use Illuminate\Support\Facades\View;
 

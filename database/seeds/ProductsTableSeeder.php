@@ -15,7 +15,7 @@ class ProductsTableSeeder extends Seeder
 
     	DB::table('products')->truncate();
         // Product table seeder
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
         	'code' => 'STRIX-RX470-O4G-GAMING',
         	'title' => 'ASUS RX 470 4GB STRIX OC',
         	'description' => 'Dedicated graphics card',
@@ -26,7 +26,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 1
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
         	'code' => 'GTX-1060-GAMING-X-6G',
         	'title' => 'MSI GTX 1060 6GB GAMING X',
         	'description' => 'Dedicated graphics card',
@@ -37,7 +37,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 2
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
         	'code' => 'DUAL-RX480-O4G',
         	'title' => 'ASUS RX 480 4GB Dual-fan OC',
         	'description' => 'Dedicated graphics card',
@@ -47,7 +47,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 3
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'GTX-1050-Ti-GAMING-X-4G',
             'title' => 'MSI GTX 1050 Ti 4GB GAMING X',
             'description' => 'Dedicated graphics card',
@@ -57,7 +57,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 4
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'STRIX-GTX1080-O8G-GAMING',
             'title' => 'ASUS GTX 1080 8GB ROG STRIX OC',
             'description' => 'Dedicated graphics card',
@@ -68,7 +68,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 5
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'GTX-1060-3GT-OC',
             'title' => 'MSI GTX 1060 3GB OC',
             'description' => 'Dedicated graphics card',
@@ -79,7 +79,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 6
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'GV-RX460WF2OC-4GD',
             'title' => 'GIGABYTE RX 460 4GB WINDFORCE OC',
             'description' => 'Dedicated graphics card',
@@ -90,7 +90,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 7
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'SAPPHIRE-FX-4G',
             'title' => 'SAPPHIRE R9 FURY X 4GB HBM',
             'description' => 'Dedicated graphics card',
@@ -101,7 +101,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 8
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'SAPPHIRE-N+-4G',
             'title' => 'SAPPHIRE NITRO+ RX 470 4GB',
             'description' => 'Dedicated graphics card',
@@ -112,7 +112,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 9
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'CORE-I5-6600K',
             'title' => 'Intel® Core™ i5-6600K 3.5GHz 6MB LGA1151',
             'price' => 250.00,
@@ -121,7 +121,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 10
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'CORE-I5-7600K',
             'title' => 'Intel® Core™ i5-7600K 3.8 GHz 6M LGA1151',
             'price' => 255.00,
@@ -130,7 +130,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 11
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'CORE-I5-7700K',
             'title' => 'Intel® Core™ i7-7700K 4.2 GHz 8M LGA1151',
             'price' => 356.42,
@@ -140,7 +140,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 12
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'RYZEN-7-1800X',
             'title' => 'AMD Ryzen 7 1800X',
             'price' => 450.65,
@@ -150,7 +150,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 13
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'RYZEN-5-1600',
             'title' => 'AMD Ryzen 5 1600',
             'price' => 221.89,
@@ -160,7 +160,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         $product->save(); // 14
 
-        $product = new \App\Product([
+        $product = new \App\Models\Product([
             'code' => 'STRIX-Z270E-GAMING',
             'title' => 'ASUS STRIX Z270E GAMING',
             'price' => 186.46,

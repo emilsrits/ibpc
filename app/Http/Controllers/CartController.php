@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
+use App\Models\Cart;
 use App\Actions\Cart\CartStoreAction;
 use App\Actions\Cart\CartDeleteAction;
 use App\Actions\Cart\CartUpdateAction;

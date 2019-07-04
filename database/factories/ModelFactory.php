@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
     
     return [
@@ -23,17 +23,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->state(App\User::class, 'user', [])
-    ->afterCreatingState(App\User::class, 'user', function ($user) {
+$factory->state(App\Models\User::class, 'user', [])
+    ->afterCreatingState(App\Models\User::class, 'user', function ($user) {
         $user->roles()->attach(config('constants.user_roles.user'));
     });
 
-$factory->state(App\User::class, 'admin', [])
-    ->afterCreatingState(App\User::class, 'admin', function ($user) {
+$factory->state(App\Models\User::class, 'admin', [])
+    ->afterCreatingState(App\Models\User::class, 'admin', function ($user) {
         $user->roles()->attach(config('constants.user_roles.admin'));
     });
 
-$factory->define(App\Role::class, function(Faker\Generator $faker) {
+$factory->define(App\Models\Role::class, function(Faker\Generator $faker) {
     $word = $faker->word;
 
     return [

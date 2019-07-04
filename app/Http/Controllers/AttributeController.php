@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Attribute;
+use App\Models\Attribute;
 use App\Http\Requests\Specification\SpecificationActionRequest;
 use App\Actions\Attribute\AttributeActionAction;
 use App\Http\Requests\Attribute\AttributeUpdateRequest;

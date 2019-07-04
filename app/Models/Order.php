@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Filters\QueryFilter;
 use Carbon\Carbon;
@@ -15,7 +15,7 @@ class Order extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     /**
@@ -25,7 +25,7 @@ class Order extends Model
      */
     public function products()
     {
-        return $this->belongsToMany('App\Product')->withPivot('order_id', 'user_id', 'product_id', 'quantity', 'price');
+        return $this->belongsToMany('App\Models\Product')->withPivot('order_id', 'user_id', 'product_id', 'quantity', 'price');
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Specification;
 
-use App\Specification;
+use App\Models\Specification;
 
 class SpecificationActionAction
 {

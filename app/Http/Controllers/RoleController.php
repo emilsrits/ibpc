@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
+use App\Models\Role;
 
 class RoleController extends Controller
 {

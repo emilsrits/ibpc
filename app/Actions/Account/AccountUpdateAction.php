@@ -2,7 +2,7 @@
 
 namespace App\Actions\Account;
 
-use App\User;
+use App\Models\User;
 
 class AccountUpdateAction
 {

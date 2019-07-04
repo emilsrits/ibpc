@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Specification;
-use App\Category;
+use App\Models\Specification;
+use App\Models\Category;
 use App\Http\Requests\Category\CategoryActionRequest;
 use App\Actions\Category\CategoryActionAction;
 use App\Http\Requests\Category\CategoryStoreRequest;

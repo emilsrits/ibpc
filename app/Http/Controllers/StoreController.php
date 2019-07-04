@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use App\Category;
+use App\Models\Product;
+use App\Models\Category;
 use App\Http\Requests\Store\StoreSearchRequest;
 
 class StoreController extends Controller

@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Media;
+use App\Models\Media;
 use App\Filters\QueryFilter;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
@@ -43,7 +43,7 @@ class Product extends Model
      */
     public function orders()
     {
-        return $this->belongsToMany('App\Order')->withPivot('order_id', 'user_id', 'product_id', 'quantity', 'price');
+        return $this->belongsToMany('App\Models\Order')->withPivot('order_id', 'user_id', 'product_id', 'quantity', 'price');
     }
 
     /**

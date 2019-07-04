@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
+use App\Models\Order;
 use App\Filters\OrderFilter;
 use Illuminate\Http\Request;
 use App\Actions\Order\OrderStoreAction;

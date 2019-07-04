@@ -2,8 +2,8 @@
 
 namespace App\Actions\Order;
 
-use App\User;
-use App\Order;
+use App\Models\User;
+use App\Models\Order;
 
 class OrderUpdateAction
 {

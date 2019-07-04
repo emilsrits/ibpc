@@ -15,14 +15,14 @@ class RolesTableSeeder extends Seeder
 
     	DB::table('roles')->truncate();
         // Adds user role types to roles table
-        $role = new \App\Role([
+        $role = new \App\Models\Role([
             'name' => 'administrator',
             'slug' => 'admin',
             'description' => 'owner, has control over the entire site'
         ]);
         $role->save();
 
-        $role = new \App\Role([
+        $role = new \App\Models\Role([
             'name' => 'customer',
             'slug' => 'user',
             'description' => 'browses the shop and buys products'

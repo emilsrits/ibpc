@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use App\Filters\QueryFilter;
@@ -39,7 +39,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Role');
+        return $this->belongsToMany('App\Models\Role');
     }
 
     /**
@@ -49,7 +49,7 @@ class User extends Authenticatable
      */
     public function orders()
     {
-        return $this->hasMany('App\Order');
+        return $this->hasMany('App\Models\Order');
     }
 
     /**
@@ -89,7 +89,7 @@ class User extends Authenticatable
      * Create invoice file and send email to user about the order
      *
      * @param \Illuminate\Support\Facades\Auth $user
-     * @param \App\Order $order
+     * @param \App\Models\Order $order
      */
     public function invoice($user, $order)
     {

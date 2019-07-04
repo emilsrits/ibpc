@@ -2,8 +2,8 @@
 
 namespace App\Actions\Product;
 
-use App\Media;
-use App\Product;
+use App\Models\Media;
+use App\Models\Product;
 
 class ProductUpdateAction
 {

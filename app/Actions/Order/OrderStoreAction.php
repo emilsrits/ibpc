@@ -2,8 +2,8 @@
 
 namespace App\Actions\Order;
 
-use App\Order;
-use App\Product;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Cart;
 
-use App\Cart;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Session;
 
 class CartUpdateAction

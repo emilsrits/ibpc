@@ -2,7 +2,7 @@
 
 namespace App\Actions\Attribute;
 
-use App\Attribute;
+use App\Models\Attribute;
 
 class AttributeStoreAction
 {

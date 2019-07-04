@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Media;
+use App\Models\Media;
 use Illuminate\Support\Facades\Storage;
 
 class MediaObserver
@@ -11,7 +11,7 @@ class MediaObserver
     /**
      * Listen to the Media deleting event.
      *
-     * @param  \App\Media  $media
+     * @param  \App\Models\Media  $media
      * @return void
      */
     public function deleting(Media $media)

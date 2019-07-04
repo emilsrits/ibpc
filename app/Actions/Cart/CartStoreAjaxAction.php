@@ -2,8 +2,8 @@
 
 namespace App\Actions\Cart;
 
-use App\Cart;
-use App\Product;
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class CartStoreAjaxAction

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Product;
 
-use App\Product;
+use App\Models\Product;
 
 class ProductActionAction
 {

@@ -15,121 +15,121 @@ class SpecificationsTableSeeder extends Seeder
 
         DB::table('specifications')->truncate();
         // Specifications table seeder
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'model',
             'name' => 'Model'
         ]);
         $specification->save(); // 1
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'interface',
             'name' => 'Interface'
         ]);
         $specification->save(); // 2
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'chipset',
             'name' => 'Chipset'
         ]);
         $specification->save(); // 3
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'memory',
             'name' => 'Memory'
         ]);
         $specification->save(); // 4
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'ports',
             'name' => 'Ports'
         ]);
         $specification->save(); // 5
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'gpu details',
             'name' => 'Details'
         ]);
         $specification->save(); // 6
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'gpu dimensions',
             'name' => 'Form Factor & Dimensions'
         ]);
         $specification->save(); // 7
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'cpu model',
             'name' => 'Model'
         ]);
         $specification->save(); // 8
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'cpu socket type',
             'name' => 'CPU Socket Type'
         ]);
         $specification->save(); // 9
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'cpu details',
             'name' => 'Details'
         ]);
         $specification->save(); // 10
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb supported cpu',
             'name' => 'Supported CPU'
         ]);
         $specification->save(); // 11
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb chipset',
             'name' => 'Chipsets'
         ]);
         $specification->save(); // 12
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb memory',
             'name' => 'Memory'
         ]);
         $specification->save(); // 13
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb expansion slots',
             'name' => 'Expansion Slots'
         ]);
         $specification->save(); // 14
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb storage',
             'name' => 'Storage Devices'
         ]);
         $specification->save(); // 15
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb video',
             'name' => 'Onboard Video'
         ]);
         $specification->save(); // 16
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb audio',
             'name' => 'Onboard Audio'
         ]);
         $specification->save(); // 17
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb lan',
             'name' => 'Onboard LAN'
         ]);
         $specification->save(); // 18
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb ports',
             'name' => 'Rear Panel Ports'
         ]);
         $specification->save(); // 19
 
-        $specification = new \App\Specification([
+        $specification = new \App\Models\Specification([
             'slug' => 'mb physical',
             'name' => 'Physical Spec'
         ]);

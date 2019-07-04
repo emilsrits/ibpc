@@ -2,7 +2,7 @@
 
 namespace App\Actions\Order;
 
-use App\Order;
+use App\Models\Order;
 
 class OrderActionAction
 {

@@ -2,14 +2,14 @@
 
 namespace App\Observers;
 
-use App\Order;
+use App\Models\Order;
 
 class OrderObserver
 {
     /**
      * Handle the order "updated" event.
      *
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return void
      */
     public function updated(Order $order)

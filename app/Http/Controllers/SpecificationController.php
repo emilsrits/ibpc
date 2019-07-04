@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Specification;
+use App\Models\Specification;
 use App\Http\Requests\Specification\SpecificationUpdateRequest;
 use App\Actions\Specification\SpecificationStoreAction;
 use App\Http\Requests\Specification\SpecificationActionRequest;

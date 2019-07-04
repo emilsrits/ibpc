@@ -2,9 +2,9 @@
 
 namespace App\Actions\Cart;
 
-use App\Product;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
-use App\Cart;
+use App\Models\Cart;
 
 class CartStoreAction
 {
