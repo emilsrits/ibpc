@@ -1,0 +1,16 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass
+{
+    /**
+     * Get all entries
+     *
+     * @return array
+     */
+    public function all()
+    {
+        //
+    }
+}

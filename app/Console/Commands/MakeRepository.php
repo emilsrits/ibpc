@@ -4,28 +4,28 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 
-class MakeAction extends GeneratorCommand
+class MakeRepository extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:action {name}';
+    protected $signature = 'make:repository {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new action class';
+    protected $description = 'Create a new repository class';
 
     /**
      * The type of class being generated.
      * 
      * @var string
      */
-    protected $type = 'Action';
+    protected $type = 'Repository';
 
     /**
      * Get the stub file for generator.
@@ -34,7 +34,7 @@ class MakeAction extends GeneratorCommand
      */
     protected function getStub()
     {
-        return app_path().'/Console/Commands/Stubs/make-action.stub';
+        return app_path().'/Console/Commands/Stubs/make-repository.stub';
     }
 
     /**
@@ -45,6 +45,6 @@ class MakeAction extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Actions';
+        return $rootNamespace.'\Repositories';
     }
 }
