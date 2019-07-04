@@ -79,7 +79,8 @@ if (!function_exists('sortEntry')) {
      * @param string|null $entry
      * @return string|null
      */
-    function sortEntry($entry = null) {
+    function sortEntry($entry = null)
+    {
         switch ($entry) {
             case null:
                 return 'desc';
@@ -88,5 +89,19 @@ if (!function_exists('sortEntry')) {
             default:
                 return null;
         }
+    }
+}
+
+if (!function_exists('roleIdFromSlug')) {
+    /**
+     * Return role ID based on slug
+     *
+     * @param string $slug
+     * @return string
+     */
+    function roleIdFromSlug(string $slug) {
+        $roles = config('constants.user_roles');
+
+        return $roles[$slug];
     }
 }
