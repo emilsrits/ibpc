@@ -6,6 +6,12 @@ Online store in Laravel framework
 
 **Author:** @emilsrits
 
+## Tools
+
+  * Laravel     5.6.39
+  * PHP         >=7.1.3
+  * MySQL       >=5.6
+
 ## Installation
 
 Install the app's dependencies by running `composer install` using the terminal in the app root directory.
@@ -25,13 +31,7 @@ Install Node dependencies by running `npm install` using the terminal in the app
 
 Run command `php artisan storage:link` to create symlink from `storage/app/public` to `public/storage` folder. This is needed for product images.
 
-## Tools:
-
-  * Laravel     5.6.39
-  * PHP         >=7.1.3
-  * MySQL       >=5.6
-
-## Testing:
+## Testing
 ### PHPUnit
 Create and configure **.env.testing** file to use different database for unit/feature tests.
 ### Laravel Dusk
