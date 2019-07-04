@@ -14,18 +14,15 @@ class RolesTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
     	DB::table('roles')->truncate();
-        // Adds user role types to roles table
         $role = new \App\Models\Role([
             'name' => 'administrator',
-            'slug' => 'admin',
-            'description' => 'owner, has control over the entire site'
+            'slug' => 'admin'
         ]);
         $role->save();
 
         $role = new \App\Models\Role([
-            'name' => 'customer',
-            'slug' => 'user',
-            'description' => 'browses the shop and buys products'
+            'name' => 'user',
+            'slug' => 'user'
         ]);
         $role->save();
 

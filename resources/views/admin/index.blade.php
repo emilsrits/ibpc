@@ -29,9 +29,6 @@ Admin Panel
         <div class="manage-tab users-list">
             <a href="{{ url('/admin/users') }}"><i class="fa fa-users" aria-hidden="true"></i>Users</a>
         </div>
-        <div class="manage-tab users-roles">
-            <a href="{{ url('/admin/roles') }}"><i class="fa fa-thumb-tack" aria-hidden="true"></i>Roles</a>
-        </div>
     </div>
 </div>
 @endsection

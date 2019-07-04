@@ -24,7 +24,7 @@
                         <li><a href="{{ url('/admin') }}">Dashboard</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"> Catalog
+                               aria-haspopup="true" aria-expanded="false">Catalog <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url('/admin/catalog') }}">Products Catalog</a></li>
@@ -33,21 +33,10 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"> Sales
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url('/admin/orders') }}">Orders List</a></li>
-                            </ul>
+                            <a href="{{ url('/admin/orders') }}">Orders</a>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false"> Users
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ url('/admin/users') }}">Users List</a></li>
-                                <li><a href="{{ url('/admin/roles') }}">Roles</a></li>
-                            </ul>
+                        <li>
+                            <a href="{{ url('/admin/users') }}">Users</a>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->

@@ -52,6 +52,10 @@ input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+label {
+  margin-bottom: 0;
+}
+
 /* HELPERS */
 .text-center {
   text-align: center !important;

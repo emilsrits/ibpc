@@ -175,14 +175,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
     ]);
 
     /**
-     * Role routes
-     */
-    Route::get('/roles', [
-        'uses' => 'RoleController@index',
-        'as' => 'role.index'
-    ]);
-
-    /**
      * Order routes
      */
     Route::get('/orders', [
