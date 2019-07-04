@@ -30,7 +30,7 @@ class OrderStoreAction
         $cart = Session::get('cart');
         $order = new Order();
         $order->user_id = $user->id;
-        $order->price = $cart->totalPrice + $cart->deliveryCost;
+        $order->price = $cart->getTotalPriceWithVat();
         $order->delivery = Session::get('delivery');
         $order->delivery_cost = $cart->deliveryCost;
         $order->status = config('constants.order_status.pending');

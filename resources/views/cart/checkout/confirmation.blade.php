@@ -27,8 +27,14 @@ Checkout Confirmation
                         @endif
                     @endif
                 </tr>
+                @if($cart->getVat())
+                    <tr class="checkout-cart-item">
+                        <td>VAT</td>
+                        <td>{{ $cart->getPriceCurrency('vat') }}</td>
+                    </tr>
+                @endif
                 <tr>
-                    <td colspan="2">Total incl. VAT: {{ $cart->getPriceCurrency('with_delivery') }}</td>
+                    <td colspan="2">Total incl. VAT: {{ $cart->getPriceCurrency('with_vat') }}</td>
                 </tr>
             </table>
             <button id="order-submit" class="btn btn-checkout" type="submit" title="Checkout">Order</button>

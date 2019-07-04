@@ -30,7 +30,7 @@ Order
                     </tr>
                 @endif
                 <tr>
-                    <td>Order Cost:</td>
+                    <td>Total cost incl. VAT:</td>
                     <td>{{ $order->getPriceCurrency('price') }}</td>
                 </tr>
             </table>

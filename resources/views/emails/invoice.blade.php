@@ -61,7 +61,7 @@
                 <td>{{ count($order->products) }}</td>
             </tr>
             <tr>
-                <td>Order total cost, incl VAT:</td>
+                <td>Total cost incl. VAT:</td>
                 <td>{{ $order->getPriceCurrency('price') }}</td>
             </tr>
             </tbody>

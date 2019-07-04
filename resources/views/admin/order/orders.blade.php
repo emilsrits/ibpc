@@ -34,7 +34,7 @@ Orders
                     </th>
                     <th class="col-sm">Id</th>
                     <th>User</th>
-                    <th>Price</th>
+                    <th>Cost</th>
                     <th class="col-md">Status</th>
                     <th id="sort-created" class="col-md">
                         <button class="btn-sort" type="submit" name="created" value="{{ sortEntry($request['created']) }}">

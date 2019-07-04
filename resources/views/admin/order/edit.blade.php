@@ -43,7 +43,7 @@ Edit Order
                             </tr>
                         @endif
                         <tr class="entity-attribute">
-                            <td><label for="cost">Total cost</label></td>
+                            <td><label for="cost">Total cost incl. VAT:</label></td>
                             <td><span>{{ $order->getPriceCurrency('price') }}</span></td>
                         </tr>
                         </tbody>

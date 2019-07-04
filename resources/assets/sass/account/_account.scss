@@ -112,7 +112,9 @@
       td {
         padding: 5px 10px;
         &:first-of-type {
+          width: 110px;
           font-weight: bold;
+          word-break: break-word;
         }
       }
     }

@@ -10,7 +10,8 @@
         "barryvdh/laravel-dompdf": "^0.8.0",
         "laravel/tinker": "^1.0",
         "fideloper/proxy": "^4.0",
-        "doctrine/dbal": "^2.9"
+        "doctrine/dbal": "^2.9",
+        "mpociot/vat-calculator": "^2.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.8",

@@ -48,6 +48,7 @@ class CheckoutController extends Controller
         $cart = new Cart(null);
         $cart = $cart->getCart();
         $cart->addDelivery($request['delivery']);
+        $cart->setVat();
 
         return view('cart.checkout.confirmation', ['user' => $user, 'cart' => $cart]);
     }
