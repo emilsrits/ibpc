@@ -14,9 +14,11 @@ Online store in Laravel framework
 
 ## Installation
 
+Create and configure **.env** file for your database.
+
 Install the app's dependencies by running `composer install` using the terminal in the app root directory.
 
-Create and configure **.env** file for your database, run `php artisan key:generate` to generate APP_KEY value in .env file. 
+Run `php artisan key:generate` to generate APP_KEY value in .env file. 
 
 Add `ADMIN_EMAIL=` and `ADMIN_PASSWORD=` to your **.env** file before seeding tables. This will create admin user for you to access administrator panel.
 Example:
