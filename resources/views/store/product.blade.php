@@ -15,7 +15,7 @@
                     </div>
                     @if(count($product->media) > 1)
                         <div class="product-media-thumbs">
-                            @foreach($product->getImages(4, 1) as $image)
+                            @foreach($product->getImages(5, 1) as $image)
                                 <div class="product-media-item">
                                     <img src="{{ $image->path }}" alt="{{ $image->id }}">
                                 </div>

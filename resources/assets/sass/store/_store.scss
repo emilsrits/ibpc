@@ -201,14 +201,17 @@
     .product-media-thumbs {
       display: flex;
       flex-direction: row;
+      justify-content: center;
       margin: auto;
       padding: 10px;
       max-width: 450px;
+      max-height: 175px;
 
       .product-media-item {
         flex-grow: 1;
         flex-basis: 0;
         padding: 5px;
+        max-width: 175px;
         > img {
           width: 100%;
           height: 100%;
