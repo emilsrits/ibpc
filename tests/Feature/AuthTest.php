@@ -9,6 +9,12 @@ class AuthTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->artisan('db:seed', ['--class' => 'RolesTableSeeder']);
+    }
+
     /** @test */
     public function user_can_view_register()
     {
