@@ -49,7 +49,6 @@ class StoreController extends Controller
     {
         $category = Category::where('slug', $child)->first();
         $categoryId = $category->id;
-        // Get products with matching categories
         $products = Product::whereHas('categories', function ($query) use ($categoryId) {
             $query->where('category_id', $categoryId);
         })->paginate(12);

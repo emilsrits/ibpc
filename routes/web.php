@@ -24,11 +24,11 @@ Route::get('/search', [
     'uses' => 'StoreController@search',
     'as' => 'store.search'
 ]);
-Route::get('/store/{parent}/{child}', [
+Route::get('/c/{parent}/{child}', [
     'uses' => 'StoreController@categorize',
     'as' => 'store.categorize'
 ]);
-Route::get('/store/{code}', [
+Route::get('/p/{code}', [
     'uses' => 'StoreController@show',
     'as' => 'store.show'
 ]);

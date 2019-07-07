@@ -32,12 +32,12 @@ Shopping Cart
                                 </button>
                             </td>
                             <td class="cart-item-media hidden-xs">
-                                <a href="{{ url('/store', ['code' => $product['item']['code']]) }}">
+                                <a href="{{ url('/p', ['code' => $product['item']['code']]) }}">
                                     <img src="{{ asset($product['item']['image']) }}" alt="{{ $product['item']['code'] }}">
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ url('/store', ['code' => $product['item']['code']]) }}">
+                                <a href="{{ url('/p', ['code' => $product['item']['code']]) }}">
                                     {{ $product['item']['title'] }}
                                 </a>
                             </td>

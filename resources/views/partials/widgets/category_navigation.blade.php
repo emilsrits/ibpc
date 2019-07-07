@@ -12,7 +12,7 @@
                         @foreach($childCategories as $child)
                             @if((int)$child->parent_id === (int)$parent->id)
                                 <li>
-                                    <a href="{{ url('/store', ['parent' => $parent->slug, 'child' => $child->slug]) }}">
+                                    <a href="{{ url('/c', ['parent' => $parent->slug, 'child' => $child->slug]) }}">
                                         {{ $child->title }} <span>({{ count($child->products) }})</span>
                                     </a>
                                 </li>

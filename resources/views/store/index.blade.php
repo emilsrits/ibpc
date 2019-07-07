@@ -13,12 +13,12 @@ IBPC
                 <div class="grid-item lg-25 md-33 sm-50">
                     <div class="product-grid">
                         <div class="product-media">
-                            <a href="{{ url('/store', ['code' => $product->code]) }}">
+                            <a href="{{ url('/p', ['code' => $product->code]) }}">
                                 <img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}">
                             </a>
                         </div>
                         <p class="product-link text-center">
-                            <a href="{{ url('/store', ['code' => $product->code]) }}">{{ $product->title }}</a>
+                            <a href="{{ url('/p', ['code' => $product->code]) }}">{{ $product->title }}</a>
                         </p>
                         @if($product->stock > 5)
                             <div class="stock-status in-stock">
