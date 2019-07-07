@@ -63,7 +63,7 @@ class StoreTest extends TestCase
         ]);
         $this->createCategory([
             'title' => 'Category Child',
-            'parent' => 0,
+            'top_level' => 0,
             'parent_id' => 1,
         ]);
 

@@ -28,8 +28,8 @@ class CategoryUpdateRequest extends FormRequest
         return [
             'submit' => 'in:delete,save',
             'title' => 'required|string|max:20|unique:categories,title,'.$id,
-            'parent' => 'required|integer|in:0,1',
-            'parent_id' => 'required_if:parent,==,0|integer|regex:/^[1-9][0-9]*$/',
+            'top_level' => 'required|integer|in:0,1',
+            'parent_id' => 'required_if:top_level,==,0|integer|regex:/^[1-9][0-9]*$/',
             'status' => 'required|integer|in:0,1',
             'spec' => 'nullable'
         ];

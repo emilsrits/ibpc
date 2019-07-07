@@ -12,7 +12,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'parent', 'parent_id', 'status' 
+        'title', 'top_level', 'parent_id', 'status' 
     ];
 
     /**
@@ -33,6 +33,22 @@ class Category extends Model
     public function specifications()
     {
         return $this->belongsToMany(Specification::class, 'category_specification', 'category_id', 'specification_id');
+    }
+
+    /**
+     * OneToMany relationship with Category class
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    /**
+     * OneToMany relationship with Category class
+     */
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     /**
@@ -186,13 +202,13 @@ class Category extends Model
     }
 
     /**
-     * Set parent_id depending on parent status
+     * Set parent_id depending on top_level status
      * 
      * @param integer $parent_id
      */
     public function setParentIdAttribute($parent_id)
     {
-        if ($this->attributes['parent'] == '1') {
+        if ($this->attributes['top_level'] == '1') {
             $this->attributes['parent_id'] = null;
         } else {
             $this->attributes['parent_id'] = $parent_id;

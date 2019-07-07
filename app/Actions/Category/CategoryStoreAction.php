@@ -17,7 +17,7 @@ class CategoryStoreAction
         $category = new Category();
         $category->title = $data['title'];
         $category->slug = str_slug($data['title']);
-        $category->parent = $data['parent'];
+        $category->top_level = $data['top_level'];
         if ($data['parent_id']) {
             $category->parent_id = $data['parent_id'];
         }

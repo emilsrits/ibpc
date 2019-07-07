@@ -41,11 +41,11 @@ class StoreController extends Controller
     /**
      * Return store view with products from a category
      *
-     * @param $parent
+     * @param $top_level
      * @param $child
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function categorize($parent, $child)
+    public function categorize($top_level, $child)
     {
         $category = Category::where('slug', $child)->first();
         $categoryId = $category->id;

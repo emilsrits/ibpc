@@ -60,14 +60,13 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
-        $categories = Category::where('parent', 0)->get();
+        $categories = Category::where('top_level', 0)->get();
 
         if ($request->old('category')) {
             $category = Category::with('specifications.attributes')->find($request->old('category'));
         } else {
             $category = null;
         }
-
 
         return view('admin.product.create', ['categories' => $categories, 'category' => $category, 'request' => $request]);
     }

@@ -29,11 +29,11 @@ Edit Category
                             <td><input type="text" name="title" required value="{{ old('title', $category->title) }}"></td>
                         </tr>
                         <tr class="entity-attribute">
-                            <td><label for="parent">Top Category</label></td>
+                            <td><label for="top_level">Top Category</label></td>
                             <td>
-                                <select id="category-parent" name="parent" required>
+                                <select id="category-parent" name="top_level" required>
                                     <option value="0">No</option>
-                                    <option value="1" {{ old('parent', $category->parent) === 1 ? 'selected' : '' }}>Yes</option>
+                                    <option value="1" {{ old('top_level', $category->top_level) === 1 ? 'selected' : '' }}>Yes</option>
                                 </select>
                             </td>
                         </tr>

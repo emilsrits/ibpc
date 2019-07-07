@@ -53,7 +53,7 @@ Categories
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->title }}</td>
                         <td>
-                            @if($category->parent)
+                            @if($category->top_level)
                                 Yes
                             @else
                                 No

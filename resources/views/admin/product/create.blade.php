@@ -28,12 +28,12 @@ Create Product
                             <td>
                                 <select id="category-select" name="category" required>
                                     <option value="0"></option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                                {{ $request->old('category') == $category->id || json_decode($request['category']) == $category->id
+                                    @foreach($categories as $parent)
+                                        <option value="{{ $parent->id }}"
+                                                {{ $request->old('category') == $parent->id || json_decode($request['category']) == $parent->id
                                                 ? 'selected'
                                                 : '' }}>
-                                            {{ $category->title }}
+                                            {{ $parent->title }}
                                         </option>
                                     @endforeach
                                 </select>

@@ -9,7 +9,7 @@ $factory->define(App\Models\Category::class, function (Faker $faker) {
     return [
         'title' => $title,
         'slug' => $slug,
-        'parent' => 1,
+        'top_level' => 1,
         'parent_id' => null,
         'status' => 1,
     ];

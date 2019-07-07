@@ -43,8 +43,8 @@ class CategoryComposer
     public function compose(View $view)
     {
         $view->with([
-            'parentCategories' => $this->parent->where('parent', 1)->where('status', 1)->get(),
-            'childCategories' => $this->child->where('parent', 0)->where('status', 1)->get()
+            'parentCategories' => $this->parent->where('top_level', 1)->where('status', 1)->get(),
+            'childCategories' => $this->child->where('top_level', 0)->where('status', 1)->get()
         ]);
     }
 }

@@ -88,7 +88,7 @@ Catalog
                         <select name="category">
                             <option value=""></option>
                             @foreach($categories as $category)
-                                @if(!$category->parent)
+                                @if(!$category->top_level)
                                     <option value="{{ $category->id }}"
                                             {{ $request['category'] == $category->id ? 'selected' : '' }}>{{ $category->title }}</option>
                                 @endif
