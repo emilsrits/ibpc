@@ -1,14 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Helpers
-|--------------------------------------------------------------------------
-|
-| This file contains helper functions that can be used across the app.
-|
-*/
-
 if (!function_exists('orderStatusExists')) {
     /**
      * Check if order status is valid, defined in config

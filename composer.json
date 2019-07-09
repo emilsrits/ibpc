@@ -33,7 +33,7 @@
             "App\\": "app/"
         },
         "files": [
-            "bootstrap/helpers.php"
+            "app/Helpers/Global.php"
         ]
     },
     "autoload-dev": {
