@@ -284,22 +284,3 @@ Route::group(['prefix' => 'checkout', 'middleware' => ['auth', 'active']], funct
         ]);
     });
 });
-
-/**
- * Resource routes
- */
-Route::get('/storage/{filePath}', function ($filePath) {
-    $path = storage_path('public/' . $filePath);
-
-    if (!File::exists($path)) {
-        abort(404);
-    }
-
-    $file = File::get($path);
-    $type = File::mimeType($path);
-
-    $response = Response::make($file, 200);
-    $response->header("Content-Type", $type);
-
-    return $response;
-});
