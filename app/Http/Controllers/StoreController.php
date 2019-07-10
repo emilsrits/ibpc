@@ -68,15 +68,8 @@ class StoreController extends Controller
      */
     public function show($code)
     {
-        $product = $this->product->getWithSpecificationsByCode($code);
-        // Get product properties associated with its category
-        if ($product->categories()->first()) {
-            $categoryId = $product->categories()->first()->id;
-            $specifications = Category::with('specifications.properties')->find($categoryId);
-        } else {
-            $specifications = null;
-        }
+        $product = $this->product->with('properties.specification')->ofCode($code)->first();
 
-        return view('store.product', compact('product', 'specifications'));
+        return view('store.product', compact('product'));
     }
 }

@@ -45,7 +45,7 @@ class Property extends Model
     /**
      * Delete properties
      *
-     * @param array|string $ids
+     * @param mixed $ids
      */
     public function deleteProperty($ids)
     {

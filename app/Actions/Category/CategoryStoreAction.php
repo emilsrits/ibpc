@@ -10,7 +10,7 @@ class CategoryStoreAction
      * Process the category store action
      *
      * @param array $data
-     * @return void|array
+     * @return mixed
      */
     public function execute(array $data)
     {

@@ -67,6 +67,18 @@ class Product extends Model
     }
 
     /**
+     * Query to only include products matched by code
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $code
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCode($query, $code)
+    {
+        return $query->where('code', '=' , $code);
+    }
+
+    /**
      * Query to only include active products
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -91,7 +103,7 @@ class Product extends Model
     /**
      * Delete a product
      *
-     * @param array|string $ids
+     * @param mixed $ids
      * @return bool
      */
     public function deleteProduct($ids)
@@ -162,7 +174,7 @@ class Product extends Model
     /**
      * Change product status
      *
-     * @param array|string $id
+     * @param mixed $id
      * @param $status
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -204,7 +216,7 @@ class Product extends Model
     /**
      * Check if product has sufficient stock
      *
-     * @param float|int $qty
+     * @param mixed $qty
      * @return bool
      */
     public function checkStock($qty)
@@ -220,7 +232,7 @@ class Product extends Model
     /**
      * Update product stock
      *
-     * @param float|int $qty
+     * @param mixed $qty
      * @return bool
      */
     public function updateStock($qty)
@@ -270,9 +282,23 @@ class Product extends Model
         });
     }
 
-    public function getWithSpecificationsByCode($code)
+    /**
+     * Group product properties by their specifications
+     * 
+     * @return array
+     */
+    public function groupPropertiesBySpecification()
     {
-        return $this->with('properties.specification')->where('code', $code)->first();
+        $grouped = $this->properties->mapToGroups(function ($item, $key) {
+            return [
+                $item->specification->name => [
+                    'name' => $item['name'],
+                    'value' => $item->pivot->value
+                ]
+            ];
+        });
+
+        return $grouped->toArray();
     }
 
     /**

@@ -70,7 +70,7 @@ class User extends Authenticatable
     /**
      * Update user status
      *
-     * @param array|string $ids
+     * @param mixed $ids
      * @param $status
      */
     public function setStatus($ids, $status)

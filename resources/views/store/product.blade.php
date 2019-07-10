@@ -25,26 +25,17 @@
                 </div>
                 <table class="product-specifications">
                     <tbody>
-                    @if($specifications)
-                        @foreach($specifications->specifications as $category => $specifications)
-                            @if($specifications->properties->first())
-                                <tr class="category">
-                                    @foreach($product->properties as $property)
-                                        @if($property->specification->id === $specifications->id)
-                                            <td>{{ $specifications->name }}</td>
-                                            @break
-                                        @endif
-                                    @endforeach
+                    @if($product->properties->first())
+                        @foreach($product->groupPropertiesBySpecification() as $specification => $properties)
+                            <tr class="category">
+                                <td>{{ $specification }}</td>
+                            </tr>
+                            @foreach($properties as $key => $property)
+                                <tr class="specification">
+                                    <td class="property">{{ $property['name'] }}</td>
+                                    <td class="value">{{ $property['value'] }}</td>
                                 </tr>
-                                @foreach($specifications->properties as $property => $value)
-                                    @if($product->getPropertyById($value->id))
-                                        <tr class="specification">
-                                            <td class="property">{{ $value->name }}</td>
-                                            <td class="value">{{ $product->getPropertyById($value->id) }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            @endif
+                            @endforeach
                         @endforeach
                     @endif
                     @if($product->description)

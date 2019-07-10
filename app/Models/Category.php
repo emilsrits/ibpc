@@ -99,7 +99,7 @@ class Category extends Model
     /**
      * Delete a category
      *
-     * @param array|string $ids
+     * @param mixed $ids
      * @return bool
      */
     public function deleteCategory($ids)
@@ -126,7 +126,7 @@ class Category extends Model
     /**
      * Set category status
      *
-     * @param array|string $id
+     * @param mixed $id
      * @param $status
      */
     public function setStatus($id, $status)
@@ -168,7 +168,7 @@ class Category extends Model
      * Get a related specification by id
      *
      * @param string $id
-     * @return mixed|null
+     * @return mixed
      */
     public function getSpecificationById($id)
     {

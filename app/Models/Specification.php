@@ -38,7 +38,7 @@ class Specification extends Model
     /**
      * Delete specification
      *
-     * @param array|string $ids
+     * @param mixed $ids
      */
     public function deleteSpecification($ids)
     {

@@ -13,7 +13,7 @@ class OrderStoreAction
      * Process the order store action
      *
      * @param array $data
-     * @return void|array
+     * @return mixed
      */
     public function execute()
     {

@@ -63,9 +63,9 @@ class Order extends Model
     /**
      * Set order status
      *
-     * @param array|int $ids
+     * @param mixed $ids
      * @param string $status
-     * @return void|bool
+     * @return mixed
      */
     public function setStatus($ids, $status)
     {

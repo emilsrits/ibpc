@@ -10,7 +10,7 @@ class OrderActionAction
      * Process the order mass-action action
      *
      * @param array $data
-     * @return void|array
+     * @return mixed
      */
     public function execute(array $data)
     {

@@ -11,7 +11,7 @@ class PropertyUpdateAction
      *
      * @param array $data
      * @param string $propertyId
-     * @return void|array
+     * @return mixed
      */
     public function execute(array $data, $propertyId)
     {

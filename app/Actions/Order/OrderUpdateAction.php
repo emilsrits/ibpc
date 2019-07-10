@@ -11,7 +11,7 @@ class OrderUpdateAction
      * Process the order update action
      *
      * @param array $data
-     * @return array|null
+     * @return mixed
      */
     public function execute(array $data, $id)
     {

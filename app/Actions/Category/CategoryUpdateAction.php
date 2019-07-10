@@ -11,7 +11,7 @@ class CategoryUpdateAction
      *
      * @param array $data
      * @param string $id
-     * @return void|array
+     * @return mixed
      */
     public function execute(array $data, $id)
     {
