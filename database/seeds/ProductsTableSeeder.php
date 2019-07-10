@@ -14,13 +14,12 @@ class ProductsTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
     	DB::table('products')->truncate();
-        // Product table seeder
         $product = new \App\Models\Product([
         	'code' => 'STRIX-RX470-O4G-GAMING',
         	'title' => 'ASUS RX 470 4GB STRIX OC',
         	'description' => 'Dedicated graphics card',
-        	'price' => 195.50,
-            'price_old' => 220.57,
+        	'price' => 125.50,
+            'price_old' => 130.57,
         	'stock' => 10,
         	'status' => 1
         ]);
@@ -30,8 +29,8 @@ class ProductsTableSeeder extends Seeder
         	'code' => 'GTX-1060-GAMING-X-6G',
         	'title' => 'MSI GTX 1060 6GB GAMING X',
         	'description' => 'Dedicated graphics card',
-        	'price' => 280.90,
-            'price_old' => 298.83,
+        	'price' => 220.90,
+            'price_old' => 276.83,
         	'stock' => 5,
         	'status' => 1
         ]);
@@ -41,7 +40,7 @@ class ProductsTableSeeder extends Seeder
         	'code' => 'DUAL-RX480-O4G',
         	'title' => 'ASUS RX 480 4GB Dual-fan OC',
         	'description' => 'Dedicated graphics card',
-        	'price' => 210.46,
+        	'price' => 110.46,
         	'stock' => 6,
         	'status' => 1
         ]);
@@ -51,7 +50,7 @@ class ProductsTableSeeder extends Seeder
             'code' => 'GTX-1050-Ti-GAMING-X-4G',
             'title' => 'MSI GTX 1050 Ti 4GB GAMING X',
             'description' => 'Dedicated graphics card',
-            'price' => 165.94,
+            'price' => 130.94,
             'stock' => 2,
             'status' => 1
         ]);
@@ -61,8 +60,8 @@ class ProductsTableSeeder extends Seeder
             'code' => 'STRIX-GTX1080-O8G-GAMING',
             'title' => 'ASUS GTX 1080 8GB ROG STRIX OC',
             'description' => 'Dedicated graphics card',
-            'price' => 730.21,
-            'price_old' => 764.58,
+            'price' => 440.21,
+            'price_old' => 480.58,
             'stock' => 6,
             'status' => 1
         ]);
@@ -72,8 +71,8 @@ class ProductsTableSeeder extends Seeder
             'code' => 'GTX-1060-3GT-OC',
             'title' => 'MSI GTX 1060 3GB OC',
             'description' => 'Dedicated graphics card',
-            'price' => 268.62,
-            'price_old' => 279.87,
+            'price' => 230.62,
+            'price_old' => 240.87,
             'stock' => 3,
             'status' => 1
         ]);
@@ -83,7 +82,7 @@ class ProductsTableSeeder extends Seeder
             'code' => 'GV-RX460WF2OC-4GD',
             'title' => 'GIGABYTE RX 460 4GB WINDFORCE OC',
             'description' => 'Dedicated graphics card',
-            'price' => 145.42,
+            'price' => 120.42,
             'price_old' => 156.54,
             'stock' => 3,
             'status' => 1
@@ -94,8 +93,8 @@ class ProductsTableSeeder extends Seeder
             'code' => 'SAPPHIRE-FX-4G',
             'title' => 'SAPPHIRE R9 FURY X 4GB HBM',
             'description' => 'Dedicated graphics card',
-            'price' => 730.89,
-            'price_old' => 742.64,
+            'price' => 400.89,
+            'price_old' => 450.64,
             'stock' => 1,
             'status' => 1
         ]);
@@ -115,7 +114,7 @@ class ProductsTableSeeder extends Seeder
         $product = new \App\Models\Product([
             'code' => 'CORE-I5-6600K',
             'title' => 'Intel® Core™ i5-6600K 3.5GHz 6MB LGA1151',
-            'price' => 250.00,
+            'price' => 230.00,
             'stock' => 6,
             'status' => 1
         ]);
@@ -124,7 +123,7 @@ class ProductsTableSeeder extends Seeder
         $product = new \App\Models\Product([
             'code' => 'CORE-I5-7600K',
             'title' => 'Intel® Core™ i5-7600K 3.8 GHz 6M LGA1151',
-            'price' => 255.00,
+            'price' => 240.00,
             'stock' => 3,
             'status' => 1
         ]);
@@ -133,8 +132,8 @@ class ProductsTableSeeder extends Seeder
         $product = new \App\Models\Product([
             'code' => 'CORE-I5-7700K',
             'title' => 'Intel® Core™ i7-7700K 4.2 GHz 8M LGA1151',
-            'price' => 356.42,
-            'price_old' => 361.58,
+            'price' => 310.42,
+            'price_old' => 350.58,
             'stock' => 7,
             'status' => 1
         ]);
@@ -153,9 +152,9 @@ class ProductsTableSeeder extends Seeder
         $product = new \App\Models\Product([
             'code' => 'RYZEN-5-1600',
             'title' => 'AMD Ryzen 5 1600',
-            'price' => 221.89,
-            'price_old' => 237.93,
-            'stock' => 3,
+            'price' => 120.89,
+            'price_old' => 140.93,
+            'stock' => 6,
             'status' => 1
         ]);
         $product->save(); // 14
@@ -163,12 +162,16 @@ class ProductsTableSeeder extends Seeder
         $product = new \App\Models\Product([
             'code' => 'STRIX-Z270E-GAMING',
             'title' => 'ASUS STRIX Z270E GAMING',
-            'price' => 186.46,
-            'price_old' => 193.31,
-            'stock' => 2,
+            'price' => 130.46,
+            'price_old' => 160.31,
+            'stock' => 4,
             'status' => 1
         ]);
         $product->save(); // 15
+
+        factory(\App\Models\Product::class, 85)->create()->each(function ($p) {
+            $p->categories()->attach(rand(1, 14));
+        });
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

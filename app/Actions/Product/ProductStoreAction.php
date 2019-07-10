@@ -15,14 +15,11 @@ class ProductStoreAction
      */
     public function execute(array $data)
     {
-        $product = new Product();
-        $product->code = $data['code'];
-        $product->title = $data['title'];
-        $product->description = $data['description'];
-        $product->price = $data['price'];
-        $product->stock = $data['stock'];
-        $product->status = $data['status'];
-        $product->save();
+        $product = Product::create(arrayExclude($data, [
+            'category', 
+            'attr', 
+            'media'
+        ]));
 
         // Attach category and its attributes to the product
         $product->categories()->attach(['category_id' => $data['category']]);

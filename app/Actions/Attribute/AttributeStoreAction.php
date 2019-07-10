@@ -15,10 +15,8 @@ class AttributeStoreAction
      */
     public function execute(array $data, $specificationId)
     {
-        $attribute = new Attribute();
-        $attribute->specification_id = $specificationId;
-        $attribute->name = $data['name'];
-        $attribute->save();
+        $data['specification_id'] = $specificationId;
+        Attribute::create($data);
 
         $flash = [
             'type' => 'message-success',

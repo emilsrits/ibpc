@@ -12,15 +12,25 @@ use App\Actions\Specification\SpecificationUpdateAction;
 class SpecificationController extends Controller
 {
     /**
+     * SpecificationController constructor
+     *
+     * @param Specification $specification
+     */
+    public function __construct(Specification $specification)
+    {
+        $this->specification = $specification;
+    }
+
+    /**
      * Return specifications view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $specifications = Specification::with('attributes')->paginate(20);
+        $specifications = $this->specification->with('attributes')->paginate(20);
 
-        return view('admin.specification.specifications', ['specifications' => $specifications]);
+        return view('admin.specification.specifications', compact('specifications'));
     }
 
     /**
@@ -73,11 +83,9 @@ class SpecificationController extends Controller
      */
     public function edit($id)
     {
-        $specification = Specification::with('attributes')->findOrFail($id);
+        $specification = $this->specification->with('attributes')->findOrFail($id);
 
-        return view('admin.specification.edit', [
-            'specification' => $specification
-        ]);
+        return view('admin.specification.edit', compact('specification'));
     }
 
     /**
@@ -90,7 +98,7 @@ class SpecificationController extends Controller
      */
     public function update(SpecificationUpdateRequest $request, SpecificationUpdateAction $action, $id)
     {
-        $flash = $action->execute($request->all(), $id);
+        $flash = $action->execute($request->except('_token'), $id);
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();

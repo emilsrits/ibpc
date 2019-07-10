@@ -10,7 +10,7 @@ $factory->define(App\Models\Product::class, function (Faker $faker) {
         'code' => $code,
         'title' => $title,
         'description' => $faker->text(100),
-        'price' => $faker->randomFloat(2, 0, 9999),
+        'price' => $faker->randomFloat(2, 50, 1200),
         'price_old' => null,
         'stock' => $faker->numberBetween(0, 100),
         'status' => 1,

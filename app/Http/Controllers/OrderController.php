@@ -14,13 +14,23 @@ use App\Http\Requests\Order\OrderUpdateRequest;
 class OrderController extends Controller
 {
     /**
+     * OrderController constructor
+     *
+     * @param Order $order
+     */
+    public function __construct(Order $order)
+    {
+        $this->order = $order;
+    }
+
+    /**
      * Return orders page
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $orders = Order::with('user')->paginate(20);
+        $orders = $this->order->with('user')->paginate(20);
 
         return view('admin.order.orders', ['orders' => $orders, 'request' => null]);
     }
@@ -41,9 +51,9 @@ class OrderController extends Controller
             return redirect()->back();
         }
 
-        $orders = Order::with('user')->filter($filters)->paginate(20);
+        $orders = $this->order->with('user')->filter($filters)->paginate(20);
 
-        return view('admin.order.orders', ['orders' => $orders, 'request' => $request]);
+        return view('admin.order.orders', compact('orders', 'request'));
     }
 
     /**
@@ -73,10 +83,10 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = Order::with('user')->findOrFail($id);
+        $order = $this->order->with('user')->findOrFail($id);
         $closed = in_array($order->status, config('constants.order_status_finished'));
 
-        return view('admin.order.edit', ['order' => $order, 'closed' => $closed]);
+        return view('admin.order.edit', compact('order', 'closed'));
     }
 
     /**

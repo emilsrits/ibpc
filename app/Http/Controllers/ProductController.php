@@ -18,14 +18,26 @@ use App\Http\Requests\Product\ProductUpdateAjaxRequest;
 class ProductController extends Controller
 {
     /**
+     * ProductController constructor
+     *
+     * @param Product $product
+     * @param Category $category
+     */
+    public function __construct(Product $product, Category $category)
+    {
+        $this->product = $product;
+        $this->category = $category;
+    }
+
+    /**
      * Return admin catalog page
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $products = Product::with('categories')->paginate(20);
-        $categories = Category::all();
+        $products = $this->product->with('categories')->paginate(20);
+        $categories = $this->category->all();
 
         return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => null]);
     }
@@ -46,10 +58,10 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        $products = Product::with('categories')->filter($filters)->paginate(20);
-        $categories = Category::all();
+        $products = $this->product->with('categories')->filter($filters)->paginate(20);
+        $categories = $this->category->all();
 
-        return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => $request]);
+        return view('admin.product.catalog', compact('products', 'categories', 'request'));
     }
 
     /**
@@ -60,15 +72,15 @@ class ProductController extends Controller
      */
     public function create(Request $request)
     {
-        $categories = Category::where('top_level', 0)->get();
+        $categories = $this->category->child()->get();
 
         if ($request->old('category')) {
-            $category = Category::with('specifications.attributes')->find($request->old('category'));
+            $category = $this->category->with('specifications.attributes')->find($request->old('category'));
         } else {
             $category = null;
         }
 
-        return view('admin.product.create', ['categories' => $categories, 'category' => $category, 'request' => $request]);
+        return view('admin.product.create', compact('categories', 'category', 'request'));
     }
 
     /**
@@ -79,7 +91,7 @@ class ProductController extends Controller
      */
     public function createWithCategory(Request $request)
     {
-        $category = Category::with('specifications.attributes')->find($request['selectFieldValue']);
+        $category = $this->category->with('specifications.attributes')->find($request->selectFieldValue);
         $view = view('partials.admin.product.specifications', ['category'=> $category])->render();
 
         if ($view) {
@@ -98,7 +110,7 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request, ProductStoreAction $action)
     {
-        $flash = $action->execute($request->all());
+        $flash = $action->execute($request->validated());
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->route('product.index');
@@ -117,19 +129,15 @@ class ProductController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $product = Product::with('categories.specifications.attributes')->find($id);
+        $product = $this->product->with('categories.specifications.attributes')->find($id);
 
         if (!$product->getCategoryId()->isEmpty()) {
-            $category = Category::with('specifications.attributes')->find($product->getCategoryId());
+            $category = $this->category->with('specifications.attributes')->find($product->getCategoryId());
         } else {
             $category = null;
         }
 
-        return view('admin.product.edit', [
-            'product' => $product,
-            'category' => $category,
-            'request' => $request
-        ]);
+        return view('admin.product.edit', compact('product', 'category', 'request'));
     }
 
     /**
@@ -142,7 +150,7 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, ProductUpdateAction $action, $id)
     {
-        $flash = $action->execute($request->all(), $id);
+        $flash = $action->execute($request->validated(), $id);
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();
@@ -161,7 +169,7 @@ class ProductController extends Controller
      */
     public function updateWithAjax(ProductUpdateAjaxRequest $request, ProductUpdateAjaxAction $action)
     {
-        $response = $action->execute($request->all());
+        $response = $action->execute($request->validated());
         if ($response) {
             return response()->json(null, 200);
         } else {

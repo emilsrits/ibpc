@@ -21,7 +21,7 @@
                     <ul id="product-search" class="nav navbar-nav">
                        <li class="product-search-container">
                            <form id="product-search-form" role="form" method="GET" action="{{ url('/search/') }}">
-                               <input id="search" type="search" name="search">
+                               <input id="search" type="search" name="q">
                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                            </form>
                        </li>

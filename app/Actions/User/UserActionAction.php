@@ -20,14 +20,14 @@ class UserActionAction
 
             switch ($data['mass-action']) {
                 case 1:
-                    $user->setStatus($userIds, 1);
+                    $user->setStatus($userIds, User::USER_ENABLED);
                     $flash = [
                         'type' => 'message-success',
                         'message' => 'User(s) enabled!'
                     ];
                     return $flash;
                 case 2:
-                    $user->setStatus($userIds, 0);
+                    $user->setStatus($userIds, User::USER_DISABLED);
                     $flash = [
                         'type' => 'message-success',
                         'message' => 'User(s) disabled!'

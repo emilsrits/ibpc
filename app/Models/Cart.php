@@ -9,6 +9,9 @@ use Mpociot\VatCalculator\Facades\VatCalculator;
 
 class Cart extends Model
 {
+    const DELIVERY_ADDRESS = 'address';
+    const DELIVERY_STORAGE = 'storage';
+
     public $items = null;
     public $totalQty = 0;
     public $delivery = [];
@@ -20,7 +23,7 @@ class Cart extends Model
      * Cart constructor
      * @param array $oldCart
      */
-    public function __construct($oldCart)
+    public function __construct($oldCart = null)
     {
         if ($oldCart) {
             $this->items = $oldCart->items;
@@ -122,6 +125,26 @@ class Cart extends Model
     }
 
     /**
+     * Setup delivery for checkout
+     *
+     * @param string $deliveryMethod
+     * @return string
+     */
+    public function setUpDelivery($deliveryMethod)
+    {
+        switch ($deliveryMethod) {
+            case self::DELIVERY_STORAGE:
+                Session::put('delivery', self::DELIVERY_STORAGE);
+                break;
+            case self::DELIVERY_ADDRESS:
+                Session::put('delivery', self::DELIVERY_ADDRESS);
+                break;
+        }
+
+        $this->addDelivery($deliveryMethod);
+    }
+
+    /**
      * Add delivery cost to cart
      *
      * @param string $deliveryMethod
@@ -130,12 +153,12 @@ class Cart extends Model
     public function addDelivery($deliveryMethod)
     {
         switch ($deliveryMethod) {
-            case 'storage':
-                $this->delivery['code'] = 'storage';
+            case self::DELIVERY_STORAGE:
+                $this->delivery['code'] = self::DELIVERY_STORAGE;
                 $this->delivery['cost'] = config('constants.delivery_cost.storage');
                 break;
-            case 'address':
-                $this->delivery['code'] = 'address';
+            case self::DELIVERY_ADDRESS:
+                $this->delivery['code'] = self::DELIVERY_ADDRESS;
                 $this->delivery['cost'] = config('constants.delivery_cost.address');
                 break;
         }
@@ -151,7 +174,7 @@ class Cart extends Model
      */
     public function getCart()
     {
-        return Session::get('cart');
+        return session('cart');
     }
 
     /**

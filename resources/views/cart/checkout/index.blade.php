@@ -36,7 +36,7 @@ Checkout
                 @endif
             @endforeach
             <tr>
-                <td colspan="2">Total incl. VAT: {{ $cart->getPriceCurrency('total') }}</td>
+                <td colspan="2">Total incl. VAT: {{ $cart->getPriceCurrency('with_vat') }}</td>
             </tr>
         </table>
         <button class="btn btn-checkout" type="button" title="Checkout" onclick="window.location='{{ url('/checkout/delivery') }}'">Continue</button>

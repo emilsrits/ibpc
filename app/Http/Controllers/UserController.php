@@ -14,9 +14,16 @@ class UserController extends Controller
 {
 	protected $redirectTo = '/';
 
-    public function __construct()
+    /**
+     * UserController constructor
+     *
+     * @param User $user
+     * @param Role $role
+     */
+    public function __construct(User $user, Role $role)
     {
-        $this->middleware('auth');
+        $this->user = $user;
+        $this->role = $role;
     }
 
     /**
@@ -26,9 +33,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->orderBy('id', 'Asc')->paginate(20);
-
-        return view('admin.user.users', ['users' => $users, 'request' => null]);
+        return view('admin.user.users', [
+            'users' => $this->user->with('roles')->oldest('id')->paginate(20), 
+            'request' => null
+        ]);
     }
 
     /**
@@ -41,14 +49,14 @@ class UserController extends Controller
      */
     public function action(UserActionRequest $request, UserActionAction $action, UserFilter $filters)
     {
-        $flash = $action->execute($request->all());
+        $flash = $action->execute($request->validated());
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
         }
 
-        $users = User::with('roles')->filter($filters)->paginate(20);
+        $users = $this->user->with('roles')->filter($filters)->paginate(20);
 
-        return view('admin.user.users', ['users' => $users, 'request' => $request ]);
+        return view('admin.user.users', compact('users', 'request'));
     }
 
     /**
@@ -59,13 +67,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::with('roles')->find($id);
-        $roles = Role::all();
+        $user = $this->user->with('roles')->find($id);
+        $roles = $this->role->all();
 
-        return view('admin.user.edit', [
-            'user' => $user,
-            'roles' => $roles
-        ]);
+        return view('admin.user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -78,20 +83,9 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, UserUpdateAction $action, $id)
     {
-        $flash = $action->execute($request->all(), $id);
+        $flash = $action->execute($request->validated(), $id);
         $request->session()->flash($flash['type'], $flash['message']);
         
         return redirect()->back();
-    }
-
-    /**
-     * Delete user
-     *
-     * @param string $id
-     */
-    public function delete($id)
-    {
-        $user = new User();
-        $user->deleteUser($id);
     }
 }

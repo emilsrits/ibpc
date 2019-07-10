@@ -57,13 +57,35 @@ class Product extends Model
     /**
      * Product filters
      *
-     * @param $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @param QueryFilter $filters
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFilter($query, QueryFilter $filters)
     {
         return $filters->apply($query);
+    }
+
+    /**
+     * Query to only include active products
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', '=' , 1);
+    }
+
+    /**
+     * Query to only include stocked products
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeStocked($query)
+    {
+        return $query->where('stock', '>', 0);
     }
 
     /**
@@ -102,40 +124,39 @@ class Product extends Model
      */
     public function setAttributes(array $data)
     {
-        $specifications = collect($data);
+        $arr = $this->collectAttributes($data);
+        $this->attributes()->attach(intermediateSyncArray($arr));
+    }
 
-        // If the product has any attributes attached
-        if ($this->attributes()->first()) {
-            foreach ($specifications as $key => $attributes) {
-                foreach ($attributes as $attribute => $value) {
-                    $productAttr = $this->attributes()->find($attribute);
-                    if ($productAttr) {
-                        if (!ctype_space($value) && !$value == "") {
-                            // Update attribute
-                            $this->attributes()->detach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                            $this->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                        } else {
-                            // Remove attribute
-                            $this->attributes()->detach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                        }
-                    } else {
-                        if (!ctype_space($value) && !$value == "") {
-                            // Add attribute
-                            $this->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                        }
-                    }
-                }
-            }
-        } else {
-            // Add attributes
-            foreach ($specifications as $key => $attributes) {
-                foreach ($attributes as $attribute => $value) {
-                    if ($value) {
-                        $this->attributes()->attach(['attribute_id' => ['attribute_id' => $attribute, 'value' => $value]]);
-                    }
+    /**
+     * Update product attributes
+     * 
+     * @param array $data
+     */
+    public function updateAttributes(array $data)
+    {
+        $arr = $this->collectAttributes($data);
+        $this->attributes()->sync(intermediateSyncArray($arr));
+    }
+
+    /**
+     * Collect attributes from an array of specifications and their attributes
+     *
+     * @param array $data
+     * @return array
+     */
+    private function collectAttributes(array $data)
+    {
+        $arr = [];
+        foreach ($data as $key => $attributes) {
+            foreach ($attributes as $attribute => $value) {
+                if (!ctype_space($value) && !$value == "") {
+                    array_push($arr, [$attribute => $value]);
                 }
             }
         }
+
+        return $arr;
     }
 
     /**
@@ -218,6 +239,56 @@ class Product extends Model
     }
 
     /**
+     * Return product attribute group names
+     *
+     * @return mixed
+     */
+    public function getAttributeGroupNames()
+    {
+        if ($this->attributes()->first()) {
+            $arr = [];
+            foreach ($this->attributes as $attribute) {
+                array_push($arr, $attribute->specification->name);
+            }
+            return array_unique($arr);
+        }
+
+        return null;
+    }
+
+    /**
+     * Get products which title or code match the input
+     *
+     * @param string $input
+     * @return Product
+     */
+    public function getByTitleAndCode($input)
+    {
+        return $this->active()->where(function ($query) use ($input) {
+            $query->where('title', 'like', '%'.$input.'%')
+                ->orWhere('code', 'like', '%'.$input.'%');
+        });
+    }
+
+    public function getWithSpecificationsByCode($code)
+    {
+        return $this->with('attributes.specification')->where('code', $code)->first();
+    }
+
+    /**
+     * Get products under specific category
+     *
+     * @param integer $categoryId
+     * @return Product
+     */
+    public function getByCategoryId($categoryId)
+    {
+        return $this->active()->whereHas('categories', function ($query) use ($categoryId) {
+            $query->where('category_id', $categoryId);
+        });
+    }
+
+    /**
      * Get product attribute by id
      *
      * @param string $id
@@ -248,7 +319,7 @@ class Product extends Model
     /**
      * Get product media attribute
      *
-     * @return null|string
+     * @return mixed
      */
     public function getImageAttribute()
     {
@@ -289,7 +360,7 @@ class Product extends Model
      * @param $price
      * @param null $orderId
      * @param null $productId
-     * @return null|string
+     * @return mixed
      */
     public function getPriceCurrency($price, $orderId = null, $productId = null)
     {
@@ -329,7 +400,7 @@ class Product extends Model
      */
     public function getCurrentPriceAttribute()
     {
-    	return ($this->price);
+    	return $this->price;
     }
 
     /**
@@ -338,7 +409,7 @@ class Product extends Model
      * @param $orderId
      * @param $productId
      * @param null $currency
-     * @return null|string
+     * @return mixed
      */
     public function getOrderPriceById($orderId, $productId, $currency = null)
     {
@@ -366,7 +437,7 @@ class Product extends Model
      * @param $orderId
      * @param $productId
      * @param null $currency
-     * @return null|string
+     * @return mixed
      */
     public function getOrderTotalPriceById($orderId, $productId, $currency = null)
     {

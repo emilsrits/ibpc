@@ -12,6 +12,16 @@ use App\Actions\Attribute\AttributeUpdateAction;
 class AttributeController extends Controller
 {
     /**
+     * AttributeController constructor
+     *
+     * @param Attribute $attribute
+     */
+    public function __construct(Attribute $attribute)
+    {
+        $this->attribute = $attribute;
+    }
+
+    /**
      * Attributes mass action
      *
      * @param \App\Http\Requests\Specification\SpecificationActionRequest $request
@@ -36,9 +46,7 @@ class AttributeController extends Controller
      */
     public function create($specificationId)
     {
-        return view('admin.attribute.create', [
-            'specificationId' => $specificationId
-        ]);
+        return view('admin.attribute.create', compact('specificationId'));
     }
 
     /**
@@ -51,10 +59,10 @@ class AttributeController extends Controller
      */
     public function store(AttributeUpdateRequest $request, AttributeStoreAction $action, $specificationId)
     {
-        $flash = $action->execute($request->all(), $specificationId);
+        $flash = $action->execute($request->validated(), $specificationId);
 
         $request->session()->flash($flash['type'], $flash['message']);
-        return redirect()->route('specification.edit', ['specificationId' => $specificationId]);
+        return redirect()->route('specification.edit', compact('specificationId'));
     }
 
     /**
@@ -66,12 +74,9 @@ class AttributeController extends Controller
      */
     public function edit($specificationId, $id)
     {
-        $attribute = Attribute::findOrFail($id);
+        $attribute = $this->attribute->findOrFail($id);
 
-        return view('admin.attribute.edit', [
-            'specificationId' => $specificationId,
-            'attribute' => $attribute
-        ]);
+        return view('admin.attribute.edit', compact('specificationId', 'attribute'));
     }
 
     /**
@@ -92,6 +97,6 @@ class AttributeController extends Controller
         }
 
         $request->session()->flash('message-success', 'Attribute deleted!');
-        return redirect()->route('specification.edit', ['specificationId' => $specificationId]);
+        return redirect()->route('specification.edit', compact('specificationId'));
     }
 }

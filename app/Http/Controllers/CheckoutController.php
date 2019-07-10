@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
@@ -17,10 +15,9 @@ class CheckoutController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $cart = new Cart(null);
-        $cart = $cart->getCart();
+        $cart = session('cart');
 
-        return view('cart.checkout.index', ['user' => $user, 'cart' => $cart]);
+        return view('cart.checkout.index', compact('user', 'cart'));
     }
 
     /**
@@ -31,26 +28,16 @@ class CheckoutController extends Controller
      */
     public function show(Request $request)
     {
-        switch ($request['delivery']) {
-            case 'storage':
-                Session::put('delivery', 'storage');
-                break;
-            case 'address':
-                Session::put('delivery', 'address');
-                break;
-        }
+        $user = Auth::user();
+        $cart = session('cart');
+        $cart->setUpDelivery($request->delivery);
+        $cart->setVat();
 
-        if (!Session::get('delivery')) {
+        if (!session('delivery')) {
             return view('cart.checkout.delivery');
         }
 
-        $user = Auth::user();
-        $cart = new Cart(null);
-        $cart = $cart->getCart();
-        $cart->addDelivery($request['delivery']);
-        $cart->setVat();
-
-        return view('cart.checkout.confirmation', ['user' => $user, 'cart' => $cart]);
+        return view('cart.checkout.confirmation', compact('user', 'cart'));
     }
 
     /**

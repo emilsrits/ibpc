@@ -24,9 +24,9 @@ class AttributeUpdateAction
 
         if ($data['submit'] === 'save') {
             $attribute = Attribute::find($attributeId);
-            $attribute->name = $data['name'];
-            $attribute->save();
+            $attribute->update($data);
             $flash = [
+                
                 'type' => 'message-success',
                 'message' => 'Attribute successfully updated!'
             ];

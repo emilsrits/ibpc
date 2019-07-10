@@ -14,6 +14,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const USER_ENABLED = 1;
+    const USER_DISABLED = 0;
+
     /**
      * The attributes that are mass assignable
      *
@@ -148,34 +151,32 @@ class User extends Authenticatable
     /**
      * Check for existing roles
      *
-     * @param $array
-     * @param $term
-     * @return int|string
-     * @throws \Exception
+     * @param Collection $roles
+     * @param string $slug
+     * @return string
      */
-    protected function getIdInArray($array, $term)
+    protected function getIdInArray($roles, $slug)
     {
-        foreach ($array as $key => $value) {
-            if ($value == $term) {
+        foreach ($roles as $key => $value) {
+            if ($value == $slug) {
                 return $key;
             }
         }
-        throw new \Exception('Can not find the role');
     }
 
     /**
      * Assign a role to a user
      *
-     * @param $title
+     * @param string $slug
      * @throws \Exception
      */
-    public function assignRole($title)
+    public function assignRole($slug)
     {
         $assignedRoles = array();
 
         $roles = Role::all()->pluck('slug', 'id');
 
-        switch ($title) {
+        switch ($slug) {
             case 'admin':
                 $assignedRoles[] = $this->getIdInArray($roles, 'admin');
                 break;
@@ -187,6 +188,16 @@ class User extends Authenticatable
         }
 
         $this->roles()->sync($assignedRoles);
+    }
+
+    /**
+     * Update user roles
+     *
+     * @param array $roles
+     */
+    public function updateRoles($roles)
+    {
+        $this->roles()->sync(array_column($roles, 'id'));
     }
 
     /**

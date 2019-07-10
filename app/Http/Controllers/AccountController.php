@@ -16,11 +16,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $orderStatuses = config('constants.order_status_active');
-        $orders = $user->orders()->whereIn('status', $orderStatuses)->paginate(20);
+        $orders = Auth::user()->orders()->active()->paginate(20);
 
-        return view('account.index', ['orders' => $orders]);
+        return view('account.index', compact('orders'));
     }
 
     /**
@@ -34,7 +32,7 @@ class AccountController extends Controller
         $user = Auth::user();
         $order = $user->orders()->findOrFail($id);
 
-        return view('account.order', ['user' => $user, 'order' => $order]);
+        return view('account.order', compact('user', 'order'));
     }
 
     /**
@@ -45,10 +43,8 @@ class AccountController extends Controller
      */
     public function edit(Request $request)
     {
-        return view('account.edit', [
-            'user' => Auth::user(),
-            'request' => $request
-        ]);
+        $user = Auth::user();
+        return view('account.edit', compact('user', 'request'));
     }
 
     /**
@@ -61,7 +57,7 @@ class AccountController extends Controller
      */
     public function update(AccountUpdateRequest $request, AccountUpdateAction $action, $id)
     {
-        $flash = $action->execute($request->all(), $id);
+        $flash = $action->execute($request->validated(), $id);
 
         $request->session()->flash($flash['type'], $flash['message']);
         return redirect()->back();
@@ -74,10 +70,8 @@ class AccountController extends Controller
      */
     public function showHistory()
     {
-        $user = Auth::user();
-        $orderStatuses = config('constants.order_status_finished');
-        $orders = $user->orders()->whereIn('status', $orderStatuses)->paginate(20);
+        $orders = Auth::user()->orders()->finished()->paginate(20);
 
-        return view('account.history', ['orders' => $orders]);
+        return view('account.history', compact('orders'));
     }
 }

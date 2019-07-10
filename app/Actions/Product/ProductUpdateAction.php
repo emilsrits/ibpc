@@ -33,17 +33,15 @@ class ProductUpdateAction
 
         if ($data['submit'] === 'save') {
             $product = Product::findOrFail($id);
-            $product->code = $data['code'];
-            $product->title = $data['title'];
-            $product->description = $data['description'];
-            $product->price = $data['price'];
-            $product->stock = $data['stock'];
-            $product->status = $data['status'];
-            $product->save();
+            $product->update(arrayExclude($data, [
+                'category', 
+                'attr', 
+                'media'
+            ]));
 
             // Update product attributes
             if (isset($data['attr'])) {
-                $product->setAttributes($data['attr']);
+                $product->updateAttributes($data['attr']);
             }
 
             // Update product media

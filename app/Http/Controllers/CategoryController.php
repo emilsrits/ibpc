@@ -14,15 +14,27 @@ use App\Actions\Category\CategoryUpdateAction;
 class CategoryController extends Controller
 {
     /**
+     * CategoryController constructor
+     *
+     * @param Category $category
+     * @param Specification $specification
+     */
+    public function __construct(Category $category, Specification $specification)
+    {
+        $this->category = $category;
+        $this->specification = $specification;
+    }
+
+    /**
      * Return category view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $categories = Category::paginate(20);
+        $categories = $this->category->paginate(20);
 
-        return view('admin.category.categories', ['categories' => $categories]);
+        return view('admin.category.categories', compact('categories'));
     }
 
     /**
@@ -50,11 +62,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $specifications = Specification::orderBy('name', 'asc')->get();
+        $specifications = $this->specification->oldest('name')->get();
 
-        return view('admin.category.create', [
-            'specifications' => $specifications
-        ]);
+        return view('admin.category.create', compact('specifications'));
     }
 
     /**
@@ -66,7 +76,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request, CategoryStoreAction $action)
     {
-        $flash = $action->execute($request->all());
+        $flash = $action->execute($request->validated());
 
         $request->session()->flash($flash['type'], $flash['message']);
         return redirect()->route('category.index');
@@ -80,14 +90,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::with('specifications')->findOrFail($id);
+        $category = $this->category->with('specifications')->findOrFail($id);
+        $specifications = $this->specification->oldest('name')->get();
 
-        $specifications = Specification::orderBy('name', 'asc')->get();
-
-        return view('admin.category.edit', [
-            'category' => $category,
-            'specifications' => $specifications
-        ]);
+        return view('admin.category.edit', compact('category', 'specifications'));
     }
 
     /**

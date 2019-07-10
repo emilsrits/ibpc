@@ -24,9 +24,7 @@ class SpecificationUpdateAction
 
         if ($data['submit'] === 'save') {
             $specification = Specification::find($id);
-            $specification->slug = $data['slug'];
-            $specification->name = $data['name'];
-            $specification->save();
+            $specification->update($data);
             
             $flash = [
                 'type' => 'message-success',

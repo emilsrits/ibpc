@@ -95,7 +95,7 @@ Users
                         </td>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->full_name }}</td>
-                        <td>{{ $user->roles->min()->slug }}</td>
+                        <td>{{ $user->roles->first() ? $user->roles->min()->slug : '' }}</td>
                         <td>{{ $user->status ? 'Active' : 'Disabled' }}</td>
                         <td class="no-wrap">{{ $user->created_at }}</td>
                         <td class="no-wrap">{{ $user->updated_at }}</td>

@@ -9,15 +9,27 @@ use App\Http\Requests\Store\StoreSearchRequest;
 class StoreController extends Controller
 {
     /**
+     * StoreController constructor
+     *
+     * @param Product $product
+     * @param Category $category
+     */
+    public function __construct(Product $product, Category $category)
+    {
+        $this->product = $product;
+        $this->category = $category;
+    }
+
+    /**
      * Returns main store view with all products
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $products = Product::where('status', 1)->paginate(12);
+        $products = $this->product->active()->paginate(12);
 
-        return view('store.index', ['products' => $products]);
+        return view('store.index', compact('products'));
     }
 
     /**
@@ -28,14 +40,9 @@ class StoreController extends Controller
      */
     public function search(StoreSearchRequest $request)
     {
-        $input = $request['search'];
+        $products = $this->product->getByTitleAndCode($request->q)->paginate(12);
 
-        $products = Product::where('status', 1)->where(function ($query) use ($input) {
-            $query->where('title', 'like', '%'.$input.'%')
-                ->orWhere('code', 'like', '%'.$input.'%');
-        })->paginate(12);
-
-        return view('store.index', ['products' => $products ]);
+        return view('store.index', compact('products'));
     }
 
     /**
@@ -47,13 +54,10 @@ class StoreController extends Controller
      */
     public function categorize($top_level, $child)
     {
-        $category = Category::where('slug', $child)->first();
-        $categoryId = $category->id;
-        $products = Product::whereHas('categories', function ($query) use ($categoryId) {
-            $query->where('category_id', $categoryId);
-        })->paginate(12);
-
-        return view('store.index', ['products' => $products]);
+        $categoryId = $this->category->ofSlug($child)->first()->id;
+        $products = $this->product->getByCategoryId($categoryId)->paginate(12);
+        
+        return view('store.index', compact('products'));
     }
 
     /**
@@ -64,7 +68,7 @@ class StoreController extends Controller
      */
     public function show($code)
     {
-        $product = Product::with('attributes.specification')->where('code', $code)->first();
+        $product = $this->product->getWithSpecificationsByCode($code);
         // Get product attributes associated with its category
         if ($product->categories()->first()) {
             $categoryId = $product->categories()->first()->id;
@@ -73,6 +77,6 @@ class StoreController extends Controller
             $specifications = null;
         }
 
-        return view('store.product', ['product' => $product], ['specifications' => $specifications]);
+        return view('store.product', compact('product', 'specifications'));
     }
 }

@@ -36,7 +36,7 @@ if (!function_exists('sessionOldCart')) {
     /**
      * Get the previous cart instance
      * 
-     * @return Cart|null
+     * @return mixed
      */
     function sessionOldCart()
     {
@@ -49,7 +49,7 @@ if (!function_exists('countryFromCode')) {
      * Return country based on its code
      * 
      * @param string $code
-     * @return string|null
+     * @return mixed
      */
     function countryFromCode(string $code)
     {
@@ -67,8 +67,8 @@ if (!function_exists('sortEntry')) {
     /**
      * Return the next direction of sorting entry
      * 
-     * @param string|null $entry
-     * @return string|null
+     * @param mixed $entry
+     * @return mixed
      */
     function sortEntry($entry = null)
     {
@@ -94,5 +94,35 @@ if (!function_exists('roleIdFromSlug')) {
         $roles = config('constants.user_roles');
 
         return $roles[$slug];
+    }
+}
+
+if (!function_exists('arrayExclude')) {
+    /**
+     * Exclude keys from array
+     *
+     * @param array $array
+     * @param array $excludedKeys
+     * @return array
+     */
+    function arrayExclude(array $array, array $excludedKeys){
+        foreach($excludedKeys as $key){
+            unset($array[$key]);
+        }
+        return $array;
+    }
+}
+
+if (!function_exists('intermediateSyncArray')) {
+    function intermediateSyncArray(array $array) {
+        $arr = collect($array)->mapWithKeys(function($item, $key) {
+            return [
+                key($item) => [
+                    'value' => $item[key($item)]
+                ]
+            ];
+        });
+
+        return $arr;
     }
 }

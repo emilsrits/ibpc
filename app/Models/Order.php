@@ -31,13 +31,33 @@ class Order extends Model
     /**
      * Order filters
      *
-     * @param $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @param QueryFilter $filters
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFilter($query, QueryFilter $filters)
     {
         return $filters->apply($query);
+    }
+
+    /**
+     * Query for active orders
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->whereIn('status', config('constants.order_status_active'));
+    }
+
+    /**
+     * Query for finished orders
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFinished($query)
+    {
+        return $query->whereIn('status', config('constants.order_status_finished'));
     }
 
     /**

@@ -17,18 +17,12 @@ class AccountUpdateAction
     {
         $user = User::findOrFail($id);
 
-        $user->first_name = $data['first_name'];
-        $user->last_name = $data['last_name'];
-        $user->email = $data['email'];
-        $user->phone = $data['phone'];
         if ($data['password'] !== null && $data['password'] !== "") {
             $user->password = bcrypt($data['password']);
         }
-        $user->country = $data['country'];
-        $user->city = $data['city'];
-        $user->address = $data['address'];
-        $user->postcode = $data['postcode'];
-        $user->save();
+        unset($data['password']);
+
+        $user->update($data);
 
         $flash = [
             'type' => 'message-success',

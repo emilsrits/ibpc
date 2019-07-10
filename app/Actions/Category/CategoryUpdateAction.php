@@ -31,19 +31,10 @@ class CategoryUpdateAction
 
         if ($data['submit'] === 'save') {
             $category = Category::find($id);
-            $category->title = $data['title'];
-            $category->slug = str_slug($data['title']);
-            $category->top_level = $data['top_level'];
-            if ($data['parent_id']) {
-                $category->parent_id = $data['parent_id'];
-            }
-            $category->status = $data['status'];
-            $category->save();
+            $category->update($data);
 
             if (isset($data['spec'])) {
                 $category->updateSpecifications($data['spec']);
-            } else {
-                $category->removeSpecifications();
             }
 
             $flash = [

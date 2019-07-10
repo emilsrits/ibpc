@@ -12,7 +12,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'top_level', 'parent_id', 'status' 
+        'title', 'slug', 'top_level', 'parent_id', 'status' 
     ];
 
     /**
@@ -49,6 +49,40 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    /**
+     * Query to only include category with matching slug
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $slug
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfSlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
+    }
+
+    /**
+     * Query to only include top level categories
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeTop($query)
+    {
+        return $query->where('top_level', 1);
+    }
+
+    /**
+     * Query to only include child categories
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeChild($query)
+    {
+        return $query->where('top_level', 0);
     }
 
     /**
@@ -106,15 +140,7 @@ class Category extends Model
      */
     public function setSpecifications(array $data)
     {
-        $specificationsGroup = collect($data)->sortBy('id');
-        // Attach specifications to category
-        foreach ($specificationsGroup as $specifications => $specification) {
-            foreach ($specification as $key => $value) {
-                if ($value) {
-                    $this->specifications()->attach(['specification_id' => ['specification_id' => $value]]);
-                }
-            }
-        }
+        $this->specifications()->attach(array_column($data, 'id'));
     }
 
     /**
@@ -124,53 +150,7 @@ class Category extends Model
      */
     public function updateSpecifications(array $data)
     {
-        if ($data) {
-            // Attach new specifications
-            $specificationsGroup = collect($data)->sortBy('id');
-            foreach ($specificationsGroup as $specifications => $specification) {
-                foreach ($specification as $key => $value) {
-                    $categorySpec = $this->specifications->find($value);
-                    if (!$categorySpec) {
-                        $this->specifications()->attach(['specification_id' => ['specification_id' => $value]]);
-                        continue;
-                    }
-                }
-            }
-            // Remove unchecked values
-            if ($this->specifications->first()) {
-                foreach ($this->specifications as $categorySpecs) {
-                    $specId = $categorySpecs->id;
-                    $matchFound = false;
-                    foreach ($specificationsGroup as $specifications => $specification) {
-                        foreach ($specification as $key => $value) {
-                            if ((int)$value === $specId) {
-                                $matchFound = true;
-                                continue;
-                            }
-                        }
-                    }
-                    if (!$matchFound) {
-                        $this->specifications()->detach(['specification_id' => ['specification_id' => $specId]]);
-                    }
-                }
-            }
-        } else {
-            // Remove all specifications
-            $this->removeSpecifications();
-        }
-    }
-
-    /**
-     * Remove specifications of a category
-     */
-    public function removeSpecifications()
-    {
-        if ($this->specifications->first()) {
-            foreach ($this->specifications as $categorySpecs) {
-                $specId = $categorySpecs->id;
-                $this->specifications()->detach(['specification_id' => ['specification_id' => $specId]]);
-            }
-        }
+        $this->specifications()->sync(array_column($data, 'id'));
     }
 
     /**
@@ -196,7 +176,7 @@ class Category extends Model
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getSpecificationId()
+    public function getSpecificationIds()
     {
         return $this->specifications()->allRelatedIds();
     }
@@ -204,14 +184,20 @@ class Category extends Model
     /**
      * Set parent_id depending on top_level status
      * 
-     * @param integer $parent_id
+     * @param integer $parentId
      */
-    public function setParentIdAttribute($parent_id)
+    public function setParentIdAttribute($parentId)
     {
         if ($this->attributes['top_level'] == '1') {
             $this->attributes['parent_id'] = null;
         } else {
-            $this->attributes['parent_id'] = $parent_id;
+            $this->attributes['parent_id'] = $parentId;
         }
+    }
+
+    public function setTitleAttribute($title)
+    {
+        $this->attributes['slug'] = str_slug($title);
+        $this->attributes['title'] = $title;
     }
 }

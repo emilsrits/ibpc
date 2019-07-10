@@ -14,15 +14,7 @@ class CategoryStoreAction
      */
     public function execute(array $data)
     {
-        $category = new Category();
-        $category->title = $data['title'];
-        $category->slug = str_slug($data['title']);
-        $category->top_level = $data['top_level'];
-        if ($data['parent_id']) {
-            $category->parent_id = $data['parent_id'];
-        }
-        $category->status = $data['status'];
-        $category->save();
+        $category = Category::create($data);
 
         if (isset($data['spec'])) {
             $category->setSpecifications($data['spec']);

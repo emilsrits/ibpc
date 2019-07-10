@@ -24,7 +24,8 @@ class ProductUpdateAjaxRequest extends FormRequest
     public function rules()
     {
         return [
-            'productId' => 'required|integer'
+            'productId' => 'required|integer',
+            'mediaId' => 'nullable|integer'
         ];
     }
 }
