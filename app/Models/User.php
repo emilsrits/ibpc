@@ -18,7 +18,7 @@ class User extends Authenticatable
     const USER_DISABLED = 0;
 
     /**
-     * The attributes that are mass assignable
+     * The properties that are mass assignable
      *
      * @var array
      */
@@ -27,7 +27,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for arrays
+     * The properties that should be hidden for arrays
      *
      * @var array
      */

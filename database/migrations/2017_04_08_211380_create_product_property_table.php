@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttributesTable extends Migration
+class CreateProductPropertyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +12,15 @@ class CreateAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create('product_property', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->integer('specification_id')->unsigned();
-            $table->foreign('specification_id')->references('id')->on('specifications')->onDelete('cascade');
-            $table->string('name', 50);
+            $table->integer('product_id')->unsigned()->index();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->integer('property_id')->unsigned()->index();
+            $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade');
+            $table->string('value', 50);
             $table->timestamps();
         });
     }
@@ -33,7 +34,7 @@ class CreateAttributesTable extends Migration
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
 
-        Schema::dropIfExists('attributes');
+        Schema::drop('product_property');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     /**
-     * The attributes that are mass assignable
+     * The properties that are mass assignable
      *
      * @var array
      */
@@ -83,6 +83,17 @@ class Category extends Model
     public function scopeChild($query)
     {
         return $query->where('top_level', 0);
+    }
+
+    /**
+     * Query to only include active categories
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
     }
 
     /**

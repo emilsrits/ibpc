@@ -17,13 +17,13 @@ class Product extends Model
     ];
 
     /**
-     * ManyToMany relationship with Attribute class
+     * ManyToMany relationship with Property class
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function attributes()
+    public function properties()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_product')->withPivot('attribute_id', 'value')->withTimestamps();
+        return $this->belongsToMany(Property::class, 'product_property')->withPivot('property_id', 'value')->withTimestamps();
     }
 
     /**
@@ -118,40 +118,40 @@ class Product extends Model
     }
 
     /**
-     * Set product attributes
+     * Set product properties
      * 
      * @param array $data
      */
-    public function setAttributes(array $data)
+    public function setProperties(array $data)
     {
-        $arr = $this->collectAttributes($data);
-        $this->attributes()->attach(intermediateSyncArray($arr));
+        $arr = $this->collectProperties($data);
+        $this->properties()->attach(intermediateSyncArray($arr));
     }
 
     /**
-     * Update product attributes
+     * Update product properties
      * 
      * @param array $data
      */
-    public function updateAttributes(array $data)
+    public function updateProperties(array $data)
     {
-        $arr = $this->collectAttributes($data);
-        $this->attributes()->sync(intermediateSyncArray($arr));
+        $arr = $this->collectProperties($data);
+        $this->properties()->sync(intermediateSyncArray($arr));
     }
 
     /**
-     * Collect attributes from an array of specifications and their attributes
+     * Collect properties from an array of specifications and their properties
      *
      * @param array $data
      * @return array
      */
-    private function collectAttributes(array $data)
+    private function collectProperties(array $data)
     {
         $arr = [];
-        foreach ($data as $key => $attributes) {
-            foreach ($attributes as $attribute => $value) {
+        foreach ($data as $key => $properties) {
+            foreach ($properties as $property => $value) {
                 if (!ctype_space($value) && !$value == "") {
-                    array_push($arr, [$attribute => $value]);
+                    array_push($arr, [$property => $value]);
                 }
             }
         }
@@ -239,16 +239,16 @@ class Product extends Model
     }
 
     /**
-     * Return product attribute group names
+     * Return product property group names
      *
      * @return mixed
      */
-    public function getAttributeGroupNames()
+    public function getPropertyGroupNames()
     {
-        if ($this->attributes()->first()) {
+        if ($this->properties()->first()) {
             $arr = [];
-            foreach ($this->attributes as $attribute) {
-                array_push($arr, $attribute->specification->name);
+            foreach ($this->properties as $property) {
+                array_push($arr, $property->specification->name);
             }
             return array_unique($arr);
         }
@@ -272,7 +272,7 @@ class Product extends Model
 
     public function getWithSpecificationsByCode($code)
     {
-        return $this->with('attributes.specification')->where('code', $code)->first();
+        return $this->with('properties.specification')->where('code', $code)->first();
     }
 
     /**
@@ -289,16 +289,16 @@ class Product extends Model
     }
 
     /**
-     * Get product attribute by id
+     * Get product property by id
      *
      * @param string $id
      * @return null
      */
-    public function getAttributeById($id)
+    public function getPropertyById($id)
     {
-        $attribute = $this->attributes()->find($id);
-        if ($attribute) {
-            $value = $attribute->pivot->value;
+        $property = $this->properties()->find($id);
+        if ($property) {
+            $value = $property->pivot->value;
         } else {
             $value = null;
         }

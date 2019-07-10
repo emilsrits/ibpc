@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-Edit Attribute Group
+Edit Property Group
 @endsection
 
 @section('content')
@@ -37,26 +37,26 @@ Edit Attribute Group
                 </div>
             </div>
         </form>
-        <div class="attribute-content-section">
+        <div class="property-content-section">
             <div class="content-section-toggle">
-                <strong>Attributes<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+                <strong>Properties<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
             </div>
             <div class="content-container">
                 <div class="manage-btn-group">
                     <div class="btn-manage-add">
-                        <a href="{{ url('/admin/attribute/create', ['id' => $specification->id]) }}">Add Attribute</a>
+                        <a href="{{ url('/admin/property/create', ['id' => $specification->id]) }}">Add Property</a>
                     </div>
                 </div>
-                <form id="attributes-form" role="form" method="POST" action="{{ url('/admin/attributes') }}">
+                <form id="properties-form" role="form" method="POST" action="{{ url('/admin/properties') }}">
                     {{ csrf_field() }}
-                    <div class="attributes-action">
+                    <div class="properties-action">
                         <select id="mass-action" name="mass-action">
                             <option value="0"></option>
                             <option value="1">Delete</option>
                         </select>
                         <button id="mass-action-run" type="submit" name="submit"><i class="fa fa-play" aria-hidden="true"></i></button>
                     </div>
-                    <table id="attributes-table">
+                    <table id="properties-table">
                         <thead class="table-head">
                         <tr>
                             <th>
@@ -70,17 +70,17 @@ Edit Attribute Group
                         </tr>
                         </thead>
                         <tbody class="table-body">
-                        @foreach($specification->attributes as $attribute)
+                        @foreach($specification->properties as $property)
                             <tr>
                                 <td>
-                                    <input class="entity-select" type="checkbox" name="attributes[{{ $attribute->id }}][id]" value="{{ $attribute->id }}">
+                                    <input class="entity-select" type="checkbox" name="properties[{{ $property->id }}][id]" value="{{ $property->id }}">
                                 </td>
-                                <td>{{ $attribute->id }}</td>
-                                <td>{{ $attribute->name }}</td>
-                                <td>{{ $attribute->created_at }}</td>
-                                <td>{{ $attribute->updated_at }}</td>
+                                <td>{{ $property->id }}</td>
+                                <td>{{ $property->name }}</td>
+                                <td>{{ $property->created_at }}</td>
+                                <td>{{ $property->updated_at }}</td>
                                 <td>
-                                    <a href="{{ url('/admin/attribute/edit', ['specificationId' => $specification->id, 'id' => $attribute->id]) }}">
+                                    <a href="{{ url('/admin/property/edit', ['specificationId' => $specification->id, 'id' => $property->id]) }}">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
                                 </td>

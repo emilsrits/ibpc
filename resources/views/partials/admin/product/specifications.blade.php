@@ -7,17 +7,17 @@
             <table class="product-table">
                 <tbody>
                 @foreach($category->specifications as $key => $specification)
-                    @if($specification->attributes->first())
+                    @if($specification->properties->first())
                         <tr class="entity-specification">
                             <td colspan="2">{{ $specification->name }}</td>
                         </tr>
                     @endif
-                    @foreach($specification->attributes as $attribute)
+                    @foreach($specification->properties as $property)
                         <tr class="entity-attribute">
-                            <td><label for="{{ 'attr[' . $specification->id . '][' . $attribute->id . ']' }}">{{ $attribute->name }}</label></td>
+                            <td><label for="{{ 'attr[' . $specification->id . '][' . $property->id . ']' }}">{{ $property->name }}</label></td>
                             <td><input type="text" 
-                                    name="{{ 'attr[' . $specification->id . '][' . $attribute->id . ']' }}" 
-                                    value="{{ is_array(old('attr.'.$specification->id)) ? old('attr.'.$specification->id.'.'.$attribute->id.'') : '' }}"></td>
+                                    name="{{ 'attr[' . $specification->id . '][' . $property->id . ']' }}" 
+                                    value="{{ is_array(old('attr.'.$specification->id)) ? old('attr.'.$specification->id.'.'.$property->id.'') : '' }}"></td>
                         </tr>
                     @endforeach
                 @endforeach

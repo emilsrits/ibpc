@@ -28,7 +28,7 @@ class SpecificationController extends Controller
      */
     public function index()
     {
-        $specifications = $this->specification->with('attributes')->paginate(20);
+        $specifications = $this->specification->with('properties')->paginate(20);
 
         return view('admin.specification.specifications', compact('specifications'));
     }
@@ -83,7 +83,7 @@ class SpecificationController extends Controller
      */
     public function edit($id)
     {
-        $specification = $this->specification->with('attributes')->findOrFail($id);
+        $specification = $this->specification->with('properties')->findOrFail($id);
 
         return view('admin.specification.edit', compact('specification'));
     }
@@ -104,7 +104,7 @@ class SpecificationController extends Controller
             return redirect()->back();
         }
 
-        $request->session()->flash('message-success', 'Attribute group deleted!');
+        $request->session()->flash('message-success', 'Property group deleted!');
         return redirect()->route('specification.index');
     }
 }

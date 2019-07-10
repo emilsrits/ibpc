@@ -18,7 +18,7 @@ class SpecificationStoreAction
         
         $flash = [
             'type' => 'message-success',
-            'message' => 'Attribute group successfully created!'
+            'message' => 'Property group successfully created!'
         ];
 
         return $flash;

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Attribute extends Model
+class Property extends Model
 {
     /**
-     * The attributes that are mass assignable
+     * The properties that are mass assignable
      *
      * @var array
      */
@@ -29,7 +29,7 @@ class Attribute extends Model
      */
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'attribute_product');
+        return $this->belongsToMany(Product::class, 'product_property');
     }
 
     /**
@@ -43,20 +43,20 @@ class Attribute extends Model
     }
 
     /**
-     * Delete attributes
+     * Delete properties
      *
      * @param array|string $ids
      */
-    public function deleteAttribute($ids)
+    public function deleteProperty($ids)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
-                $attribute = Attribute::find($id);
-                $attribute->destroy($id);
+                $property = Property::find($id);
+                $property->destroy($id);
             }
         } else {
-            $attribute = Attribute::findOrFail($ids);
-            $attribute->destroy($ids);
+            $property = Property::findOrFail($ids);
+            $property->destroy($ids);
         }
     }
 }

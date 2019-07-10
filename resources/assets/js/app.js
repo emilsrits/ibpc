@@ -100,13 +100,13 @@
                 element: $('#specifications-form'),
                 id: '1',
                 action: 'delete',
-                entity: 'attribute groups'
+                entity: 'property groups'
             },
-            attribute: {
-                element: $('#attributes-form'),
+            property: {
+                element: $('#properties-form'),
                 id: '1',
                 action: 'delete',
-                entity: 'attributes'
+                entity: 'properties'
             },
             user: {
                 element: $('#users-form'),

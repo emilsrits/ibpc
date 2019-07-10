@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('title')
-Create Attribute Group
+Create Property Group
 @endsection
 
 @section('content')
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="specification-create">
-        <h3>New Attribute Group</h3>
+        <h3>New Property Group</h3>
         <form id="create-specifications-form" role="form" method="POST" action="{{ url('/admin/specification/create/save') }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">

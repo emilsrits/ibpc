@@ -75,7 +75,7 @@ class ProductController extends Controller
         $categories = $this->category->child()->get();
 
         if ($request->old('category')) {
-            $category = $this->category->with('specifications.attributes')->find($request->old('category'));
+            $category = $this->category->with('specifications.properties')->find($request->old('category'));
         } else {
             $category = null;
         }
@@ -91,7 +91,7 @@ class ProductController extends Controller
      */
     public function createWithCategory(Request $request)
     {
-        $category = $this->category->with('specifications.attributes')->find($request->selectFieldValue);
+        $category = $this->category->with('specifications.properties')->find($request->selectFieldValue);
         $view = view('partials.admin.product.specifications', ['category'=> $category])->render();
 
         if ($view) {
@@ -129,10 +129,10 @@ class ProductController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $product = $this->product->with('categories.specifications.attributes')->find($id);
+        $product = $this->product->with('categories.specifications.properties')->find($id);
 
         if (!$product->getCategoryId()->isEmpty()) {
-            $category = $this->category->with('specifications.attributes')->find($product->getCategoryId());
+            $category = $this->category->with('specifications.properties')->find($product->getCategoryId());
         } else {
             $category = null;
         }

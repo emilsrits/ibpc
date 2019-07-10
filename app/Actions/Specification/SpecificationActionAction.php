@@ -23,7 +23,7 @@ class SpecificationActionAction
                     $specification->deleteSpecification($specificationIds);
                     $flash = [
                         'type' => 'message-success',
-                        'message' => 'Attribute groups deleted!'
+                        'message' => 'Property groups deleted!'
                     ];
 
                     return $flash;

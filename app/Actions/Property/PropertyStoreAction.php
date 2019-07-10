@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Actions\Attribute;
+namespace App\Actions\Property;
 
-use App\Models\Attribute;
+use App\Models\Property;
 
-class AttributeStoreAction
+class PropertyStoreAction
 {
     /**
-     * Process the attribute store action
+     * Process the property store action
      *
      * @param array $data
      * @param string $specificationId
@@ -16,11 +16,11 @@ class AttributeStoreAction
     public function execute(array $data, $specificationId)
     {
         $data['specification_id'] = $specificationId;
-        Attribute::create($data);
+        Property::create($data);
 
         $flash = [
             'type' => 'message-success',
-            'message' => 'Attribute successfully created!'
+            'message' => 'Property successfully created!'
         ];
 
         return $flash;

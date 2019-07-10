@@ -12,7 +12,7 @@ class Media extends Model
     const DEFAULT_PRODUCT_MEDIA_PATH = '/media/products/default.png';
 
     /**
-     * The attributes that are mass assignable
+     * The properties that are mass assignable
      *
      * @var array
      */

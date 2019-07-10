@@ -27,20 +27,20 @@
                     <tbody>
                     @if($specifications)
                         @foreach($specifications->specifications as $category => $specifications)
-                            @if($specifications->attributes->first())
+                            @if($specifications->properties->first())
                                 <tr class="category">
-                                    @foreach($product->attributes as $attribute)
-                                        @if($attribute->specification->id === $specifications->id)
+                                    @foreach($product->properties as $property)
+                                        @if($property->specification->id === $specifications->id)
                                             <td>{{ $specifications->name }}</td>
                                             @break
                                         @endif
                                     @endforeach
                                 </tr>
-                                @foreach($specifications->attributes as $attribute => $value)
-                                    @if($product->getAttributeById($value->id))
+                                @foreach($specifications->properties as $property => $value)
+                                    @if($product->getPropertyById($value->id))
                                         <tr class="specification">
-                                            <td class="attribute">{{ $value->name }}</td>
-                                            <td class="value">{{ $product->getAttributeById($value->id) }}</td>
+                                            <td class="property">{{ $value->name }}</td>
+                                            <td class="value">{{ $product->getPropertyById($value->id) }}</td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -52,7 +52,7 @@
                             <td>Additional Information</td>
                         </tr>
                         <tr class="specification">
-                            <td class="attribute">Description</td>
+                            <td class="property">Description</td>
                             <td class="value">{{ $product->description }}</td>
                         </tr>
                     @endif

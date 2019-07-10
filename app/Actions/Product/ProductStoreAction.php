@@ -21,10 +21,10 @@ class ProductStoreAction
             'media'
         ]));
 
-        // Attach category and its attributes to the product
+        // Attach category and its properties to the product
         $product->categories()->attach(['category_id' => $data['category']]);
         if (isset($data['attr'])) {
-            $product->setAttributes($data['attr']);
+            $product->setProperties($data['attr']);
         }
 
         // Store product media files

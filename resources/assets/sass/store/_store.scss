@@ -241,10 +241,10 @@
     td {
       padding: 4px 5px;
       color: $color_black;
-      &.attribute, &.value {
+      &.property, &.value {
         border-bottom: 1px solid $color_gray;
       }
-      &.attribute {
+      &.property {
         padding-left: 5px;
         width: 170px;
         border-right: 2px solid $color_white;

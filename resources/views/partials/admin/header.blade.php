@@ -29,7 +29,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url('/admin/catalog') }}">Products Catalog</a></li>
                                 <li><a href="{{ url('/admin/categories') }}">Categories</a></li>
-                                <li><a href="{{ url('/admin/specifications') }}">Attributes</a></li>
+                                <li><a href="{{ url('/admin/specifications') }}">Properties</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

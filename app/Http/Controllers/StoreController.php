@@ -69,10 +69,10 @@ class StoreController extends Controller
     public function show($code)
     {
         $product = $this->product->getWithSpecificationsByCode($code);
-        // Get product attributes associated with its category
+        // Get product properties associated with its category
         if ($product->categories()->first()) {
             $categoryId = $product->categories()->first()->id;
-            $specifications = Category::with('specifications.attributes')->find($categoryId);
+            $specifications = Category::with('specifications.properties')->find($categoryId);
         } else {
             $specifications = null;
         }

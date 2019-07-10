@@ -19,11 +19,11 @@ class OrderValidStatus implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
+     * @param  string  $property
      * @param  mixed  $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($property, $value)
     {
         return orderStatusExists($value) || $value == (string)0;
     }

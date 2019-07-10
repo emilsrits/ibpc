@@ -39,9 +39,9 @@ class ProductUpdateAction
                 'media'
             ]));
 
-            // Update product attributes
+            // Update product properties
             if (isset($data['attr'])) {
-                $product->updateAttributes($data['attr']);
+                $product->updateProperties($data['attr']);
             }
 
             // Update product media

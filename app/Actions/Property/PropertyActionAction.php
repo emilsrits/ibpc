@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Actions\Attribute;
+namespace App\Actions\Property;
 
-use App\Models\Attribute;
+use App\Models\Property;
 
-class AttributeActionAction
+class PropertyActionAction
 {
     /**
-     * Process the attribute mass-action action
+     * Process the property mass-action action
      *
      * @param array $data
      * @return void|array
      */
     public function execute(array $data)
     {
-        if (isset($data['attributes'])) {
-            $attributeIds = $data['attributes'];
-            $attribute = new Attribute();
+        if (isset($data['properties'])) {
+            $propertyIds = $data['properties'];
+            $property = new Property();
 
             switch ($data['mass-action']) {
                 case 1:
-                    $attribute->deleteAttribute($attributeIds);
+                    $property->deleteProperty($propertyIds);
                     $flash = [
                         'type' => 'message-success',
-                        'message' => 'Attribute(s) deleted!'
+                        'message' => 'Properties deleted!'
                     ];
 
                     return $flash;

@@ -94,7 +94,7 @@
 }
 .manage-catalog, .manage-users, .manage-settings, .manage-orders {
   width: 100%;
-  .products-categories, .products-attributes, .orders-pending, .orders-history {
+  .products-categories, .products-properties, .orders-pending, .orders-history {
     width: 50%;
     float: left;
   }
@@ -133,10 +133,10 @@
 
 /* CATALOG, CATEGORIES, ATTRIBUTES */
 #catalog-form, #categories-form, #specifications-form,
-#attributes-form, #users-form, #roles-form, #orders-form {
+#properties-form, #users-form, #roles-form, #orders-form {
   margin: 20px 0;
   overflow-x: auto;
-  .catalog-action, .categories-action, .specifications-action, .attributes-action, .users-action, .orders-action {
+  .catalog-action, .categories-action, .specifications-action, .properties-action, .users-action, .orders-action {
     margin: 0 10px 10px;
     select {
       height: 25px;
@@ -156,7 +156,7 @@
   }
 }
 #catalog-table, #categories-table, #specifications-table,
-#attributes-table, #users-table, #orders-table {
+#properties-table, #users-table, #orders-table {
   margin: 15px 0;
   width: 100%;
   th, td {
@@ -238,7 +238,7 @@
     }
   }
 }
-.attribute-content-section {
+.property-content-section {
   .btn-manage-add {
     margin: 25px 0 0;
   }
@@ -248,7 +248,7 @@
 .product-create, .product-edit,
 .category-create, .category-edit,
 .specification-create, .specification-edit,
-.attribute-create, .attribute-edit, .user-edit, .order-edit {
+.property-create, .property-edit, .user-edit, .order-edit {
   .entity-save, #entity-delete {
     margin: 5px;
     font-size: 13px;
@@ -289,12 +289,12 @@
   }
   .content-container {
     transition: all ease-in-out 0.2s;
-    .product-specification-attributes {
+    .product-specification-properties {
       display: none;
     }
   }
   .product-table, .category-table, .specification-table,
-  .attribute-table, .user-table, .order-table {
+  .property-table, .user-table, .order-table {
     width: 100%;
     margin: 10px 0 5px;
   }
@@ -346,7 +346,7 @@
 .category-create, .category-edit, .user-edit {
   .category-table, .user-table {
     .entity-attribute {
-      .category-attribute-group, .user-role {
+      .category-property-group, .user-role {
         width: 200px;
         input[type="checkbox"] {
           position: relative;
@@ -357,7 +357,7 @@
           line-height: 20px;
         }
       }
-      .category-attribute-group {
+      .category-property-group {
         font-size: 13px;
       }
     }

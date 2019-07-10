@@ -28,7 +28,7 @@ class SpecificationUpdateAction
             
             $flash = [
                 'type' => 'message-success',
-                'message' => 'Attribute group successfully updated!'
+                'message' => 'Property group successfully updated!'
             ];
 
             return $flash;

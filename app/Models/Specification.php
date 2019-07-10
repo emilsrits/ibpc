@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Specification extends Model
 {
     /**
-     * The attributes that are mass assignable
+     * The properties that are mass assignable
      *
      * @var array
      */
@@ -16,13 +16,13 @@ class Specification extends Model
     ];
 
     /**
-     * OneToMany relationship with Attribute class
+     * OneToMany relationship with Property class
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function attributes()
+    public function properties()
     {
-        return $this->hasMany(Attribute::class);
+        return $this->hasMany(Property::class);
     }
 
     /**

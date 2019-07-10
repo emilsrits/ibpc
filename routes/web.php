@@ -103,7 +103,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
     ]);
 
     /**
-     * Specification / Attribute Group routes
+     * Specification / Property Group routes
      */
     Route::get('/specifications', [
         'uses' => 'SpecificationController@index',
@@ -131,27 +131,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
     ]);
 
     /**
-     * Attribute routes
+     * Property routes
      */
-    Route::post('/attributes', [
-        'uses' => 'AttributeController@action',
-        'as' => 'attribute.action'
+    Route::post('/properties', [
+        'uses' => 'PropertyController@action',
+        'as' => 'property.action'
     ]);
-    Route::get('/attribute/create/{specificationId}', [
-        'uses' => 'AttributeController@create',
-        'as' => 'attribute.create'
+    Route::get('/property/create/{specificationId}', [
+        'uses' => 'PropertyController@create',
+        'as' => 'property.create'
     ]);
-    Route::post('/attribute/create/save/{specificationId}', [
-        'uses' => 'AttributeController@store',
-        'as' => 'attribute.store'
+    Route::post('/property/create/save/{specificationId}', [
+        'uses' => 'PropertyController@store',
+        'as' => 'property.store'
     ]);
-    Route::get('/attribute/edit/{specificationId}/{id}', [
-        'uses' => 'AttributeController@edit',
-        'as' => 'attribute.edit'
+    Route::get('/property/edit/{specificationId}/{id}', [
+        'uses' => 'PropertyController@edit',
+        'as' => 'property.edit'
     ]);
-    Route::post('/attribute/update/{specificationId}/{id}', [
-        'uses' => 'AttributeController@update',
-        'as' => 'attribute.update'
+    Route::post('/property/update/{specificationId}/{id}', [
+        'uses' => 'PropertyController@update',
+        'as' => 'property.update'
     ]);
 
     /**

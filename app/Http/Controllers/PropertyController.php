@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attribute;
+use App\Models\Property;
 use App\Http\Requests\Specification\SpecificationActionRequest;
-use App\Actions\Attribute\AttributeActionAction;
-use App\Http\Requests\Attribute\AttributeUpdateRequest;
-use App\Actions\Attribute\AttributeStoreAction;
-use App\Actions\Attribute\AttributeUpdateAction;
+use App\Actions\Property\PropertyActionAction;
+use App\Http\Requests\Property\PropertyUpdateRequest;
+use App\Actions\Property\PropertyStoreAction;
+use App\Actions\Property\PropertyUpdateAction;
 
-class AttributeController extends Controller
+class PropertyController extends Controller
 {
     /**
-     * AttributeController constructor
+     * PropertyController constructor
      *
-     * @param Attribute $attribute
+     * @param Property $property
      */
-    public function __construct(Attribute $attribute)
+    public function __construct(Property $property)
     {
-        $this->attribute = $attribute;
+        $this->property = $property;
     }
 
     /**
-     * Attributes mass action
+     * Properties mass action
      *
      * @param \App\Http\Requests\Specification\SpecificationActionRequest $request
-     * @param \App\Actions\Attribute\AttributeActionAction $action
+     * @param \App\Actions\Property\PropertyActionAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function action(SpecificationActionRequest $request, AttributeActionAction $action)
+    public function action(SpecificationActionRequest $request, PropertyActionAction $action)
     {
         $flash = $action->execute($request->all());
         if ($flash != null) {
@@ -39,25 +39,25 @@ class AttributeController extends Controller
     }
 
     /**
-     * Return attribute create view
+     * Return property create view
      *
      * @param $specificationId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create($specificationId)
     {
-        return view('admin.attribute.create', compact('specificationId'));
+        return view('admin.property.create', compact('specificationId'));
     }
 
     /**
-     * Save attribute
+     * Save property
      *
-     * @param \App\Http\Requests\Attribute\AttributeUpdateRequest $request
-     * @param \App\Actions\Attribute\AttributeStoreAction $action
+     * @param \App\Http\Requests\Property\PropertyUpdateRequest $request
+     * @param \App\Actions\Property\PropertyStoreAction $action
      * @param string $specificationId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(AttributeUpdateRequest $request, AttributeStoreAction $action, $specificationId)
+    public function store(PropertyUpdateRequest $request, PropertyStoreAction $action, $specificationId)
     {
         $flash = $action->execute($request->validated(), $specificationId);
 
@@ -66,7 +66,7 @@ class AttributeController extends Controller
     }
 
     /**
-     * Return attribute edit view
+     * Return property edit view
      *
      * @param string $specificationId
      * @param string $id
@@ -74,21 +74,21 @@ class AttributeController extends Controller
      */
     public function edit($specificationId, $id)
     {
-        $attribute = $this->attribute->findOrFail($id);
+        $property = $this->property->findOrFail($id);
 
-        return view('admin.attribute.edit', compact('specificationId', 'attribute'));
+        return view('admin.property.edit', compact('specificationId', 'property'));
     }
 
     /**
-     * Update attribute
+     * Update property
      *
-     * @param \App\Http\Requests\Attribute\AttributeUpdateRequest $request
-     * @param \App\Actions\Attribute\AttributeUpdateAction $action
+     * @param \App\Http\Requests\Property\PropertyUpdateRequest $request
+     * @param \App\Actions\Property\PropertyUpdateAction $action
      * @param string $specificationId
      * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(AttributeUpdateRequest $request, AttributeUpdateAction $action, $specificationId, $id)
+    public function update(PropertyUpdateRequest $request, PropertyUpdateAction $action, $specificationId, $id)
     {
         $flash = $action->execute($request->all(), $id);
         if ($flash != null) {
@@ -96,7 +96,7 @@ class AttributeController extends Controller
             return redirect()->back();
         }
 
-        $request->session()->flash('message-success', 'Attribute deleted!');
+        $request->session()->flash('message-success', 'Property deleted!');
         return redirect()->route('specification.edit', compact('specificationId'));
     }
 }

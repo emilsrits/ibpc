@@ -55,7 +55,7 @@ Create Category
             </div>
             <div class="category-content-section">
                 <div class="content-section-toggle">
-                    <strong>Attribute groups<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+                    <strong>Property groups<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
                 </div>
                 <div class="content-container of-x">
                     <table class="category-table">
@@ -63,7 +63,7 @@ Create Category
                         @foreach($specifications->chunk(3) as $chunk)
                             <tr class="entity-attribute">
                                 @foreach($chunk as $specification)
-                                    <td class="category-attribute-group no-wrap">
+                                    <td class="category-property-group no-wrap">
                                         <label>
                                             <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}" 
                                                 {{ is_array(old('spec.'.$specification->id)) ? 'checked' : '' }}
