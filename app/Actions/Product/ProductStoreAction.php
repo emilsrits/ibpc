@@ -15,10 +15,10 @@ class ProductStoreAction
      */
     public function execute(array $data)
     {
+        $data['price'] = parseMoneyByDecimal($data['price']);
+
         $product = Product::create(arrayExclude($data, [
-            'category', 
-            'attr', 
-            'media'
+            'category', 'attr', 'media'
         ]));
 
         // Attach category and its properties to the product

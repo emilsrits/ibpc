@@ -105,7 +105,8 @@ if (!function_exists('arrayExclude')) {
      * @param array $excludedKeys
      * @return array
      */
-    function arrayExclude(array $array, array $excludedKeys){
+    function arrayExclude(array $array, array $excludedKeys)
+    {
         foreach($excludedKeys as $key){
             unset($array[$key]);
         }
@@ -114,7 +115,14 @@ if (!function_exists('arrayExclude')) {
 }
 
 if (!function_exists('intermediateSyncArray')) {
-    function intermediateSyncArray(array $array) {
+    /**
+     * Create array with intermediate values ready for relationship syncing
+     *
+     * @param array $array
+     * @return Collection
+     */
+    function intermediateSyncArray(array $array)
+    {
         $arr = collect($array)->mapWithKeys(function($item, $key) {
             return [
                 key($item) => [
@@ -124,5 +132,35 @@ if (!function_exists('intermediateSyncArray')) {
         });
 
         return $arr;
+    }
+}
+
+if (!function_exists('parseMoneyByDecimal')) {
+    /**
+     * Parse money by decimal
+     *
+     * @param string $money
+     * @return string
+     */
+    function parseMoneyByDecimal($money)
+    {
+        $parsed = money_parse_by_decimal($money, config('constants.currency'))->toArray();
+
+        return $parsed['amount'];
+    }
+}
+
+if (!function_exists('formatMoneyByDecimal')) {
+    /**
+     * Format money by decimal
+     *
+     * @param string $money
+     * @return string
+     */
+    function formatMoneyByDecimal($money)
+    {
+        $formatted = money($money)->formatByDecimal();
+
+        return $formatted;
     }
 }

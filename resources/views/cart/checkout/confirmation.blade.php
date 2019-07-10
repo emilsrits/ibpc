@@ -15,7 +15,7 @@ Checkout Confirmation
                     @if($item['item']['id'])
                     <tr class="checkout-cart-item">
                         <td>{{ $item['item']['title'] }}</td>
-                        <td class="no-wrap">{{ $cart->getItemTotalPrice($item['item']['id'], 1) }}</td>
+                        <td class="no-wrap">@money($cart->getItemTotalPrice($item['item']['id']))</td>
                     </tr>
                     @endif
                 @endforeach
@@ -23,18 +23,18 @@ Checkout Confirmation
                     @if(Session::has('delivery'))
                         @if($cart->delivery)
                             <td>{{ 'Delivery to ' . $cart->delivery['code'] }}</td>
-                            <td>{{ $cart->getPriceCurrency('delivery') }}</td>
+                            <td>@money($cart->deliveryCost)</td>
                         @endif
                     @endif
                 </tr>
                 @if($cart->getVat())
                     <tr class="checkout-cart-item">
                         <td>VAT</td>
-                        <td>{{ $cart->getPriceCurrency('vat') }}</td>
+                        <td>@money($cart->vat)</td>
                     </tr>
                 @endif
                 <tr>
-                    <td colspan="2">Total incl. VAT: {{ $cart->getPriceCurrency('with_vat') }}</td>
+                    <td colspan="2">Total incl. VAT: @money($cart->getTotalPriceWithVat())</td>
                 </tr>
             </table>
             <button id="order-submit" class="btn btn-checkout" type="submit" title="Checkout">Order</button>

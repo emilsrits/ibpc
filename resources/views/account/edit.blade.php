@@ -19,19 +19,19 @@ Account Settings
                     <div class="content-container">
                         <div class="form-group">
                             <label for="first_name">First Name</label>
-                            <input type="text" name="first_name" class="form-control" value="{{ $request->old('first_name') ? $request->old('first_name') : $user->first_name }}">
+                            <input type="text" name="first_name" class="form-control" value="{{ old('first_name') ? old('first_name') : $user->first_name }}">
                         </div>
                         <div class="form-group">
                             <label for="last_name">Last Name</label>
-                            <input type="text" name="last_name" class="form-control" value="{{ $request->old('last_name') ? $request->old('last_name') : $user->last_name }}">
+                            <input type="text" name="last_name" class="form-control" value="{{ old('last_name') ? old('last_name') : $user->last_name }}">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" name="email" class="form-control" value="{{ $request->old('email') ? $request->old('email') : $user->email }}">
+                            <input type="text" name="email" class="form-control" value="{{ old('email') ? old('email') : $user->email }}">
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="text" name="phone" class="form-control" value="{{ $request->old('phone') ? $request->old('phone') : $user->phone }}">
+                            <input type="text" name="phone" class="form-control" value="{{ old('phone') ? old('phone') : $user->phone }}">
                         </div>
                     </div>
                 </div>
@@ -61,15 +61,15 @@ Account Settings
                         </div>
                         <div class="form-group">
                             <label for="city">City</label>
-                            <input type="text" name="city" class="form-control" value="{{ $request->old('city') ? $request->old('city') : $user->city }}">
+                            <input type="text" name="city" class="form-control" value="{{ old('city') ? old('city') : $user->city }}">
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" name="address" class="form-control" value="{{ $request->old('address') ? $request->old('address') : $user->address }}">
+                            <input type="text" name="address" class="form-control" value="{{ old('address') ? old('address') : $user->address }}">
                         </div>
                         <div class="form-group">
                             <label for="postcode">Postcode</label>
-                            <input type="text" name="postcode" class="form-control" value="{{ $request->old('postcode') ? $request->old('postcode') : $user->postcode }}">
+                            <input type="text" name="postcode" class="form-control" value="{{ old('postcode') ? old('postcode') : $user->postcode }}">
                         </div>
                     </div>
                 </div>

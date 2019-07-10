@@ -49,39 +49,41 @@ Edit Product
                         <tr class="entity-attribute">
                             <td><label for="code">Code</label></td>
                             <td>
-                                <input type="text" name="code" required value="{{ $request->old('code') ? $request->old('code') : $product->code }}">
+                                <input type="text" name="code" required value="{{ old('code') ? old('code') : $product->code }}">
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="title">Title</label></td>
                             <td>
-                                <input type="text" name="title" required value="{{ $request->old('title') ? $request->old('title') : $product->title }}">
+                                <input type="text" name="title" required value="{{ old('title') ? old('title') : $product->title }}">
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="description">Description</label></td>
                             <td>
-                                <textarea name="description" cols="20" rows="10">{{ $request->old('description') ? $request->old('description') : $product->description }}</textarea>
+                                <textarea name="description" cols="20" rows="10">{{ old('description') ? old('description') : $product->description }}</textarea>
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="price">Price</label></td>
                             <td>
-                                <input type="text" name="price" required pattern="^[0-9]*\.[0-9]{2}|[0-9]*$" value="{{ $request->old('price') ? $request->old('price') : $product->price }}">
+                                <input type="text" name="price" required pattern="^[0-9]*\.[0-9]{2}|[0-9]*$" 
+                                    value="{{ old('price') ? old('price') : formatMoneyByDecimal($product->price) }}">
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="stock">Stock</label></td>
                             <td>
-                                <input type="number" min="0" max="1000" name="stock" required value="{{ $request->old('stock') ? $request->old('stock') : $product->stock }}">
+                                <input type="number" min="0" max="1000" name="stock" required 
+                                    value="{{ old('stock') ? old('stock') : $product->stock }}">
                             </td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="status">Status</label></td>
                             <td>
                                 <select name="status" required>
-                                    <option value="0" {{ $request->old('status') == 0 || $product->status == 0 ? 'selected' : '' }}>Disabled</option>
-                                    <option value="1" {{ $request->old('status') == 1 || $product->status == 1 ? 'selected' : '' }}>Enabled</option>
+                                    <option value="0" {{ old('status') == 0 || $product->status == 0 ? 'selected' : '' }}>Disabled</option>
+                                    <option value="1" {{ old('status') == 1 || $product->status == 1 ? 'selected' : '' }}>Enabled</option>
                                 </select>
                             </td>
                         </tr>

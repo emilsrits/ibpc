@@ -15,8 +15,8 @@ return [
 
     // Delivery cost
     'delivery_cost' => [
-        'storage' => 0.00,
-        'address' => 6.99
+        'storage' => 0,
+        'address' => 699
     ],
 
     // User roles

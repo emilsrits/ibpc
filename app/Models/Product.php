@@ -381,32 +381,6 @@ class Product extends Model
     }
 
     /**
-     * Return price with currency
-     *
-     * @param $price
-     * @param null $orderId
-     * @param null $productId
-     * @return mixed
-     */
-    public function getPriceCurrency($price, $orderId = null, $productId = null)
-    {
-        switch ($price) {
-            case 'old':
-                if ($this->price_old > $this->price) {
-                    return $this->price_old . ' €';
-                } else {
-                    return null;
-                }
-            case 'current':
-                return $this->price . ' €';
-            case 'order':
-                return $this->getOrderPriceById($orderId, $productId, 1);
-            case 'order_total':
-                return $this->getOrderTotalPriceById($orderId, $productId, 1);
-        }
-    }
-
-    /**
      * Get product old price attribute
      *
      * @return string
@@ -434,10 +408,9 @@ class Product extends Model
      *
      * @param $orderId
      * @param $productId
-     * @param null $currency
      * @return mixed
      */
-    public function getOrderPriceById($orderId, $productId, $currency = null)
+    public function getOrderPriceById($orderId, $productId)
     {
         $order = $this->orders()->where([
             ['order_id', '=', $orderId],
@@ -445,11 +418,7 @@ class Product extends Model
         ])->first();
 
         if ($order) {
-            if ($currency) {
-                $price = $order->pivot->price . ' €';
-            } else {
-                $price = $order->pivot->price;
-            }
+            $price = $order->pivot->price;
         } else {
             $price = null;
         }
@@ -462,10 +431,9 @@ class Product extends Model
      *
      * @param $orderId
      * @param $productId
-     * @param null $currency
      * @return mixed
      */
-    public function getOrderTotalPriceById($orderId, $productId, $currency = null)
+    public function getOrderTotalPriceById($orderId, $productId)
     {
         $order = $this->orders()->where([
             ['order_id', '=', $orderId],
@@ -473,11 +441,7 @@ class Product extends Model
         ])->first();
 
         if ($order) {
-            if ($currency) {
-                $price = ($order->pivot->price * $order->pivot->quantity) . ' €';
-            } else {
-                $price = ($order->pivot->price * $order->pivot->quantity);
-            }
+            $price = ($order->pivot->price * $order->pivot->quantity);
         } else {
             $price = null;
         }

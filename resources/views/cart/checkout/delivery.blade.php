@@ -13,13 +13,13 @@ Checkout Delivery
             <div class="checkout-delivery-storage grid-item lg-50 md-50 sm-100">
                 <h4>Receive at storage</h4>
                 <img src="{{ asset('/media/delivery-storage.png') }}" alt="storage">
-                <p>{{ config('constants.delivery_cost.storage') . ' ' . config('constants.currency') }}</p>
+                <p>@money(config('constants.delivery_cost.storage'))</p>
                 <input type="checkbox" name="delivery" value="storage" {{ Session::get('delivery') === 'storage' ? 'checked' : '' }}>
             </div>
             <div class="checkout-delivery-address grid-item lg-50 md-50 sm-100">
                 <h4>Receive at your address</h4>
                 <img src="{{ asset('/media/delivery-address.png') }}" alt="address">
-                <p>{{ config('constants.delivery_cost.address') . ' ' . config('constants.currency') }}</p>
+                <p>@money(config('constants.delivery_cost.address'))</p>
                 <input type="checkbox" name="delivery" value="address" {{ Session::get('delivery') === 'address' ? 'checked' : '' }}>
             </div>
             <button class="btn btn-checkout" type="submit" title="Checkout">Continue</button>

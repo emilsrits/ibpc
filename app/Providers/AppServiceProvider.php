@@ -3,11 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Media;
-use App\Observers\MediaObserver;
-use Illuminate\Support\ServiceProvider;
 use App\Models\Order;
+use App\Observers\MediaObserver;
 use App\Observers\OrderObserver;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,12 +19,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::directive('moneyraw', function ($expression) {
+            return "<?php echo money($expression)->formatByDecimal(); ?>";
+        });
+
         // Share errors variable across views
         View::share('errors', null);
 
-        // Media event observer
         Media::observe(MediaObserver::class);
-        // Order eventt observer
         Order::observe(OrderObserver::class);
     }
 

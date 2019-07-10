@@ -41,10 +41,10 @@ class AccountController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Request $request)
+    public function edit()
     {
         $user = Auth::user();
-        return view('account.edit', compact('user', 'request'));
+        return view('account.edit', compact('user'));
     }
 
     /**

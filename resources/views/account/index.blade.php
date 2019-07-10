@@ -29,7 +29,7 @@ Active Orders
                         @foreach($orders as $order)
                             <tr>
                                 <td>{{ $order->id }}</td>
-                                <td class="no-wrap">{{ $order->getPriceCurrency('price') }}</td>
+                                <td class="no-wrap">@money($order->price)</td>
                                 <td>{{ $order->delivery }}</td>
                                 <td>{{ $order->status }}</td>
                                 <td class="no-wrap">{{ $order->created }}</td>

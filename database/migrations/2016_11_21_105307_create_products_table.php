@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('code', 50)->unique();
             $table->string('title', 50);
             $table->text('description')->nullable();
-            $table->decimal('price');
-            $table->decimal('price_old')->nullable();
+            $table->integer('price');
+            $table->integer('price_old')->nullable();
             $table->integer('stock');
             $table->integer('status');
             $table->timestamps();

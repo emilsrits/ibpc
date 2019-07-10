@@ -33,10 +33,11 @@ class ProductUpdateAction
 
         if ($data['submit'] === 'save') {
             $product = Product::findOrFail($id);
+            
+            $data['price'] = parseMoneyByDecimal($data['price']);
+            
             $product->update(arrayExclude($data, [
-                'category', 
-                'attr', 
-                'media'
+                'category', 'attr', 'media'
             ]));
 
             // Update product properties

@@ -108,7 +108,7 @@ Catalog
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->title }}</td>
                         <td>{{ $product->code }}</td>
-                        <td class="no-wrap">{{ $product->getPriceCurrency('current') }}</td>
+                        <td class="no-wrap">@money($product->price)</td>
                         <td>{{ $product->stock }}</td>
                         <td>{{ $product->status ? 'Enabled' : 'Disabled' }}</td>
                         <td>{{ $product->categories->first()->title }}</td>

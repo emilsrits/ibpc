@@ -46,10 +46,10 @@ Shopping Cart
                                        value="{{ $product['qty'] }}" title="qty" pattern="[0-9]*">
                             </td>
                             <td class="cart-item-price hidden-xs no-wrap">
-                                {{ $cart->getItemPrice($product['item']['id'], 1) }}
+                                @money($cart->getItemPrice($product['item']['id']))
                             </td>
                             <td class="no-wrap">
-                                {{ $cart->getItemTotalPrice($product['item']['id'], 1) }}
+                                @money($cart->getItemTotalPrice($product['item']['id']))
                             </td>
                         </tr>
                         @endif
@@ -62,7 +62,7 @@ Shopping Cart
         </div>
         <div class="cart-checkout cf">
             <div class="cart-total">
-                <strong>Total: {{ $cart->getPriceCurrency('total') }}</strong>
+                <strong>Total: @money($cart->totalPrice)</strong>
             </div>
             <button class="btn btn-checkout" type="button" title="Checkout" onclick="window.location='{{ url('/checkout') }}'">Checkout</button>
         </div>

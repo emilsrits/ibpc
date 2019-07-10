@@ -46,7 +46,7 @@
             </tr>
             <tr>
                 <td>Order date:</td>
-                <td>{{ \Carbon\Carbon::now()->toDateString() }}</td>
+                <td>{{ $order->created }}</td>
             </tr>
             <tr>
                 <td>Payment method:</td>
@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <td>Total cost incl. VAT:</td>
-                <td>{{ $order->getPriceCurrency('price') }}</td>
+                <td>@money($order->price)</td>
             </tr>
             </tbody>
         </table>

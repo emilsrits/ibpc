@@ -67,20 +67,19 @@ class ProductController extends Controller
     /**
      * Return product creation view
      *
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create(Request $request)
+    public function create()
     {
         $categories = $this->category->child()->get();
 
-        if ($request->old('category')) {
-            $category = $this->category->with('specifications.properties')->find($request->old('category'));
+        if (old('category')) {
+            $category = $this->category->with('specifications.properties')->find(old('category'));
         } else {
             $category = null;
         }
 
-        return view('admin.product.create', compact('categories', 'category', 'request'));
+        return view('admin.product.create', compact('categories', 'category'));
     }
 
     /**
@@ -123,12 +122,12 @@ class ProductController extends Controller
     /**
      * Product edit view
      *
-     * @param Request $request
      * @param string $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
+        //dd(money(parseMoneyByDecimal('42.67'))->formatByDecimal());
         $product = $this->product->with('categories.specifications.properties')->find($id);
 
         if (!$product->getCategoryId()->isEmpty()) {
@@ -137,7 +136,7 @@ class ProductController extends Controller
             $category = null;
         }
 
-        return view('admin.product.edit', compact('product', 'category', 'request'));
+        return view('admin.product.edit', compact('product', 'category'));
     }
 
     /**

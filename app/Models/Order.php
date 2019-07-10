@@ -89,22 +89,6 @@ class Order extends Model
     }
 
     /**
-     * Return price with currency symbol
-     *
-     * @param $price
-     * @return string
-     */
-    public function getPriceCurrency($price)
-    {
-        switch ($price) {
-            case 'price':
-                return $this->price . ' €';
-            case 'delivery':
-                return $this->delivery_cost . ' €';
-        }
-    }
-
-    /**
      * Get formatted order creation date
      *
      * @return string

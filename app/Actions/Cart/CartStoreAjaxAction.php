@@ -35,7 +35,7 @@ class CartStoreAjaxAction
             // Update displayed number of items in cart
             if (Session::has('cart')) {
                 $items = count(Session::get('cart')->items);
-                $html = '(' . $items . ') ' . Session::get('cart')->getPriceCurrency('total');
+                $html = '(' . $items . ') ' . money(session('cart')->totalPrice);
             } else {
                 $html = 0;
             }

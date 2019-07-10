@@ -26,12 +26,12 @@ Order
                 @if($order->delivery_cost)
                     <tr>
                         <td>Delivery cost:</td>
-                        <td>{{ $order->getPriceCurrency('delivery') }}</td>
+                        <td>@money($order->delivery_cost)</td>
                     </tr>
                 @endif
                 <tr>
                     <td>Total cost incl. VAT:</td>
-                    <td>{{ $order->getPriceCurrency('price') }}</td>
+                    <td>@money($order->price)</td>
                 </tr>
             </table>
             <div class="table-items of-x">
@@ -53,8 +53,8 @@ Order
                             <td class="no-wrap">{{ $product->title }}</td>
                             <td class="no-wrap">{{ $product->code }}</td>
                             <td>{{ $product->pivot->quantity }}</td>
-                            <td class="no-wrap">{{ $product->getOrderPriceById($order->id, $product->id, 1) }}</td>
-                            <td class="no-wrap">{{ $product->getOrderTotalPriceById($order->id, $product->id, 1) }}</td>
+                            <td class="no-wrap">@money($product->getOrderPriceById($order->id, $product->id))</td>
+                            <td class="no-wrap">@money($product->getOrderTotalPriceById($order->id, $product->id))</td>
                         </tr>
                     @endforeach
                     </tbody>

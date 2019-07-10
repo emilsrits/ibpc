@@ -92,7 +92,7 @@ Orders
                         </td>
                         <td>{{ $order->id }}</td>
                         <td class="no-wrap">{{ $order->user->full_name }}</td>
-                        <td class="no-wrap">{{ $order->getPriceCurrency('price') }}</td>
+                        <td class="no-wrap">@money($order->price)</td>
                         <td>{{ $order->status }}</td>
                         <td class="no-wrap">{{ $order->created_at }}</td>
                         <td class="no-wrap">{{ $order->updated_at }}</td>

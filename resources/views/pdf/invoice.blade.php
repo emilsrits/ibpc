@@ -112,19 +112,19 @@
             <tr>
                 <td>{{ $product->title }}</td>
                 <td>{{ $product->pivot->quantity }}</td>
-                <td style="white-space: nowrap">{{ $product->getOrderPriceById($order->id, $product->id, 0) }}</td>
-                <td style="white-space: nowrap">{{ $product->getOrderTotalPriceById($order->id, $product->id, 0) }}</td>
+                <td style="white-space: nowrap">@moneyraw($product->getOrderPriceById($order->id, $product->id))</td>
+                <td style="white-space: nowrap">@moneyraw($product->getOrderTotalPriceById($order->id, $product->id))</td>
             </tr>
         @endforeach
         @if($order->delivery_cost)
             <tr>
                 <td colspan="3">Delivery cost:</td>
-                <td>{{ $order->delivery_cost }}</td>
+                <td>@moneyraw($order->delivery_cost)</td>
             </tr>
         @endif
         <tr>
             <td colspan="3">Total, {{ config('constants.currency') }}:</td>
-            <td>{{ $order->price }}</td>
+            <td>@moneyraw($order->price)</td>
         </tr>
         </tbody>
     </table>

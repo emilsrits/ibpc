@@ -118,7 +118,7 @@ class Cart extends Model
         if (VatCalculator::shouldCollectVAT($user->country)) {
             $totalPriceWithDelivery = $this->totalPrice + $this->deliveryCost;
             $grossPrice = VatCalculator::calculate($totalPriceWithDelivery, $user->country, $user->postcode); // required for $taxValue
-            $taxValue   = VatCalculator::getTaxValue();
+            $taxValue = round(VatCalculator::getTaxValue(), 0);
 
             $this->vat = $taxValue;
         }
@@ -193,36 +193,13 @@ class Cart extends Model
     }
 
     /**
-     * Return a price with currency symbol
-     *
-     * @param string $price
-     * @return mixed
-     */
-    public function getPriceCurrency($price)
-    {
-        switch ($price) {
-            case 'total':
-                return $this->totalPrice . ' €';
-            case 'delivery':
-                return $this->deliveryCost . ' €';
-            case 'with_delivery':
-                return $this->totalPrice + $this->deliveryCost . ' €';
-            case 'vat':
-                return $this->getVat() . ' €';
-            case 'with_vat':
-                return $this->getTotalPriceWithVat() . ' €';
-        }
-    }
-
-    /**
      * Return total price with delivery and VAT
      * 
      * @return float
      */
     public function getTotalPriceWithVat()
     {
-        $total = $this->totalPrice + $this->deliveryCost + $this->vat;
-        return number_format((float)$total, 2, '.', '');
+        return $this->totalPrice + $this->deliveryCost + $this->vat;
     }
 
     /**
@@ -239,32 +216,22 @@ class Cart extends Model
      * Get total price of a product
      *
      * @param string $id
-     * @param mixed $currency
-     * @return mixed
+     * @return integer
      */
-    public function getItemTotalPrice($id, $currency = null)
+    public function getItemTotalPrice($id)
     {
-        if ($currency) {
-            return $this->items[$id]['price'] * $this->items[$id]['qty'] . ' €';
-        } else {
-            return $this->items[$id]['price'] * $this->items[$id]['qty'];
-        }
+        return $this->items[$id]['price'] * $this->items[$id]['qty'];
     }
 
     /**
      * Get price of a product
      *
      * @param string $id
-     * @param mixed $currency
-     * @return mixed
+     * @return integer
      */
-    public function getItemPrice($id, $currency = null)
+    public function getItemPrice($id)
     {
-        if ($currency) {
-            return  $this->items[$id]['price'] . ' €';
-        } else {
-            return  $this->items[$id]['price'];
-        }
+        return  $this->items[$id]['price'];
     }
 
     /**
@@ -275,7 +242,7 @@ class Cart extends Model
     public function getVat()
     {
         if ($this->vat > 0) {
-            return number_format((float)$this->vat, 2, '.', '');
+            return $this->vat;
         }
         
         return false;

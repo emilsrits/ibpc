@@ -39,12 +39,12 @@ Edit Order
                         @if($order->delivery_cost > 0)
                             <tr class="entity-attribute">
                                 <td><label for="delivery">Delivery cost</label></td>
-                                <td><span>{{ $order->getPriceCurrency('delivery') }}</span></td>
+                                <td><span>@money($order->delivery_cost)</span></td>
                             </tr>
                         @endif
                         <tr class="entity-attribute">
                             <td><label for="cost">Total cost incl. VAT:</label></td>
-                            <td><span>{{ $order->getPriceCurrency('price') }}</span></td>
+                            <td><span>@money($order->price)</span></td>
                         </tr>
                         </tbody>
                     </table>
@@ -97,8 +97,8 @@ Edit Order
                                 <td>{{ $product->title }}</td>
                                 <td>{{ $product->code }}</td>
                                 <td>{{ $product->pivot->quantity }}</td>
-                                <td class="no-wrap">{{ $product->getPriceCurrency('order', $order->id, $product->id) }}</td>
-                                <td class="no-wrap">{{ $product->getPriceCurrency('order_total', $order->id, $product->id) }}</td>
+                                <td class="no-wrap">@money($product->getOrderPriceById($order->id, $product->id))</td>
+                                <td class="no-wrap">@money($product->getOrderTotalPriceById($order->id, $product->id))</td>
                             </tr>
                         @endforeach
                         </tbody>

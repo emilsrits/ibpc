@@ -33,8 +33,8 @@
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span id="navbar-cart-items">
                                     @if (Session::has('cart'))
-                                        ({{ count(Session::get('cart')->items) }})
-                                        {{ Session::get('cart')->getPriceCurrency('total') }}
+                                        ({{ count(session('cart')->items) }})
+                                        @money(session('cart')->totalPrice)
                                     @else
                                         0
                                     @endif
