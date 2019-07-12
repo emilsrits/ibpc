@@ -28,7 +28,7 @@ class SpecificationController extends Controller
      */
     public function index()
     {
-        $specifications = $this->specification->with('properties')->paginate(20);
+        $specifications = $this->specification->paginate(20);
 
         return view('admin.specification.specifications', compact('specifications'));
     }
@@ -78,13 +78,11 @@ class SpecificationController extends Controller
     /**
      * Return specification edit view
      *
-     * @param string $id
+     * @param Specification $specification
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Specification $specification)
     {
-        $specification = $this->specification->with('properties')->findOrFail($id);
-
         return view('admin.specification.edit', compact('specification'));
     }
 
@@ -93,12 +91,12 @@ class SpecificationController extends Controller
      *
      * @param \App\Http\Requests\Specification\SpecificationUpdateRequest $request
      * @param \App\Actions\Specification\SpecificationUpdateAction $action
-     * @param string $id
+     * @param Specification $specification
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SpecificationUpdateRequest $request, SpecificationUpdateAction $action, $id)
+    public function update(SpecificationUpdateRequest $request, SpecificationUpdateAction $action, Specification $specification)
     {
-        $flash = $action->execute($request->except('_token'), $id);
+        $flash = $action->execute($request->except('_token'), $specification);
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();

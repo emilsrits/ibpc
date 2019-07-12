@@ -10,12 +10,12 @@ class PropertyStoreAction
      * Process the property store action
      *
      * @param array $data
-     * @param string $specificationId
+     * @param Specification $specification
      * @return array
      */
-    public function execute(array $data, $specificationId)
+    public function execute(array $data, $specification)
     {
-        $data['specification_id'] = $specificationId;
+        $data['specification_id'] = $specification->id;
         Property::create($data);
 
         $flash = [

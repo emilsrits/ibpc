@@ -23,11 +23,11 @@ class CategoryUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route('id');
+        $category = $this->route('category');
 
         return [
             'submit' => 'in:delete,save',
-            'title' => 'required|string|max:20|unique:categories,title,'.$id,
+            'title' => 'required|string|max:20|unique:categories,title,'.$category->id,
             'top_level' => 'required|integer|in:0,1',
             'parent_id' => 'required_if:top_level,==,0|integer|regex:/^[1-9][0-9]*$/',
             'status' => 'required|integer|in:0,1',

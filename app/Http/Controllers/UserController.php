@@ -34,7 +34,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user.users', [
-            'users' => $this->user->with('roles')->oldest('id')->paginate(20), 
+            'users' => $this->user->oldest('id')->paginate(20), 
             'request' => null
         ]);
     }
@@ -54,7 +54,7 @@ class UserController extends Controller
             $request->session()->flash($flash['type'], $flash['message']);
         }
 
-        $users = $this->user->with('roles')->filter($filters)->paginate(20);
+        $users = $this->user->filter($filters)->paginate(20);
 
         return view('admin.user.users', compact('users', 'request'));
     }
@@ -62,12 +62,11 @@ class UserController extends Controller
     /**
      * Return user edit page
      *
-     * @param string $id
+     * @param User @user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = $this->user->with('roles')->find($id);
         $roles = $this->role->all();
 
         return view('admin.user.edit', compact('user', 'roles'));
@@ -78,12 +77,12 @@ class UserController extends Controller
      *
      * @param \App\Http\Requests\User\UserUpdateRequest $request
      * @param \App\Actions\User\UserUpdateAction $action
-     * @param string $id
+     * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UserUpdateRequest $request, UserUpdateAction $action, $id)
+    public function update(UserUpdateRequest $request, UserUpdateAction $action, User $user)
     {
-        $flash = $action->execute($request->validated(), $id);
+        $flash = $action->execute($request->validated(), $user);
         $request->session()->flash($flash['type'], $flash['message']);
         
         return redirect()->back();

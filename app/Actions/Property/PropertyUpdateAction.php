@@ -10,20 +10,18 @@ class PropertyUpdateAction
      * Process the property update action
      *
      * @param array $data
-     * @param string $propertyId
+     * @param Property $property
      * @return mixed
      */
-    public function execute(array $data, $propertyId)
+    public function execute(array $data, $property)
     {
         if ($data['submit'] === 'delete') {
-            $property = new Property();
-            $property->deleteProperty($propertyId);
+            $property->deleteProperty();
 
             return;
         }
 
         if ($data['submit'] === 'save') {
-            $property = Property::find($propertyId);
             $property->update($data);
             $flash = [
                 

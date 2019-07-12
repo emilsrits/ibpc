@@ -4,7 +4,7 @@ namespace App\Http\Requests\Property;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PropertyUpdateRequest extends FormRequest
+class PropertyStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,8 @@ class PropertyUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $property = $this->route('property');
-
         return [
-            'name' => 'required|string|max:20|unique:properties,name,'.$property->id
+            'name' => 'required|string|max:20|unique:properties,name'
         ];
     }
 }

@@ -20,7 +20,7 @@ class OrderActionAction
 
             if ($status) {
                 $order = new Order();
-                $result = $order->setStatus($orderIds, $status);
+                $result = $order->setStatus($status, $orderIds);
 
                 if ($result === false) {
                     $flash = [

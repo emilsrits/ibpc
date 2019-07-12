@@ -11,13 +11,13 @@ class OrderUpdateAction
      * Process the order update action
      *
      * @param array $data
+     * @param Order $order
      * @return mixed
      */
-    public function execute(array $data, $id)
+    public function execute(array $data, $order)
     {
         // If action is to send invoice, else update order
         if ($data['submit'] === 'invoice') {
-            $order = Order::with('user')->find($id);
             $user = User::find($order->user->id);
 
             if ($order->status === config('constants.order_status.pending')) {
@@ -36,12 +36,10 @@ class OrderUpdateAction
         } 
         
         if ($data['submit'] === 'save') {
-            $order = Order::find($id);
-
             if (isset($data['status'])) {
                 $status = $data['status'];
 
-                $result = $order->setStatus($id, $status);
+                $result = $order->setStatus($status);
 
                 if ($result === false) {
                     $flash = [

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
-use App\Http\Requests\Specification\SpecificationActionRequest;
-use App\Actions\Property\PropertyActionAction;
-use App\Http\Requests\Property\PropertyUpdateRequest;
+use App\Models\Specification;
 use App\Actions\Property\PropertyStoreAction;
+use App\Actions\Property\PropertyActionAction;
 use App\Actions\Property\PropertyUpdateAction;
+use App\Http\Requests\Property\PropertyStoreRequest;
+use App\Http\Requests\Property\PropertyUpdateRequest;
+use App\Http\Requests\Specification\SpecificationActionRequest;
 
 class PropertyController extends Controller
 {
@@ -41,42 +43,40 @@ class PropertyController extends Controller
     /**
      * Return property create view
      *
-     * @param $specificationId
+     * @param Specification $specification
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create($specificationId)
+    public function create(Specification $specification)
     {
-        return view('admin.property.create', compact('specificationId'));
+        return view('admin.property.create', compact('specification'));
     }
 
     /**
      * Save property
      *
-     * @param \App\Http\Requests\Property\PropertyUpdateRequest $request
+     * @param \App\Http\Requests\Property\PropertyStoreRequest $request
      * @param \App\Actions\Property\PropertyStoreAction $action
-     * @param string $specificationId
+     * @param Specification $specification
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(PropertyUpdateRequest $request, PropertyStoreAction $action, $specificationId)
+    public function store(PropertyStoreRequest $request, PropertyStoreAction $action, Specification $specification)
     {
-        $flash = $action->execute($request->validated(), $specificationId);
+        $flash = $action->execute($request->validated(), $specification);
 
         $request->session()->flash($flash['type'], $flash['message']);
-        return redirect()->route('specification.edit', compact('specificationId'));
+        return redirect()->route('specification.edit', compact('specification'));
     }
 
     /**
      * Return property edit view
      *
-     * @param string $specificationId
-     * @param string $id
+     * @param Specification $specification
+     * @param Property $property
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($specificationId, $id)
+    public function edit(Specification $specification, Property $property)
     {
-        $property = $this->property->findOrFail($id);
-
-        return view('admin.property.edit', compact('specificationId', 'property'));
+        return view('admin.property.edit', compact('specification', 'property'));
     }
 
     /**
@@ -84,19 +84,19 @@ class PropertyController extends Controller
      *
      * @param \App\Http\Requests\Property\PropertyUpdateRequest $request
      * @param \App\Actions\Property\PropertyUpdateAction $action
-     * @param string $specificationId
-     * @param string $id
+     * @param Specification $specification
+     * @param Property $property
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PropertyUpdateRequest $request, PropertyUpdateAction $action, $specificationId, $id)
+    public function update(PropertyUpdateRequest $request, PropertyUpdateAction $action, Specification $specification, Property $property)
     {
-        $flash = $action->execute($request->all(), $id);
+        $flash = $action->execute($request->all(), $property);
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();
         }
 
         $request->session()->flash('message-success', 'Property deleted!');
-        return redirect()->route('specification.edit', compact('specificationId'));
+        return redirect()->route('specification.edit', compact('specification'));
     }
 }

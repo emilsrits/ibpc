@@ -9,11 +9,11 @@ Edit Property
     <div class="property-edit">
         <h3>#{{ $property->id . ' ' . $property->name }}</h3>
         <form id="edit-property-form" role="form" method="POST"
-              action="{{ url('/admin/property/update', ['specificationId' => $specificationId, 'id' => $property->id]) }}">
+              action="{{ url('/admin/property/update', ['specification' => $specification->id, 'id' => $property->id]) }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
-                    <a href="{{ url('/admin/specification/edit', ['specificationId' => $specificationId]) }}">
+                    <a href="{{ url('/admin/specification/edit', ['specification' => $specification->id]) }}">
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>Back
                     </a>
                 </div>

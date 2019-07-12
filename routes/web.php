@@ -61,7 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'ProductController@store',
         'as' => 'product.store'
     ]);
-    Route::get('/product/edit/{id}', [
+    Route::get('/product/edit/{product}', [
         'uses' => 'ProductController@edit',
         'as' => 'product.edit'
     ]);
@@ -69,7 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'ProductController@updateWithAjax',
         'as' => 'product.updateWithAjax'
     ]);
-    Route::post('/product/update/{id}', [
+    Route::post('/product/update/{product}', [
         'uses' => 'ProductController@update',
         'as' => 'product.update'
     ]);
@@ -93,11 +93,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'CategoryController@store',
         'as' => 'category.store'
     ]);
-    Route::get('/category/edit/{id}', [
+    Route::get('/category/edit/{category}', [
         'uses' => 'CategoryController@edit',
         'as' => 'category.edit'
     ]);
-    Route::post('/category/update/{id}', [
+    Route::post('/category/update/{category}', [
         'uses' => 'CategoryController@update',
         'as' => 'category.update'
     ]);
@@ -121,11 +121,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'SpecificationController@store',
         'as' => 'specification.store'
     ]);
-    Route::get('/specification/edit/{id}', [
+    Route::get('/specification/edit/{specification}', [
         'uses' => 'SpecificationController@edit',
         'as' => 'specification.edit'
     ]);
-    Route::post('/specification/update/{id}', [
+    Route::post('/specification/update/{specification}', [
         'uses' => 'SpecificationController@update',
         'as' => 'specification.update'
     ]);
@@ -137,19 +137,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'PropertyController@action',
         'as' => 'property.action'
     ]);
-    Route::get('/property/create/{specificationId}', [
+    Route::get('/property/create/{specification}', [
         'uses' => 'PropertyController@create',
         'as' => 'property.create'
     ]);
-    Route::post('/property/create/save/{specificationId}', [
+    Route::post('/property/create/save/{specification}', [
         'uses' => 'PropertyController@store',
         'as' => 'property.store'
     ]);
-    Route::get('/property/edit/{specificationId}/{id}', [
+    Route::get('/property/edit/{specification}/{property}', [
         'uses' => 'PropertyController@edit',
         'as' => 'property.edit'
     ]);
-    Route::post('/property/update/{specificationId}/{id}', [
+    Route::post('/property/update/{specification}/{property}', [
         'uses' => 'PropertyController@update',
         'as' => 'property.update'
     ]);
@@ -165,11 +165,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'UserController@action',
         'as' => 'user.action'
     ]);
-    Route::get('/user/edit/{id}', [
+    Route::get('/user/edit/{user}', [
         'uses' => 'UserController@edit',
         'as' => 'user.edit'
     ]);
-    Route::post('/user/update/{id}', [
+    Route::post('/user/update/{user}', [
         'uses' => 'UserController@update',
         'as' => 'user.update'
     ]);
@@ -185,11 +185,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'OrderController@action',
         'as' => 'order.action'
     ]);
-    Route::get('/order/edit/{id}', [
+    Route::get('/order/edit/{order}', [
         'uses' => 'OrderController@edit',
         'as' => 'order.edit'
     ]);
-    Route::post('/order/update/{id}', [
+    Route::post('/order/update/{order}', [
         'uses' => 'OrderController@update',
         'as' => 'order.update'
     ]);
@@ -239,7 +239,7 @@ Route::group(['prefix' => 'cart'], function () {
         'uses' => 'CartController@storeWithAjax',
         'as' => 'cart.storeWithAjax'
     ]);
-    Route::post('/add/{id}', [
+    Route::post('/add/{product}', [
         'uses' => 'CartController@store',
         'as' => 'cart.store'
     ]);

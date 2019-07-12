@@ -94,12 +94,12 @@ class OrderController extends Controller
      *
      * @param \App\Http\Requests\Order\OrderUpdateRequest $request
      * @param \App\Actions\Order\OrderUpdateAction $action
-     * @param string $id
+     * @param Order $order
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(OrderUpdateRequest $request, OrderUpdateAction $action, $id)
+    public function update(OrderUpdateRequest $request, OrderUpdateAction $action, Order $order)
     {
-        $flash = $action->execute($request->all(), $id);
+        $flash = $action->execute($request->all(), $order);
         if ($flash !== null) {
             $request->session()->flash($flash['type'], $flash['message']);
         }

@@ -10,13 +10,11 @@ class UserUpdateAction
      * Process the user update action
      *
      * @param array $data
-     * @param string $id
+     * @param User $user
      * @return array
      */
-    public function execute(array $data, $id)
+    public function execute(array $data, $user)
     {
-        $user = User::findOrFail($id);
-
         if ($data['password'] !== null && $data['password'] !== "") {
             $user->password = bcrypt($data['password']);
         }

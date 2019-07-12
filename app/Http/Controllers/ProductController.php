@@ -122,16 +122,15 @@ class ProductController extends Controller
     /**
      * Product edit view
      *
-     * @param string $id
+     * @param Product $product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //dd(money(parseMoneyByDecimal('42.67'))->formatByDecimal());
-        $product = $this->product->with('categories.specifications.properties')->find($id);
+        $product = $this->product->with('categories.specifications.properties')->find($product->id);
 
         if (!$product->getCategoryId()->isEmpty()) {
-            $category = $this->category->with('specifications.properties')->find($product->getCategoryId());
+            $category = $this->category->getCategoryWithPropertiesById($product->getCategoryId());
         } else {
             $category = null;
         }
@@ -144,12 +143,12 @@ class ProductController extends Controller
      *
      * @param ProductUpdateRequest $request
      * @param ProductUpdateAction $action
-     * @param string $id
+     * @param Product $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProductUpdateRequest $request, ProductUpdateAction $action, $id)
+    public function update(ProductUpdateRequest $request, ProductUpdateAction $action, Product $product)
     {
-        $flash = $action->execute($request->validated(), $id);
+        $flash = $action->execute($request->validated(), $product);
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();

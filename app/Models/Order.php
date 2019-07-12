@@ -9,6 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     /**
+     * The properties that are mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'status'
+    ];
+
+    /**
+     * These relationships should be auto loaded
+     *
+     * @var array
+     */
+    protected $with = [
+        'user'
+    ];
+
+    /**
      * OneToMany inverse relationship with User class
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -63,11 +81,11 @@ class Order extends Model
     /**
      * Set order status
      *
-     * @param mixed $ids
      * @param string $status
+     * @param mixed $ids
      * @return mixed
      */
-    public function setStatus($ids, $status)
+    public function setStatus($status, $ids = null)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
@@ -75,16 +93,13 @@ class Order extends Model
                 if (orderStatusFinished($order->status)) {
                     return false;
                 }
-                $order->status = $status;
-                $order->save();
+                $order->update(['status' => $status]);
             }
         } else {
-            $order = Order::findOrFail($ids);
-            if (orderStatusFinished($order->status)) {
+            if (orderStatusFinished($this->status)) {
                 return false;
             }
-            $order->status = $status;
-            $order->save();
+            $this->update(['status' => $status]);
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use App\Actions\Cart\CartStoreAction;
 use App\Actions\Cart\CartDeleteAction;
 use App\Actions\Cart\CartUpdateAction;
@@ -36,12 +37,12 @@ class CartController extends Controller
      *
      * @param CartStoreRequest $request
      * @param CartStoreAction $action
-     * @param string $id
+     * @param Product $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CartStoreRequest $request, CartStoreAction $action, $id)
+    public function store(CartStoreRequest $request, CartStoreAction $action, Product $product)
     {
-        $flash = $action->execute($request->all(), $id);
+        $flash = $action->execute($request->all(), $product);
         if ($flash != null) {
             $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->route('cart.index');

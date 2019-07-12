@@ -12,17 +12,16 @@ class CartStoreAction
      * Process the cart store action
      * 
      * @param array $data
-     * @param string $id
+     * @param Product $product
      * @return mixed
      */
-    public function execute(array $data, $id)
+    public function execute(array $data, $product)
     {
         // Create a new cart instance
         $oldCart = sessionOldCart();
         $cart = new Cart($oldCart);
 
-        $product = Product::find($id);
-        if  ($product) {
+        if ($product) {
             $qty = $data['qty'];
             // Add product to the cart
             $cart->add($product, $product->id, $qty);

@@ -47,7 +47,7 @@ class Property extends Model
      *
      * @param mixed $ids
      */
-    public function deleteProperty($ids)
+    public function deleteProperty($ids = null)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
@@ -55,8 +55,7 @@ class Property extends Model
                 $property->destroy($id);
             }
         } else {
-            $property = Property::findOrFail($ids);
-            $property->destroy($ids);
+            $this->destroy($this->id);
         }
     }
 }

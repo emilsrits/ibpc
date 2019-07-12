@@ -23,10 +23,10 @@ class SpecificationUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route('id');
+        $specification = $this->route('specification');
 
         return [
-            'slug' => 'required|string|max:20|unique:specifications,slug,'.$id,
+            'slug' => 'required|string|max:20|unique:specifications,slug,'.$specification->id,
             'name' => 'required|string|max:20'
         ];
     }

@@ -10,20 +10,18 @@ class SpecificationUpdateAction
      * Process the specification update action
      *
      * @param array $data
-     * @param string $id
+     * @param Specification $specification
      * @return mixed
      */
-    public function execute(array $data, $id)
+    public function execute(array $data, $specification)
     {
         if ($data['submit'] === 'delete') {
-            $specification = new Specification();
-            $specification->deleteSpecification($id);
+            $specification->deleteSpecification();
 
             return;
         }
 
         if ($data['submit'] === 'save') {
-            $specification = Specification::find($id);
             $specification->update($data);
             
             $flash = [

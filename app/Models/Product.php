@@ -11,6 +11,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Product extends Model
 {
+    /**
+     * The properties that are mass assignable
+     *
+     * @var array
+     */
     protected $fillable = [
         'category_id', 'code', 'title', 'description', 'price',
         'price_old', 'stock', 'status', 'created_at', 'updated_at'
@@ -106,7 +111,7 @@ class Product extends Model
      * @param mixed $ids
      * @return bool
      */
-    public function deleteProduct($ids)
+    public function deleteProduct($ids = null)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
@@ -119,12 +124,11 @@ class Product extends Model
                 return true;
             }
         } else {
-            $product = Product::findOrFail($ids);
-            if ($product->orders()->first()) {
+            if ($this->orders()->first()) {
                 return false;
             }
-            $product->deleteMedia();
-            $product->destroy($ids);
+            $this->deleteMedia();
+            $this->destroy($this->id);
             return true;
         }
     }

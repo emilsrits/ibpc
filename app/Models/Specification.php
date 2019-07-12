@@ -16,6 +16,15 @@ class Specification extends Model
     ];
 
     /**
+     * These relationships should be auto loaded
+     *
+     * @var array
+     */
+    protected $with = [
+        'properties'
+    ];
+
+    /**
      * OneToMany relationship with Property class
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -40,7 +49,7 @@ class Specification extends Model
      *
      * @param mixed $ids
      */
-    public function deleteSpecification($ids)
+    public function deleteSpecification($ids = null)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
@@ -48,8 +57,7 @@ class Specification extends Model
                 $specification->destroy($id);
             }
         } else {
-            $specification = Specification::findOrFail($ids);
-            $specification->destroy($ids);
+            $this->destroy($this->id);
         }
     }
 }

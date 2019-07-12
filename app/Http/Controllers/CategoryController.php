@@ -85,12 +85,11 @@ class CategoryController extends Controller
     /**
      * Return edit category page
      *
-     * @param string $id
+     * @param Category $category
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = $this->category->with('specifications')->findOrFail($id);
         $specifications = $this->specification->oldest('name')->get();
 
         return view('admin.category.edit', compact('category', 'specifications'));
@@ -101,12 +100,12 @@ class CategoryController extends Controller
      *
      * @param \App\Http\Requests\Category\CategoryUpdateRequest $request
      * @param \App\Actions\Category\CategoryUpdateAction $action
-     * @param string $id
+     * @param Category $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CategoryUpdateRequest $request, CategoryUpdateAction $action, $id)
+    public function update(CategoryUpdateRequest $request, CategoryUpdateAction $action, Category $category)
     {
-        $flash = $action->execute($request->all(), $id);
+        $flash = $action->execute($request->all(), $category);
         if ($flash['type'] != null) {
             $request->session()->flash($flash['type'], $flash['message']);
             return redirect()->back();

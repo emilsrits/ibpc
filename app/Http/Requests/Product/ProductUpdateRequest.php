@@ -23,13 +23,13 @@ class ProductUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route('id');
+        $product = $this->route('product');
 
         return [
             'submit' => 'required',
             'media' => 'nullable',
             'media.*' => 'mimes:jpeg,png,jpg,gif|max:2048',
-            'code' => 'required|string|unique:products,code,'.$id,
+            'code' => 'required|string|unique:products,code,'.$product->id,
             'title' => 'required|string',
             'description' => 'nullable|string',
             'price' => 'required|numeric',

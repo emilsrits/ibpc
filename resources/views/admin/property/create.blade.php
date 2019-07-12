@@ -8,11 +8,11 @@ Create Property
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="property-create">
         <h3>New Property</h3>
-        <form id="create-properties-form" role="form" method="POST" action="{{ url('/admin/property/create/save', ['id' => $specificationId]) }}">
+        <form id="create-properties-form" role="form" method="POST" action="{{ url('/admin/property/create/save', ['id' => $specification->id]) }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
-                    <a href="{{ url('/admin/specification/edit', ['id' => $specificationId]) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
+                    <a href="{{ url('/admin/specification/edit', ['id' => $specification->id]) }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
                 <button class="entity-save" type="submit" name="submit">Save</button>
             </div>
@@ -23,7 +23,7 @@ Create Property
                 <div class="content-container">
                     <table class="property-table">
                         <tbody>
-                        <input type="hidden" value="{{ $specificationId }}">
+                        <input type="hidden" value="{{ $specification->id }}">
                         <tr class="entity-attribute">
                             <td><label for="name">Name</label></td>
                             <td><input type="text" name="name" required value="{{ old('name') }}"></td>

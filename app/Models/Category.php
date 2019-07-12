@@ -16,6 +16,15 @@ class Category extends Model
     ];
 
     /**
+     * These relationships should be auto loaded
+     *
+     * @var array
+     */
+    protected $with = [
+        'specifications'
+    ];
+
+    /**
      * ManyToMany relationship with Product class
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -102,7 +111,7 @@ class Category extends Model
      * @param mixed $ids
      * @return bool
      */
-    public function deleteCategory($ids)
+    public function deleteCategory($ids = null)
     {
         if (is_array($ids)) {
             foreach ($ids as $id => $value) {
@@ -114,11 +123,10 @@ class Category extends Model
                 return true;
             }
         } else {
-            $category = Category::findOrFail($ids);
-            if ($category->products()->first()) {
+            if ($this->products()->first()) {
                 return false;
             }
-            $category->destroy($ids);
+            $this->destroy($this->id);
             return true;
         }
     }
@@ -162,6 +170,17 @@ class Category extends Model
     public function updateSpecifications(array $data)
     {
         $this->specifications()->sync(array_column($data, 'id'));
+    }
+
+    /**
+     * Get a category with specifications and properties by id
+     *
+     * @param string $id
+     * @return Category
+     */
+    public function getCategoryWithPropertiesById($id)
+    {
+        return $this->with('specifications.properties')->find($id);
     }
 
     /**

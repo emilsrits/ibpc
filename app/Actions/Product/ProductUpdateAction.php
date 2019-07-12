@@ -11,15 +11,13 @@ class ProductUpdateAction
      * Process the product update action
      * 
      * @param array $data
-     * @param string $id
+     * @param Product $product
      * @return mixed
      */
-    public function execute(array $data, $id)
+    public function execute(array $data, $product)
     {
         if ($data['submit'] === 'delete') {
-            $product = new Product();
-
-            if ($product->deleteProduct($id)) {
+            if ($product->deleteProduct()) {
                 return;
             } else {
                 $flash = [
@@ -32,8 +30,6 @@ class ProductUpdateAction
         }
 
         if ($data['submit'] === 'save') {
-            $product = Product::findOrFail($id);
-            
             $data['price'] = parseMoneyByDecimal($data['price']);
             
             $product->update(arrayExclude($data, [

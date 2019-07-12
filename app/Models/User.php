@@ -36,6 +36,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * These relationships should be auto loaded
+     *
+     * @var array
+     */
+    protected $with = [
+        'roles'
+    ];
+
+    /**
      * ManyToMany relationship with Role class
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

@@ -10,14 +10,13 @@ class CategoryUpdateAction
      * Process the category update action
      *
      * @param array $data
-     * @param string $id
+     * @param Category $category
      * @return mixed
      */
-    public function execute(array $data, $id)
+    public function execute(array $data, $category)
     {
         if ($data['submit'] === 'delete') {
-            $category = new Category();
-            if ($category->deleteCategory($id)) {
+            if ($category->deleteCategory()) {
                 return;
             } else {
                 $flash = [
@@ -30,7 +29,6 @@ class CategoryUpdateAction
         }
 
         if ($data['submit'] === 'save') {
-            $category = Category::find($id);
             $category->update($data);
 
             if (isset($data['spec'])) {
