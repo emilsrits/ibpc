@@ -196,7 +196,7 @@ class User extends Authenticatable
                 throw new \Exception('The role entered does not exist');
         }
 
-        $this->roles()->sync($assignedRoles);
+        $this->roles()->attach($assignedRoles);
     }
 
     /**
@@ -206,7 +206,11 @@ class User extends Authenticatable
      */
     public function updateRoles($roles)
     {
-        $this->roles()->sync(array_column($roles, 'id'));
+        if (count($roles) == count($roles, COUNT_RECURSIVE)) {
+            $this->roles()->sync($roles);
+        } else {
+            $this->roles()->sync(array_column($roles, 'id'));
+        }
     }
 
     /**

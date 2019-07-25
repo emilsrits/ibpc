@@ -14,8 +14,7 @@ class Cart extends Model
 
     public $items = null;
     public $totalQty = 0;
-    public $delivery = [];
-    public $deliveryCost = 0;
+    public $delivery = ['code' => null, 'cost' => null];
     public $vat = 0;
     public $totalPrice = 0;
 
@@ -29,7 +28,6 @@ class Cart extends Model
             $this->items = $oldCart->items;
             $this->totalQty = $oldCart->totalQty;
             $this->delivery = $oldCart->delivery;
-            $this->deliveryCost = $oldCart->deliveryCost;
             $this->vat = $oldCart->vat;
             $this->totalPrice = $oldCart->totalPrice;
         }
@@ -39,19 +37,18 @@ class Cart extends Model
      * Add an item to cart
      *
      * @param Product $item
-     * @param string $id
      * @param integer $qty
      */
-    public function add($item, $id, $qty)
+    public function addItem($item, $qty)
     {
         $cartItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
         if ($this->items) {
-            if (array_key_exists($id, $this->items)) {
-                $cartItem = $this->items[$id];
+            if (array_key_exists($item->id, $this->items)) {
+                $cartItem = $this->items[$item->id];
             }
         }
         $cartItem['qty'] += $qty;
-        $this->items[$id] = $cartItem;
+        $this->items[$item->id] = $cartItem;
         $this->totalQty += $qty;
         $this->totalPrice += $item->price * $qty;
     }
@@ -59,13 +56,28 @@ class Cart extends Model
     /**
      * Remove item from cart
      *
-     * @param string $id
+     * @param integer $id
      */
-    public function remove($id)
+    public function removeItem($id)
     {
         $this->totalQty -= $this->items[$id]['qty'];
         $this->totalPrice -= $this->items[$id]['price'] * $this->items[$id]['qty'];
         unset($this->items[$id]);
+    }
+
+    /**
+     * Get specific item from cart
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function getItem($id)
+    {
+        if (array_key_exists($id, $this->items)) {
+            return $this->items[$id];
+        }
+
+        return null;
     }
 
     /**
@@ -116,7 +128,7 @@ class Cart extends Model
     {
         $user = Auth::user();
         if (VatCalculator::shouldCollectVAT($user->country)) {
-            $totalPriceWithDelivery = $this->totalPrice + $this->deliveryCost;
+            $totalPriceWithDelivery = $this->totalPrice + $this->delivery['cost'];
             $grossPrice = VatCalculator::calculate($totalPriceWithDelivery, $user->country, $user->postcode); // required for $taxValue
             $taxValue = round(VatCalculator::getTaxValue(), 0);
 
@@ -162,7 +174,6 @@ class Cart extends Model
                 $this->delivery['cost'] = config('constants.delivery_cost.address');
                 break;
         }
-        $this->deliveryCost = $this->delivery['cost'];
 
         return $this->delivery;
     }
@@ -199,7 +210,7 @@ class Cart extends Model
      */
     public function getTotalPriceWithVat()
     {
-        return $this->totalPrice + $this->deliveryCost + $this->vat;
+        return $this->totalPrice + $this->delivery['cost'] + $this->vat;
     }
 
     /**
@@ -209,7 +220,7 @@ class Cart extends Model
      */
     public function getTotalPriceWithDelivery()
     {
-        return $this->totalPrice + $this->deliveryCost;
+        return $this->totalPrice + $this->delivery['cost'];
     }
 
     /**
@@ -246,5 +257,25 @@ class Cart extends Model
         }
         
         return false;
+    }
+
+    /**
+     * Accessor for cart delivery cost
+     *
+     * @return string
+     */
+    public function getDeliveryCostAttribute()
+    {
+        return $this->delivery['cost'];
+    }
+
+    /**
+     * Accessor for cart delivery code
+     *
+     * @return string
+     */
+    public function getDeliveryCodeAttribute()
+    {
+        return $this->delivery['code'];
     }
 }

@@ -22,7 +22,7 @@ class StoreTest extends TestCase
     /** @test */
     public function store_shows_products()
     {
-        $product = $this->createProduct([
+        $product = $this->createProductWithCategory([
             'title' => 'Example Product Title',
         ]);
 
@@ -33,7 +33,7 @@ class StoreTest extends TestCase
     /** @test */
     public function store_paginates_products()
     {
-        $this->createProduct([], 50);
+        $this->createProductWithCategory([], 50);
 
         $response = $this->get('/');
         $response->assertSee('?page=2');
@@ -42,10 +42,10 @@ class StoreTest extends TestCase
     /** @test */
     public function store_can_search_products()
     {
-        $this->createProduct([
+        $this->createProductWithCategory([
             'title' => 'Covfefe',
         ]);
-        $this->createProduct([
+        $this->createProductWithCategory([
             'title' => 'Is Fefe product',
         ]);
 
@@ -58,25 +58,25 @@ class StoreTest extends TestCase
     /** @test */
     public function store_shows_categories()
     {
-        $this->createCategory([
+        $parent = $this->createCategory([
             'title' => 'Category Parent',
         ]);
-        $this->createCategory([
+        $child = $this->createCategory([
             'title' => 'Category Child',
             'top_level' => 0,
-            'parent_id' => 1,
+            'parent_id' => $parent->id,
         ]);
 
         $response = $this->get('/');
         $response->assertSessionHasNoErrors();
-        $response->assertSee('Category Parent');
-        $response->assertSee('Category Child');
+        $response->assertSee($parent->title);
+        $response->assertSee($child->title);
     }
 
     /** @test*/
     public function store_shows_single_product()
     {
-        $product = $this->createProduct([
+        $product = $this->createProductWithCategory([
             'title' => 'Test Product 123',
         ]);
 

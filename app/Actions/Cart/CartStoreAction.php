@@ -24,7 +24,7 @@ class CartStoreAction
         if ($product) {
             $qty = $data['qty'];
             // Add product to the cart
-            $cart->add($product, $product->id, $qty);
+            $cart->addItem($product, $qty);
 
             // Add the new cart to session
             Session::put('cart', $cart);

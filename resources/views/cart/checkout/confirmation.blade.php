@@ -22,8 +22,8 @@ Checkout Confirmation
                 <tr class="checkout-cart-item">
                     @if(Session::has('delivery'))
                         @if($cart->delivery)
-                            <td>{{ 'Delivery to ' . $cart->delivery['code'] }}</td>
-                            <td>@money($cart->deliveryCost)</td>
+                            <td>{{ 'Delivery to ' . $cart->delivery_code }}</td>
+                            <td>@money($cart->delivery_cost)</td>
                         @endif
                     @endif
                 </tr>

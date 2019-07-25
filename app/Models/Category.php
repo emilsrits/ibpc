@@ -225,6 +225,11 @@ class Category extends Model
         }
     }
 
+    /**
+     * Mutator for category title attribute
+     *
+     * @param string $title
+     */
     public function setTitleAttribute($title)
     {
         $this->attributes['slug'] = str_slug($title);

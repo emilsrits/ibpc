@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Category::class, function (Faker $faker) {
-    $title = trim(substr($faker->unique()->sentence(rand(1, 4)), 0, 50));
+    $title = trim(substr($faker->unique()->sentence(rand(1, 4)), 0, 50), '.');
     $slug = str_slug($title);
 
     return [

@@ -27,7 +27,7 @@ class CartStoreAjaxAction
             $cart = new Cart($oldCart);
 
             // Add product to the cart
-            $cart->add($product, $product->id, $qty);
+            $cart->addItem($product, $qty);
 
             // Add the new cart to session
             Session::put('cart', $cart);

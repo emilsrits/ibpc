@@ -12,6 +12,7 @@ class AuthTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        
         $this->artisan('db:seed', ['--class' => 'RolesTableSeeder']);
     }
 

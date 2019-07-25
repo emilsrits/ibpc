@@ -111,7 +111,7 @@ Catalog
                         <td class="no-wrap">@money($product->price)</td>
                         <td>{{ $product->stock }}</td>
                         <td>{{ $product->status ? 'Enabled' : 'Disabled' }}</td>
-                        <td>{{ $product->categories->first()->title }}</td>
+                        <td>{{ $product->category_title }}</td>
                         <td class="no-wrap">{{ $product->created_at }}</td>
                         <td class="no-wrap">{{ $product->updated_at }}</td>
                         <td>

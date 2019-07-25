@@ -20,7 +20,7 @@ class CartDeleteAction
         $cart = new Cart($oldCart);
 
         if ($cart->items[$productId]) {
-            $cart->remove($productId);
+            $cart->removeItem($productId);
 
             Session::put('cart', $cart);
 

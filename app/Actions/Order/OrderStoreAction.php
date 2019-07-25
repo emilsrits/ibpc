@@ -32,7 +32,7 @@ class OrderStoreAction
         $order->user_id = $user->id;
         $order->price = $cart->getTotalPriceWithVat();
         $order->delivery = session('delivery');
-        $order->delivery_cost = $cart->deliveryCost;
+        $order->delivery_cost = $cart->delivery['cost'];
         $order->status = config('constants.order_status.pending');
 
         // Check for item stock

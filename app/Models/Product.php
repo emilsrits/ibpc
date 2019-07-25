@@ -408,6 +408,17 @@ class Product extends Model
     }
 
     /**
+     * Get product category title attribute
+     *
+     * @return mixed
+     */
+    public function getCategoryTitleAttribute()
+    {
+        $category = $this->categories()->first();
+        return ($category) ? $category->title : null;
+    }
+
+    /**
      * Get product price from a order
      *
      * @param $orderId
@@ -453,6 +464,11 @@ class Product extends Model
         return $price;
     }
 
+    /**
+     * Mutator for price attribute
+     *
+     * @param string $price
+     */
     public function setPriceAttribute($price)
     {
         if ($price !== $this->price_old) {
