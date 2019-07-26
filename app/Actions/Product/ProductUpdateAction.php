@@ -33,12 +33,12 @@ class ProductUpdateAction
             $data['price'] = parseMoneyByDecimal($data['price']);
             
             $product->update(arrayExclude($data, [
-                'category', 'attr', 'media'
+                'category', 'properties', 'media'
             ]));
 
             // Update product properties
-            if (isset($data['attr'])) {
-                $product->updateProperties($data['attr']);
+            if (isset($data['properties'])) {
+                $product->updateProperties($data['properties']);
             }
 
             // Update product media

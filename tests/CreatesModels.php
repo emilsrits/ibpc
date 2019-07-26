@@ -5,6 +5,7 @@ namespace Tests;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Property;
 use App\Models\Specification;
 
 trait CreatesModels
@@ -14,7 +15,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return User
+     * @return mixed
      */
     protected function makeUserWithNoRole(array $attributes = [], $count = 1)
     {
@@ -29,7 +30,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return User
+     * @return mixed
      */
     protected function createUser(array $attributes = [], $count = 1)
     {
@@ -44,7 +45,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return User
+     * @return mixed
      */
     protected function createAdmin(array $attributes = [], $count = 1)
     {
@@ -59,7 +60,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return User
+     * @return mixed
      */
     protected function makeUser(array $attributes = [], $count = 1)
     {
@@ -74,7 +75,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return User
+     * @return mixed
      */
     protected function makeAdmin(array $attributes = [], $count = 1)
     {
@@ -89,7 +90,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return Category
+     * @return mixed
      */
     protected function createCategory(array $attributes = [], $count = 1)
     {
@@ -105,7 +106,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return Product
+     * @return mixed
      */
     protected function createProduct(array $attributes = [], $count = 1)
     {
@@ -121,7 +122,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return Product
+     * @return mixed
      */
     protected function createProductWithCategory(array $attributes = [], $count = 1)
     {
@@ -137,7 +138,7 @@ trait CreatesModels
      *
      * @param array $attributes
      * @param integer $count
-     * @return Specification
+     * @return mixed
      */
     protected function createSpecification(array $attributes = [], $count = 1)
     {
@@ -146,5 +147,21 @@ trait CreatesModels
         }
 
         return factory(Specification::class)->create(array_merge([], $attributes));
+    }
+
+    /**
+     * Create property
+     *
+     * @param array $attributes
+     * @param integer $count
+     * @return mixed
+     */
+    protected function createProperty(array $attributes = [], $count = 1)
+    {
+        if ($count > 1) {
+            return factory(Property::class, $count)->create(array_merge([], $attributes));
+        }
+
+        return factory(Property::class)->create(array_merge([], $attributes));
     }
 }

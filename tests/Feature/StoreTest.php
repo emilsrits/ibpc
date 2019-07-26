@@ -60,9 +60,11 @@ class StoreTest extends TestCase
     {
         $parent = $this->createCategory([
             'title' => 'Category Parent',
+            'slug' => 'category-parent',
         ]);
         $child = $this->createCategory([
             'title' => 'Category Child',
+            'slug' => 'category-child',
             'top_level' => 0,
             'parent_id' => $parent->id,
         ]);

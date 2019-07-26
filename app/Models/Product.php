@@ -140,8 +140,8 @@ class Product extends Model
      */
     public function setProperties(array $data)
     {
-        $arr = $this->collectProperties($data);
-        $this->properties()->attach(intermediateSyncArray($arr));
+        $array = $this->collectProperties($data);
+        $this->properties()->attach(intermediateSyncArray($array));
     }
 
     /**
@@ -151,8 +151,8 @@ class Product extends Model
      */
     public function updateProperties(array $data)
     {
-        $arr = $this->collectProperties($data);
-        $this->properties()->sync(intermediateSyncArray($arr));
+        $array = $this->collectProperties($data);
+        $this->properties()->sync(intermediateSyncArray($array));
     }
 
     /**
@@ -163,16 +163,16 @@ class Product extends Model
      */
     private function collectProperties(array $data)
     {
-        $arr = [];
+        $array = [];
         foreach ($data as $key => $properties) {
             foreach ($properties as $property => $value) {
                 if (!ctype_space($value) && !$value == "") {
-                    array_push($arr, [$property => $value]);
+                    array_push($array, [$property => $value]);
                 }
             }
         }
 
-        return $arr;
+        return $array;
     }
 
     /**

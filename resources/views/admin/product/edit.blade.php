@@ -108,11 +108,11 @@ Edit Product
                                     @endif
                                     @foreach($specification->properties as $property)
                                         <tr class="entity-attribute">
-                                            <td><label for="{{ 'attr[' . $specification->id . '][' . $property->id . ']' }}">{{ $property->name }}</label></td>
+                                            <td><label for="{{ 'properties[' . $specification->id . '][' . $property->id . ']' }}">{{ $property->name }}</label></td>
                                             <td>
-                                                <input type="text" name="{{ 'attr[' . $specification->id . '][' . $property->id . ']' }}"
-                                                    value="{{ is_array(old('attr.'.$specification->id)) 
-                                                        ? old('attr.'.$specification->id.'.'.$property->id.'') 
+                                                <input type="text" name="{{ 'properties[' . $specification->id . '][' . $property->id . ']' }}"
+                                                    value="{{ is_array(old('properties.'.$specification->id)) 
+                                                        ? old('properties.'.$specification->id.'.'.$property->id.'') 
                                                         : $product->getPropertyById($property->id) }}">
                                             </td>
                                         </tr>

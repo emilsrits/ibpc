@@ -65,4 +65,14 @@ class SpecificationTest extends TestCase
 
         $this->assertTrue($deleted);
     }
+
+    /** @test */
+    public function it_can_have_properties()
+    {
+        $this->createProperty([
+            'specification_id' => $this->specification->id
+        ]);
+
+        $this->assertEquals(1, $this->specification->properties->count());
+    }
 }

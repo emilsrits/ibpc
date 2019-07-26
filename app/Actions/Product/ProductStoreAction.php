@@ -18,13 +18,13 @@ class ProductStoreAction
         $data['price'] = parseMoneyByDecimal($data['price']);
 
         $product = Product::create(arrayExclude($data, [
-            'category', 'attr', 'media'
+            'category', 'properties', 'media'
         ]));
 
         // Attach category and its properties to the product
         $product->categories()->attach(['category_id' => $data['category']]);
-        if (isset($data['attr'])) {
-            $product->setProperties($data['attr']);
+        if (isset($data['properties'])) {
+            $product->setProperties($data['properties']);
         }
 
         // Store product media files

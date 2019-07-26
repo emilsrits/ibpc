@@ -33,7 +33,7 @@ class ProductStoreRequest extends FormRequest
             'price' => 'required|numeric',
             'stock' => 'required|integer|regex:/^[0-9][0-9]*$/',
             'status' => 'required|integer|in:0,1',
-            'attr' => 'nullable'
+            'properties' => 'nullable'
         ];
     }
 }

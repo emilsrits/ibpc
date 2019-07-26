@@ -71,4 +71,18 @@ class CategoryTest extends TestCase
 
         $this->assertTrue($deleted);
     }
+
+    /** @test */
+    public function it_can_attach_and_detach_specifications()
+    {
+        $specification = $this->createSpecification();
+
+        $this->category->specifications()->attach($specification);
+
+        $this->assertEquals(1, $this->category->specifications->count());
+
+        $this->category->specifications()->detach($specification);
+        
+        $this->assertEquals(null, $this->category->specifications()->first());
+    }
 }
