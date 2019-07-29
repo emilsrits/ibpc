@@ -39,9 +39,9 @@ class OrderUpdateAction
             if (isset($data['status'])) {
                 $status = $data['status'];
 
-                $result = $order->setStatus($status);
+                $status = $order->setStatus($status);
 
-                if ($result === false) {
+                if ($status === false) {
                     $flash = [
                         'type' => 'message-danger',
                         'message' => 'Can not change status of a finished order!'

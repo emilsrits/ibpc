@@ -46,10 +46,18 @@ class ProductUpdateAction
             if ($files) {
                 foreach ($files as $file) {
                     $media = new Media();
-                    $media->type = $file->guessClientExtension();
-                    $filePath = $media->storeMedia($file, $product);
-                    $media->path = $filePath;
-                    $product->media()->save($media);
+                    $uploaded = $media->storeMedia($file, $product);
+
+                    if ($uploaded) {
+                        $product->media()->save($media);
+                    } else {
+                        $flash = [
+                            'type' => 'message-info',
+                            'message' => 'Maximum media amount for product exceeded!'
+                        ];
+
+                        return $flash;
+                    }
                 }
             }
 

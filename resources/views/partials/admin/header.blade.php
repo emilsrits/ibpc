@@ -4,7 +4,6 @@
             <div class="container-fluid">
                 <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -12,14 +11,12 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('media/logo.png') }}" alt="IBPC">
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side of Navbar -->
                     <ul class="nav navbar-nav admin-sections">
                         <li><a href="{{ url('/admin') }}">Dashboard</a></li>
                         <li class="dropdown">
@@ -39,7 +36,6 @@
                             <a href="{{ url('/admin/users') }}">Users</a>
                         </li>
                     </ul>
-                    <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -49,9 +45,8 @@
                                 <li><a href="{{ url('/user/account') }}">Account</a></li>
                                 <li><a href="{{ url('/admin') }}">Admin Panel</a></li>
                                 <li role="separator" class="divider"></li>
-                                <!-- Authentication Links -->
                                 <li>
-                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a id="sign-out" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out
                                     </a>
                                 </li>
@@ -61,8 +56,8 @@
                             </ul>
                         </li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </div>
     </nav>
 </header>

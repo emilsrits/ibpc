@@ -3,13 +3,11 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
-    static $password;
-    
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('password'),
+        'password' => bcrypt('password'),
         'status' => '1',
     ];
 });

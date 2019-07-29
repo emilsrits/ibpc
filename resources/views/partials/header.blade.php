@@ -3,21 +3,19 @@
         <div class="container-inner">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- Branding Image -->
+
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('media/logo.png') }}" alt="IBPC">
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
                     <ul id="product-search" class="nav navbar-nav">
                        <li class="product-search-container">
                            <form id="product-search-form" role="form" method="GET" action="{{ url('/search/') }}">
@@ -26,7 +24,6 @@
                            </form>
                        </li>
                     </ul>
-                    <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="{{ url('/cart') }}">
@@ -59,13 +56,12 @@
                                     @endif
                                     <li role="separator" class="divider"></li>
                                 @endif
-                            <!-- Authentication Links -->
                                 @if (Auth::guest())
                                     <li><a href="{{ url('/login') }}"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a></li>
                                     <li><a href="{{ url('/register') }}"><i class="fa fa-pencil-square" aria-hidden="true"></i> Register</a></li>
                                 @else
                                     <li>
-                                        <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <a id="sign-out" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out
                                         </a>
                                     </li>
@@ -76,8 +72,8 @@
                             </ul>
                         </li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </div>
     </nav>
 </header>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,16 +43,27 @@ class Media extends Model
      *
      * @param UploadedFile $file
      * @param Product $product
-     * @return string
+     * @return bool
      */
     public function storeMedia(UploadedFile $file, Product $product)
     {
-        $fileExt =  $file->guessClientExtension();
-        $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $categoryId = $product->categories->first()->id;
-        $generatedName = $product->code . '-' . $fileName . str_random(4) . '.' . $fileExt;
-        $file->storeAs(self::STORAGE_SAVE_PRODUCT_MEDIA_PATH . $categoryId . '/', $generatedName);
+        try {
+            if ($product->media()->count() >= $product::MAX_MEDIA_COUNT) {
+                return false;
+            }
 
-        return self::STORAGE_ACCESS_PRODUCT_MEDIA_PATH . $categoryId . '/' . $generatedName;
+            $fileExt =  $file->guessClientExtension();
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $categoryId = $product->categories->first()->id;
+            $generatedName = $product->code . '-' . $fileName . str_random(4) . '.' . $fileExt;
+            $file->storeAs(self::STORAGE_SAVE_PRODUCT_MEDIA_PATH . $categoryId . '/', $generatedName);
+
+            $this->attributes['type'] = $fileExt;
+            $this->attributes['path'] = self::STORAGE_ACCESS_PRODUCT_MEDIA_PATH . $categoryId . '/' . $generatedName;
+        } catch (Exception $exception) {
+            throw new Exception('Media could not be added - ' . $exception->getMessage());
+        }
+
+        return true;
     }
 }

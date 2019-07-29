@@ -5,7 +5,6 @@ namespace App\Actions\Order;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class OrderStoreAction
 {
@@ -18,6 +17,7 @@ class OrderStoreAction
     public function execute()
     {
         $user = Auth::user();
+        
         if (!$user->canMakeOrder()) {
             $flash = [
                 'type' => 'message-warning',
@@ -29,60 +29,17 @@ class OrderStoreAction
 
         $cart = session('cart');
         $order = new Order();
-        $order->user_id = $user->id;
-        $order->price = $cart->getTotalPriceWithVat();
-        $order->delivery = session('delivery');
-        $order->delivery_cost = $cart->delivery['cost'];
-        $order->status = config('constants.order_status.pending');
 
-        // Check for item stock
-        foreach ($cart->items as $item) {
-            $productId = $item['item']['id'];
+        $order->setUpOrder($cart, $user->id);
+        $attached = $order->addItems($cart->items, $user->id);
 
-            if ($productId) {
-                $product = Product::find($productId);
+        if ($attached === false) {
+            $flash = [
+                'type' => 'message-danger',
+                'message' => 'Not enough of products in stock!'
+            ];
 
-                if (!$product->checkStock(-1 * abs($item['qty']))) {
-                    $flash = [
-                        'type' => 'message-danger',
-                        'message' => 'Not enough of product ' . $product->title . ' in stock!'
-                    ];
-
-                    return $flash;
-                }
-            }
-        }
-
-        $order->save();
-
-        // Attach items to order and update their stock
-        foreach ($cart->items as $item) {
-            $productId = $item['item']['id'];
-            
-            if ($productId) {
-                $order->products()->attach([
-                    'order_id' => [
-                        'order_id' => $order->id,
-                        'user_id' => $user->id,
-                        'product_id' => $productId,
-                        'quantity' => $item['qty'],
-                        'price' => $item['price']
-                    ]
-                ]);
-
-                $product = Product::find($productId);
-
-                if (!$product->updateStock(-1 * abs($item['qty']))) {
-                    $flash = [
-                        'type' => 'message-danger',
-                        'message' => 'Not enough of product ' . $product->title . ' in stock!'
-                    ];
-                    $order->status = config('constants.order_status.canceled');
-                    $order->save();
-
-                    return $flash;
-                }
-            }
+            return $flash;
         }
 
         $order->status = config('constants.order_status.invoiced');

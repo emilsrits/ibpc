@@ -79,6 +79,64 @@ class Order extends Model
     }
 
     /**
+     * Set up an order
+     *
+     * @param Cart $cart
+     * @param string|integer $userId
+     */
+    public function setUpOrder(Cart $cart, $userId)
+    {
+        try {
+            $this->user_id = $userId;
+            $this->price = $cart->getTotalPriceWithVat();
+            $this->delivery = $cart->delivery['code'];
+            $this->delivery_cost = $cart->delivery['cost'];
+            $this->status = config('constants.order_status.pending');
+            $this->save();
+        } catch (Exception $exception) {
+            throw new Exception('Order could not be set up - ' . $exception->getMessage());
+        }
+    }
+
+    /**
+     * Attach items to order
+     *
+     * @param array $items
+     * @param string|integer $userId
+     * @return bool
+     */
+    public function addItems(array $items, $userId)
+    {
+        foreach ($items as $item) {
+            $productId = $item['item']['id'];
+            
+            if ($productId) {
+                $this->products()->attach([
+                    'order_id' => [
+                        'order_id' => $this->id,
+                        'user_id' => $userId,
+                        'product_id' => $productId,
+                        'quantity' => $item['qty'],
+                        'price' => $item['price']
+                    ]
+                ]);
+
+                $product = Product::find($productId);
+
+                if (!$product->updateStock(-1 * abs($item['qty']))) {
+
+                    $this->status = config('constants.order_status.canceled');
+                    $this->save();
+
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Set order status
      *
      * @param string $status

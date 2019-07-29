@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Product extends Model
 {
+    const MAX_MEDIA_COUNT = 6;
+
     /**
      * The properties that are mass assignable
      *
