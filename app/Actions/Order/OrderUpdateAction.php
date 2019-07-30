@@ -4,6 +4,7 @@ namespace App\Actions\Order;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Events\InvoiceResent;
 
 class OrderUpdateAction
 {
@@ -20,12 +21,7 @@ class OrderUpdateAction
         if ($data['submit'] === 'invoice') {
             $user = User::find($order->user->id);
 
-            if ($order->status === config('constants.order_status.pending')) {
-                $order->status = config('constants.order_status.invoiced');
-            }
-            $user->invoice($user, $order);
-
-            $order->save();
+            event(new InvoiceResent($order, $user));
 
             $flash = [
                 'type' => 'message-success',
@@ -39,9 +35,9 @@ class OrderUpdateAction
             if (isset($data['status'])) {
                 $status = $data['status'];
 
-                $status = $order->setStatus($status);
+                $statusSet = $order->setStatus($status);
 
-                if ($status === false) {
+                if ($statusSet === false) {
                     $flash = [
                         'type' => 'message-danger',
                         'message' => 'Can not change status of a finished order!'

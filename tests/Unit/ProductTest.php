@@ -3,9 +3,10 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Product;
+use App\Filters\ProductFilter;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductTest extends TestCase
 {
@@ -119,5 +120,54 @@ class ProductTest extends TestCase
 
         $this->assertEquals(1, $this->product->properties->count());
         $this->assertEquals($value, $this->product->properties()->first()->pivot->value);
+    }
+
+    /** @test */
+    public function it_can_filter_by_title()
+    {
+        $this->createProduct([
+            'title' => 'Random Title'
+        ]);
+
+        $request = Request::create('/catalog', 'POST', [
+            'title' => 'random'
+        ]);
+        $filter = new ProductFilter($request);
+        $products = Product::filter($filter)->get();
+
+        $this->assertEquals(true, count($products) >= 1);
+    }
+
+    /** @test */
+    public function it_can_filter_by_code()
+    {
+        $this->createProduct([
+            'code' => 'RANDOM-CODE'
+        ]);
+
+        $request = Request::create('/catalog', 'POST', [
+            'code' => 'code'
+        ]);
+        $filter = new ProductFilter($request);
+        $products = Product::filter($filter)->get();
+
+        $this->assertEquals(true, count($products) >= 1);
+    }
+
+    /** @test */
+    public function it_can_filter_by_category()
+    {
+        $product = $this->createProduct();
+        $category = $this->createCategory();
+        
+        $product->categories()->attach($category);
+
+        $request = Request::create('/catalog', 'POST', [
+            'category' => $category->id
+        ]);
+        $filter = new ProductFilter($request);
+        $products = Product::filter($filter)->get();
+
+        $this->assertEquals(true, count($products) >= 1);
     }
 }

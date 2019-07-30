@@ -1,6 +1,11 @@
 <?php
 
 return [
+    // App name
+    'app' => [
+        'name' => env('APP_NAME')
+    ],
+
     // Admin seed
     'admin' => [
         'email' => env('ADMIN_EMAIL'),

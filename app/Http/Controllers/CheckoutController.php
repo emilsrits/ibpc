@@ -16,6 +16,7 @@ class CheckoutController extends Controller
     {
         $user = Auth::user();
         $cart = session('cart');
+        $cart->setVat();
 
         return view('cart.checkout.index', compact('user', 'cart'));
     }

@@ -152,12 +152,16 @@ class Order extends Model
                     return false;
                 }
                 $order->update(['status' => $status]);
+                
+                return true;
             }
         } else {
             if (orderStatusFinished($this->status)) {
                 return false;
             }
             $this->update(['status' => $status]);
+
+            return true;
         }
     }
 

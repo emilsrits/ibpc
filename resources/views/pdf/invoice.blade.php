@@ -46,7 +46,7 @@
 
 @section('content')
 <div id="invoice">
-    <img src="{{ asset('/media/logo.png') }}" alt="logo">
+    <h2>{{ config('constants.app.name') }}</h2>
     <h4>Invoice #{{ $order->id }}</h4>
     <p>{{ \Carbon\Carbon::now()->toDateString() }}</p>
     <hr>

@@ -2,11 +2,7 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use App\Filters\QueryFilter;
-use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -94,31 +90,6 @@ class User extends Authenticatable
             $user = User::findOrFail($ids);
             $user->status = $status;
             $user->save();
-        }
-    }
-
-    /**
-     * Create invoice file and send email to user about the order
-     *
-     * @param \Illuminate\Support\Facades\Auth $user
-     * @param \App\Models\Order $order
-     */
-    public function invoice($user, $order)
-    {
-        // Generate PDF invoice file
-        $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
-
-        // Send mail with order info and attached invoice
-        Mail::send('emails.invoice', ['user' => $user, 'order' => $order], function($message) use($pdf, $user, $order)
-        {
-            $message->to($user->email)->subject('Invoice for order #' . $order->id);
-            $message->attachData($pdf->output(), $order->id .'-invoice.pdf');
-        });
-
-        // Save copy of invoice locally
-        if (config('constants.invoice_storage')) {
-            $now = Carbon::now();
-            Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice-' . str_random(2) . '.pdf', $pdf->output());
         }
     }
 

@@ -3,8 +3,8 @@
 namespace App\Actions\Order;
 
 use App\Models\Order;
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use App\Events\OrderCreated;
 
 class OrderStoreAction
 {
@@ -42,10 +42,7 @@ class OrderStoreAction
             return $flash;
         }
 
-        $order->status = config('constants.order_status.invoiced');
-        $user->invoice($user, $order);
-
-        $order->save();
+        event(new OrderCreated($order, $user));
 
         $cart->deleteCart();
 

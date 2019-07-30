@@ -9,6 +9,11 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => bcrypt('password'),
         'status' => '1',
+        'phone' => $faker->phoneNumber,
+        'country' => $faker->countryCode,
+        'city' => $faker->city,
+        'address' => $faker->address,
+        'postcode' => $faker->postcode,
     ];
 });
 

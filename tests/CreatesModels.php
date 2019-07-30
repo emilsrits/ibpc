@@ -2,7 +2,9 @@
 
 namespace Tests;
 
+use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Property;
@@ -163,5 +165,31 @@ trait CreatesModels
         }
 
         return factory(Property::class)->create(array_merge([], $attributes));
+    }
+
+    /**
+     * Create order
+     *
+     * @return Order
+     */
+    protected function createOrder($user = null, $product = null)
+    {
+        if ($user === null) {
+            $user = $this->createUser();
+        }
+
+        if ($product === null) {
+            $product = $this->createProductWithCategory();
+        }
+
+        $cart = new Cart();
+        $order = new Order();
+
+        $cart->addItem($product, 1);
+        $cart->addDelivery(Cart::DELIVERY_ADDRESS);
+        $order->setUpOrder($cart, $user->id);
+        $order->addItems($cart->items, $user->id);
+
+        return $order;
     }
 }
