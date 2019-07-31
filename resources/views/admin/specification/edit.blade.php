@@ -80,7 +80,7 @@ Edit Property Group
                                 <td>{{ $property->created_at }}</td>
                                 <td>{{ $property->updated_at }}</td>
                                 <td>
-                                    <a href="{{ url('/admin/property/edit', ['specificationId' => $specification->id, 'id' => $property->id]) }}">
+                                    <a href="{{ url('/admin/property/edit', ['id' => $property->id]) }}">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
                                 </td>

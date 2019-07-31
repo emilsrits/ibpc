@@ -4,7 +4,7 @@ namespace App\Http\Requests\Cart;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CartDeleteRequest extends FormRequest
+class CartDeleteAsyncRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

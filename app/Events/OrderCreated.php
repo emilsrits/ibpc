@@ -11,8 +11,14 @@ class OrderCreated
 {
     use Dispatchable, SerializesModels;
 
+    /**
+     * @var Order
+     */
     public $order;
     
+    /**
+     * @var User
+     */
     public $user;
 
     /**

@@ -5,22 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Specification;
 use App\Models\Category;
 use App\Http\Requests\Category\CategoryActionRequest;
-use App\Actions\Category\CategoryActionAction;
 use App\Http\Requests\Category\CategoryStoreRequest;
-use App\Actions\Category\CategoryStoreAction;
 use App\Http\Requests\Category\CategoryUpdateRequest;
-use App\Actions\Category\CategoryUpdateAction;
+use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
     /**
      * CategoryController constructor
      *
+     * @param CategoryService $categoryService
      * @param Category $category
      * @param Specification $specification
      */
-    public function __construct(Category $category, Specification $specification)
+    public function __construct(CategoryService $categoryService, Category $category, Specification $specification)
     {
+        $this->categoryService = $categoryService;
         $this->category = $category;
         $this->specification = $specification;
     }
@@ -41,14 +41,13 @@ class CategoryController extends Controller
      * Categories mass action
      *
      * @param \App\Http\Requests\Category\CategoryActionRequest $request
-     * @param \App\Actions\Category\CategoryActionAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function action(CategoryActionRequest $request, CategoryActionAction $action)
+    public function action(CategoryActionRequest $request)
     {
-        $flash = $action->execute($request->all());
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->categoryService->action($request->validated());
+        if ($action) {
+            $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
             return redirect()->back();
         }
 
@@ -71,14 +70,13 @@ class CategoryController extends Controller
      * Save a category
      *
      * @param \App\Http\Requests\Category\CategoryStoreRequest $request
-     * @param \App\Actions\Category\CategoryStoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CategoryStoreRequest $request, CategoryStoreAction $action)
+    public function store(CategoryStoreRequest $request)
     {
-        $flash = $action->execute($request->validated());
+        $this->categoryService->store($request->validated());
 
-        $request->session()->flash($flash['type'], $flash['message']);
+        $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
         return redirect()->route('category.index');
     }
 
@@ -99,19 +97,18 @@ class CategoryController extends Controller
      * Update category
      *
      * @param \App\Http\Requests\Category\CategoryUpdateRequest $request
-     * @param \App\Actions\Category\CategoryUpdateAction $action
-     * @param Category $id
+     * @param Category $category
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CategoryUpdateRequest $request, CategoryUpdateAction $action, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        $flash = $action->execute($request->all(), $category);
-        if ($flash['type'] != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->categoryService->update($request->except('_token'), $category);
+        if ($action) {
+            $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-success', 'Category deleted!');
+        $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
         return redirect()->route('category.index');
     }
 }

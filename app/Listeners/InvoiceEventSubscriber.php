@@ -27,9 +27,7 @@ class InvoiceEventSubscriber
      * @param $event
      */
     public function onInvoiceResent($event) {
-        $save = false;
-
-        $this->sendInvoice($event->order, $event->user, $save);
+        $this->sendInvoice($event->order, $event->user);
     }
 
     /**
@@ -57,7 +55,7 @@ class InvoiceEventSubscriber
      * @param $user
      * @param bool $save
      */
-    private function sendInvoice($order, $user, $save)
+    private function sendInvoice($order, $user, $save = false)
     {
         if ($order->status === config('constants.order_status.pending')) {
             $order->status = config('constants.order_status.invoiced');

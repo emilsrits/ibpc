@@ -22,9 +22,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $with = [
-        'user'
-    ];
+    protected $with = ['user'];
 
     /**
      * OneToMany inverse relationship with User class
@@ -152,16 +150,12 @@ class Order extends Model
                     return false;
                 }
                 $order->update(['status' => $status]);
-                
-                return true;
             }
         } else {
             if (orderStatusFinished($this->status)) {
                 return false;
             }
             $this->update(['status' => $status]);
-
-            return true;
         }
     }
 

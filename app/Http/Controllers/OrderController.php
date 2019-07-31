@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Filters\OrderFilter;
 use Illuminate\Http\Request;
-use App\Actions\Order\OrderStoreAction;
-use App\Actions\Order\OrderActionAction;
-use App\Actions\Order\OrderUpdateAction;
+use App\Services\OrderService;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Order\OrderActionRequest;
 use App\Http\Requests\Order\OrderUpdateRequest;
 
@@ -18,8 +17,9 @@ class OrderController extends Controller
      *
      * @param Order $order
      */
-    public function __construct(Order $order)
+    public function __construct(OrderService $orderService, Order $order)
     {
+        $this->orderService = $orderService;
         $this->order = $order;
     }
 
@@ -39,15 +39,14 @@ class OrderController extends Controller
      * Order mass action
      *
      * @param \App\Http\Requests\Order\OrderActionRequest $request
-     * @param \App\Actions\Order\OrderActionAction $action
      * @param OrderFilter $filters
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function action(OrderActionRequest $request, OrderActionAction $action, OrderFilter $filters)
+    public function action(OrderActionRequest $request, OrderFilter $filters)
     {
-        $flash = $action->execute($request->all());
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->orderService->action($request->validated());
+        if ($action) {
+            $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
             return redirect()->back();
         }
 
@@ -60,18 +59,17 @@ class OrderController extends Controller
      * Create an order
      *
      * @param Request $request
-     * @param \App\Actions\Order\OrderStoreAction $action
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(Request $request, OrderStoreAction $action)
+    public function store(Request $request)
     {
-        $flash = $action->execute();
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->orderService->store(Auth::user(), session('cart'));
+        if (!$action) {
+            $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-success', 'Order successfully placed!');
+        $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
         return redirect()->route('order.success', ['success' => true]);
     }
 
@@ -93,17 +91,14 @@ class OrderController extends Controller
      * Update order
      *
      * @param \App\Http\Requests\Order\OrderUpdateRequest $request
-     * @param \App\Actions\Order\OrderUpdateAction $action
      * @param Order $order
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(OrderUpdateRequest $request, OrderUpdateAction $action, Order $order)
+    public function update(OrderUpdateRequest $request, Order $order)
     {
-        $flash = $action->execute($request->all(), $order);
-        if ($flash !== null) {
-            $request->session()->flash($flash['type'], $flash['message']);
-        }
+        $action = $this->orderService->update($request->except('_token'), $order);
 
+        $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
         return redirect()->back();
     }
 

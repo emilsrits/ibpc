@@ -6,25 +6,24 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Filters\ProductFilter;
-use App\Actions\Product\ProductStoreAction;
-use App\Actions\Product\ProductActionAction;
-use App\Actions\Product\ProductUpdateAction;
-use App\Actions\Product\ProductUpdateAjaxAction;
 use App\Http\Requests\Product\ProductStoreRequest;
 use App\Http\Requests\Product\ProductActionRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
-use App\Http\Requests\Product\ProductUpdateAjaxRequest;
+use App\Http\Requests\Product\ProductUpdateAsyncRequest;
+use App\Services\ProductService;
 
 class ProductController extends Controller
 {
     /**
      * ProductController constructor
      *
+     * @param ProductService $productService
      * @param Product $product
      * @param Category $category
      */
-    public function __construct(Product $product, Category $category)
+    public function __construct(ProductService $productService, Product $product, Category $category)
     {
+        $this->productService = $productService;
         $this->product = $product;
         $this->category = $category;
     }
@@ -46,15 +45,14 @@ class ProductController extends Controller
      * Catalog mass action
      *
      * @param ProductActionRequest $request
-     * @param ProductActionAction $action
      * @param ProductFilter $filters
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function action(ProductActionRequest $request, ProductActionAction $action, ProductFilter $filters)
+    public function action(ProductActionRequest $request, ProductFilter $filters)
     {
-        $flash = $action->execute($request->all());
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->productService->action($request->validated());
+        if ($action) {
+            $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
             return redirect()->back();
         }
 
@@ -83,12 +81,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Return category id for AJAX response
+     * Return product creation with new category properties
      *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function createWithCategory(Request $request)
+    public function createAsync(Request $request)
     {
         $category = $this->category->with('specifications.properties')->find($request->selectFieldValue);
         $view = view('partials.admin.product.specifications', ['category'=> $category])->render();
@@ -104,19 +102,14 @@ class ProductController extends Controller
      * Save created product
      *
      * @param ProductStoreRequest $request
-     * @param ProductStoreAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ProductStoreRequest $request, ProductStoreAction $action)
+    public function store(ProductStoreRequest $request)
     {
-        $flash = $action->execute($request->validated());
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
-            return redirect()->route('product.index');
-        }
+        $this->productService->store($request->validated());
 
-        $request->session()->flash('message-danger', 'Invalid form action!');
-        return redirect()->back();
+        $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
+        return redirect()->route('product.index');
     }
 
     /**
@@ -142,32 +135,30 @@ class ProductController extends Controller
      * Update product
      *
      * @param ProductUpdateRequest $request
-     * @param ProductUpdateAction $action
      * @param Product $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProductUpdateRequest $request, ProductUpdateAction $action, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        $flash = $action->execute($request->validated(), $product);
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->productService->update($request->except('_token'), $product);
+        if ($action) {
+            $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-success', 'Product deleted!');
+        $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
         return redirect()->route('product.index');
     }
 
     /**
      * Update product with AJAX
      *
-     * @param ProductUpdateAjaxRequest $request
-     * @param ProductUpdateAjaxAction $action
+     * @param ProductUpdateAsyncRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateWithAjax(ProductUpdateAjaxRequest $request, ProductUpdateAjaxAction $action)
+    public function updateAsync(ProductUpdateAsyncRequest $request)
     {
-        $response = $action->execute($request->validated());
+        $response = $this->productService->updateAsync($request->validated());
         if ($response) {
             return response()->json(null, 200);
         } else {

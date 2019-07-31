@@ -54,7 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'as' => 'product.create'
     ]);
     Route::get('/product/categories', [
-        'uses' => 'ProductController@createWithCategory',
+        'uses' => 'ProductController@createAsync',
         'as' => 'product.createWithCategory'
     ]);
     Route::post('/product/create/save', [
@@ -66,7 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'as' => 'product.edit'
     ]);
     Route::post('/product/update', [
-        'uses' => 'ProductController@updateWithAjax',
+        'uses' => 'ProductController@updateAsync',
         'as' => 'product.updateWithAjax'
     ]);
     Route::post('/product/update/{product}', [
@@ -145,11 +145,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'PropertyController@store',
         'as' => 'property.store'
     ]);
-    Route::get('/property/edit/{specification}/{property}', [
+    Route::get('/property/edit/{property}', [
         'uses' => 'PropertyController@edit',
         'as' => 'property.edit'
     ]);
-    Route::post('/property/update/{specification}/{property}', [
+    Route::post('/property/update/{property}', [
         'uses' => 'PropertyController@update',
         'as' => 'property.update'
     ]);
@@ -220,7 +220,7 @@ Route::group(['prefix' => 'user'], function () {
             'uses' => 'AccountController@edit',
             'as' => 'account.edit'
         ]);
-        Route::post('/update/{id}', [
+        Route::post('/update/{user}', [
             'uses' => 'AccountController@update',
             'as' => 'account.update'
         ])->middleware('owner');
@@ -235,16 +235,16 @@ Route::group(['prefix' => 'cart'], function () {
         'uses' => 'CartController@index',
         'as' => 'cart.index'
     ]);
-    Route::post('/add', [
-        'uses' => 'CartController@storeWithAjax',
-        'as' => 'cart.storeWithAjax'
-    ]);
     Route::post('/add/{product}', [
         'uses' => 'CartController@store',
         'as' => 'cart.store'
     ]);
+    Route::post('/add', [
+        'uses' => 'CartController@storeAsync',
+        'as' => 'cart.storeWithAjax'
+    ]);
     Route::post('/remove', [
-        'uses' => 'CartController@delete',
+        'uses' => 'CartController@deleteAsync',
         'as' => 'cart.delete'
     ]);
     Route::post('/update', [

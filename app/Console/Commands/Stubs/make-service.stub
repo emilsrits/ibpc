@@ -1,0 +1,19 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass
+{
+    public $message;
+    
+    /**
+     * Create a new service instance.
+     */
+    public function __construct()
+    {
+        $this->message = [
+            'type' => null,
+            'content' => null
+        ];
+    }
+}

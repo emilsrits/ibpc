@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Specification;
+namespace App\Http\Requests\Property;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpecificationActionRequest extends FormRequest
+class PropertyActionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class SpecificationActionRequest extends FormRequest
     {
         return [
             'mass-action' => 'integer|in:0,1',
-            'specifications' => 'nullable|array'
+            'properties' => 'nullable|array'
         ];
     }
 }

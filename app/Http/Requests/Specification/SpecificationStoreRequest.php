@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Specification;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductUpdateAjaxRequest extends FormRequest
+class SpecificationStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class ProductUpdateAjaxRequest extends FormRequest
     public function rules()
     {
         return [
-            'productId' => 'required|integer',
-            'mediaId' => 'nullable|integer'
+            'slug' => 'required|string|max:20|unique:specifications,slug',
+            'name' => 'required|string|max:20'
         ];
     }
 }

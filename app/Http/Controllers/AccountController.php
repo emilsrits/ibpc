@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use App\Actions\Account\AccountUpdateAction;
 use App\Http\Requests\Account\AccountUpdateRequest;
 
 class AccountController extends Controller
 {
+    /**
+     * AccountController constructor
+     *
+     * @param UserService $userService
+     */
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * Return account orders view
      *
@@ -36,6 +48,18 @@ class AccountController extends Controller
     }
 
     /**
+     * Return account orders history view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showHistory()
+    {
+        $orders = Auth::user()->orders()->finished()->paginate(20);
+
+        return view('account.history', compact('orders'));
+    }
+
+    /**
      * Return account edit view
      *
      * @param Request $request
@@ -51,27 +75,14 @@ class AccountController extends Controller
      * Update user information
      *
      * @param \App\Http\Requests\Account\AccountUpdateRequest $request
-     * @param AccountUpdateAction $action
-     * @param string $id
+     * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(AccountUpdateRequest $request, AccountUpdateAction $action, $id)
+    public function update(AccountUpdateRequest $request, User $user)
     {
-        $flash = $action->execute($request->validated(), $id);
+        $this->userService->update($request->validated(), $user);
 
-        $request->session()->flash($flash['type'], $flash['message']);
+        $request->session()->flash($this->userService->message['type'], $this->userService->message['content']);
         return redirect()->back();
-    }
-
-    /**
-     * Return account orders history view
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function showHistory()
-    {
-        $orders = Auth::user()->orders()->finished()->paginate(20);
-
-        return view('account.history', compact('orders'));
     }
 }

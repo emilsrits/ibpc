@@ -3,21 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Specification;
-use App\Http\Requests\Specification\SpecificationUpdateRequest;
-use App\Actions\Specification\SpecificationStoreAction;
+use App\Services\SpecificationService;
+use App\Http\Requests\Specification\SpecificationStoreRequest;
 use App\Http\Requests\Specification\SpecificationActionRequest;
-use App\Actions\Specification\SpecificationActionAction;
-use App\Actions\Specification\SpecificationUpdateAction;
+use App\Http\Requests\Specification\SpecificationUpdateRequest;
 
 class SpecificationController extends Controller
 {
     /**
      * SpecificationController constructor
      *
+     * @param SpecificationService $specificationService
      * @param Specification $specification
      */
-    public function __construct(Specification $specification)
+    public function __construct(SpecificationService $specificationService, Specification $specification)
     {
+        $this->specificationService = $specificationService;
         $this->specification = $specification;
     }
 
@@ -37,14 +38,13 @@ class SpecificationController extends Controller
      * Specification mass action
      *
      * @param \App\Http\Requests\Specification\SpecificationActionRequest $request
-     * @param \App\Actions\Specification\SpecificationActionAction $action
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function action(SpecificationActionRequest $request, SpecificationActionAction $action)
+    public function action(SpecificationActionRequest $request)
     {
-        $flash = $action->execute($request->all());
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->specificationService->action($request->validated());
+        if ($action) {
+            $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
         }
 
         return redirect()->back();
@@ -63,15 +63,14 @@ class SpecificationController extends Controller
     /**
      * Save a specification
      *
-     * @param \App\Http\Requests\Specification\SpecificationUpdateRequest $request
-     * @param \App\Actions\Specification\SpecificationStoreAction $action
+     * @param \App\Http\Requests\Specification\SpecificationStoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(SpecificationUpdateRequest $request, SpecificationStoreAction $action)
+    public function store(SpecificationStoreRequest $request)
     {
-        $flash = $action->execute($request->all());
+        $this->specificationService->store($request->validated());
 
-        $request->session()->flash($flash['type'], $flash['message']);
+        $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
         return redirect()->route('specification.index');
     }
 
@@ -90,19 +89,18 @@ class SpecificationController extends Controller
      * Update specification
      *
      * @param \App\Http\Requests\Specification\SpecificationUpdateRequest $request
-     * @param \App\Actions\Specification\SpecificationUpdateAction $action
      * @param Specification $specification
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SpecificationUpdateRequest $request, SpecificationUpdateAction $action, Specification $specification)
+    public function update(SpecificationUpdateRequest $request, Specification $specification)
     {
-        $flash = $action->execute($request->except('_token'), $specification);
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->specificationService->update($request->except('_token'), $specification);
+        if ($action) {
+            $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-success', 'Property group deleted!');
+        $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
         return redirect()->route('specification.index');
     }
 }

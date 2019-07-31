@@ -4,37 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Models\Specification;
-use App\Actions\Property\PropertyStoreAction;
-use App\Actions\Property\PropertyActionAction;
-use App\Actions\Property\PropertyUpdateAction;
+use App\Services\PropertyService;
 use App\Http\Requests\Property\PropertyStoreRequest;
+use App\Http\Requests\Property\PropertyActionRequest;
 use App\Http\Requests\Property\PropertyUpdateRequest;
-use App\Http\Requests\Specification\SpecificationActionRequest;
 
 class PropertyController extends Controller
 {
     /**
      * PropertyController constructor
      *
+     * @param PropertyService $propertyService
      * @param Property $property
      */
-    public function __construct(Property $property)
+    public function __construct(PropertyService $propertyService, Property $property)
     {
+        $this->propertyServoce = $propertyService;
         $this->property = $property;
     }
 
     /**
      * Properties mass action
      *
-     * @param \App\Http\Requests\Specification\SpecificationActionRequest $request
-     * @param \App\Actions\Property\PropertyActionAction $action
+     * @param \App\Http\Requests\Specification\PropertyActionRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function action(SpecificationActionRequest $request, PropertyActionAction $action)
+    public function action(PropertyActionRequest $request)
     {
-        $flash = $action->execute($request->all());
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->propertyServoce->action($request->validated());
+        if ($action) {
+            $request->session()->flash($this->propertyServoce->message['type'], $this->propertyServoce->message['content']);
         }
 
         return redirect()->back();
@@ -55,15 +54,14 @@ class PropertyController extends Controller
      * Save property
      *
      * @param \App\Http\Requests\Property\PropertyStoreRequest $request
-     * @param \App\Actions\Property\PropertyStoreAction $action
      * @param Specification $specification
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(PropertyStoreRequest $request, PropertyStoreAction $action, Specification $specification)
+    public function store(PropertyStoreRequest $request, Specification $specification)
     {
-        $flash = $action->execute($request->validated(), $specification);
+        $this->propertyServoce->store($request->validated(), $specification);
 
-        $request->session()->flash($flash['type'], $flash['message']);
+        $request->session()->flash($this->propertyServoce->message['type'], $this->propertyServoce->message['content']);
         return redirect()->route('specification.edit', compact('specification'));
     }
 
@@ -74,29 +72,27 @@ class PropertyController extends Controller
      * @param Property $property
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Specification $specification, Property $property)
+    public function edit(Property $property)
     {
-        return view('admin.property.edit', compact('specification', 'property'));
+        return view('admin.property.edit', compact('property'));
     }
 
     /**
      * Update property
      *
      * @param \App\Http\Requests\Property\PropertyUpdateRequest $request
-     * @param \App\Actions\Property\PropertyUpdateAction $action
-     * @param Specification $specification
      * @param Property $property
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(PropertyUpdateRequest $request, PropertyUpdateAction $action, Specification $specification, Property $property)
+    public function update(PropertyUpdateRequest $request, Property $property)
     {
-        $flash = $action->execute($request->all(), $property);
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->propertyServoce->update($request->except('_token'), $property);
+        if ($action) {
+            $request->session()->flash($this->propertyServoce->message['type'], $this->propertyServoce->message['content']);
             return redirect()->back();
         }
 
-        $request->session()->flash('message-success', 'Property deleted!');
-        return redirect()->route('specification.edit', compact('specification'));
+        $request->session()->flash($this->propertyServoce->message['type'], $this->propertyServoce->message['content']);
+        return redirect()->route('specification.edit', ['specification' => $property->specification]);
     }
 }

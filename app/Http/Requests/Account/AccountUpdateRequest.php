@@ -24,12 +24,12 @@ class AccountUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->user()->id;
+        $user = $this->route('user');
 
         return [
             'first_name' => 'required|max:20',
             'last_name' => 'required|max:20',
-            'email'  => 'required|email|max:45|unique:users,email,'.$id,
+            'email'  => 'required|email|max:45|unique:users,email,'.$user->id,
             'phone' => 'regex:/^\(?\+?\(?\d{0,3}\)?\s?\d{8}$/',
             'password' => 'min:6|string|confirmed',
             'country' => 'string',

@@ -13,10 +13,19 @@ class UserInvoiceMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * @var Order
+     */
     public $order;
 
+    /**
+     * @var User
+     */
     public $user;
 
+    /**
+     * @var PDF
+     */
     public $pdf;
 
     /**

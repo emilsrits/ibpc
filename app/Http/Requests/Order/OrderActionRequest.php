@@ -26,6 +26,7 @@ class OrderActionRequest extends FormRequest
     {
         return [
             'mass-action' => new OrderValidStatus,
+            'orders' => 'nullable|array',
             'id' => 'nullable|integer',
             'user' => 'nullable|string',
             'status' => 'nullable|string',

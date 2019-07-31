@@ -63,9 +63,8 @@ class OrderTest extends TestCase
         $order->setUpOrder($this->cart, $this->user->id);
         $order->addItems($this->cart->items, $this->user->id);
 
-        $statusSet = $order->setStatus(config('constants.order_status.completed'));
+        $order->setStatus(config('constants.order_status.completed'));
 
-        $this->assertTrue($statusSet);
         $this->assertEquals($order->status, config('constants.order_status.completed'));
     }
 

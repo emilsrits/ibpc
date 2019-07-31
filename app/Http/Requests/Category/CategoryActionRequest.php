@@ -24,7 +24,8 @@ class CategoryActionRequest extends FormRequest
     public function rules()
     {
         return [
-            'mass-action' => 'integer|in:0,1,2,3'
+            'mass-action' => 'integer|in:0,1,2,3',
+            'categories' => 'nullable|array'
         ];
     }
 }

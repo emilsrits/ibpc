@@ -170,6 +170,8 @@ trait CreatesModels
     /**
      * Create order
      *
+     * @param User $user
+     * @param Product $product
      * @return Order
      */
     protected function createOrder($user = null, $product = null)

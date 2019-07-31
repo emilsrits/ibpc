@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Specification;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpecificationActionRequest extends FormRequest
+class ProductUpdateAsyncRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class SpecificationActionRequest extends FormRequest
     public function rules()
     {
         return [
-            'mass-action' => 'integer|in:0,1',
-            'specifications' => 'nullable|array'
+            'productId' => 'required|integer',
+            'mediaId' => 'nullable|integer'
         ];
     }
 }

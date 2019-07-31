@@ -4,24 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
-use App\Actions\User\UserActionAction;
-use App\Actions\User\UserUpdateAction;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Requests\User\UserActionRequest;
 use App\Filters\UserFilter;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
-	protected $redirectTo = '/';
-
     /**
      * UserController constructor
      *
+     * @param UserService $userService
      * @param User $user
      * @param Role $role
      */
-    public function __construct(User $user, Role $role)
+    public function __construct(UserService $userService, User $user, Role $role)
     {
+        $this->userService = $userService;
         $this->user = $user;
         $this->role = $role;
     }
@@ -43,15 +42,15 @@ class UserController extends Controller
      * Users mass action
      *
      * @param \App\Http\Requests\User\UserActionRequest $request
-     * @param \App\Actions\User\UserActionAction $action
      * @param UserFilter $filters
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function action(UserActionRequest $request, UserActionAction $action, UserFilter $filters)
+    public function action(UserActionRequest $request, UserFilter $filters)
     {
-        $flash = $action->execute($request->validated());
-        if ($flash != null) {
-            $request->session()->flash($flash['type'], $flash['message']);
+        $action = $this->userService->action($request->validated());
+
+        if ($action) {
+            $request->session()->flash($this->userService->message['type'], $this->userService->message['content']);
         }
 
         $users = $this->user->filter($filters)->paginate(20);
@@ -76,15 +75,14 @@ class UserController extends Controller
      * Update user
      *
      * @param \App\Http\Requests\User\UserUpdateRequest $request
-     * @param \App\Actions\User\UserUpdateAction $action
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UserUpdateRequest $request, UserUpdateAction $action, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $flash = $action->execute($request->validated(), $user);
-        $request->session()->flash($flash['type'], $flash['message']);
-        
+        $this->userService->update($request->validated(), $user);
+
+        $request->session()->flash($this->userService->message['type'], $this->userService->message['content']);
         return redirect()->back();
     }
 }

@@ -20,9 +20,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $with = [
-        'specifications'
-    ];
+    protected $with = ['specifications'];
 
     /**
      * ManyToMany relationship with Product class
