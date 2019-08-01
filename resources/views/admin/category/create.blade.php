@@ -8,7 +8,7 @@ Create Category
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="category-create">
         <h3>New Category</h3>
-        <form id="create-categories-form" role="form" method="POST" action="{{ url('/admin/category/create/save') }}">
+        <form id="create-categories-form" role="form" method="POST" action="{{ url('/admin/category/create') }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">

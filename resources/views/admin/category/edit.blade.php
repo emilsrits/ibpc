@@ -9,12 +9,13 @@ Edit Category
     <div class="category-edit">
         <h3>#{{ $category->id . ' ' . $category->title }}</h3>
         <form id="edit-category-form" role="form" method="POST" action="{{ url('/admin/category/update', ['id' => $category->id]) }}">
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
                     <a href="{{ url('/admin/categories') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
-                <button id="entity-delete" type="submit" name="submit" value="delete" formnovalidate>Delete</button>
+                <button id="entity-delete" data-url="{{ route('category.delete', ['id' => $category->id], false) }}" type="button">Delete</button>
                 <button class="entity-save" type="submit" name="submit" value="save">Save</button>
             </div>
             <div class="category-content-section">

@@ -9,6 +9,7 @@ Shopping Cart
 <div class="lg-100 md-100 sm-100">
     @include('partials.widgets.checkout_progress', ['page' => 1])
     <form id="shopping-cart-form" role="form" method="POST" action="{{ url('/cart/update') }}">
+        {{ method_field('PATCH') }}
         {{ csrf_field() }}
         <fieldset>
             <table id="shopping-cart-table">

@@ -79,37 +79,29 @@ class PropertyService
      *
      * @param array $data
      * @param Property $property
-     * @return mixed
      */
     public function update(array $data, Property $property)
     {
-        if ($data['submit'] === 'delete') {
-            $property->deleteProperty();
-
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Property deleted!'
-            ];
-
-            return false;
-        }
-
-        if ($data['submit'] === 'save') {
-            $property->update($data);
-
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Property successfully updated!'
-            ];
-
-            return true;
-        }
+        $property->update($data);
 
         $this->message = [
-            'type' => 'message-danger',
-            'content' => 'Invalid form action!'
+            'type' => 'message-success',
+            'content' => 'Property successfully updated!'
         ];
+    }
 
-        return false;
+    /**
+     * Property delete action
+     *
+     * @param Property $property
+     */
+    public function delete(Property $property)
+    {
+        $property->deleteProperty();
+
+        $this->message = [
+            'type' => 'message-success',
+            'content' => 'Property deleted!'
+        ];
     }
 }

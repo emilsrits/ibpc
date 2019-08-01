@@ -9,12 +9,13 @@ Edit Product
     <div class="product-edit">
         <h3>#{{ $product->id . ' ' . $product->title }}</h3>
         <form id="edit-products-form" role="form" method="POST" action="{{ url('/admin/product/update', ['id' => $product->id]) }}" enctype="multipart/form-data">
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
                     <a href="{{ url('/admin/catalog') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
-                <button id="entity-delete" type="submit" name="submit" value="delete" formnovalidate>Delete</button>
+                <button id="entity-delete" data-url="{{ route('product.delete', ['id' => $product->id], false) }}" type="button">Delete</button>
                 <button class="entity-save" type="submit" name="submit" value="save">Save</button>
             </div>
             <div class="product-content-section">

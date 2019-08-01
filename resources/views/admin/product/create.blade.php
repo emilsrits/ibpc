@@ -8,7 +8,7 @@ Create Product
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="product-create">
         <h3>New Product</h3>
-        <form id="create-products-form" role="form" method="POST" action="{{ url('/admin/product/create/save') }}" enctype="multipart/form-data">
+        <form id="create-products-form" role="form" method="POST" action="{{ url('/admin/product/create') }}" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">

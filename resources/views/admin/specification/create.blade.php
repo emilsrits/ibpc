@@ -8,7 +8,7 @@ Create Property Group
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="specification-create">
         <h3>New Property Group</h3>
-        <form id="create-specifications-form" role="form" method="POST" action="{{ url('/admin/specification/create/save') }}">
+        <form id="create-specifications-form" role="form" method="POST" action="{{ url('/admin/specification/create') }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">

@@ -8,7 +8,7 @@ Create Property
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="property-create">
         <h3>New Property</h3>
-        <form id="create-properties-form" role="form" method="POST" action="{{ url('/admin/property/create/save', ['id' => $specification->id]) }}">
+        <form id="create-properties-form" role="form" method="POST" action="{{ url('/admin/property/create', ['id' => $specification->id]) }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">

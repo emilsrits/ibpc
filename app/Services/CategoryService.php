@@ -104,48 +104,43 @@ class CategoryService
      *
      * @param array $data
      * @param Category $category
-     * @return bool
      */
     public function update(array $data, Category $category)
     {
-        if ($data['submit'] === 'delete') {
-            if ($category->deleteCategory()) {
-                $this->message = [
-                    'type' => 'message-success',
-                    'content' => 'Category deleted!'
-                ];
+        $category->update($data);
 
-                return false;
-            } else {
-                $this->message = [
-                    'type' => 'message-danger',
-                    'content' => 'Cannot delete category with existing products!'
-                ];
-
-                return true;
-            }
-        }
-
-        if ($data['submit'] === 'save') {
-            $category->update($data);
-
-            if (isset($data['spec'])) {
-                $category->updateSpecifications($data['spec']);
-            }
-
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Category successfully updated!'
-            ];
-
-            return true;
+        if (isset($data['spec'])) {
+            $category->updateSpecifications($data['spec']);
         }
 
         $this->message = [
-            'type' => 'message-danger',
-            'content' => 'Invalid form action!'
+            'type' => 'message-success',
+            'content' => 'Category successfully updated!'
         ];
+    }
 
-        return true;
+    /**
+     * Category delete action
+     *
+     * @param Category $category
+     * @return bool
+     */
+    public function delete(Category $category)
+    {
+        if ($category->deleteCategory()) {
+            $this->message = [
+                'type' => 'message-success',
+                'content' => 'Category deleted!'
+            ];
+            
+            return true;
+        } else {
+            $this->message = [
+                'type' => 'message-danger',
+                'content' => 'Cannot delete category with existing products!'
+            ];
+
+            return false;
+        }
     }
 }

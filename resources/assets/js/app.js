@@ -56,11 +56,6 @@
            }
         });
 
-        // Confirm single entity delete
-        $('#entity-delete').on('click', function() {
-            return confirm('Delete this?');
-        });
-
         // Confirm mass action on a entity
         confirmAction = function(actions) {
             var items = Object.values(actions);
@@ -257,7 +252,7 @@
             e.preventDefault();
             el.addClass('disabled');
             $.ajax({
-                type: 'POST',
+                type: 'PUT',
                 url: '/admin/product/update',
                 data: {
                     mediaId: el.data('id'),
@@ -272,6 +267,26 @@
                     console.log("error: " + err);
                 }
             });
+        });
+
+        // Confirm single entity delete
+        $('#entity-delete').on('click', function(e) {
+            var el = $(this);
+            e.preventDefault();
+            let confirmed = confirm('Delete this?');
+            if (confirmed) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: el.data('url'),
+                    dataType: 'json',
+                    success: function(data) {
+                        window.location.href = data.redirectUrl;
+                    },
+                    error: function(err) {
+                        console.log("error: " + err);
+                    }
+                });
+            }
         });
     })
 

@@ -140,18 +140,14 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, Product $product)
     {
-        $action = $this->productService->update($request->except('_token'), $product);
-        if ($action) {
-            $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
-            return redirect()->back();
-        }
+        $this->productService->update($request->validated(), $product);
 
         $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
-        return redirect()->route('product.index');
+        return redirect()->back();
     }
 
     /**
-     * Update product with AJAX
+     * Update product async
      *
      * @param ProductUpdateAsyncRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -164,5 +160,33 @@ class ProductController extends Controller
         } else {
             return response()->json(null, 400);
         }
+    }
+
+    /**
+     * Delete product
+     *
+     * @param Request $request
+     * @param Product $product
+     * @return mixed
+     */
+    public function delete(Request $request, Product $product)
+    {
+        $async = $request->wantsJson();
+
+        $action = $this->productService->delete($product);
+
+        $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
+
+        if ($async) {
+            if ($action) {
+                return response()->json(array('redirectUrl'=> route('product.index')), 200);
+            }
+            return response()->json(null, 400);
+        }
+        
+        if ($action) {
+            return redirect()->route('product.index');
+        }
+        return redirect()->back();
     }
 }

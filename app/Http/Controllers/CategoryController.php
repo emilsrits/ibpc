@@ -8,6 +8,7 @@ use App\Http\Requests\Category\CategoryActionRequest;
 use App\Http\Requests\Category\CategoryStoreRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Services\CategoryService;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -102,13 +103,37 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, Category $category)
     {
-        $action = $this->categoryService->update($request->except('_token'), $category);
-        if ($action) {
-            $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
-            return redirect()->back();
-        }
+        $this->categoryService->update($request->validated(), $category);
 
         $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
-        return redirect()->route('category.index');
+        return redirect()->back();
+    }
+
+    /**
+     * Delete category
+     *
+     * @param Request $request
+     * @param Category $category
+     * @return mixed
+     */
+    public function delete(Request $request, Category $category)
+    {
+        $async = $request->wantsJson();
+
+        $action = $this->categoryService->delete($category);
+
+        $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
+
+        if ($async) {
+            if ($action) {
+                return response()->json(array('redirectUrl'=> route('category.index')), 200);
+            }
+            return response()->json(null, 400);
+        }
+        
+        if ($action) {
+            return redirect()->route('category.index');
+        }
+        return redirect()->back();
     }
 }

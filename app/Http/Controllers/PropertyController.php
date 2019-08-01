@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use Illuminate\Http\Request;
 use App\Models\Specification;
 use App\Services\PropertyService;
 use App\Http\Requests\Property\PropertyStoreRequest;
@@ -19,7 +20,7 @@ class PropertyController extends Controller
      */
     public function __construct(PropertyService $propertyService, Property $property)
     {
-        $this->propertyServoce = $propertyService;
+        $this->propertyService = $propertyService;
         $this->property = $property;
     }
 
@@ -31,9 +32,9 @@ class PropertyController extends Controller
      */
     public function action(PropertyActionRequest $request)
     {
-        $action = $this->propertyServoce->action($request->validated());
+        $action = $this->propertyService->action($request->validated());
         if ($action) {
-            $request->session()->flash($this->propertyServoce->message['type'], $this->propertyServoce->message['content']);
+            $request->session()->flash($this->propertyService->message['type'], $this->propertyService->message['content']);
         }
 
         return redirect()->back();
@@ -59,9 +60,9 @@ class PropertyController extends Controller
      */
     public function store(PropertyStoreRequest $request, Specification $specification)
     {
-        $this->propertyServoce->store($request->validated(), $specification);
+        $this->propertyService->store($request->validated(), $specification);
 
-        $request->session()->flash($this->propertyServoce->message['type'], $this->propertyServoce->message['content']);
+        $request->session()->flash($this->propertyService->message['type'], $this->propertyService->message['content']);
         return redirect()->route('specification.edit', compact('specification'));
     }
 
@@ -86,13 +87,29 @@ class PropertyController extends Controller
      */
     public function update(PropertyUpdateRequest $request, Property $property)
     {
-        $action = $this->propertyServoce->update($request->except('_token'), $property);
-        if ($action) {
-            $request->session()->flash($this->propertyServoce->message['type'], $this->propertyServoce->message['content']);
-            return redirect()->back();
-        }
+        $this->propertyService->update($request->validated(), $property);
 
-        $request->session()->flash($this->propertyServoce->message['type'], $this->propertyServoce->message['content']);
+        return redirect()->back();
+    }
+
+    /**
+     * Delete property
+     *
+     * @param Request $request
+     * @param Property $property
+     * @return mixed
+     */
+    public function delete(Request $request, Property $property)
+    {
+        $async = $request->wantsJson();
+
+        $this->propertyService->delete($property);
+
+        $request->session()->flash($this->propertyService->message['type'], $this->propertyService->message['content']);
+
+        if ($async) {
+            return response()->json(array('redirectUrl'=> route('specification.edit', ['specification' => $property->specification])), 200);
+        }
         return redirect()->route('specification.edit', ['specification' => $property->specification]);
     }
 }

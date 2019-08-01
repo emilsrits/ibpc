@@ -9,6 +9,7 @@ Edit User
     <div class="user-edit">
         <h3>#{{ $user->id . ' ' . $user->full_name }}</h3>
         <form id="edit-user-form" role="form" method="POST" action="{{ url('/admin/user/update', ['id' => $user->id]) }}">
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">

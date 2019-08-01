@@ -9,12 +9,13 @@ Edit Property Group
     <div class="specification-edit">
         <h3>#{{ $specification->id . ' ' . $specification->name }}</h3>
         <form id="edit-specification-form" role="form" method="POST" action="{{ url('/admin/specification/update', ['id' => $specification->id]) }}">
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
                     <a href="{{ url('/admin/specifications') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
                 </div>
-                <button id="entity-delete" type="submit" name="submit" value="delete" formnovalidate>Delete</button>
+                <button id="entity-delete" data-url="{{ route('specification.delete', ['id' => $specification->id], false) }}" type="button">Delete</button>
                 <button class="entity-save" type="submit" name="submit" value="save">Save</button>
             </div>
             <div class="specification-content-section">

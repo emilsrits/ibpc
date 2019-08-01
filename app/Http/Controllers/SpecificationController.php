@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Specification;
 use App\Services\SpecificationService;
 use App\Http\Requests\Specification\SpecificationStoreRequest;
@@ -94,13 +95,30 @@ class SpecificationController extends Controller
      */
     public function update(SpecificationUpdateRequest $request, Specification $specification)
     {
-        $action = $this->specificationService->update($request->except('_token'), $specification);
-        if ($action) {
-            $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
-            return redirect()->back();
-        }
+        $this->specificationService->update($request->validated(), $specification);
 
         $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
+        return redirect()->back();
+    }
+
+    /**
+     * Delete specification
+     *
+     * @param Request $request
+     * @param Specification $specification
+     * @return mixed
+     */
+    public function delete(Request $request, Specification $specification)
+    {
+        $async = $request->wantsJson();
+
+        $this->specificationService->delete($specification);
+
+        $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
+
+        if ($async) {
+            return response()->json(array('redirectUrl'=> route('specification.index')), 200);
+        }
         return redirect()->route('specification.index');
     }
 }

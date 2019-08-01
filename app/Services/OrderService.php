@@ -118,54 +118,52 @@ class OrderService
      */
     public function update(array $data, Order $order)
     {
-        // If action is to send invoice, else update order
-        if ($data['submit'] === 'invoice') {
-            $user = User::find($order->user->id);
+        if (isset($data['status'])) {
+            $status = $data['status'];
 
-            event(new InvoiceResent($order, $user));
+            $statusSet = $order->setStatus($status);
 
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Invoice successfully sent!'
-            ];
+            if ($statusSet === false) {
+                $this->message = [
+                    'type' => 'message-danger',
+                    'content' => 'Can not change status of a finished order!'
+                ];
 
-            return true;
-        } 
-        
-        if ($data['submit'] === 'save') {
-            if (isset($data['status'])) {
-                $status = $data['status'];
-
-                $statusSet = $order->setStatus($status);
-
-                if ($statusSet === false) {
-                    $this->message = [
-                        'type' => 'message-danger',
-                        'content' => 'Can not change status of a finished order!'
-                    ];
-                } else {
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'Order successfully updated!'
-                    ];
-                }
+                return false;
             } else {
-                if (!orderStatusFinished($order->status)) {
-                    $this->message = [
-                        'type' => 'message-danger',
-                        'content' => 'Order must have a status!'
-                    ];
-                }
-            }
+                $this->message = [
+                    'type' => 'message-success',
+                    'content' => 'Order successfully updated!'
+                ];
 
-            return true;
+                return true;
+            }
+        } else {
+            if (!orderStatusFinished($order->status)) {
+                $this->message = [
+                    'type' => 'message-danger',
+                    'content' => 'Order must have a status!'
+                ];
+
+                return false;
+            }
         }
+    }
+
+    /**
+     * Order invoice action
+     *
+     * @param Order $order
+     */
+    public function invoice(Order $order)
+    {
+        $user = User::find($order->user->id);
+
+        event(new InvoiceResent($order, $user));
 
         $this->message = [
-            'type' => 'message-danger',
-            'content' => 'Invalid form action!'
+            'type' => 'message-success',
+            'content' => 'Invoice successfully sent!'
         ];
-
-        return false;
     }
 }

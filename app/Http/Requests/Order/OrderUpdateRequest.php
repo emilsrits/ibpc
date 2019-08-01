@@ -25,7 +25,7 @@ class OrderUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'mass-action' => new OrderValidStatus
+            'status' => 'required|string'
         ];
     }
 }

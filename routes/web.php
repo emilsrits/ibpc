@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'ProductController@createAsync',
         'as' => 'product.createWithCategory'
     ]);
-    Route::post('/product/create/save', [
+    Route::post('/product/create', [
         'uses' => 'ProductController@store',
         'as' => 'product.store'
     ]);
@@ -65,13 +65,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'ProductController@edit',
         'as' => 'product.edit'
     ]);
-    Route::post('/product/update', [
+    Route::put('/product/update', [
         'uses' => 'ProductController@updateAsync',
-        'as' => 'product.updateWithAjax'
+        'as' => 'product.updateAsync'
     ]);
-    Route::post('/product/update/{product}', [
+    Route::patch('/product/update/{product}', [
         'uses' => 'ProductController@update',
         'as' => 'product.update'
+    ]);
+    Route::delete('/product/delete/{product}', [
+        'uses' => 'ProductController@delete',
+        'as' => 'product.delete'
     ]);
 
     /**
@@ -89,7 +93,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'CategoryController@create',
         'as' => 'category.create'
     ]);
-    Route::post('/category/create/save', [
+    Route::post('/category/create', [
         'uses' => 'CategoryController@store',
         'as' => 'category.store'
     ]);
@@ -97,9 +101,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'CategoryController@edit',
         'as' => 'category.edit'
     ]);
-    Route::post('/category/update/{category}', [
+    Route::patch('/category/update/{category}', [
         'uses' => 'CategoryController@update',
         'as' => 'category.update'
+    ]);
+    Route::delete('/category/delete/{category}', [
+        'uses' => 'CategoryController@delete',
+        'as' => 'category.delete'
     ]);
 
     /**
@@ -117,7 +125,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'SpecificationController@create',
         'as' => 'specification.create'
     ]);
-    Route::post('/specification/create/save', [
+    Route::post('/specification/create', [
         'uses' => 'SpecificationController@store',
         'as' => 'specification.store'
     ]);
@@ -125,9 +133,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'SpecificationController@edit',
         'as' => 'specification.edit'
     ]);
-    Route::post('/specification/update/{specification}', [
+    Route::patch('/specification/update/{specification}', [
         'uses' => 'SpecificationController@update',
         'as' => 'specification.update'
+    ]);
+    Route::delete('/specification/delete/{specification}', [
+        'uses' => 'SpecificationController@delete',
+        'as' => 'specification.delete'
     ]);
 
     /**
@@ -141,7 +153,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'PropertyController@create',
         'as' => 'property.create'
     ]);
-    Route::post('/property/create/save/{specification}', [
+    Route::post('/property/create/{specification}', [
         'uses' => 'PropertyController@store',
         'as' => 'property.store'
     ]);
@@ -149,9 +161,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'PropertyController@edit',
         'as' => 'property.edit'
     ]);
-    Route::post('/property/update/{property}', [
+    Route::patch('/property/update/{property}', [
         'uses' => 'PropertyController@update',
         'as' => 'property.update'
+    ]);
+    Route::delete('/property/delete/{property}', [
+        'uses' => 'PropertyController@delete',
+        'as' => 'property.delete'
     ]);
 
     /**
@@ -169,7 +185,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'UserController@edit',
         'as' => 'user.edit'
     ]);
-    Route::post('/user/update/{user}', [
+    Route::patch('/user/update/{user}', [
         'uses' => 'UserController@update',
         'as' => 'user.update'
     ]);
@@ -189,9 +205,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'active']],
         'uses' => 'OrderController@edit',
         'as' => 'order.edit'
     ]);
-    Route::post('/order/update/{order}', [
+    Route::patch('/order/update/{order}', [
         'uses' => 'OrderController@update',
         'as' => 'order.update'
+    ]);
+    Route::post('/order/invoice/{order}', [
+        'uses' => 'OrderController@invoice',
+        'as' => 'order.invoice'
     ]);
 });
 
@@ -220,7 +240,7 @@ Route::group(['prefix' => 'user'], function () {
             'uses' => 'AccountController@edit',
             'as' => 'account.edit'
         ]);
-        Route::post('/update/{user}', [
+        Route::patch('/update/{user}', [
             'uses' => 'AccountController@update',
             'as' => 'account.update'
         ])->middleware('owner');
@@ -241,13 +261,13 @@ Route::group(['prefix' => 'cart'], function () {
     ]);
     Route::post('/add', [
         'uses' => 'CartController@storeAsync',
-        'as' => 'cart.storeWithAjax'
+        'as' => 'cart.storeAsync'
     ]);
     Route::post('/remove', [
         'uses' => 'CartController@deleteAsync',
-        'as' => 'cart.delete'
+        'as' => 'cart.deleteAsync'
     ]);
-    Route::post('/update', [
+    Route::patch('/update', [
        'uses' => 'CartController@update',
         'as' => 'cart.update'
     ]);

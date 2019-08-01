@@ -8,8 +8,8 @@ Edit Property
 <div class="admin-page lg-100 md-100 sm-100">
     <div class="property-edit">
         <h3>#{{ $property->id . ' ' . $property->name }}</h3>
-        <form id="edit-property-form" role="form" method="POST"
-              action="{{ url('/admin/property/update', ['id' => $property->id]) }}">
+        <form id="edit-property-form" role="form" method="POST" action="{{ url('/admin/property/update', ['id' => $property->id]) }}">
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
@@ -17,7 +17,7 @@ Edit Property
                         <i class="fa fa-arrow-left" aria-hidden="true"></i>Back
                     </a>
                 </div>
-                <button id="entity-delete" type="submit" name="submit" value="delete" formnovalidate>Delete</button>
+                <button id="entity-delete" data-url="{{ route('property.delete', ['id' => $property->id], false) }}" type="button">Delete</button>
                 <button class="entity-save" type="submit" name="submit" value="save">Save</button>
             </div>
             <div class="property-content-section">

@@ -9,6 +9,7 @@ Edit Order
     <div class="order-edit">
         <h3>#{{ $order->id }}</h3>  
         <form id="edit-order-form" role="form" method="POST" action="{{ url('/admin/order/update', ['id' => $order->id]) }}">
+            {{ method_field('PATCH') }}
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <div class="btn-manage-back">
@@ -107,7 +108,7 @@ Edit Order
             </div>
         </form>
 
-        <form id="send-invoice-form" role="form" method="POST" action="{{ url('/admin/order/update', ['id' => $order->id]) }}">
+        <form id="send-invoice-form" role="form" method="POST" action="{{ url('/admin/order/invoice', ['id' => $order->id]) }}">
             {{ csrf_field() }}
             <div class="manage-btn-group">
                 <button class="entity-save" type="submit" name="submit" value="invoice">Resend Invoice</button>

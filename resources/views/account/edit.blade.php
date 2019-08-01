@@ -11,6 +11,7 @@ Account Settings
         <div id="account-panel" class="grid-item lg-10 md-100 sm-100">
             <h4>Account settings</h4>
             <form id="account--edit-form" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/update', ['id' => $user->id]) }}">
+                {{ method_field('PATCH') }}
                 {{ csrf_field() }}
                 <div class="account-content-section">
                     <div class="content-section-toggle">

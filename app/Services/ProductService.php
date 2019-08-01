@@ -125,71 +125,45 @@ class ProductService
      *
      * @param array $data
      * @param Product $product
-     * @return mixed
+     * @return bool
      */
     public function update(array $data, Product $product)
     {
-        if ($data['submit'] === 'delete') {
-            if ($product->deleteProduct()) {
-                $this->message = [
-                    'type' => 'message-success',
-                    'content' => 'Product deleted!'
-                ];
+        
+        $data['price'] = parseMoneyByDecimal($data['price']);
+        
+        $product->update(arrayExclude($data, [
+            'category', 'properties', 'media'
+        ]));
 
-                return false;
-            } else {
-                $this->message = [
-                    'type' => 'message-danger',
-                    'content' => 'Can not delete products that are in active orders!'
-                ];
-
-                return true;
-            }
+        // Update product properties
+        if (isset($data['properties'])) {
+            $product->updateProperties($data['properties']);
         }
 
-        if ($data['submit'] === 'save') {
-            $data['price'] = parseMoneyByDecimal($data['price']);
-            
-            $product->update(arrayExclude($data, [
-                'category', 'properties', 'media'
-            ]));
+        // Update product media
+        $files = isset($data['media']) ? $data['media'] : null;
+        if ($files) {
+            foreach ($files as $file) {
+                $media = new Media();
+                $uploaded = $media->storeMedia($file, $product);
 
-            // Update product properties
-            if (isset($data['properties'])) {
-                $product->updateProperties($data['properties']);
-            }
+                if ($uploaded) {
+                    $product->media()->save($media);
+                } else {
+                    $this->message = [
+                        'type' => 'message-info',
+                        'content' => 'Maximum media amount for product exceeded!'
+                    ];
 
-            // Update product media
-            $files = isset($data['media']) ? $data['media'] : null;
-            if ($files) {
-                foreach ($files as $file) {
-                    $media = new Media();
-                    $uploaded = $media->storeMedia($file, $product);
-
-                    if ($uploaded) {
-                        $product->media()->save($media);
-                    } else {
-                        $flash = [
-                            'type' => 'message-info',
-                            'content' => 'Maximum media amount for product exceeded!'
-                        ];
-
-                        return $flash;
-                    }
+                    return false;
                 }
             }
-
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Product successfully updated!'
-            ];
-    
-            return true;
         }
 
         $this->message = [
-            'type' => 'message-danger',
-            'content' => 'Invalid form action!'
+            'type' => 'message-success',
+            'content' => 'Product successfully updated!'
         ];
 
         return true;
@@ -211,6 +185,31 @@ class ProductService
             $product->media->find($mediaId)->delete();
             return true;
         } else {
+            return false;
+        }
+    }
+
+    /**
+     * Product delete action
+     *
+     * @param Product $product
+     * @return bool
+     */
+    public function delete(Product $product)
+    {
+        if ($product->deleteProduct()) {
+            $this->message = [
+                'type' => 'message-success',
+                'content' => 'Product deleted!'
+            ];
+
+            return true;
+        } else {
+            $this->message = [
+                'type' => 'message-danger',
+                'content' => 'Can not delete products that are in active orders!'
+            ];
+
             return false;
         }
     }

@@ -96,7 +96,22 @@ class OrderController extends Controller
      */
     public function update(OrderUpdateRequest $request, Order $order)
     {
-        $action = $this->orderService->update($request->except('_token'), $order);
+        $this->orderService->update($request->validated(), $order);
+
+        $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
+        return redirect()->back();
+    }
+
+    /**
+     * Invoice order
+     *
+     * @param Request $request
+     * @param Order $order
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function invoice(Request $request, Order $order)
+    {
+        $this->orderService->invoice($order);
 
         $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
         return redirect()->back();

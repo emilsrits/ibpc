@@ -75,37 +75,29 @@ class SpecificationService
      *
      * @param array $data
      * @param Specification $specification
-     * @return mixed
      */
     public function update(array $data, Specification $specification)
     {
-        if ($data['submit'] === 'delete') {
-            $specification->deleteSpecification();
+        $specification->update($data);
+        
+        $this->message = [
+            'type' => 'message-success',
+            'content' => 'Property group successfully updated!'
+        ];
+    }
 
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Property group deleted!'
-            ];
-
-            return false;
-        }
-
-        if ($data['submit'] === 'save') {
-            $specification->update($data);
-            
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Property group successfully updated!'
-            ];
-
-            return true;
-        }
+    /**
+     * Specification delete action
+     *
+     * @param Specification $specification
+     */
+    public function delete(Specification $specification)
+    {
+        $specification->deleteSpecification();
 
         $this->message = [
-            'type' => 'message-danger',
-            'content' => 'Invalid form action!'
+            'type' => 'message-success',
+            'content' => 'Property group deleted!'
         ];
-
-        return false;
     }
 }
