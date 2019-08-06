@@ -2,15 +2,17 @@
 
 namespace DummyNamespace;
 
-class DummyClass
+use App\Repositories\Repository;
+
+class DummyClass extends Repository
 {
     /**
-     * Get all entries
+     * Specify Model class name
      *
-     * @return array
+     * @return mixed
      */
-    public function all()
+    function model()
     {
-        //
+        //return 'App\Models\Example';
     }
 }

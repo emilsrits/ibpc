@@ -21,7 +21,6 @@ class MediaTest extends TestCase
 
         $uploaded = $media->storeMedia($file, $product);
         $product->media()->save($media);
-
         $path = $media->path;
 
         $this->assertTrue($uploaded);

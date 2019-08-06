@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\Cart;
 use App\Models\Order;
@@ -69,6 +70,20 @@ class OrderTest extends TestCase
     }
 
     /** @test */
+    public function it_can_filter_by_id()
+    {
+        $order = $this->createOrder();
+
+        $request = Request::create('/orders', 'POST', [
+            'id' => $order->id
+        ]);
+        $filter = new OrderFilter($request);
+        $orders = Order::filter($filter)->get();
+
+        $this->assertEquals(true, count($orders) === 1);
+    }
+
+    /** @test */
     public function it_can_filter_by_user()
     {
         $user = $this->createUser([
@@ -94,6 +109,35 @@ class OrderTest extends TestCase
 
         $request = Request::create('/orders', 'POST', [
             'status' => $status
+        ]);
+        $filter = new OrderFilter($request);
+        $orders = Order::filter($filter)->get();
+
+        $this->assertEquals(true, count($orders) >= 1);
+    }
+
+    /** @test */
+    public function it_can_filter_by_created_at()
+    {
+        $this->createOrder();
+
+        $request = Request::create('/orders', 'POST', [
+            'createdAt' => Carbon::now()->format('Y-m-d')
+        ]);
+        $filter = new OrderFilter($request);
+        $orders = Order::filter($filter)->get();
+
+        $this->assertEquals(true, count($orders) >= 1);
+    }
+
+    /** @test */
+    public function it_can_filter_by_updated_at()
+    {
+        $order = $this->createOrder();
+        $order->update();
+
+        $request = Request::create('/orders', 'POST', [
+            'updatedAt' => Carbon::now()->format('Y-m-d')
         ]);
         $filter = new OrderFilter($request);
         $orders = Order::filter($filter)->get();

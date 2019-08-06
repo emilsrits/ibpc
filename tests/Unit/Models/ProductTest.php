@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\Product;
 use App\Filters\ProductFilter;
@@ -123,6 +124,20 @@ class ProductTest extends TestCase
     }
 
     /** @test */
+    public function it_can_filter_by_id()
+    {
+        $product = $this->createProduct();
+
+        $request = Request::create('/catalog', 'POST', [
+            'id' => $product->id
+        ]);
+        $filter = new ProductFilter($request);
+        $products = Product::filter($filter)->get();
+
+        $this->assertEquals(true, count($products) === 1);
+    }
+
+    /** @test */
     public function it_can_filter_by_title()
     {
         $this->createProduct([
@@ -164,6 +179,35 @@ class ProductTest extends TestCase
 
         $request = Request::create('/catalog', 'POST', [
             'category' => $category->id
+        ]);
+        $filter = new ProductFilter($request);
+        $products = Product::filter($filter)->get();
+
+        $this->assertEquals(true, count($products) >= 1);
+    }
+
+    /** @test */
+    public function it_can_filter_by_created_at()
+    {
+        $this->createProduct();
+
+        $request = Request::create('/catalog', 'POST', [
+            'createdAt' => Carbon::now()->format('Y-m-d')
+        ]);
+        $filter = new ProductFilter($request);
+        $products = Product::filter($filter)->get();
+
+        $this->assertEquals(true, count($products) >= 1);
+    }
+
+    /** @test */
+    public function it_can_filter_by_updated_at()
+    {
+        $product = $this->createProduct();
+        $product->update();
+
+        $request = Request::create('/catalog', 'POST', [
+            'updatedAt' => Carbon::now()->format('Y-m-d')
         ]);
         $filter = new ProductFilter($request);
         $products = Product::filter($filter)->get();

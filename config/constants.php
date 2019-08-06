@@ -12,6 +12,11 @@ return [
         'password' => env('ADMIN_PASSWORD')
     ],
 
+    // Default pagination limit
+    'pagination' => [
+        'limit' => 20,
+    ],
+
     // Save a copy of invoice inside storage directory
     'invoice_storage' => true,
 

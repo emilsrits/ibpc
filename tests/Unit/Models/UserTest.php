@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\Role;
 use App\Models\User;
@@ -98,6 +99,20 @@ class UserTest extends TestCase
     }
 
     /** @test */
+    public function it_can_filter_by_id()
+    {
+        $this->createUser([], 5);
+
+        $request = Request::create('/users', 'POST', [
+            'id' => 3
+        ]);
+        $filter = new UserFilter($request);
+        $users = User::filter($filter)->get();
+
+        $this->assertEquals(true, count($users) === 1);
+    }
+
+    /** @test */
     public function it_can_filter_by_name()
     {
         $this->createUser([
@@ -137,12 +152,41 @@ class UserTest extends TestCase
             'status' => User::USER_DISABLED
         ], 3);
 
-        $reqest = Request::create('/users', 'POST', [
+        $request = Request::create('/users', 'POST', [
             'status' => User::USER_DISABLED
         ]);
-        $filter = new UserFilter($reqest);
+        $filter = new UserFilter($request);
         $users = User::filter($filter)->get();
 
         $this->assertEquals(true, count($users) >= 3);
+    }
+
+    /** @test */
+    public function it_can_filter_by_created_at()
+    {
+        $this->createUser();
+
+        $request = Request::create('/users', 'POST', [
+            'createdAt' => Carbon::now()->format('Y-m-d')
+        ]);
+        $filter = new UserFilter($request);
+        $users = User::filter($filter)->get();
+
+        $this->assertEquals(true, count($users) >= 1);
+    }
+
+    /** @test */
+    public function it_can_filter_by_updated_at()
+    {
+        $user = $this->createUser();
+        $user->update();
+
+        $request = Request::create('/users', 'POST', [
+            'updatedAt' => Carbon::now()->format('Y-m-d')
+        ]);
+        $filter = new UserFilter($request);
+        $users = User::filter($filter)->get();
+
+        $this->assertEquals(true, count($users) >= 1);
     }
 }

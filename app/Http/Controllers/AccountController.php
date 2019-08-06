@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
-use App\Actions\Account\AccountUpdateAction;
 use App\Http\Requests\Account\AccountUpdateRequest;
 
 class AccountController extends Controller
