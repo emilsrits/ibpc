@@ -26,19 +26,19 @@ Edit User
                         <tbody>
                         <tr class="entity-attribute">
                             <td><label for="first_name">First Name</label></td>
-                            <td><input type="text" name="first_name" value="{{ $user->first_name }}"></td>
+                            <td><input type="text" name="first_name" value="{{ old('first_name') ? old('first_name') : $user->first_name }}"></td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="last_name">Last Name</label></td>
-                            <td><input type="text" name="last_name" value="{{ $user->last_name }}"></td>
+                            <td><input type="text" name="last_name" value="{{ old('last_name') ? old('last_name') : $user->last_name }}"></td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="email">Email</label></td>
-                            <td><input type="email" name="email" value="{{ $user->email }}"></td>
+                            <td><input type="email" name="email" value="{{ old('email') ? old('email') : $user->email }}"></td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="phone">Phone</label></td>
-                            <td><input type="text" name="phone" value="{{ $user->phone }}"></td>
+                            <td><input type="text" name="phone" value="{{ old('phone') ? old('phone') : $user->phone }}"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -74,15 +74,15 @@ Edit User
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="city">City</label></td>
-                            <td><input type="text" name="city" value="{{ $user->city }}"></td>
+                            <td><input type="text" name="city" value="{{ old('city') ? old('city') : $user->city }}"></td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="address">Address</label></td>
-                            <td><input type="text" name="address" value="{{ $user->address }}"></td>
+                            <td><input type="text" name="address" value="{{ old('address') ? old('address') : $user->address }}"></td>
                         </tr>
                         <tr class="entity-attribute">
                             <td><label for="postcode">Post Code</label></td>
-                            <td><input type="text" name="postcode" value="{{ $user->postcode }}"></td>
+                            <td><input type="text" name="postcode" value="{{ old('postcode') ? old('postcode') : $user->postcode }}"></td>
                         </tr>
                         </tbody>
                     </table>

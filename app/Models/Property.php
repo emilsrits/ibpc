@@ -41,21 +41,4 @@ class Property extends Model
     {
         return $this->belongsTo(Specification::class);
     }
-
-    /**
-     * Delete properties
-     *
-     * @param mixed $ids
-     */
-    public function deleteProperty($ids = null)
-    {
-        if (is_array($ids)) {
-            foreach ($ids as $id => $value) {
-                $property = Property::find($id);
-                $property->destroy($id);
-            }
-        } else {
-            $this->destroy($this->id);
-        }
-    }
 }

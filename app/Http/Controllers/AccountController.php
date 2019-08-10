@@ -27,7 +27,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $orders = Auth::user()->orders()->active()->paginate(20);
+        $user = Auth::user();
+        $orders = $user->getActiveOrders(20);
 
         return view('account.index', compact('orders'));
     }
@@ -41,7 +42,7 @@ class AccountController extends Controller
     public function showOrder($id)
     {
         $user = Auth::user();
-        $order = $user->orders()->findOrFail($id);
+        $order = $user->getOrder($id);
 
         return view('account.order', compact('user', 'order'));
     }
@@ -53,7 +54,8 @@ class AccountController extends Controller
      */
     public function showHistory()
     {
-        $orders = Auth::user()->orders()->finished()->paginate(20);
+        $user = Auth::user();
+        $orders = $user->getFinishedOrders(20);
 
         return view('account.history', compact('orders'));
     }

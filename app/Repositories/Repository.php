@@ -49,10 +49,21 @@ abstract class Repository implements RepositoryInterface
     {
         $model = $this->app->make($this->model());
 
-        if (!$model instanceof Model)
+        if (!$model instanceof Model) {
             throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+        }
 
         return $this->model = $model;
+    }
+
+    /**
+     * Reset model
+     *
+     * @throws RepositoryException
+     */
+    public function resetModel()
+    {
+        $this->makeModel();
     }
 
     /**
@@ -61,15 +72,17 @@ abstract class Repository implements RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function all($columns = ['*'])
+    public function all(array $columns = ['*'])
     {
         if ($this->model instanceof Builder) {
-            $results = $this->model->get($columns);
+            $result = $this->model->get($columns);
         } else {
-            $results = $this->model->all($columns);
+            $result = $this->model->all($columns);
         }
 
-        return $results;
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
@@ -78,9 +91,13 @@ abstract class Repository implements RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function get($columns = ['*'])
+    public function get(array $columns = ['*'])
     {
-        return $this->all($columns);
+        $result = $this->all($columns);
+
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
@@ -90,12 +107,14 @@ abstract class Repository implements RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function paginate($limit = null, $columns = ['*'])
+    public function paginate($limit = null, array $columns = ['*'])
     {
         $limit = is_null($limit) ? config('constants.pagination.limit', 15) : $limit;
-        $results = $this->model->paginate($limit, $columns);
+        $result = $this->model->paginate($limit, $columns);
 
-        return $results;
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
@@ -105,9 +124,13 @@ abstract class Repository implements RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function find($id, $columns = ['*'])
+    public function find($id, array $columns = ['*'])
     {
-        return $this->model->findOrFail($id, $columns);
+        $result = $this->model->findOrFail($id, $columns);
+
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
@@ -118,9 +141,13 @@ abstract class Repository implements RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function findBy($column, $value, $columns = ['*'])
+    public function findBy($column, $value, array $columns = ['*'])
     {
-        return $this->model->where($column, '=', $value)->first($columns);
+        $result = $this->model->where($column, '=', $value)->first($columns);
+
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
@@ -131,21 +158,33 @@ abstract class Repository implements RepositoryInterface
      */
     public function create(array $data)
     {
-        return $this->model->create($data);
+        $result = $this->model->create($data);
+
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
      * Update entity
      *
      * @param array $data
-     * @param $id
+     * @param $id Entity model or ID
      * @return mixed
      */
     public function update(array $data, $id)
     {
-        $model = $this->model->findOrFail($id);
+        if ($id instanceof Model) {
+            $model = $id;
+        } else {
+            $model = $this->model->findOrFail($id);
+        }
 
-        return $model->update($data);
+        $result = $model->update($data);
+
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
@@ -156,7 +195,17 @@ abstract class Repository implements RepositoryInterface
      */
     public function delete($id)
     {
-        return $this->model->destroy($id);
+        if (is_array($id)) {
+            foreach ($id as $key => $value) {
+                $result = $this->model->destroy($key);
+            }
+        } else {
+            $result = $this->model->destroy($id);
+        }
+
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
@@ -168,18 +217,62 @@ abstract class Repository implements RepositoryInterface
      */
     public function deleteBy($column, $value)
     {
-        return $this->model->where($column, '=', $value)->delete();
+        $result = $this->model->where($column, '=', $value)->delete();
+
+        $this->resetModel();
+
+        return $result;
     }
 
     /**
      * Load relations
      *
-     * @param $relations
+     * @param mixed $relations
      * @return $this
      */
     public function with($relations)
     {
         $this->model = $this->model->with($relations);
+
+        return $this;
+    }
+
+    /**
+     * Add count of relations to collection
+     *
+     * @param mixed $relations
+     * @return $this
+     */
+    public function withCount($relations)
+    {
+        $this->model = $this->model->withCount($relations);
+
+        return $this;
+    }
+
+    /**
+     * Load where model has relations
+     *
+     * @param string $relations
+     * @return $this
+     */
+    public function has(string $relation)
+    {
+        $this->model = $this->model->has($relation);
+
+        return $this;
+    }
+
+    /**
+     * Load relation with closure
+     *
+     * @param string $relation
+     * @param $closure
+     * @return $this
+     */
+    public function whereHas(string $relation, $closure)
+    {
+        $this->model = $this->model->whereHas($relation, $closure);
 
         return $this;
     }

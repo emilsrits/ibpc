@@ -9,18 +9,20 @@ use App\Services\OrderService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Order\OrderActionRequest;
 use App\Http\Requests\Order\OrderUpdateRequest;
+use App\Repositories\OrderRepository;
 
 class OrderController extends Controller
 {
     /**
      * OrderController constructor
      *
-     * @param Order $order
+     * @param OrderService $orderService
+     * @param OrderRepository $orderRepository
      */
-    public function __construct(OrderService $orderService, Order $order)
+    public function __construct(OrderService $orderService, OrderRepository $orderRepository)
     {
         $this->orderService = $orderService;
-        $this->order = $order;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -30,7 +32,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = $this->order->with('user')->paginate(20);
+        $orders = $this->orderRepository->paginate();
 
         return view('admin.order.orders', ['orders' => $orders, 'request' => null]);
     }
@@ -50,7 +52,7 @@ class OrderController extends Controller
             return redirect()->back();
         }
 
-        $orders = $this->order->with('user')->filter($filters)->paginate(20);
+        $orders = $this->orderRepository->with('user')->filter($filters)->paginate();
 
         return view('admin.order.orders', compact('orders', 'request'));
     }
@@ -81,7 +83,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order = $this->order->with('user')->findOrFail($id);
+        $order = $this->orderRepository->with('user')->find($id);
         $closed = in_array($order->status, config('constants.order_status_finished'));
 
         return view('admin.order.edit', compact('order', 'closed'));

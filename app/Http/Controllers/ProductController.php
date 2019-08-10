@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Filters\ProductFilter;
+use App\Services\ProductService;
+use App\Repositories\ProductRepository;
+use App\Repositories\CategoryRepository;
 use App\Http\Requests\Product\ProductStoreRequest;
 use App\Http\Requests\Product\ProductActionRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Http\Requests\Product\ProductUpdateAsyncRequest;
-use App\Services\ProductService;
 
 class ProductController extends Controller
 {
@@ -18,14 +19,14 @@ class ProductController extends Controller
      * ProductController constructor
      *
      * @param ProductService $productService
-     * @param Product $product
-     * @param Category $category
+     * @param ProductRepository $productRepository
+     * @param CategoryRepository $categoryRepository
      */
-    public function __construct(ProductService $productService, Product $product, Category $category)
+    public function __construct(ProductService $productService, ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
         $this->productService = $productService;
-        $this->product = $product;
-        $this->category = $category;
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -35,8 +36,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->product->with('categories')->paginate(20);
-        $categories = $this->category->all();
+        $products = $this->productRepository->with('categories')->paginate();
+        $categories = $this->categoryRepository->all();
 
         return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => null]);
     }
@@ -56,8 +57,8 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        $products = $this->product->with('categories')->filter($filters)->paginate(20);
-        $categories = $this->category->all();
+        $products = $this->productRepository->with('categories')->filter($filters)->paginate();
+        $categories = $this->categoryRepository->all();
 
         return view('admin.product.catalog', compact('products', 'categories', 'request'));
     }
@@ -69,10 +70,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->child()->get();
+        $categories = $this->categoryRepository->child()->get();
 
         if (old('category')) {
-            $category = $this->category->with('specifications.properties')->find(old('category'));
+            $category = $this->categoryRepository->with('specifications.properties')->find(old('category'));
         } else {
             $category = null;
         }
@@ -88,7 +89,7 @@ class ProductController extends Controller
      */
     public function createAsync(Request $request)
     {
-        $category = $this->category->with('specifications.properties')->find($request->selectFieldValue);
+        $category = $this->categoryRepository->with('specifications.properties')->find($request->selectFieldValue);
         $view = view('partials.admin.product.specifications', ['category'=> $category])->render();
 
         if ($view) {
@@ -120,10 +121,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $product = $this->product->with('categories.specifications.properties')->find($product->id);
+        $product = $this->productRepository->with('categories.specifications.properties')->find($product->id);
 
         if (!$product->getCategoryId()->isEmpty()) {
-            $category = $this->category->getCategoryWithPropertiesById($product->getCategoryId());
+            $category = $this->categoryRepository->with('specifications.properties')->find($product->getCategoryId());
         } else {
             $category = null;
         }

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Specification;
+use App\Repositories\SpecificationRepository;
 
 class SpecificationService
 {
@@ -10,22 +11,19 @@ class SpecificationService
      * @var array
      */
     public $message;
-
-    /**
-     * @var Specification
-     */
-    protected $specification;
     
     /**
      * Create a new service instance.
+     * 
+     * @param SpecificationRepository $specificationRepository
      */
-    public function __construct(Specification $specification)
+    public function __construct(SpecificationRepository $specificationRepository)
     {
         $this->message = [
             'type' => null,
             'content' => null
         ];
-        $this->specification = $specification;
+        $this->specificationRepository = $specificationRepository;
     }
 
     /**
@@ -41,7 +39,7 @@ class SpecificationService
 
             switch ($data['mass-action']) {
                 case 1:
-                    $this->specification->deleteSpecification($specificationIds);
+                    $this->specificationRepository->delete($specificationIds);
 
                     $this->message = [
                         'type' => 'message-success',
@@ -62,7 +60,7 @@ class SpecificationService
      */
     public function store(array $data)
     {
-        Specification::create($data);
+        $this->specificationRepository->create($data);
         
         $this->message = [
             'type' => 'message-success',
@@ -78,7 +76,7 @@ class SpecificationService
      */
     public function update(array $data, Specification $specification)
     {
-        $specification->update($data);
+        $this->specificationRepository->update($data, $specification);
         
         $this->message = [
             'type' => 'message-success',
@@ -93,7 +91,7 @@ class SpecificationService
      */
     public function delete(Specification $specification)
     {
-        $specification->deleteSpecification();
+        $this->specificationRepository->delete($specification->id);
 
         $this->message = [
             'type' => 'message-success',

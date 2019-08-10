@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Property;
 use App\Models\Specification;
+use App\Repositories\PropertyRepository;
 
 class PropertyService
 {
@@ -11,22 +12,19 @@ class PropertyService
      * @var array
      */
     public $message;
-
-    /**
-     * @var Property
-     */
-    protected $property;
     
     /**
      * Create a new service instance.
+     * 
+     * @param PropertyRepository $propertyRepository
      */
-    public function __construct(Property $property)
+    public function __construct(PropertyRepository $propertyRepository)
     {
         $this->message = [
             'type' => null,
             'content' => null
         ];
-        $this->property = $property;
+        $this->propertyRepository = $propertyRepository;
     }
 
     /**
@@ -42,7 +40,7 @@ class PropertyService
 
             switch ($data['mass-action']) {
                 case 1:
-                    $this->property->deleteProperty($propertyIds);
+                    $this->propertyRepository->delete($propertyIds);
 
                     $this->message = [
                         'type' => 'message-success',
@@ -66,7 +64,7 @@ class PropertyService
     {
         $data['specification_id'] = $specification->id;
 
-        Property::create($data);
+        $this->propertyRepository->create($data);
 
         $this->message = [
             'type' => 'message-success',
@@ -82,7 +80,7 @@ class PropertyService
      */
     public function update(array $data, Property $property)
     {
-        $property->update($data);
+        $this->propertyRepository->update($data, $property);
 
         $this->message = [
             'type' => 'message-success',
@@ -97,7 +95,7 @@ class PropertyService
      */
     public function delete(Property $property)
     {
-        $property->deleteProperty();
+        $this->propertyRepository->delete($property->id);
 
         $this->message = [
             'type' => 'message-success',

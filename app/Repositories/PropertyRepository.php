@@ -1,10 +1,10 @@
 <?php
 
-namespace DummyNamespace;
+namespace App\Repositories;
 
 use App\Repositories\Repository;
 
-class DummyClass extends Repository
+class PropertyRepository extends Repository
 {
     /**
      * Specify Model class name
@@ -13,6 +13,6 @@ class DummyClass extends Repository
      */
     function model()
     {
-        //return 'App\Models\Example';
+        return 'App\Models\Property';
     }
 }

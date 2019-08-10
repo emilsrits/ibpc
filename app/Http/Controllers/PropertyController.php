@@ -16,12 +16,10 @@ class PropertyController extends Controller
      * PropertyController constructor
      *
      * @param PropertyService $propertyService
-     * @param Property $property
      */
-    public function __construct(PropertyService $propertyService, Property $property)
+    public function __construct(PropertyService $propertyService)
     {
         $this->propertyService = $propertyService;
-        $this->property = $property;
     }
 
     /**

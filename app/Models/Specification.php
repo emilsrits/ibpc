@@ -43,21 +43,4 @@ class Specification extends Model
     {
         return $this->belongsToMany(Category::class, 'category_specification', 'specification_id', 'category_id');
     }
-
-    /**
-     * Delete specification
-     *
-     * @param mixed $ids
-     */
-    public function deleteSpecification($ids = null)
-    {
-        if (is_array($ids)) {
-            foreach ($ids as $id => $value) {
-                $specification = Specification::find($id);
-                $specification->destroy($id);
-            }
-        } else {
-            $this->destroy($this->id);
-        }
-    }
 }

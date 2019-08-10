@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Repositories\UserRepository;
 
 class UserService
 {
@@ -12,23 +13,19 @@ class UserService
     public $message;
 
     /**
-     * @var User
-     */
-    protected $user;
-
-    /**
      * Create a new service instance.
      * 
-     * @param array $message
      * @param User $user
+     * @param UserRepository $userRepository
      */
-    public function __construct(User $user)
+    public function __construct(User $user, UserRepository $userRepository)
     {
         $this->message = [
             'type' => null,
             'content' => null
         ];
         $this->user = $user;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -81,7 +78,7 @@ class UserService
         }
         unset($data['role']);
 
-        $user->update($data);
+        $this->userRepository->update($data, $user);
 
         $this->message = [
             'type' => 'message-success',

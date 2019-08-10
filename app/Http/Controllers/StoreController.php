@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\Category;
 use App\Http\Requests\Store\StoreSearchRequest;
+use App\Repositories\ProductRepository;
+use App\Repositories\CategoryRepository;
 
 class StoreController extends Controller
 {
     /**
      * StoreController constructor
      *
-     * @param Product $product
-     * @param Category $category
+     * @param ProductRepository $productRepository
+     * @param CategoryRepository $categoryRepository
      */
-    public function __construct(Product $product, Category $category)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
     {
-        $this->product = $product;
-        $this->category = $category;
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -27,7 +27,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $products = $this->product->active()->paginate(12);
+        $products = $this->productRepository->active()->paginate(16);
 
         return view('store.index', compact('products'));
     }
@@ -40,7 +40,7 @@ class StoreController extends Controller
      */
     public function search(StoreSearchRequest $request)
     {
-        $products = $this->product->getByTitleAndCode($request->q)->paginate(12);
+        $products = $this->productRepository->active()->getByTitleOrCode($request->q)->paginate(16);
 
         return view('store.index', compact('products'));
     }
@@ -54,8 +54,8 @@ class StoreController extends Controller
      */
     public function categorize($top_level, $child)
     {
-        $categoryId = $this->category->ofSlug($child)->first()->id;
-        $products = $this->product->getByCategoryId($categoryId)->paginate(12);
+        $categoryId = $this->categoryRepository->findBy('slug', $child)->id;
+        $products = $this->productRepository->active()->getByCategoryId($categoryId)->paginate(16);
         
         return view('store.index', compact('products'));
     }
@@ -68,7 +68,7 @@ class StoreController extends Controller
      */
     public function show($code)
     {
-        $product = $this->product->with('properties.specification')->ofCode($code)->first();
+        $product = $this->productRepository->with('properties.specification')->findBy('code', $code);
 
         return view('store.product', compact('product'));
     }

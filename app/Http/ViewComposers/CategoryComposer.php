@@ -3,48 +3,30 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use App\Models\Category;
+use App\Repositories\CategoryRepository;
 
 class CategoryComposer
 {
     /**
-     * Parent categories.
-     *
-     * @var Category
-     */
-    protected $parent;
-
-    /**
-     * Child categories.
-     *
-     * @var Category
-     */
-    protected $child;
-
-    /**
      * Create a new category composer.
      *
-     * @param  Category  $parent
-     * @param Category $child
-     * @return void
+     * @param  CategoryRepository  $categoryRepository
      */
-    public function __construct(Category $parent, Category $child)
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->parent = $parent;
-        $this->child = $child;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
      * Bind data to the view.
      *
      * @param  View  $view
-     * @return void
      */
     public function compose(View $view)
     {
         $view->with([
-            'parentCategories' => $this->parent->top()->active()->get(),
-            'childCategories' => $this->child->child()->active()->get()
+            'parentCategories' => $this->categoryRepository->parent()->active()->get(),
+            'childCategories' => $this->categoryRepository->child()->active()->get()
         ]);
     }
 }

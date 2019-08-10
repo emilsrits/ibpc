@@ -10,7 +10,7 @@ interface RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function all($columns = ['*']);
+    public function all(array $columns = ['*']);
 
     /**
      * Alias for retrieve all
@@ -18,7 +18,7 @@ interface RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function get($columns = ['*']);
+    public function get(array $columns = ['*']);
 
     /**
      * Retrieve all of repository, paginated
@@ -27,7 +27,7 @@ interface RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function paginate($limit = null, $columns = ['*']);
+    public function paginate($limit = null, array $columns = ['*']);
 
     /**
      * Find data by id
@@ -36,7 +36,7 @@ interface RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function find($id, $columns = ['*']);
+    public function find($id, array $columns = ['*']);
 
     /**
      * Find data by field value
@@ -46,7 +46,7 @@ interface RepositoryInterface
      * @param array $columns
      * @return mixed
      */
-    public function findBy($column, $value, $columns = ['*']);
+    public function findBy($column, $value, array $columns = ['*']);
 
     /**
      * Create a new entity
@@ -89,6 +89,31 @@ interface RepositoryInterface
      * @return $this
      */
     public function with($relations);
+
+    /**
+     * Add count of relations to collection
+     *
+     * @param mixed $relations
+     * @return $this
+     */
+    public function withCount($relations);
+
+    /**
+     * Load where model has relations
+     *
+     * @param string $relations
+     * @return $this
+     */
+    public function has(string $relation);
+
+    /**
+     * Load relation with closure
+     *
+     * @param string $relation
+     * @param $closure
+     * @return $this
+     */
+    public function whereHas(string $relation, $closure);
 
     /**
      * Order a collection by column

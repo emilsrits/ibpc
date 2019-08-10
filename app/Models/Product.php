@@ -74,41 +74,7 @@ class Product extends Model
     }
 
     /**
-     * Query to only include products matched by code
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $code
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOfCode($query, $code)
-    {
-        return $query->where('code', '=' , $code);
-    }
-
-    /**
-     * Query to only include active products
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeActive($query)
-    {
-        return $query->where('status', '=' , 1);
-    }
-
-    /**
-     * Query to only include stocked products
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeStocked($query)
-    {
-        return $query->where('stock', '>', 0);
-    }
-
-    /**
-     * Delete a product
+     * Check if a product can be deleted then delete it
      *
      * @param mixed $ids
      * @return bool
@@ -275,20 +241,6 @@ class Product extends Model
     }
 
     /**
-     * Get products which title or code match the input
-     *
-     * @param string $input
-     * @return Product
-     */
-    public function getByTitleAndCode($input)
-    {
-        return $this->active()->where(function ($query) use ($input) {
-            $query->where('title', 'like', '%'.$input.'%')
-                ->orWhere('code', 'like', '%'.$input.'%');
-        });
-    }
-
-    /**
      * Group product properties by their specifications
      * 
      * @return array
@@ -305,19 +257,6 @@ class Product extends Model
         });
 
         return $grouped->toArray();
-    }
-
-    /**
-     * Get products under specific category
-     *
-     * @param integer $categoryId
-     * @return Product
-     */
-    public function getByCategoryId($categoryId)
-    {
-        return $this->active()->whereHas('categories', function ($query) use ($categoryId) {
-            $query->where('category_id', $categoryId);
-        });
     }
 
     /**

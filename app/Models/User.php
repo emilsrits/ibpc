@@ -171,6 +171,45 @@ class User extends Authenticatable
     }
 
     /**
+     * Find specific order
+     *
+     * @param $id
+     * @return Order
+     */
+    public function getOrder($id)
+    {
+        return $this->orders()->findOrFail($id);
+    }
+
+    /**
+     * Get collection of active orders
+     *
+     * @param null $limit
+     * @return mixed
+     */
+    public function getActiveOrders($limit = null)
+    {
+        if ($limit) {
+            return $this->orders()->active()->paginate($limit);
+        }
+        return $this->orders()->active()->get();
+    }
+
+    /**
+     * Get collection of finished orders
+     *
+     * @param null $limit
+     * @return mixed
+     */
+    public function getFinishedOrders($limit = null)
+    {
+        if ($limit) {
+            return $this->orders()->finished()->paginate($limit);
+        }
+        return $this->orders()->finished()->get();
+    }
+
+    /**
      * Update user roles
      *
      * @param array $roles

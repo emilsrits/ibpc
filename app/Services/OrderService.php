@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Models\Cart;
-use App\Models\User;
 use App\Models\Order;
 use App\Events\OrderCreated;
 use App\Events\InvoiceResent;
+use App\Repositories\UserRepository;
 
 class OrderService
 {
@@ -14,22 +14,21 @@ class OrderService
      * @var array
      */
     public $message;
-
-    /**
-     * @var Order
-     */
-    protected $order;
     
     /**
      * Create a new service instance.
+     * 
+     * @param Order $order
+     * @param UserRepository $userRepository
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, UserRepository $userRepository)
     {
         $this->message = [
             'type' => null,
             'content' => null
         ];
         $this->order = $order;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -157,7 +156,7 @@ class OrderService
      */
     public function invoice(Order $order)
     {
-        $user = User::find($order->user->id);
+        $user = $this->userRepository->find($order->user->id);
 
         event(new InvoiceResent($order, $user));
 

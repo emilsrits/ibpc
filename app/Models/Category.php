@@ -59,52 +59,7 @@ class Category extends Model
     }
 
     /**
-     * Query to only include category with matching slug
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $slug
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOfSlug($query, $slug)
-    {
-        return $query->where('slug', $slug);
-    }
-
-    /**
-     * Query to only include top level categories
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeTop($query)
-    {
-        return $query->where('top_level', 1);
-    }
-
-    /**
-     * Query to only include child categories
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeChild($query)
-    {
-        return $query->where('top_level', 0);
-    }
-
-    /**
-     * Query to only include active categories
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeActive($query)
-    {
-        return $query->where('status', 1);
-    }
-
-    /**
-     * Delete a category
+     * Check if a category can be deleted then delete it
      *
      * @param mixed $ids
      * @return bool
@@ -168,17 +123,6 @@ class Category extends Model
     public function updateSpecifications(array $data)
     {
         $this->specifications()->sync(array_column($data, 'id'));
-    }
-
-    /**
-     * Get a category with specifications and properties by id
-     *
-     * @param string $id
-     * @return Category
-     */
-    public function getCategoryWithPropertiesById($id)
-    {
-        return $this->with('specifications.properties')->find($id);
     }
 
     /**

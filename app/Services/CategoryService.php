@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Repositories\CategoryRepository;
 
 class CategoryService
 {
@@ -10,24 +11,21 @@ class CategoryService
      * @var array
      */
     public $message;
-
-    /**
-     * @var Category
-     */
-    protected $category;
     
     /**
      * Create a new service instance.
      * 
      * @param Category $category
+     * @param CategoryRepository $categoryRepository
      */
-    public function __construct(Category $category)
+    public function __construct(Category $category, CategoryRepository $categoryRepository)
     {
         $this->message = [
             'type' => null,
             'content' => null
         ];
         $this->category = $category;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -87,7 +85,7 @@ class CategoryService
      */
     public function store(array $data)
     {
-        $category = Category::create($data);
+        $category = $this->categoryRepository->create($data);
 
         if (isset($data['spec'])) {
             $category->setSpecifications($data['spec']);
@@ -107,7 +105,7 @@ class CategoryService
      */
     public function update(array $data, Category $category)
     {
-        $category->update($data);
+        $this->categoryRepository->update($data, $category);
 
         if (isset($data['spec'])) {
             $category->updateSpecifications($data['spec']);

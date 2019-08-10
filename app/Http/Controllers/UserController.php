@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Role;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Requests\User\UserActionRequest;
 use App\Filters\UserFilter;
 use App\Services\UserService;
+use App\Repositories\UserRepository;
+use App\Repositories\RoleRepository;
 
 class UserController extends Controller
 {
@@ -15,14 +16,14 @@ class UserController extends Controller
      * UserController constructor
      *
      * @param UserService $userService
-     * @param User $user
-     * @param Role $role
+     * @param UserRepository $userRepository
+     * @param RoleRepository $roleRepository
      */
-    public function __construct(UserService $userService, User $user, Role $role)
+    public function __construct(UserService $userService, UserRepository $userRepository, RoleRepository $roleRepository)
     {
         $this->userService = $userService;
-        $this->user = $user;
-        $this->role = $role;
+        $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -33,7 +34,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.user.users', [
-            'users' => $this->user->oldest('id')->paginate(20), 
+            'users' => $this->userRepository->paginate(),
             'request' => null
         ]);
     }
@@ -53,7 +54,7 @@ class UserController extends Controller
             $request->session()->flash($this->userService->message['type'], $this->userService->message['content']);
         }
 
-        $users = $this->user->filter($filters)->paginate(20);
+        $users = $this->userRepository->filter($filters)->paginate();
 
         return view('admin.user.users', compact('users', 'request'));
     }
@@ -66,7 +67,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = $this->role->all();
+        $roles = $this->roleRepository->all();
 
         return view('admin.user.edit', compact('user', 'roles'));
     }

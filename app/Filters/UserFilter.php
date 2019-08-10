@@ -27,7 +27,7 @@ class UserFilter extends QueryFilter
     public function user($user)
     {
         if (is_numeric($user)) {
-            return $this->builder->where('id', $user);  
+            return $this->builder->where('id', $user);
         }
 
         return $this->builder->where(DB::raw('CONCAT_WS(" ", first_name, last_name)'), 'like', '%'.$user.'%');

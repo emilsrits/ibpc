@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Models\Media;
+use App\Repositories\ProductRepository;
 
 class ProductService
 {
@@ -11,22 +12,21 @@ class ProductService
      * @var array
      */
     public $message;
-
-    /**
-     * @var Product
-     */
-    protected $product;
     
     /**
      * Create a new service instance.
+     * 
+     * @param Product $product
+     * @param ProductRepository $productRepository
      */
-    public function __construct(Product $product)
+    public function __construct(Product $product, ProductRepository $productRepository)
     {
         $this->message = [
             'type' => null,
             'content' => null
         ];
         $this->product = $product;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -86,7 +86,7 @@ class ProductService
     {
         $data['price'] = parseMoneyByDecimal($data['price']);
 
-        $product = Product::create(arrayExclude($data, [
+        $product = $this->productRepository->create(arrayExclude($data, [
             'category', 'properties', 'media'
         ]));
 
@@ -132,9 +132,9 @@ class ProductService
         
         $data['price'] = parseMoneyByDecimal($data['price']);
         
-        $product->update(arrayExclude($data, [
+        $this->productRepository->update(arrayExclude($data, [
             'category', 'properties', 'media'
-        ]));
+        ]), $product);
 
         // Update product properties
         if (isset($data['properties'])) {
@@ -179,7 +179,7 @@ class ProductService
     {
         $productId = $data['productId'];
         $mediaId = $data['mediaId'];
-        $product = Product::findOrFail($productId);
+        $product = $this->productRepository->find($productId);
 
         if ($product) {
             $product->media->find($mediaId)->delete();

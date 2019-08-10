@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Specification;
 use App\Models\Category;
 use App\Http\Requests\Category\CategoryActionRequest;
 use App\Http\Requests\Category\CategoryStoreRequest;
 use App\Http\Requests\Category\CategoryUpdateRequest;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
+use App\Repositories\CategoryRepository;
+use App\Repositories\SpecificationRepository;
 
 class CategoryController extends Controller
 {
@@ -16,14 +17,14 @@ class CategoryController extends Controller
      * CategoryController constructor
      *
      * @param CategoryService $categoryService
-     * @param Category $category
-     * @param Specification $specification
+     * @param CategoryRepository $categoryRepository
+     * @param SpecificationRepository $specificationRepository
      */
-    public function __construct(CategoryService $categoryService, Category $category, Specification $specification)
+    public function __construct(CategoryService $categoryService, CategoryRepository $categoryRepository, SpecificationRepository $specificationRepository)
     {
         $this->categoryService = $categoryService;
-        $this->category = $category;
-        $this->specification = $specification;
+        $this->categoryRepository = $categoryRepository;
+        $this->specificationRepository = $specificationRepository;
     }
 
     /**
@@ -33,7 +34,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->category->paginate(20);
+        $categories = $this->categoryRepository->paginate();
 
         return view('admin.category.categories', compact('categories'));
     }
@@ -62,7 +63,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $specifications = $this->specification->oldest('name')->get();
+        $specifications = $this->specificationRepository->orderBy('name')->get();
 
         return view('admin.category.create', compact('specifications'));
     }
@@ -89,7 +90,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $specifications = $this->specification->oldest('name')->get();
+        $specifications = $this->specificationRepository->orderBy('name')->get();
 
         return view('admin.category.edit', compact('category', 'specifications'));
     }

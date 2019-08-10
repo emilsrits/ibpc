@@ -8,6 +8,7 @@ use App\Services\SpecificationService;
 use App\Http\Requests\Specification\SpecificationStoreRequest;
 use App\Http\Requests\Specification\SpecificationActionRequest;
 use App\Http\Requests\Specification\SpecificationUpdateRequest;
+use App\Repositories\SpecificationRepository;
 
 class SpecificationController extends Controller
 {
@@ -15,12 +16,12 @@ class SpecificationController extends Controller
      * SpecificationController constructor
      *
      * @param SpecificationService $specificationService
-     * @param Specification $specification
+     * @param SpecificationRepository $specificationRepository
      */
-    public function __construct(SpecificationService $specificationService, Specification $specification)
+    public function __construct(SpecificationService $specificationService, SpecificationRepository $specificationRepository)
     {
         $this->specificationService = $specificationService;
-        $this->specification = $specification;
+        $this->specificationRepository = $specificationRepository;
     }
 
     /**
@@ -30,7 +31,7 @@ class SpecificationController extends Controller
      */
     public function index()
     {
-        $specifications = $this->specification->paginate(20);
+        $specifications = $this->specificationRepository->paginate();
 
         return view('admin.specification.specifications', compact('specifications'));
     }
