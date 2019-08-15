@@ -1,0 +1,45 @@
+/* GENERAL */
+body {
+  font-size: $font-size-base;
+  color: $font-color-base;
+  line-height: $line-height-base;
+  background-color: $body-background-color;
+}
+
+main {
+  margin: 50px auto 0;
+  padding-bottom: 50px;
+  min-height: 1000px;
+}
+
+a {
+  color: $font-color-base;
+  &:hover, &:focus {
+    color: $color-accent-darker-green;
+    text-decoration: none;
+  }
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+  vertical-align: baseline;
+}
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+/* APP */
+#app {
+  position: relative;
+  margin: auto;
+  max-width: 1920px;
+}

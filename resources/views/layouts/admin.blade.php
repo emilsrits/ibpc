@@ -25,7 +25,7 @@
     </script>
 </head>
 <body>
-    <div id="wrapper">
+    <div id="app">
         @yield('modal')
         @include('partials.admin.header')
 

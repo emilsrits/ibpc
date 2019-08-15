@@ -6,6 +6,7 @@ use App\Models\Media;
 use App\Models\Order;
 use App\Observers\MediaObserver;
 use App\Observers\OrderObserver;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
 
         Media::observe(MediaObserver::class);
         Order::observe(OrderObserver::class);
+
+        Paginator::defaultView('vendor.pagination.default');
+        Paginator::defaultSimpleView('vendor.pagination.simple-default');
     }
 
     /**

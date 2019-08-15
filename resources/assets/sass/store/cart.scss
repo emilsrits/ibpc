@@ -1,0 +1,141 @@
+/* CART */
+#shopping-cart-form {
+  #qty {
+    width: 50px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    background: $color_lightGray;
+    border: 1px $color_gray solid;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color ease-in-out .25s;
+    &:focus {
+      border: 1px solid $color_orange;
+    }
+  }
+
+  .cart-total {
+    margin: 10px 10px 20px;
+
+    strong {
+      font-size: 16px;
+    }
+  }
+
+  .cart-update {
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  .cart-checkout {
+    margin-left: auto;
+    padding: 10px;
+    width: 300px;
+    text-align: right;
+  }
+}
+
+#shopping-cart-table {
+  width: 100%;
+
+  tr {
+    background-color: $color_white;
+    border-bottom: 1px solid $color_lightGray;
+  }
+
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .table-head {
+    padding: 5px 0;
+    > tr {
+      line-height: 30px;
+    }
+
+    th {
+      padding: 10px 5px;
+      color: $color_red;
+      font-weight: bold;
+    }
+  }
+
+  .table-body {
+    td {
+      padding: 15px;
+      line-height: 20px;
+    }
+  }
+
+  .cart-item-remove {
+    color: $color_black;
+    &:hover {
+      color: $color_red;
+    }
+  }
+
+  .cart-item-media {
+    img {
+      margin: auto;
+      width: auto;
+      max-height: 50px;
+    }
+  }
+
+  .cart-item-price {
+    min-width: 100px;
+  }
+}
+
+.cart-empty {
+  margin: 40px auto;
+  text-align: center;
+  > h2 {
+    margin-bottom: 50px;
+    font-size: 24px;
+    text-transform: uppercase;
+  }
+  > a {
+    padding: 5px 10px;
+    color: $color_black;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    background-color: $color_orange;
+    border: 1px solid $color_black;
+    transition: background ease-in-out .25s;
+    &:hover {
+      color: $color_black;
+      background-color: $color_red;
+    }
+  }
+}
+
+/* RESPONSIVE STYLES */
+@include until($desktop) {
+  #shopping-cart-form {
+    #shopping-cart-table {
+      .table-headers {
+        th {
+          font-size: 13px;
+        }
+      }
+      .table-body {
+        td {
+          padding: 15px 10px;
+          font-size: 13px;
+        }
+      }
+      #qty {
+        width: 40px;
+        font-size: 14px;
+      }
+    }
+    .cart-checkout {
+      margin: 15px auto;
+    }
+  }
+}

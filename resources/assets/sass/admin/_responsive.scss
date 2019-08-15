@@ -1,4 +1,4 @@
-@media only screen and (max-width: $mobile-md - 1) {
+@include until($desktop) {
   .product-media {
     input[type="file"] {
       width: 160px;

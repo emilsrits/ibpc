@@ -1,0 +1,52 @@
+#categorize {
+  padding: 5px 5px 5px 10px;
+  background-color: $color-accent-darkest-gray;
+}
+
+.category {
+  &.is-active {
+    .category-list {
+      display: block;
+    }
+
+    .category-toggle i {
+      transform: rotate(180deg); 
+    }
+  }
+
+  a {
+    display: block;
+    padding: 3px 0;
+  }
+
+  .category-header {
+    position: relative;
+    font-weight: bold;
+  }
+
+  .category-toggle {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .category-name {
+    display: inline-block;
+    position: relative;
+  }
+
+  .category-list {
+    display: none;
+    padding-left: $size-7;
+    font-size: $size-7;
+
+    a span {
+      color: $font-color-darker;
+    }
+  }
+}

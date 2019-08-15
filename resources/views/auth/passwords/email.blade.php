@@ -1,41 +1,33 @@
 @extends('layouts.master')
 
-<!-- Main Content -->
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div id="authorization" class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
+<div class="container is-fluid">
+    <div class="columns">
+        <div class="column is-8 is-offset-2">
+            <div id="authorization" class="panel">
+                <p class="panel-heading">Reset Password</p>
+
+                <div class="panel-block">
                     @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
+                        <p class="alert alert-success">{{ session('status') }}</p>
                     @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
+                    <form class="form" role="form" method="POST" action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                        <div class="field">
+                            <label for="email" class="label">Email</label>
+                            <div class="control">
+                                <input id="email" class="input" type="email" name="email" value="{{ old('email') }}" required autofocus>
                             </div>
+                            @if ($errors->has('email'))
+                                <p class="help is-danger">{{ $errors->first('email') }}</p>
+                            @endif
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link" type="submit">Send Password Reset Link</button>
                             </div>
                         </div>
                     </form>

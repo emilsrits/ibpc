@@ -1,0 +1,22 @@
+/* HELPERS */
+.radio, .checkbox {
+  &:hover {
+    color: $color-accent-darker-green;
+  }
+}
+
+.shadow {
+  -moz-box-shadow: inset 0 0 10px rgba(107, 110, 112, .8);
+  -webkit-box-shadow: inset 0 0 10px rgba(107, 110, 112, .8);
+  box-shadow: inset 0 2px 5px rgba(107, 110, 112, .8);
+}
+
+/* RESPONSIVE */
+@include until($desktop) {
+  .hidden-xs {
+    display: none;
+  }
+  .visible-xs {
+    display: block;
+  }
+}

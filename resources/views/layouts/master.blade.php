@@ -17,7 +17,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
 	@yield('styles')
 
-	<!-- Scripts -->
+	<!-- Scripts Head -->
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -25,25 +25,21 @@
     </script>
 </head>
 <body>
-	<div id="wrapper">
+	<div id="app">
         @yield('modal')
 		@include('partials.header')
-		@include('partials.widgets.category_navigation')
 
 		<main>
-			<div class="container-inner cf">
-				@yield('content')
-			</div>
+			@yield('content')
 		</main>
 
 		@include('partials.footer')
 	</div>
 
-	<!-- Scripts -->
-	<script type="text/javascript" src="{{ URL::to('/js/jquery.min.js') }}"></script>
-	<script type="text/javascript" src="{{ URL::to('/js/bootstrap.min.js') }}"></script>
-	<script type="text/javascript" src="{{ URL::to('/js/magnific-popup.min.js') }}"></script>
-	<script type="text/javascript" src="{{ URL::to('/js/app.js') }}"></script>
+	<!-- Scripts Body -->
+	<script src="{{ URL::to('/js/jquery.min.js') }}"></script>
+	<script src="{{ URL::to('/js/magnific-popup.min.js') }}"></script>
+	<script src="{{ mix('/js/app.js') }}"></script>
 	@yield('scripts')
 </body>
 </html>

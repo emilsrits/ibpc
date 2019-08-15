@@ -1,10 +1,16 @@
 /node_modules
 /public/storage
+/public/hot
 /vendor
 /.idea
 /.vscode
+/storage/*.key
 Homestead.json
 Homestead.yaml
 .env
+.env.backup
 .env.testing
 .env.dusk.local
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log

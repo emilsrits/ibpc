@@ -1,0 +1,40 @@
+#authorization {
+  margin-top: 25px;
+  background-color: $color-accent-darkest-gray;
+
+  p.alert {
+    padding: 10px;
+  }
+
+  .panel-block {
+    flex-direction: column;
+  }
+
+  form {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .field.is-grouped {
+    padding-top: 10px;
+    align-items: center;
+
+    .has-text-right {
+      flex: 1 0 auto;
+    }
+  }
+
+  button[type="submit"] {
+    color: $font-color-base;
+    background-color: $color-accent-green;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: $color-accent-darker-green;
+    }
+  }
+
+  .password-reset {
+    font-size: $size-7;
+    text-decoration: underline;
+  }
+}
