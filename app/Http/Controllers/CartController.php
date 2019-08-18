@@ -31,7 +31,7 @@ class CartController extends Controller
     public function index()
     {
         if (!Session::has('cart')) {
-            return view('cart.index');
+            return view('cart.index', ['cart' => null, 'products' => null]);
         }
 
         $cart = new Cart(session('cart'));
@@ -83,7 +83,7 @@ class CartController extends Controller
     public function deleteAsync(CartDeleteAsyncRequest $request)
     {
         $response = $this->cartService->deleteAsync($request->validated());
-        if ($response !== null) {
+        if ($response !== false) {
             return response()->json($response, 200);
         } else {
             return response()->json($response , 400);

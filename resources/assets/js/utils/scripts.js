@@ -9,6 +9,19 @@
             specifications = $('#specifications'),
             massAction = $('#mass-action');
 
+        // Magnific Popup initialize on product images
+        $('.product-media-item > img').magnificPopup({
+            type: 'image',
+            gallery: {
+                enabled:true
+            },
+            callbacks: {
+                elementParse: function(item) {
+                    item.src = item.el.attr('src');
+                }
+            }
+        });
+
         // Hide flash message
         $('.message-close').css('display', 'inline-block').click(function () {
             $('.flash-message').fadeOut(500);
@@ -124,19 +137,6 @@
             $(this).find('#order-submit').addClass('disabled').attr('onclick','return false;');
         });
 
-        // Magnific Popup initialize on product images
-        $('.product-media-item > img').magnificPopup({
-            type: 'image',
-            gallery: {
-                enabled:true
-            },
-            callbacks: {
-                elementParse: function(item) {
-                    item.src = item.el.attr('src');
-                }
-            }
-        });
-
         // Preview uploaded product media
         mediaUpload.on('change', function () {
             var mediaPreview = $('#product-media-preview');
@@ -192,42 +192,6 @@
                 },
                 error: function() {
                     specifications.empty();
-                }
-            });
-        });
-
-        // Add a product to cart
-        itemAdd.on('click', function() {
-            $.ajax({
-                type: 'POST',
-                url: '/cart/add',
-                data: {
-                    productId: $(this).val()
-                },
-                dataType: 'json',
-                success: function(data) {
-                    $('#navbar-cart-items').html(data);
-                },
-                error: function(err) {
-                    console.log("error: " + err);
-                }
-            });
-        });
-
-        // Remove a product from cart
-        itemRemove.on('click', function() {
-            $.ajax({
-                type: 'POST',
-                url: '/cart/remove',
-                data: {
-                    productId: $(this).val()
-                },
-                dataType: 'json',
-                success: function(data) {
-                    window.location.href = data.redirectUrl;
-                },
-                error: function(err) {
-                    console.log("error: " + err);
                 }
             });
         });

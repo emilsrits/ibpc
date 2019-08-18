@@ -24,7 +24,8 @@ class CartStoreAsyncRequest extends FormRequest
     public function rules()
     {
         return [
-            'productId' => 'required|integer|exists:products,id'
+            'productId' => 'required|integer|exists:products,id',
+            'qty' => 'nullable|integer|regex:/^[1-9][0-9]*$/'
         ];
     }
 }

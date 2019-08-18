@@ -5,18 +5,20 @@ $color-accent-darkest-gray: #222629;
 $color-accent-darker-gray: #474B4F;
 $color-accent-gray: #6B6E70;
 
+$color-red: #CC4040;
+$color-orange: #f37c34;
+$color-blue: #3273dc;
+$color-white: #eee;
 $color-black: #1b1b1b;
 $color-transparent-black: rgba(0, 0, 0, .3);
 
-$color-white: #fff;
 $color-lightGray: #eee;
 $color-gray: #E6E6E6;
 $color-darkerGray: #3e3e3e;
 $color-darkGray: #303030;
 $color-darkBrown: #373330;
 $color-brownBlack: #222;
-$color-red: #CC4040;
-$color-orange: #f37c34;
+
 $color-green: #67E824;
 $color-darkGreen: #55bf1e;
 
@@ -68,5 +70,10 @@ $panel-heading-color: $font-color-base;
 $panel-heading-background-color: $color-transparent-black;
 $panel-block-color: $font-color-base;
 $panel-item-border: 1px solid $color-transparent-black;
+
+$table-head-cell-color: $font-color-darker;
+$table-color: $font-color-base;
+$table-background-color: $color-accent-darkest-gray;
+$table-cell-border: 1px solid $color-accent-darker-gray;
 
 @import "../vendor/bulma/utilities/_all.sass";

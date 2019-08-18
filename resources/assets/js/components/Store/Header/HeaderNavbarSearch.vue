@@ -8,18 +8,20 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            route: {
-                type: String,
-                required: true
-            }
+export default {
+    name: 'HeaderNavbarSearch',
+
+    props: {
+        route: {
+            type: String,
+            required: true
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../../../sass/modules/variables.scss";
+@import "../../../../sass/modules/variables.scss";
 
 .search-form {
     .search-container {

@@ -65,7 +65,7 @@ class CartService
      */
     public function storeAsync(array $data)
     {
-        $qty = 1;
+        isset($data['qty']) ? $qty = $data['qty'] : $qty = 1;
 
         $productId = $data['productId'];
         $product = Product::findOrFail($productId);
@@ -78,13 +78,16 @@ class CartService
 
             // Update displayed number of items in cart
             if (Session::has('cart')) {
-                $items = count(Session::get('cart')->items);
-                $html = '(' . $items . ') ' . money(session('cart')->totalPrice);
+                $itemCount = count(Session::get('cart')->items);
+                $response = [
+                    'itemCount' => $itemCount,
+                    'price' => money(session('cart')->totalPrice)->format()
+                ];
             } else {
-                $html = 0;
+                $response = null;
             }
 
-            return $html;
+            return $response;
         } else {
             return null;
         }
@@ -106,11 +109,22 @@ class CartService
 
             Session::put('cart', $cart);
 
-            $cart->isEmpty();
+            if ($cart->isEmpty()) {
+                $response = [
+                    'itemCount' => 0,
+                    'price' => null
+                ];
+            } else {
+                $itemCount = count(Session::get('cart')->items);
+                $response = [
+                    'itemCount' => $itemCount,
+                    'price' => money(session('cart')->totalPrice)->format()
+                ];
+            }
 
-            return array('redirectUrl'=> '/cart');
+            return $response;
         } else {
-            return null;
+            return false;
         }
     }
 

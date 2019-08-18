@@ -24,7 +24,7 @@
 
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <header-navbar-cart 
+                        <header-navbar-cart
                             :cart="cart" 
                             :route="routes.cart"
                         />
@@ -46,7 +46,7 @@
 
                         <div class="navbar-dropdown">
                             <div class="navbar-item">
-                                <a @click="submitLogoutForm">
+                                <a @click.prevent="submitLogoutForm">
                                     <i class="fa fa-sign-out" aria-hidden="true">&nbsp;</i>
                                     Sign Out
                                 </a>
@@ -63,49 +63,53 @@
 </template>
 
 <script>
-    import HeaderNavbarCart from './HeaderNavbarCart.vue';
-    import HeaderNavbarSearch from './HeaderNavbarSearch';
+import HeaderNavbarCart from './HeaderNavbarCart.vue';
+import HeaderNavbarSearch from './HeaderNavbarSearch';
 
-    export default {
-        components: {
-            HeaderNavbarCart,
-            HeaderNavbarSearch
-        },
+export default {
+    name: 'HeaderNavbar',
 
-        props: {
-            user: {
-                type: Object,
-                default() {
-                    return null
-                }
-            },
-            cart: Object,
-            routes: Object,
-            media: Object
-        },
-        
-        data: function () {
-            return {
-                csrf: window.Laravel.csrfToken
+    components: {
+        HeaderNavbarCart,
+        HeaderNavbarSearch
+    },
+
+    props: {
+        user: {
+            type: Object,
+            default() {
+                return null;
             }
         },
-        methods: {
-            toggleNavbar: function (event) {
-                let el = event.currentTarget
-                let target = document.getElementById(el.dataset.target)
-                el.classList.toggle('is-active')
-                target.classList.toggle('is-active')
-            },
-            submitLogoutForm: function (event) {
-                event.preventDefault()
-                document.getElementById('logout-form').submit()
-            }
+        cart: Object,
+        media: Object,
+        routes: Object
+    },
+    
+    data: function () {
+        return {
+            csrf: window.Laravel.csrfToken
+        }
+    },
+    
+    methods: {
+        toggleNavbar(event) {
+            let el = event.currentTarget;
+            let target = document.getElementById(el.dataset.target);
+
+            el.classList.toggle('is-active');
+            target.classList.toggle('is-active');
+        },
+
+        submitLogoutForm(event) {
+            document.getElementById('logout-form').submit();
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../../../sass/modules/variables.scss";
+@import "../../../../sass/modules/variables.scss";
 
 @include until($desktop) {
     .navbar {

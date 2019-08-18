@@ -3,12 +3,15 @@
         :user="{{ json_encode(Auth::user()) }}"
         @if (Session::has('cart'))
         :cart="{
-            items: {{ json_encode(session('cart')->items) }},
+            itemCount: {{ json_encode(count(session('cart')->items)) }},
             price: '{{ money(session('cart')->totalPrice) }}'
         }"
         @else
         :cart="null"
         @endif
+        :media="{
+            logo: '{{ asset('media/logo.png') }}'
+        }"
         :routes="{
             home: '{{ url('/') }}',
             search: '{{ url('/search/') }}',
@@ -17,9 +20,6 @@
             login: '{{ url('/login') }}',
             register: '{{ url('/register') }}',
             logout: '{{ url('/logout') }}'
-        }"
-        :media="{
-            logo: '{{ asset('media/logo.png') }}'
         }"
     >
     </header-navbar>
