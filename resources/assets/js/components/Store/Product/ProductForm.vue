@@ -81,7 +81,7 @@ export default {
     padding-bottom: 10px;
     font-size: 20px;
     font-weight: bold;
-    border-bottom: 1px solid $color-accent-darkest-gray;
+    border-bottom: 1px solid $color-gray-darkest;
 }
 
 .product-code {
@@ -89,7 +89,7 @@ export default {
 }
 
 .product-price-old {
-    color: $font-color-darker;
+    color: $color-gray-lighter;
 }
 
 .product-price-current {
@@ -120,7 +120,7 @@ export default {
 
 .in-stock .stock-icon {
     > i {
-        color: $color-accent-green;
+        color: $color-green;
     }
 }
 
@@ -139,7 +139,7 @@ export default {
 .form-container {
     margin: 20px 0;
     padding: 15px 0;
-    border-top: 1px solid $color-accent-darkest-gray;
+    border-top: 1px solid $color-gray-darkest;
 }
 
 #product-add-form {
@@ -157,13 +157,13 @@ export default {
         height: 50px;
         font-size: 20px;
         text-align: center;
-        background: $color-accent-darkest-gray;
+        background: $color-gray-darkest;
         border: 1px $color-black solid;
         border-radius: 3px;
         outline: none;
         transition: border-color ease-in-out .25s;
         &:focus {
-            border: 1px solid $color-accent-darker-green;
+            border: 1px solid $color-green-darker;
         }
     }
 }

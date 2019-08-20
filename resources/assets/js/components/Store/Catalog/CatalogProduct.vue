@@ -70,7 +70,7 @@ export default {
 .product-item {
     padding: 10px 10px 4px;
     height: 320px;
-    background-color: $color-transparent-black;
+    background-color: $color-black-transparent;
 
     .product-media {
         margin: 5px auto;
@@ -79,7 +79,7 @@ export default {
         img {
             margin: auto;
             max-height: 120px;
-            border: 2px solid $color-accent-darkest-gray;
+            border: 2px solid $color-gray-darkest;
 
         }
     }
@@ -104,7 +104,7 @@ export default {
     }
 
     .in-stock .stock-text {
-        color: $color-accent-green;
+        color: $color-green;
     }
 
     .low-stock .stock-text {
@@ -117,14 +117,14 @@ export default {
 
         .product-price-old {
             margin: 0;
-            color: $font-color-darker;
+            color: $color-gray-lighter;
             font-size: 13px;
             line-height: 20px;
             text-decoration: line-through;
         }
 
         .product-price-current {
-            color: $font-color-base;
+            color: $color-gray-lighest;
             font-size: 15px;
             font-weight: bold;
             line-height: 25px;
@@ -137,14 +137,14 @@ export default {
             padding: 0;
             width: 40px;
             height: 25px;
-            color: $color-accent-darkest-gray;
+            color: $color-gray-darkest;
             border: none;
             border-radius: 10px;
             background-color: $color-white;
-            box-shadow: inset $color-accent-darkest-gray 0 1px 5px 0;
+            box-shadow: inset $color-gray-darkest 0 1px 5px 0;
             outline: none;
             &:hover {
-                box-shadow: inset $color-accent-darkest-gray 0 1px 5px 1px;
+                box-shadow: inset $color-gray-darkest 0 1px 5px 1px;
             }
             &:focus {
                 outline: 0;

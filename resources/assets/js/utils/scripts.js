@@ -2,8 +2,6 @@
 
     $(document).ready(function() {
         var 
-            itemAdd = $('.product-quick-add'),
-            itemRemove = $('.cart-item-remove'),
             mediaRemove = $('#product-media-preview').find('.product-media-remove'),
             mediaUpload = $('#product-media-upload'),
             specifications = $('#specifications'),
@@ -124,18 +122,6 @@
             }
         };
         confirmAction(actionsCollection);
-
-        // Uncheck other checkboxes when one of delivery options is selected
-        $('.checkout-delivery-storage, .checkout-delivery-address').on('click', function() {
-            var checkbox = $(this).find('input[type="checkbox"]');
-            checkbox.prop('checked', true);
-            $('input[type="checkbox"]').not(checkbox).prop('checked', false);
-        });
-
-        // Disable order submit button after one click
-        $('#checkout-confirm-form').one('submit', function() {
-            $(this).find('#order-submit').addClass('disabled').attr('onclick','return false;');
-        });
 
         // Preview uploaded product media
         mediaUpload.on('change', function () {

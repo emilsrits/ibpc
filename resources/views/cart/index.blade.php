@@ -13,7 +13,9 @@ Shopping Cart
             </div>
 
             <div class="column is-12-mobile is-9-tablet is-10-widescreen">
-                <checkout-cart
+                @include('partials.checkout.checkout_progress', ['step' => 1])
+                
+                <cart-form
                     :cart-total-price="'{{ $cart ? money($cart->totalPrice) : null }}'"
                     :routes="{
                         action: '{{ url('/cart/update') }}',
@@ -59,7 +61,7 @@ Shopping Cart
                             @endforeach
                         </template>
                     @endif
-                </checkout-cart>
+                </cart-form>
             </div>
         </div>
     </div>

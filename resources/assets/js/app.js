@@ -16,7 +16,7 @@ import HeaderNavbar from './components/Store/Header/HeaderNavbar.vue';
 import CatalogProduct from './components/Store/Catalog/CatalogProduct.vue';
 import ProductDetails from './components/Store/Product/ProductDetails.vue';
 import ProductForm from './components/Store/Product/ProductForm.vue';
-import CheckoutCart from './components/Store/Checkout/CheckoutCart.vue';
+import CartForm from './components/Store/Cart/CartForm.vue';
 
 const app = new Vue({
     el: '#app',
@@ -26,6 +26,6 @@ const app = new Vue({
         CatalogProduct,
         ProductDetails,
         ProductForm,
-        CheckoutCart
+        CartForm
     }
 });

@@ -1,109 +1,63 @@
 /* CHECKOUT */
-.checkout-address, .checkout-cart {
-  margin: 20px 0 0;
-  border: 1px solid $color_gray;
-  padding: 20px;
-}
-.checkout-address {
+#checkout-address {
   h4 {
     padding: 15px 0;
     font-weight: bold;
   }
+
   p {
     padding: 0 0 10px;
   }
+
   .checkout-edit {
-    margin-top: 15px;
     text-decoration: underline;
-    float: right;
-  }
-}
-.checkout-cart {
-  .checkout-cart-items {
-    width: 100%;
-
-    .checkout-cart-item {
-      border-bottom: 1px solid $color_lightGray;
-
-      td {
-        &:first-of-type {
-          text-align: left;
-        }
-        &:last-of-type {
-          text-align: right;
-        }
-      }
-    }
-
-    tr {
-      td {
-        padding: 5px 10px;
-      }
-      &:last-of-type {
-        td {
-          font-weight: bold;
-          text-align: right;
-        }
-      }
-    }
-  }
-
-  .btn-checkout {
-    margin-top: 30px;
-    float: right;
   }
 }
 
-.checkout-delivery {
-  margin: 20px 0 0;
+#checkout-cart .button {
+  background-color: $color-green;
+  &:hover {
+    background-color: $color-green-darker;
+  }
+}
+
+#checkout-delivery {
   #checkout-delivery-form {
-    text-align: center;
-    .btn-checkout {
-      margin: 30px 0 0;
+    .button {
+      background-color: $color-green;
+      &:hover {
+        background-color: $color-green-darker;
+      }
     }
-  }
 
-  .checkout-delivery-storage, .checkout-delivery-address {
-    padding: 20px;
-    text-align: center;
-    border: 1px solid $color_gray;
-    cursor: pointer;
-    &:hover {
-      box-shadow: inset $color_darkGray 0 1px 10px 1px;
-    }
-    h4 {
-      font-size: 14px;
-      text-transform: uppercase;
-    }
-    img {
-      max-width: 200px;
-      height: auto;
-    }
-    p {
-      margin: 20px 0 10px;
-      font-weight: bold;
-    }
-    input[type="checkbox"] {
-      margin-top: 10px;
-      cursor: pointer;
+    .delivery-info {
+      padding-left: 25px;
+      color: $color-gray-lighter;
+      list-style: circle;
     }
   }
 }
 
-.checkout-confirm {
-  margin: 20px 0 0;
+#checkout-confirm {
+  #order-submit.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 }
 
-.checkout-success {
-  margin: 20px 0 0;
-  padding: 15px;
+#checkout-success {
   .order-success-message {
-    margin-top: 40px;
+    h4 {
+      margin: 0 0 20px;
+    }
+
     ul {
       list-style-position: inside;
+
       li {
         list-style-type: circle;
         padding: 10px 0;
+
         a {
           text-decoration: underline;
         }
@@ -112,72 +66,24 @@
   }
 }
 
-.checkout-progress {
-  margin: 20px auto;
-  text-align: center;
+.checkout-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto 30px;
+  color: $color-gray-lighest;
 
-  ul {
-    display: inline-block;
+  .steps-segment {
+    padding: 4px 14px;
     text-align: center;
-
-    li {
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 40px;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      border-top: 3px solid $color_lightGray;
-      border-left: 1px solid $color_lightGray;
-      float: left;
-      &:first-of-type {
-        border-left: none;
-      }
-
-      span {
-        padding: 12px 10px 12px 20px;
-        color: $color_gray;
-      }
-
-      i {
-        padding: 12px 20px 12px 0;
-        color: $color_gray;
-      }
+    border-top: 3px solid $color-black-transparent;
+    border-right: 2px solid $color-black-transparent;
+    &.passed {
+      border-top: 3px solid $color-green-darker;
+      border-right: 2px solid $color-green-darker;
     }
-
-    .current {
-      border-top: 3px solid $color_red;
-      border-left: 1px solid $color_red;
-
-      span, i {
-        color: $color_black;
-      }
-    }
-  }
-}
-
-/* RESPONSIVE STYLES */
-@include until($desktop) {
-  .checkout-delivery {
-    #checkout-delivery-form {
-      .checkout-delivery-storage, .checkout-delivery-address {
-        height: auto;
-        img {
-          width: 80px;
-        }
-      }
-    }
-  }
-
-  .checkout-progress {
-    ul {
-      li {
-        span {
-          padding: 12px 10px 12px 13px;
-        }
-        i {
-          padding: 12px 13px 12px 0;
-        }
-      }
+    &:last-of-type {
+      border-right: none;
     }
   }
 }

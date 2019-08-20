@@ -1,6 +1,6 @@
 #categorize {
   padding: 5px 5px 5px 10px;
-  background-color: $color-accent-darkest-gray;
+  background-color: $color-gray-darkest;
 }
 
 .category {
@@ -47,7 +47,7 @@
     font-size: $size-7;
 
     a span {
-      color: $font-color-darker;
+      color: $color-gray-lighter;
     }
   }
 }

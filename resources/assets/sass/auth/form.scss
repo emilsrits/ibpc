@@ -1,6 +1,6 @@
 #authorization {
   margin-top: 25px;
-  background-color: $color-accent-darkest-gray;
+  background-color: $color-gray-darkest;
 
   p.alert {
     padding: 10px;
@@ -25,11 +25,11 @@
   }
 
   button[type="submit"] {
-    color: $font-color-base;
-    background-color: $color-accent-green;
+    color: $color-gray-lighest;
+    background-color: $color-green;
     transition: all 0.3s ease;
     &:hover {
-      background-color: $color-accent-darker-green;
+      background-color: $color-green-darker;
     }
   }
 

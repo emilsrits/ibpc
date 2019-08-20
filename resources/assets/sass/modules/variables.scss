@@ -1,36 +1,25 @@
 // Color variables
-$color-accent-darker-green: #61892F;
-$color-accent-green: #7eb62f;
-$color-accent-darkest-gray: #222629;
-$color-accent-darker-gray: #474B4F;
-$color-accent-gray: #6B6E70;
+$color-green-darker: #61892F;
+$color-green: #7eb62f;
+$color-gray-darkest: #222629;
+$color-gray-darker: #474B4F;
+$color-gray: #6B6E70;
+$color-gray-lighter: #bebebe;
+$color-gray-lighest: #e0e0e0;;
 
 $color-red: #CC4040;
 $color-orange: #f37c34;
 $color-blue: #3273dc;
 $color-white: #eee;
 $color-black: #1b1b1b;
-$color-transparent-black: rgba(0, 0, 0, .3);
-
-$color-lightGray: #eee;
-$color-gray: #E6E6E6;
-$color-darkerGray: #3e3e3e;
-$color-darkGray: #303030;
-$color-darkBrown: #373330;
-$color-brownBlack: #222;
-
-$color-green: #67E824;
-$color-darkGreen: #55bf1e;
+$color-black-transparent: rgba(0, 0, 0, .3);
 
 // Typography
 $font-family-sans-serif: 'Roboto', sans-serif;
 $font-size-base: 14px;
-$font-color-base: #e0e0e0;
-$font-color-darker: #bebebe;
-$font-color-darkest: #666666;
 
 // General
-$body-background-color: $color-accent-darker-gray;
+$body-background-color: $color-gray-darker;
 $line-height-base: 1.6;
 
 // Bulma Override
@@ -38,12 +27,12 @@ $family-sans-serif: $font-family-sans-serif;
 
 $navbar-padding-vertical: 0;
 $navbar-background-color: $color-black;
-$navbar-item-color: $font-color-base;
+$navbar-item-color: $color-gray-lighest;
 $navbar-item-img-max-height: 2.5rem;
-$navbar-item-hover-color: $color-accent-darker-green;
+$navbar-item-hover-color: $color-green-darker;
 $navbar-item-hover-background-color: $color-black;
 
-$navbar-dropdown-arrow: $color-accent-darker-green;
+$navbar-dropdown-arrow: $color-green-darker;
 $navbar-dropdown-background-color: $color-black;
 $navbar-dropdown-boxed-radius: 0;
 $navbar-dropdown-item-hover-background-color: $color-black;
@@ -52,28 +41,31 @@ $navbar-dropdown-offset: 0px;
 $pagination-margin: 1.5rem 0;
 $pagination-item-margin: 0.1rem;
 $pagination-border-color: $color-black;
-$pagination-color: $font-color-darker;
-$pagination-hover-color: $font-color-darkest;
+$pagination-color: $color-gray-lighter;
+$pagination-hover-color: $color-gray;
 $pagination-hover-border-color: $color-black;
 $pagination-focus-border-color: $color-black;
 $pagination-current-border-color: $color-black;
-$pagination-current-color: $font-color-darker;
-$pagination-disabled-color: $font-color-darker;
+$pagination-current-color: $color-gray-lighter;
+$pagination-disabled-color: $color-gray-lighter;
 $pagination-disabled-border-color: $color-black;
 
-$menu-label-color: $font-color-base;
-$menu-item-color: $font-color-base;
+$menu-label-color: $color-gray-lighest;
+$menu-item-color: $color-gray-lighest;
 
-$label-color: $font-color-base;
+$label-color: $color-gray-lighest;
 
-$panel-heading-color: $font-color-base;
-$panel-heading-background-color: $color-transparent-black;
-$panel-block-color: $font-color-base;
-$panel-item-border: 1px solid $color-transparent-black;
+$panel-heading-color: $color-gray-lighest;
+$panel-heading-background-color: $color-black-transparent;
+$panel-block-color: $color-gray-lighest;
+$panel-item-border: 1px solid $color-black-transparent;
 
-$table-head-cell-color: $font-color-darker;
-$table-color: $font-color-base;
-$table-background-color: $color-accent-darkest-gray;
-$table-cell-border: 1px solid $color-accent-darker-gray;
+$table-head-cell-color: $color-gray-lighter;
+$table-color: $color-gray-lighest;
+$table-background-color: $color-gray-darkest;
+$table-cell-border: 1px solid $color-gray-darker;
+
+$box-color: $color-gray-lighest;
+$box-background-color: $color-gray-darkest;
 
 @import "../vendor/bulma/utilities/_all.sass";

@@ -17,13 +17,13 @@
       background-color: #d9edf7;
       border: 1px solid #31708f;
     } .message-warning {
-        color: $color_orange;
+        color: $color-orange;
         background-color: #fff3eb;
-        border: 1px solid $color_orange;
+        border: 1px solid $color-orange;
       } .message-danger {
           color: $color_red;
           background-color: #ffe7e7;
-          border: 1px solid $color_red;
+          border: 1px solid $color-red;
         }
   .message-text {
     word-wrap: break-word;
@@ -34,7 +34,7 @@
     top: 10px;
     right: 10px;
     a, a:hover {
-      color: $color_darkGray;
+      color: $color-gray-darkest;
       opacity: 0.5;
     }
     a:hover {

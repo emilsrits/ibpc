@@ -13,6 +13,7 @@ IBPC
             </div>
 
             <div class="column is-12-mobile is-9-tablet is-10-widescreen">
+                {{ $products->appends(Request::except('page'))->links() }}
                 <div class="columns is-multiline">
                     @foreach($products as $product)
                         <div class="column is-12-mobile is-4-tablet is-3-desktop">

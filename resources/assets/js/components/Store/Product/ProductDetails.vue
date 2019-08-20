@@ -71,20 +71,20 @@ export default {
             }
         }
         &.specification {
-            background-color: $color-accent-darkest-gray;
+            background-color: $color-gray-darkest;
         }
     }
 
     td {
         padding: 4px 5px;
-        color: $font-color-darker;
+        color: $color-gray-lighter;
         &.property, &.value {
-            border-bottom: 1px solid $color-accent-darker-gray;
+            border-bottom: 1px solid $color-gray-darker;
         }
         &.property {
             padding-left: 5px;
             width: 170px;
-            border-right: 2px solid $color-accent-darker-gray;
+            border-right: 2px solid $color-gray-darker;
         }
         &.value {
             padding-left: 10px;

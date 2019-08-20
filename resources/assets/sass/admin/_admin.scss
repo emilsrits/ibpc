@@ -14,7 +14,7 @@
     .dropdown-menu {
       li {
         font-size: 12px;
-        border-bottom: 1px solid $color_brownBlack;
+        border-bottom: 1px solid $color-gray-darkest;
         a {
           padding: 10px;
         }
@@ -70,14 +70,14 @@
   text-transform: uppercase;
   justify-content: center;
   align-items: center;
-  border: 1px solid $color_lightGray;
+  border: 1px solid $color-gray;
   transition: color ease-in-out 0.2s,
   border ease-in-out 0.2s,
   background ease-in-out 0.2s;
   &:hover, &:focus {
     border-color: $color_gray;
-    background-color: $color_lightGray;
-    box-shadow: inset $color_darkGray 0 1px 12px 1px;
+    background-color: $color-gray;
+    box-shadow: inset $color-gray-darkest 0 1px 12px 1px;
   }
   > a {
     display: flex;
@@ -178,9 +178,9 @@
   }
   .table-body {
     tr {
-      border-top: 1px solid $color_lightGray;
+      border-top: 1px solid $color-gray;
       &:hover {
-        background-color: $color_lightGray;
+        background-color: $color-gray;
         box-shadow: inset 0 1px 12px 1px #303030;
       }
     }
@@ -221,7 +221,7 @@
         -moz-box-shadow: none;
         box-shadow: none;
         &:hover, &:focus {
-          background-color: $color_lightGray;
+          background-color: $color-gray;
         }
       }
       input {
@@ -255,30 +255,30 @@
     font-weight: bold;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    border: 1px solid $color_black;
+    border: 1px solid $color-black;
     border-radius: 4px;
     transition: box-shadow ease-in-out .15s;
     &:hover, &:focus {
-      box-shadow: inset $color_darkGray 0 1px 10px 1px;
+      box-shadow: inset $color-gray 0 1px 10px 1px;
     }
   }
   .entity-save {
     padding: 10px 30px;
     color: $color_white;
-    background-color: $color_orange;
+    background-color: $color-orange;
   }
   #entity-delete {
     padding: 10px 15px;
     color: $color_black;
-    background-color: $color_red;
+    background-color: $color-red;
   }
   .content-section-toggle {
     margin: 15px 0 0;
     padding: 10px;
     cursor: pointer;
-    border-bottom: 1px solid $color_lightGray;
+    border-bottom: 1px solid $color-gray;
     > strong {
-      color: $color_red;
+      color: $color-red;
       font-size: 15px;
       letter-spacing: 0.3px;
       text-transform: uppercase;
@@ -301,7 +301,7 @@
   .entity-specification {
     font-weight: bold;
     letter-spacing: 0.2px;
-    border-left: 1px solid $color_orange;
+    border-left: 1px solid $color-orange;
     > td {
       padding: 15px 10px;
       color: $color_black;
@@ -321,7 +321,7 @@
         vertical-align: middle;
       }
       label {
-        color: $color_black;
+        color: $color-black;
       }
       input {
         padding: 2px 3px;
@@ -370,7 +370,7 @@
     width: 200px;
     cursor: pointer;
     &:hover {
-      color: $color_red;
+      color: $color-red;
     }
 
     input {
@@ -393,7 +393,7 @@
     position: relative;
     display: inline-block;
     &.new {
-      border: 1px solid $color_orange;
+      border: 1px solid $color-orange;
     }
   }
 

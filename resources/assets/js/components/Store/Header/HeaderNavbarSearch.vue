@@ -34,7 +34,7 @@ export default {
         left: 0;
         padding: 0px 8px;
         height: 26px;
-        color: $font-color-darker;
+        color: $color-gray-lighter;
         background: 0 0;
         border: none;
         border-top-left-radius: 8px;
@@ -43,7 +43,7 @@ export default {
         cursor: pointer;
         transition: .3s ease-in-out;
         &:hover {
-            color: $color-accent-darker-green;
+            color: $color-green-darker;
             background-color: $color-black;
         }
     }
@@ -52,16 +52,16 @@ export default {
         padding: 0px 8px 0px 36px;
         width: 180px;
         height: 26px;
-        color: $font-color-base;
+        color: $color-gray-lighest;
         font-size: $size-7;
-        background: $color-accent-darkest-gray;
+        background: $color-gray-darkest;
         border: none;
         border-radius: 8px;
         outline: 0;
         vertical-align: middle;
         transition: .3s ease-out;
         &:focus {
-            box-shadow: 0 0 2px $color-accent-darker-green;
+            box-shadow: 0 0 2px $color-green-darker;
         }
     }
 }

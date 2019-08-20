@@ -18,7 +18,7 @@ class CheckoutController extends Controller
         $cart = session('cart');
         $cart->setVat();
 
-        return view('cart.checkout.index', compact('user', 'cart'));
+        return view('checkout.index', compact('user', 'cart'));
     }
 
     /**
@@ -38,7 +38,7 @@ class CheckoutController extends Controller
             return view('cart.checkout.delivery');
         }
 
-        return view('cart.checkout.confirmation', compact('user', 'cart'));
+        return view('checkout.confirmation', compact('user', 'cart'));
     }
 
     /**
@@ -56,6 +56,6 @@ class CheckoutController extends Controller
             return redirect()->back();
         }
 
-        return view('cart.checkout.delivery');
+        return view('checkout.delivery');
     }
 }

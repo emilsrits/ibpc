@@ -1,6 +1,6 @@
 <template>
-    <div id="checkout-cart">
-        <form id="shopping-cart-form" role="form" method="POST" :action="routes.action">
+    <div id="cart-form">
+        <form role="form" method="POST" :action="routes.action">
             <slot name="form-method"></slot>
             <input type="hidden" name="_token" :value="csrf">
 
@@ -48,7 +48,7 @@
 
 <script>
 export default {
-    name: 'CheckoutCart',
+    name: 'CartForm',
 
     props: {
         cartTotalPrice: String,
@@ -99,7 +99,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../../../sass/modules/variables.scss";
 
-#shopping-cart-form {
+#cart-form {
     .cart-actions {
         margin-top: 25px;
     }
@@ -119,9 +119,9 @@ export default {
         padding: 10px;
 
         .button {
-            background-color: $color-accent-green;
+            background-color: $color-green;
             &:hover {
-                background-color: $color-accent-darker-green;
+                background-color: $color-green-darker;
             }
         }
     }
@@ -138,7 +138,7 @@ export default {
         padding: 10px;
         color: $color-white;
         &:hover {
-            color: $color-accent-darker-green;
+            color: $color-green-darker;
         }
     }
 
@@ -159,20 +159,20 @@ export default {
         height: 40px;
         font-size: 16px;
         text-align: center;
-        background-color: $color-accent-darker-gray;
+        background-color: $color-gray-darker;
         border: 1px $color-black solid;
         border-radius: 3px;
         outline: none;
         transition: border-color ease-in-out .25s;
         &:focus {
-            border: 1px solid $color-accent-darker-green;
+            border: 1px solid $color-green-darker;
         }
     }
 }
 
 /* RESPONSIVE STYLES */
 @include until($desktop) {
-    #shopping-cart-form {
+    #cart-form {
         #shopping-cart-table {
             .table-body td {
                 padding: 15px 10px;

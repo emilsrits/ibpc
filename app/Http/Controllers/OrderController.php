@@ -128,7 +128,7 @@ class OrderController extends Controller
     public function success(Request $request)
     {
         if ($request['success']) {
-            return view('cart.checkout.success');
+            return view('checkout.success');
         }
         
         return redirect()->route('shop.index');

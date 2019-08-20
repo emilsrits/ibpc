@@ -18,7 +18,7 @@
       font-size: 13px;
       font-weight: bold;
       text-transform: uppercase;
-      border: 1px solid $color_lightGray;
+      border: 1px solid $color-gray;
       -webkit-transition: color ease-in-out 0.2s,
       border ease-in-out 0.2s,
       background ease-in-out 0.1s;
@@ -26,9 +26,9 @@
       border ease-in-out 0.2s,
       background ease-in-out 0.1s;
       &:hover {
-        border-color: $color_gray;
-        background-color: $color_lightGray;
-        box-shadow: inset $color_darkGray 0 1px 3px 0;
+        border-color: $color-gray;
+        background-color: $color-gray;
+        box-shadow: inset $color-gray-darkest 0 1px 3px 0;
       }
       a {
         display: flex;
@@ -45,7 +45,7 @@
       }
     }
     .active {
-      color: $color_red;
+      color: $color-red;
       &:before {
         content: "";
         position: absolute;
@@ -54,7 +54,7 @@
         left: 50%;
         bottom: -1px;
         border: 10px solid;
-        border-color: transparent transparent $color_lightGray transparent;
+        border-color: transparent transparent $color-gray transparent;
       }
       &:after {
         content: "";
@@ -64,10 +64,10 @@
         left: 50%;
         bottom: -3px;
         border: 10px solid;
-        border-color: transparent transparent $color_white transparent;
+        border-color: transparent transparent $color-white transparent;
       }
       &:hover::before {
-        border-color: transparent transparent $color_gray transparent;
+        border-color: transparent transparent $color-gray transparent;
       }
     }
   }
@@ -96,7 +96,7 @@
       }
       tbody {
         tr {
-          border-top: 1px solid $color_lightGray;
+          border-top: 1px solid $color-gray;
         }
         td {
           &:last-of-type {
@@ -134,7 +134,7 @@
       margin: 15px 0 0;
       padding: 10px;
       cursor: pointer;
-      border-bottom: 1px solid $color_lightGray;
+      border-bottom: 1px solid $color-gray;
       strong {
         color: $color_red;
         font-size: 15px;
@@ -157,21 +157,21 @@
   }
   #account-update-confirm {
     margin: 30px 0 0;
-    background-color: $color_lightGray;
+    background-color: $color-gray;
   }
   #account-update-submit {
     margin: 20px 10px;
     height: 45px;
-    color: $color_white;
+    color: $color-white;
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 0.4px;
     text-transform: uppercase;
-    border: 1px solid $color_black;
-    background-color: $color_orange;
+    border: 1px solid $color-black;
+    background-color: $color-orange;
     &:hover {
-      background: $color_red;
-      box-shadow: inset $color_darkGray 0 1px 20px 2px;
+      background: $color-red;
+      box-shadow: inset $color-gray-darkest 0 1px 20px 2px;
     }
   }
 }

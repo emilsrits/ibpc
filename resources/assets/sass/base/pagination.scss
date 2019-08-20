@@ -1,14 +1,14 @@
 /* PAGINATION */
 .pagination .pagination-list li a {
-  background-color: $color-accent-darkest-gray;
+  background-color: $color-gray-darkest;
   transition: 0.2s ease;
   &.is-current {
-    background-color: $color-accent-darker-green;
+    background-color: $color-green-darker;
     &:hover {
-      color: $font-color-darkest;
+      color: $color-gray;
     }
   }
   &:hover {
-    background-color: $color-accent-green;
+    background-color: $color-green;
   }
 }
