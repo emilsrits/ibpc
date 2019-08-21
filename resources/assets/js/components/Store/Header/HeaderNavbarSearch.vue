@@ -52,7 +52,7 @@ export default {
         padding: 0px 8px 0px 36px;
         width: 180px;
         height: 26px;
-        color: $color-gray-lighest;
+        color: $color-gray-lightest;
         font-size: $size-7;
         background: $color-gray-darkest;
         border: none;

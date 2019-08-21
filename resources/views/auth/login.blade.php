@@ -41,7 +41,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link" type="submit">
+                                <button class="button is-link button-action" type="submit">
                                     Login
                                 </button>
                             </div>
@@ -51,7 +51,7 @@
                                 </a>
                             </div>
                             <div class="control has-text-right">
-                                <a class="button is-link" href="{{ url('/register') }}">
+                                <a class="button is-link button-action" href="{{ url('/register') }}">
                                     Register
                                 </a>
                             </div>

@@ -5,7 +5,7 @@ $color-gray-darkest: #222629;
 $color-gray-darker: #474B4F;
 $color-gray: #6B6E70;
 $color-gray-lighter: #bebebe;
-$color-gray-lighest: #e0e0e0;;
+$color-gray-lightest: #e0e0e0;
 
 $color-red: #CC4040;
 $color-orange: #f37c34;
@@ -27,7 +27,7 @@ $family-sans-serif: $font-family-sans-serif;
 
 $navbar-padding-vertical: 0;
 $navbar-background-color: $color-black;
-$navbar-item-color: $color-gray-lighest;
+$navbar-item-color: $color-gray-lightest;
 $navbar-item-img-max-height: 2.5rem;
 $navbar-item-hover-color: $color-green-darker;
 $navbar-item-hover-background-color: $color-black;
@@ -50,22 +50,32 @@ $pagination-current-color: $color-gray-lighter;
 $pagination-disabled-color: $color-gray-lighter;
 $pagination-disabled-border-color: $color-black;
 
-$menu-label-color: $color-gray-lighest;
-$menu-item-color: $color-gray-lighest;
+$menu-label-color: $color-gray-lightest;
+$menu-item-color: $color-gray-lightest;
 
-$label-color: $color-gray-lighest;
+$label-color: $color-gray-lightest;
 
-$panel-heading-color: $color-gray-lighest;
+$panel-heading-color: $color-gray-lightest;
 $panel-heading-background-color: $color-black-transparent;
-$panel-block-color: $color-gray-lighest;
+$panel-block-color: $color-gray-lightest;
 $panel-item-border: 1px solid $color-black-transparent;
 
 $table-head-cell-color: $color-gray-lighter;
-$table-color: $color-gray-lighest;
+$table-color: $color-gray-lightest;
 $table-background-color: $color-gray-darkest;
 $table-cell-border: 1px solid $color-gray-darker;
+$table-row-hover-background-color: $color-black-transparent;
 
-$box-color: $color-gray-lighest;
+$box-color: $color-gray-lightest;
 $box-background-color: $color-gray-darkest;
+
+$tabs-link-color: $color-gray-lightest;
+$tabs-link-hover-color: $color-green;
+$tabs-link-active-color: $color-green-darker;
+$tabs-boxed-link-hover-background-color: $color-gray-darkest;
+$tabs-boxed-link-active-background-color: $color-gray-darkest;
+$tabs-border-bottom-color: $color-gray;
+$tabs-boxed-link-active-border-color: $color-gray;
+$tabs-boxed-link-hover-border-bottom-color: $color-gray;
 
 @import "../vendor/bulma/utilities/_all.sass";

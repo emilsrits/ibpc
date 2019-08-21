@@ -24,5 +24,3 @@
     >
     </header-navbar>
 </header>
-
-@include('partials.widgets.flash_message')

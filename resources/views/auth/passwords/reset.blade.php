@@ -44,7 +44,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link" type="submit">Reset Password</button>
+                                <button class="button is-link button-action" type="submit">Reset Password</button>
                             </div>
                         </div>
                     </form>

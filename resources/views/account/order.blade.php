@@ -1,16 +1,17 @@
 @extends('layouts.master')
 
 @section('title')
-Order
+Order #{{ $order->id }}
 @endsection
 
 @section('content')
-<div class="grid rlg-100 md-100 sm-100">
-    <div id="user-account" class="cf">
-        @include('partials.account.navigation')
-        <div id="account-panel" class="grid-item lg-10 md-100 sm-100">
-            <h4>Order #{{ $order->id }}</h4>
-            <table class="order-sumup">
+<div class="section">
+    <div class="container">
+        <div id="user-account" class="box">
+            @include('partials.account.navigation')
+            
+            <table class="table is-bordered">
+                <caption>Order #{{ $order->id }}</caption>
                 <tr>
                     <td>Order Date:</td>
                     <td>{{ $order->created }}</td>
@@ -34,11 +35,11 @@ Order
                     <td>@money($order->price)</td>
                 </tr>
             </table>
-            <div class="table-items of-x">
-                <table class="user-orders order-view">
+            <div class="scrollable-x">
+                <table id="user-order" class="table is-fullwidth">
                     <thead>
                     <tr>
-                        <th>Image</th>
+                        <th class="is-hidden-mobile"></th>
                         <th>Title</th>
                         <th>Code</th>
                         <th>Quantity</th>
@@ -49,12 +50,14 @@ Order
                     <tbody>
                     @foreach($order->products as $product)
                         <tr>
-                            <td><img class="img-responsive" src="{{ $product->image }}" alt="{{ $product->code }}"></td>
+                            <td class="order-item-media is-hidden-mobile">
+                                <img class="image" src="{{ $product->image }}" alt="{{ $product->code }}">
+                            </td>
                             <td class="no-wrap">{{ $product->title }}</td>
                             <td class="no-wrap">{{ $product->code }}</td>
                             <td>{{ $product->pivot->quantity }}</td>
-                            <td class="no-wrap">@money($product->getOrderPriceById($order->id, $product->id))</td>
-                            <td class="no-wrap">@money($product->getOrderTotalPriceById($order->id, $product->id))</td>
+                            <td>@money($product->getOrderPriceById($order->id, $product->id))</td>
+                            <td>@money($product->getOrderTotalPriceById($order->id, $product->id))</td>
                         </tr>
                     @endforeach
                     </tbody>

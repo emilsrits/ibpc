@@ -33,20 +33,7 @@ Checkout
 
         <div class="box">
             <div id="checkout-cart">
-                <table class="checkout-cart-items table is-fullwidth">
-                    @foreach($cart->items as $item)
-                        @if($item['item']['id'])
-                        <tr class="checkout-cart-item">
-                            <td>{{ $item['item']['title'] }}</td>
-                            <td>@money($cart->getItemTotalPrice($item['item']['id']))</td>
-                        </tr>
-                        @endif
-                    @endforeach
-                    <tr>
-                        <td class="has-text-right has-text-weight-bold" colspan="2">Total incl. VAT: @money($cart->getTotalPriceWithVat())</td>
-                    </tr>
-                </table>
-
+                @include('partials.checkout.cart_items', ['cart' => $cart])
                 <div class="has-text-right">
                     <a class="button is-link button-action" href="{{ url('/checkout/delivery') }}">
                         <i class="fa fa-arrow-right" aria-hidden="true">&nbsp;</i>

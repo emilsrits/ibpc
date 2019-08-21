@@ -10,8 +10,7 @@ Checkout Delivery
         @include('partials.checkout.checkout_progress', ['step' => 3])
         <div id="checkout-delivery" class="box">
             <form id="checkout-delivery-form" class="form" role="form" method="POST" action="{{ url('/checkout/confirmation') }}">
-                {{ csrf_field() }}
-
+                @csrf
                 <div class="level">
                     <div class="level-left">
                         <div class="level-item">

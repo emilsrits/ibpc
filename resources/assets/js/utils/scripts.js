@@ -52,12 +52,6 @@
             });
         }
 
-        // Toggle form sections
-        $('.content-section-toggle').on('click', function() {
-            $('i', this).toggleClass('fa-angle-up fa-angle-down');
-            $(this).parent().find('.content-container').slideToggle();
-        });
-
         // Toggle parent_id selection for category creation
         $('#category-parent').on('change', function() {
            if ($(this).val() === '1') {

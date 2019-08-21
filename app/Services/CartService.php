@@ -109,7 +109,7 @@ class CartService
 
             Session::put('cart', $cart);
 
-            if ($cart->isEmpty()) {
+            if ($cart->destroyIfEmpty()) {
                 $response = [
                     'itemCount' => 0,
                     'price' => null
@@ -153,6 +153,6 @@ class CartService
 
         Session::put('cart', $cart);
 
-        $cart->isEmpty();
+        $cart->destroyIfEmpty();
     }
 }

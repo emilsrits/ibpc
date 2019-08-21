@@ -1,0 +1,25 @@
+.form-section {
+  padding: 15px 0;
+
+  &.is-active {
+    .section-toggle i {
+      transform: rotate(180deg); 
+    }
+
+    .content-container {
+      display: block;
+    }
+  }
+
+  .section-toggle {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: $color-green-darker;
+    cursor: pointer;
+  }
+
+  .content-container {
+    display: none;
+  }
+}

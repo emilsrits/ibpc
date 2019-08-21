@@ -63,7 +63,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link" type="submit">
+                                <button class="button is-link button-action" type="submit">
                                     Register
                                 </button>
                             </div>

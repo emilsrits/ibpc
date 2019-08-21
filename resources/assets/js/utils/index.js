@@ -2,9 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Toggle category navigation dropdowns
     const categoryToggles = document.querySelectorAll('.category-toggle');
-    for (const categoryToggle of categoryToggles) {
+    for (let categoryToggle of categoryToggles) {
         categoryToggle.addEventListener('click', function(event) {
             event.currentTarget.closest('.category').classList.toggle('is-active');
+        });
+    }
+
+    // Toggle section content
+    const formSectionToggles = document.querySelectorAll('.section-toggle');
+    for (let formSectionToggle of formSectionToggles) {
+        formSectionToggle.addEventListener('click', function(event) {
+            event.currentTarget.parentElement.classList.toggle('is-active');
         });
     }
 

@@ -13,15 +13,15 @@
                 </a>
             </div>
             @if($parent->children())
-                @foreach($parent->children as $child)
-                    <ul class="category-list">
-                        <li>
-                            <a href="{{ url('/c', ['parent' => $parent->slug, 'child' => $child->slug]) }}">
-                                {{ $child->title }} <span>({{ count($child->products) }})</span>
-                            </a>
-                        </li>
-                    </ul>
-                @endforeach
+                <ul class="category-list">
+                    @foreach($parent->children as $child)
+                    <li>
+                        <a href="{{ url('/c', ['parent' => $parent->slug, 'child' => $child->slug]) }}">
+                            {{ $child->title }} <span>({{ count($child->products) }})</span>
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
             @endif
         </div>
     @endforeach

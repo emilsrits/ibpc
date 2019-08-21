@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar   is-spaced" role="navigation">
+    <nav class="navbar is-fixed-top is-spaced" role="navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" :href="routes.home">

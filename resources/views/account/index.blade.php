@@ -5,48 +5,13 @@ Active Orders
 @endsection
 
 @section('content')
-<div class="grid rlg-100 md-100 sm-100">
-    <div id="user-account" class="cf">
-        @include('partials.account.navigation')
-        <div id="account-panel" class="grid-item lg-10 md-100 sm-100">
-            <h4>Active orders</h4>
+<div class="section">
+    <div class="container">
+        <div id="user-account" class="box">
+            @include('partials.account.navigation')
+            
             @if(count($orders))
-                {{ $orders->appends(Request::except('page'))->links() }}
-                <div class="table-items of-x">
-                    <table class="user-orders">
-                        <thead>
-                        <tr>
-                            <th class="col-sm">Id</th>
-                            <th>Price</th>
-                            <th>Delivery</th>
-                            <th>Status</th>
-                            <th class="col-md">Created</th>
-                            <th class="col-md">Updated</th>
-                            <th class="col-xs"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($orders as $order)
-                            <tr>
-                                <td>{{ $order->id }}</td>
-                                <td class="no-wrap">@money($order->price)</td>
-                                <td>{{ $order->delivery }}</td>
-                                <td>{{ $order->status }}</td>
-                                <td class="no-wrap">{{ $order->created }}</td>
-                                <td class="no-wrap">{{ $order->updated }}</td>
-                                <td>
-                                    <a href="{{ url('/user/order', ['id' => $order->id]) }}">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                @if($orders->count() >= 20)
-                    {{ $orders->appends(Request::except('page'))->links() }}
-                @endif
+                @include('partials.account.orders_table', ['orders' => $orders])
             @else
                 <p>You have no active orders</p>
             @endif

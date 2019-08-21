@@ -48,11 +48,11 @@ class StoreController extends Controller
     /**
      * Return store view with products from a category
      *
-     * @param $top_level
-     * @param $child
+     * @param string $parent
+     * @param string $child
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function categorize($top_level, $child)
+    public function categorize($parent, $child)
     {
         $categoryId = $this->categoryRepository->findBy('slug', $child)->id;
         $products = $this->productRepository->active()->getByCategoryId($categoryId)->paginate(16);

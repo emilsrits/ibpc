@@ -124,7 +124,7 @@ export default {
         }
 
         .product-price-current {
-            color: $color-gray-lighest;
+            color: $color-gray-lightest;
             font-size: 15px;
             font-weight: bold;
             line-height: 25px;

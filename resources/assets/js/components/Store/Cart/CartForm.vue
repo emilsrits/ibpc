@@ -5,7 +5,7 @@
             <input type="hidden" name="_token" :value="csrf">
 
             <fieldset>
-                <table id="shopping-cart-table" class="table is-fullwidth">
+                <table id="shopping-cart-table" class="table is-fullwidth is-hoverable">
                     <thead class="table-head">
                         <tr>
                             <th></th>
@@ -142,12 +142,10 @@ export default {
         }
     }
 
-    .cart-item-media {
-        img {
-            margin: auto;
-            width: auto;
-            max-height: 50px;
-        }
+    .cart-item-media img {
+        margin: auto;
+        width: auto;
+        max-height: 50px;
     }
 
     .cart-item-price {

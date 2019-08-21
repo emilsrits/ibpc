@@ -9,11 +9,12 @@
 @import "vendor/bulma/components/menu.sass";
 @import "vendor/bulma/components/panel.sass";
 @import "vendor/bulma/components/level.sass";
+@import "vendor/bulma/components/tabs.sass";
 @import "vendor/bulma/form/_all.sass";
 @import "vendor/bulma/layout/section.sass";
 
 @import "base/_all.scss";
 @import "auth/_all.scss";
 @import "store/_all.scss";
-@import "account/account";
+@import "account/_all.scss";
 @import "admin/admin";

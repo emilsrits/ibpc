@@ -1,7 +1,7 @@
 /* GENERAL */
 body {
   font-size: $font-size-base;
-  color: $color-gray-lighest;
+  color: $color-gray-lightest;
   line-height: $line-height-base;
   background-color: $body-background-color;
 }
@@ -13,19 +13,11 @@ main {
 }
 
 a {
-  color: $color-gray-lighest;
+  color: $color-gray-lightest;
   &:hover, &:focus {
     color: $color-green-darker;
     text-decoration: none;
   }
-}
-
-ol, ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border: 0;
-  vertical-align: baseline;
 }
 
 input[type="number"] {

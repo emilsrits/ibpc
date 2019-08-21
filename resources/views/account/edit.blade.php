@@ -5,92 +5,125 @@ Account Settings
 @endsection
 
 @section('content')
-<div class="grid rlg-100 md-100 sm-100">
-    <div id="user-account" class="cf">
-        @include('partials.account.navigation')
-        <div id="account-panel" class="grid-item lg-10 md-100 sm-100">
-            <h4>Account settings</h4>
+<div class="section">
+    <div class="container">
+        <div id="user-account" class="box">
+            @include('partials.account.navigation')
+
             <form id="account--edit-form" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/update', ['id' => $user->id]) }}">
-                {{ method_field('PATCH') }}
-                {{ csrf_field() }}
-                <div class="account-content-section">
-                    <div class="content-section-toggle">
-                        <strong>Contact information<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+                @method('PATCH')
+                @csrf
+
+                <div class="form-section is-active">
+                    <div class="section-toggle">
+                        <h4 class="has-text-weight-bold">Contact information</h4>
+                        <span class="icon">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
                     </div>
+
                     <div class="content-container">
-                        <div class="form-group">
-                            <label for="first_name">First Name</label>
-                            <input type="text" name="first_name" class="form-control" value="{{ old('first_name') ? old('first_name') : $user->first_name }}">
+                        <div class="field">
+                            <label class="label is-small" for="first_name">First Name</label>
+                            <div class="control">
+                                <input class="input" type="text" name="first_name" value="{{ old('first_name') ?? $user->first_name }}">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" name="last_name" class="form-control" value="{{ old('last_name') ? old('last_name') : $user->last_name }}">
+                        <div class="field">
+                            <label class="label is-small" for="last_name">Last Name</label>
+                            <div class="control">
+                                <input class="input" type="text" name="last_name" value="{{ old('last_name') ?? $user->last_name }}">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" class="form-control" value="{{ old('email') ? old('email') : $user->email }}">
+                        <div class="field">
+                            <label class="label is-small" for="email">Email</label>
+                            <div class="control">
+                                <input class="input" type="text" name="email" value="{{ old('email') ?? $user->email }}">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text" name="phone" class="form-control" value="{{ old('phone') ? old('phone') : $user->phone }}">
-                        </div>
-                    </div>
-                </div>
-                <div class="account-content-section">
-                    <div class="content-section-toggle">
-                        <strong>Password<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
-                    </div>
-                    <div class="content-container user-account-password-section">
-                        <div class="form-group">
-                            <label for="password">New Password</label>
-                            <input type="password" name="password" class="form-control" value="">
-                        </div>
-                        <div class="form-group">
-                            <label for="password_confirmation">New Password Again</label>
-                            <input type="password" name="password_confirmation" class="form-control" value="">
+                        <div class="field">
+                            <label class="label is-small" for="phone">Phone</label>
+                            <div class="control">
+                                <input class="input" type="text" name="phone" value="{{ old('phone') ?? $user->phone }}">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="account-content-section">
-                    <div class="content-section-toggle">
-                        <strong>Address<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+
+                <div class="form-section">
+                    <div class="section-toggle">
+                        <h4 class="has-text-weight-bold">Password</h4>
+                        <span class="icon">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
                     </div>
+
                     <div class="content-container">
-                        <div class="form-group">
-                            <label for="country">Country</label>
-                            @include('partials.widgets.countries', ['default' => $user->country])
+                        <div class="field">
+                            <label class="label is-small" for="password">New Password</label>
+                            <div class="control">
+                                <input class="input" type="password" name="password" value="">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" name="city" class="form-control" value="{{ old('city') ? old('city') : $user->city }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="address">Address</label>
-                            <input type="text" name="address" class="form-control" value="{{ old('address') ? old('address') : $user->address }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="postcode">Postcode</label>
-                            <input type="text" name="postcode" class="form-control" value="{{ old('postcode') ? old('postcode') : $user->postcode }}">
+                        <div class="field">
+                            <label class="label is-small" for="password_confirmation">New Password Again</label>
+                            <div class="control">
+                                <input class="input" type="password" name="password_confirmation" value="">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="account-update-confirm">
-                    <div class="form-group">
-                        <label for="current_password">Current Password</label>
-                        <input type="password" name="current_password" class="form-control" value="" required>
+
+                <div class="form-section is-active">
+                    <div class="section-toggle">
+                        <h4 class="has-text-weight-bold">Address</h4>
+                        <span class="icon">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
                     </div>
-                    <button id="account-update-submit" class="btn" type="submit" name="submit" value="save">Save Account</button>
+
+                    <div class="content-container">
+                        <div class="field">
+                            <label class="label is-small" for="country">Country</label>
+                            <div class="select">
+                                {!! Form::select('country', config('constants.countries'), old('country') ?? optional($user)->country) !!}
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label is-small" for="city">City</label>
+                            <div class="control">
+                                <input class="input" type="text" name="city" value="{{ old('city') ?? $user->city }}">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label is-small" for="address">Address</label>
+                            <div class="control">
+                                <input class="input" type="text" name="address" value="{{ old('address') ?? $user->address }}">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label is-small" for="postcode">Postcode</label>
+                            <div class="control">
+                                <input class="input" type="text" name="postcode" value="{{ old('postcode') ?? $user->postcode }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="account-update-confirm" class="form-section">
+                    <div class="field">
+                        <label class="label is-small" for="current_password">Current Password</label>
+                        <div class="control">
+                            <input class="input" type="password" name="current_password" value="" required>
+                        </div>
+                    </div>
+
+                    <div class="has-text-right">
+                        <button id="account-update-submit" class="button is-link button-action" type="submit" name="submit" value="save">Save</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-@endsection
-
-@section('scripts')
-<script>
-    $(document).ready(function () {
-        $('.user-account-password-section').hide();
-    });
-</script>
 @endsection
