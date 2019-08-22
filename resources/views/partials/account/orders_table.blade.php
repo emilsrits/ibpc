@@ -22,7 +22,7 @@
                 <td>{{ $order->created }}</td>
                 <td>{{ $order->updated }}</td>
                 <td>
-                    <a href="{{ url('/user/order', ['id' => $order->id]) }}">
+                    <a class="link-action" href="{{ url('/user/order', ['id' => $order->id]) }}">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                     </a>
                 </td>

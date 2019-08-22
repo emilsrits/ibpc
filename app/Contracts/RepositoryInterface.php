@@ -123,4 +123,12 @@ interface RepositoryInterface
      * @return $this
      */
     public function orderBy($column, $direction = 'asc');
+
+    /**
+     * Limit how many entries to retrieve
+     *
+     * @param integer $limit
+     * @return $this
+     */
+    public function take(int $limit);
 }

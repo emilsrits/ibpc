@@ -290,4 +290,17 @@ abstract class Repository implements RepositoryInterface
 
         return $this;
     }
+
+    /**
+     * Limit how many entries to retrieve
+     *
+     * @param integer $limit
+     * @return $this
+     */
+    public function take(int $limit)
+    {
+        $this->model = $this->model->take($limit);
+
+        return $this;
+    }
 }

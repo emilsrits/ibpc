@@ -23,28 +23,37 @@ Account Settings
                     </div>
 
                     <div class="content-container">
-                        <div class="field">
-                            <label class="label is-small" for="first_name">First Name</label>
-                            <div class="control">
-                                <input class="input" type="text" name="first_name" value="{{ old('first_name') ?? $user->first_name }}">
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <label class="label is-small" for="first_name">First Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="first_name" value="{{ old('first_name') ?? $user->first_name }}">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label is-small" for="last_name">Last Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="last_name" value="{{ old('last_name') ?? $user->last_name }}">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="field">
-                            <label class="label is-small" for="last_name">Last Name</label>
-                            <div class="control">
-                                <input class="input" type="text" name="last_name" value="{{ old('last_name') ?? $user->last_name }}">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label is-small" for="email">Email</label>
-                            <div class="control">
-                                <input class="input" type="text" name="email" value="{{ old('email') ?? $user->email }}">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label is-small" for="phone">Phone</label>
-                            <div class="control">
-                                <input class="input" type="text" name="phone" value="{{ old('phone') ?? $user->phone }}">
+
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <label class="label is-small" for="email">Email</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="email" value="{{ old('email') ?? $user->email }}">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label is-small" for="phone">Phone</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="phone" value="{{ old('phone') ?? $user->phone }}">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,22 +98,29 @@ Account Settings
                                 {!! Form::select('country', config('constants.countries'), old('country') ?? optional($user)->country) !!}
                             </div>
                         </div>
-                        <div class="field">
-                            <label class="label is-small" for="city">City</label>
-                            <div class="control">
-                                <input class="input" type="text" name="city" value="{{ old('city') ?? $user->city }}">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label is-small" for="address">Address</label>
-                            <div class="control">
-                                <input class="input" type="text" name="address" value="{{ old('address') ?? $user->address }}">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label is-small" for="postcode">Postcode</label>
-                            <div class="control">
-                                <input class="input" type="text" name="postcode" value="{{ old('postcode') ?? $user->postcode }}">
+
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <label class="label is-small" for="city">City</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="city" value="{{ old('city') ?? $user->city }}">
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label is-small" for="address">Address</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="address" value="{{ old('address') ?? $user->address }}">
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label is-small" for="postcode">Postcode</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="postcode" value="{{ old('postcode') ?? $user->postcode }}">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -29,6 +29,10 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+.table tbody td {
+  vertical-align: middle;
+}
+
 /* APP */
 #app {
   position: relative;

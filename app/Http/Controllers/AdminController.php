@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use App\Repositories\OrderRepository;
 
 class AdminController extends Controller
 {
+    /**
+     * AdminController constructor
+     *
+     * @param OrderRepository $orderRepository
+     */
+    public function __construct(OrderRepository $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
     /**
      * Return admin panel view
      *
@@ -13,6 +23,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index', ['user' => Auth::user()]);
+        $orders = $this->orderRepository->active()->orderBy('created_at', 'desc')->take(5)->get();
+
+        return view('admin.index', compact('orders'));
     }
 }

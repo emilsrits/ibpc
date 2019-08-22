@@ -12,7 +12,8 @@ Vue.config.productionTip = false;
 
 import store from './vuex/store.js'
 
-import HeaderNavbar from './components/Store/Header/HeaderNavbar.vue';
+import HeaderNavbar from './components/Header/HeaderNavbar.vue';
+import HeaderNavbarCart from './components/Header//HeaderNavbarCart.vue';
 import CatalogProduct from './components/Store/Catalog/CatalogProduct.vue';
 import ProductDetails from './components/Store/Product/ProductDetails.vue';
 import ProductForm from './components/Store/Product/ProductForm.vue';
@@ -23,6 +24,7 @@ const app = new Vue({
     store,
     components: {
         HeaderNavbar,
+        HeaderNavbarCart,
         CatalogProduct,
         ProductDetails,
         ProductForm,

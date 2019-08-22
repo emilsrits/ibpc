@@ -15,39 +15,31 @@
 
             <div id="main-nav" class="navbar-menu">
                 <div class="navbar-start">
-                    <div class="navbar-item">
-                        <header-navbar-search 
-                            :route="routes.search"
-                        />
-                    </div>
+                    <slot name="navbar-start"></slot>
                 </div>
 
                 <div class="navbar-end">
-                    <div class="navbar-item">
-                        <header-navbar-cart
-                            :cart="cart" 
-                            :route="routes.cart"
-                        />
-                    </div>
+                    <slot name="navbar-end"></slot>
 
-                    <div class="navbar-item" v-if="!user">
+                    <div v-if="!user" class="navbar-item">
                         <div>
                             <a class="item-link" :href="routes.login">
-                                <i class="fa fa-sign-in" aria-hidden="true">&nbsp;</i>
+                                <i class="fa fa-sign-in">&nbsp;</i>
                                 Sign In
                             </a>
                         </div>
                     </div>
-                    <div class="navbar-item has-dropdown is-hoverable" v-else>
+
+                    <div v-else class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link item-link" :href="routes.account">
-                            <i class="fa fa-user" aria-hidden="true">&nbsp;</i>
+                            <i class="fa fa-user">&nbsp;</i>
                             Account
                         </a>
 
                         <div class="navbar-dropdown">
                             <div class="navbar-item">
                                 <a @click.prevent="submitLogoutForm">
-                                    <i class="fa fa-sign-out" aria-hidden="true">&nbsp;</i>
+                                    <i class="fa fa-sign-out">&nbsp;</i>
                                     Sign Out
                                 </a>
                                 <form id="logout-form" :action="routes.logout" method="POST" style="display: none;">
@@ -63,16 +55,9 @@
 </template>
 
 <script>
-import HeaderNavbarCart from './HeaderNavbarCart.vue';
-import HeaderNavbarSearch from './HeaderNavbarSearch';
 
 export default {
     name: 'HeaderNavbar',
-
-    components: {
-        HeaderNavbarCart,
-        HeaderNavbarSearch
-    },
 
     props: {
         user: {
@@ -81,7 +66,6 @@ export default {
                 return null;
             }
         },
-        cart: Object,
         media: Object,
         routes: Object
     },
@@ -109,7 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../sass/modules/variables.scss";
+@import "../../../sass/modules/variables.scss";
 
 @include until($desktop) {
     .navbar {

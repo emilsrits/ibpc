@@ -5,29 +5,44 @@ Admin Panel
 @endsection
 
 @section('content')
-<div class="lg-100 md-100 sm-100">
-    <div class="manage-section manage-catalog">
-        <h4>Catalog</h4>
-        <div class="manage-tab products-catalog">
-            <a href="{{ url('/admin/catalog') }}"><i class="fa fa-book" aria-hidden="true"></i>Product Catalog</a>
-        </div>
-        <div class="manage-tab products-categories">
-            <a href="{{ url('/admin/categories') }}"><i class="fa fa-tag" aria-hidden="true"></i>Categories</a>
-        </div>
-        <div class="manage-tab products-properties">
-            <a href="{{ url('/admin/specifications') }}"><i class="fa fa-list" aria-hidden="true"></i>Properties</a>
-        </div>
-    </div>
-    <div class="manage-section manage-orders">
-        <h4>Sales</h4>
-        <div class="manage-tab orders-list">
-            <a href="{{ url('/admin/orders') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Orders</a>
-        </div>
-    </div>
-    <div class="manage-section manage-users">
-        <h4>Users</h4>
-        <div class="manage-tab users-list">
-            <a href="{{ url('/admin/users') }}"><i class="fa fa-users" aria-hidden="true"></i>Users</a>
+<div class="section">
+    <div class="container is-fluid">
+        <div class="box">
+            <div class="manage-section">
+                <h4>Recent Orders</h4>
+                @if($orders)
+                    <div class="scrollable-x">
+                        <table class="table is-fullwidth is-hoverable">
+                            <thead>
+                                <th>Id</th>
+                                <th>User</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <td>{{ $order->id }}</td>
+                                        <td>{{ $order->user->full_name }}</td>
+                                        <td class="no-wrap">@money($order->price)</td>
+                                        <td>{{ $order->status }}</td>
+                                        <td>{{ $order->created_at }}</td>
+                                        <td>
+                                            <a class="link-action" href="{{ url('/admin/order/edit', ['id' => $order->id]) }}">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p>No orders</p>
+                @endif
+            </div>
         </div>
     </div>
 </div>
