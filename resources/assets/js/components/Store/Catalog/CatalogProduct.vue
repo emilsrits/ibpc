@@ -9,16 +9,18 @@
             <a :href="route">{{ product.title }}</a>
         </p>
 
-        <div v-if="product.stock > 5" class="stock-status in-stock is-uppercase has-text-right">
+        <div class="stock-status in-stock is-uppercase has-text-right" v-if="product.stock > 5">
             <div class="stock-text">In Stock</div>
         </div>
 
-        <div v-else class="stock-status low-stock is-uppercase has-text-right">
+        <div class="stock-status low-stock is-uppercase has-text-right" v-else>
             <div class="stock-text">{{ product.stock }} In Stock</div>
         </div>
 
         <div class="product-price">
-            <div v-if="productPrices.old" class="product-price-old">{{ productPrices.old }}</div>
+            <div class="product-price-old" v-if="productPrices.old">
+                {{ productPrices.old }}
+            </div>
             <div class="product-price-current">{{ productPrices.current }}</div>
         </div>
 

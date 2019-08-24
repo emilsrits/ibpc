@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Tables\CategoryTable;
 use App\Models\Category;
 use App\Http\Requests\Category\CategoryActionRequest;
 use App\Http\Requests\Category\CategoryStoreRequest;
@@ -18,12 +19,18 @@ class CategoryController extends Controller
      *
      * @param CategoryService $categoryService
      * @param CategoryRepository $categoryRepository
+     * @param CategoryTable $categoryTable
      * @param SpecificationRepository $specificationRepository
      */
-    public function __construct(CategoryService $categoryService, CategoryRepository $categoryRepository, SpecificationRepository $specificationRepository)
-    {
+    public function __construct(
+        CategoryService $categoryService,
+        CategoryRepository $categoryRepository,
+        CategoryTable $categoryTable,
+        SpecificationRepository $specificationRepository
+    ) {
         $this->categoryService = $categoryService;
         $this->categoryRepository = $categoryRepository;
+        $this->categoryTable = $categoryTable;
         $this->specificationRepository = $specificationRepository;
     }
 
@@ -35,8 +42,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->paginate();
+        $table = $this->categoryTable;
 
-        return view('admin.category.categories', compact('categories'));
+        return view('admin.category.categories', compact('categories', 'table'));
     }
 
     /**

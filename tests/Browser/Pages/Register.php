@@ -40,6 +40,7 @@ class Register extends Page
             '@email' => 'input[name=email]',
             '@password' => 'input[name=password]',
             '@confirm' => 'input[name=password_confirmation]',
+            '@register' => 'button.action-do',
         ];
     }
 }

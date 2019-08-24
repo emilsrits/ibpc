@@ -24,7 +24,7 @@ class UserFilter extends QueryFilter
      * @param $user
      * @return mixed
      */
-    public function user($user)
+    public function name($user)
     {
         if (is_numeric($user)) {
             return $this->builder->where('id', $user);

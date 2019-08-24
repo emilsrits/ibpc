@@ -1,1 +1,0 @@
-{!! Form::select('country', config('constants.countries'), $default) !!}

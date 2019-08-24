@@ -36,8 +36,8 @@ class CategoryService
      */
     public function action(array $data)
     {
-        if (isset($data['categories'])) {
-            $categoryIds = $data['categories'];
+        if (isset($data['category'])) {
+            $categoryIds = $data['category'];
 
             switch ($data['mass-action']) {
                 case 1:

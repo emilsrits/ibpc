@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Tables\ProductTable;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Filters\ProductFilter;
@@ -20,12 +21,18 @@ class ProductController extends Controller
      *
      * @param ProductService $productService
      * @param ProductRepository $productRepository
+     * @param ProductTable $productTable
      * @param CategoryRepository $categoryRepository
      */
-    public function __construct(ProductService $productService, ProductRepository $productRepository, CategoryRepository $categoryRepository)
-    {
+    public function __construct(
+        ProductService $productService,
+        ProductRepository $productRepository,
+        ProductTable $productTable,
+        CategoryRepository $categoryRepository
+    ) {
         $this->productService = $productService;
         $this->productRepository = $productRepository;
+        $this->productTable = $productTable;
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -39,7 +46,10 @@ class ProductController extends Controller
         $products = $this->productRepository->with('categories')->paginate();
         $categories = $this->categoryRepository->all();
 
-        return view('admin.product.catalog', ['products' => $products, 'categories' => $categories, 'request' => null]);
+        return view('admin.product.catalog', [
+            'products' => $products,
+            'table' => $this->productTable
+        ]);
     }
 
     /**
@@ -58,9 +68,9 @@ class ProductController extends Controller
         }
 
         $products = $this->productRepository->with('categories')->filter($filters)->paginate();
-        $categories = $this->categoryRepository->all();
+        $table = $this->productTable;
 
-        return view('admin.product.catalog', compact('products', 'categories', 'request'));
+        return view('admin.product.catalog', compact('products', 'table', 'request'));
     }
 
     /**

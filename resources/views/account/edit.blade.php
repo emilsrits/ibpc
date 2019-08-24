@@ -8,7 +8,7 @@ Account Settings
 <div class="section">
     <div class="container">
         <div id="user-account" class="box">
-            @include('partials.account.navigation')
+            @include('account._partials.navigation')
 
             <form id="account--edit-form" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/update', ['id' => $user->id]) }}">
                 @method('PATCH')
@@ -135,7 +135,7 @@ Account Settings
                     </div>
 
                     <div class="has-text-right">
-                        <button id="account-update-submit" class="button is-link button-action" type="submit" name="submit" value="save">Save</button>
+                        <button id="account-update-submit" class="button button-action action-do" type="submit" name="submit" value="save">Save</button>
                     </div>
                 </div>
             </form>

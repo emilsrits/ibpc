@@ -35,7 +35,7 @@ abstract class Repository implements RepositoryInterface
     /**
      * Specify Model class name
      *
-     * @return mixed
+     * @return string
      */
     abstract function model();
 

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Media;
 use App\Filters\QueryFilter;
+use App\Traits\HasPrice;
+use App\Traits\HasStatus;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +13,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Product extends Model
 {
+    use HasPrice, HasStatus;
+
     const MAX_MEDIA_COUNT = 6;
 
     /**
@@ -89,14 +93,16 @@ class Product extends Model
                 }
                 $product->deleteMedia();
                 $product->destroy($id);
-                return true;
             }
+            
+            return true;
         } else {
             if ($this->orders()->first()) {
                 return false;
             }
             $this->deleteMedia();
             $this->destroy($this->id);
+
             return true;
         }
     }
@@ -323,29 +329,6 @@ class Product extends Model
         }
 
         return $items;
-    }
-
-    /**
-     * Get product old price attribute
-     *
-     * @return string
-     */
-    public function getOldPriceAttribute()
-    {
-    	if ($this->price_old)
-    		return ($this->price_old);
-    	else 
-    		return  '';
-    }
-
-    /**
-     * Get product current price attribute
-     *
-     * @return string
-     */
-    public function getCurrentPriceAttribute()
-    {
-    	return $this->price;
     }
 
     /**

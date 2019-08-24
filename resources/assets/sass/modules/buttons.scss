@@ -1,32 +1,39 @@
 /* BUTTONS */
-.button-action {
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 20px;
-  text-transform: uppercase;
-  border: 1px solid $color-black;
-  box-shadow: inset $color-gray 0 1px 20px 2px;
-  background-color: $color-gray-darkest;
-  transition: all ease-in-out .15s;
-  &:hover {
-    box-shadow: inset $color-gray-darker 0 1px 20px 2px;
+.button {
+  &.button-action {
+    color: $color-white;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 20px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    box-shadow: inset $color-gray 0 1px 20px 2px;
+    background-color: $color-gray-lightest;
+    transition: all ease-in-out .15s;
+    &:hover {
+      box-shadow: inset $color-gray-darker 0 1px 20px 2px;
+    }
   }
-}
-
-.button-clean {
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-}
-
-.button-label {
-  color: $color-white;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 0;
-  border-top-left-radius: 5px;
-  &:hover {
-    color: $color-red;
+  
+  &.button-action.action-do {
+    background-color: $color-blue;
+  }
+  
+  &.button-action.action-remove {
+    background-color: $color-red;
+  }
+  
+  &.button-action.action-add {
+    background-color: $color-green-darker;
+  }
+  
+  &.button-clean {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    &:focus:not(:active) {
+      box-shadow: none;
+    }
   }
 }

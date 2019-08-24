@@ -1,7 +1,7 @@
 <template>
     <div id="cart-form">
         <form role="form" method="POST" :action="routes.action">
-            <slot name="form-method"></slot>
+            <input type="hidden" name="_method" :value="method" v-if="method">
             <input type="hidden" name="_token" :value="csrf">
 
             <fieldset>
@@ -27,16 +27,16 @@
                 </table>
             </fieldset>
 
-            <div v-if="cartData.price" class="cart-actions">
+            <div class="cart-actions" v-if="cartData.price">
                 <div class="cart-update has-text-right">
-                    <button class="button is-link button-action" type="submit" name="submit">Update Cart</button>
+                    <button class="button button-action action-do" type="submit" name="submit">Update Cart</button>
                 </div>
 
                 <div class="cart-checkout has-text-right">
                     <div class="cart-total">
                         <span>Total excl. VAT: {{ cartData.price }}</span>
                     </div>
-                    <button class="button is-link button-action" type="button" title="Checkout" @click.prevent="goToCheckout">
+                    <button class="button button-action action-add" type="button" title="Checkout" @click.prevent="goToCheckout">
                         <i class="fa fa-arrow-right" aria-hidden="true">&nbsp;</i>
                         Checkout
                     </button>
@@ -51,6 +51,12 @@ export default {
     name: 'CartForm',
 
     props: {
+        method: {
+            type: String,
+            default() {
+                return 'PATCH';
+            }
+        },
         cartTotalPrice: String,
         routes: Object
     },
@@ -117,13 +123,6 @@ export default {
     .cart-checkout {
         margin-left: auto;
         padding: 10px;
-
-        .button {
-            background-color: $color-green;
-            &:hover {
-                background-color: $color-green-darker;
-            }
-        }
     }
 }
 

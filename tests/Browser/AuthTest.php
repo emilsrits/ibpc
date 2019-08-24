@@ -30,9 +30,8 @@ class AuthTest extends DuskTestCase
                 ->type('@email', 'johndoe@example.test')
                 ->type('@password', 'option123')
                 ->type('@confirm', 'option123')
-                ->press('Register')
+                ->press('@register')
                 ->assertPathIs('/')
-                ->assertSee('John')
                 ->assertAuthenticated();
         });
     }
@@ -49,9 +48,8 @@ class AuthTest extends DuskTestCase
             $browser->visit(new Login)
                 ->type('@email', $user->email)
                 ->type('@password', $password)
-                ->press('Login')
+                ->press('@login')
                 ->assertPathIs('/')
-                ->assertSee($user->first_name)
                 ->assertAuthenticated();
         });
     }
@@ -65,9 +63,8 @@ class AuthTest extends DuskTestCase
             $browser->loginAs($user->id)
                 ->visit(new Store)
                 ->assertPathIs('/')
-                ->waitForText($user->first_name)
-                ->assertSee($user->first_name)
-                ->click('@dropdown')
+                ->waitForText('Account')
+                ->mouseover('@dropdown')
                 ->assertVisible('@sign-out')
                 ->click('@sign-out')
                 ->assertPathIs('/')

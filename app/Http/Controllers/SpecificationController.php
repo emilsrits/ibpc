@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Tables\SpecificationTable;
 use Illuminate\Http\Request;
 use App\Models\Specification;
 use App\Services\SpecificationService;
@@ -17,11 +18,16 @@ class SpecificationController extends Controller
      *
      * @param SpecificationService $specificationService
      * @param SpecificationRepository $specificationRepository
+     * @param SpecificationTable $specificationTable
      */
-    public function __construct(SpecificationService $specificationService, SpecificationRepository $specificationRepository)
-    {
+    public function __construct(
+        SpecificationService $specificationService,
+        SpecificationRepository $specificationRepository,
+        SpecificationTable $specificationTable
+    ) {
         $this->specificationService = $specificationService;
         $this->specificationRepository = $specificationRepository;
+        $this->specificationTable = $specificationTable;
     }
 
     /**
@@ -32,8 +38,9 @@ class SpecificationController extends Controller
     public function index()
     {
         $specifications = $this->specificationRepository->paginate();
+        $table = $this->specificationTable;
 
-        return view('admin.specification.specifications', compact('specifications'));
+        return view('admin.specification.specifications', compact('specifications', 'table'));
     }
 
     /**

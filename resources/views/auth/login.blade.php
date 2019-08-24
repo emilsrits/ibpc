@@ -9,14 +9,14 @@
 
                 <div class="panel-block">
                     <form class="form" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
+                        @csrf
 
                         <div class="field">
                             <label for="email" class="label">Email</label>
                             <div class="control">
                                 <input id="email" class="input" type="email" name="email" value="{{ old('email') }}" required autofocus>
                             </div>
-                            @if ($errors->has('email'))
+                            @if($errors->has('email'))
                                 <p class="help is-danger">{{ $errors->first('email') }}</p>
                             @endif
                         </div>
@@ -26,7 +26,7 @@
                             <div class="control">
                                 <input id="password" class="input" type="password" name="password" required>
                             </div>
-                            @if ($errors->has('password'))
+                            @if($errors->has('password'))
                                 <p class="help is-danger">{{ $errors->first('password') }}</p>
                             @endif
                         </div>
@@ -41,7 +41,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link button-action" type="submit">
+                                <button class="button button-action action-add" type="submit">
                                     Login
                                 </button>
                             </div>
@@ -51,7 +51,7 @@
                                 </a>
                             </div>
                             <div class="control has-text-right">
-                                <a class="button is-link button-action" href="{{ url('/register') }}">
+                                <a class="button button-action action-do" href="{{ url('/register') }}">
                                     Register
                                 </a>
                             </div>

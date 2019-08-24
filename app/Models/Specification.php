@@ -43,4 +43,14 @@ class Specification extends Model
     {
         return $this->belongsToMany(Category::class, 'category_specification', 'specification_id', 'category_id');
     }
+
+    /**
+     * Get number of properties for this specification
+     *
+     * @return integer
+     */
+    public function getPropertyCountAttribute()
+    {
+        return $this->properties()->count();
+    }
 }

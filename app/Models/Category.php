@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use HasStatus;
+
     /**
      * The properties that are mass assignable
      *
@@ -151,6 +154,16 @@ class Category extends Model
     public function getSpecificationIds()
     {
         return $this->specifications()->allRelatedIds();
+    }
+
+    /**
+     * Get category top level attribute in human readable format
+     *
+     * @return string
+     */
+    public function getTopAttribute()
+    {
+        return $this->top_level ? 'Yes' : 'No';
     }
 
     /**

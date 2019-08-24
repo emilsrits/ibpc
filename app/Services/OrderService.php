@@ -39,8 +39,8 @@ class OrderService
      */
     public function action(array $data)
     {
-        if (isset($data['orders'])) {
-            $orderIds = $data['orders'];
+        if (isset($data['order'])) {
+            $orderIds = $data['order'];
             $status = $data['mass-action'];
 
             if ($status) {

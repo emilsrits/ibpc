@@ -149,11 +149,11 @@ class UserTest extends TestCase
     public function it_can_filter_by_status()
     {
         $this->createUser([
-            'status' => User::USER_DISABLED
+            'status' => User::USER_STATUS_DISABLED
         ], 3);
 
         $request = Request::create('/users', 'POST', [
-            'status' => User::USER_DISABLED
+            'status' => User::USER_STATUS_DISABLED
         ]);
         $filter = new UserFilter($request);
         $users = User::filter($filter)->get();

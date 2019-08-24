@@ -1,0 +1,22 @@
+.entity-table {
+  thead th:not(:first-child):not(:last-child) {
+    min-width: 100px;
+  }
+}
+
+.table-filters {
+  input, select {
+    padding: 3px 5px;
+    width: 100%;
+    background-color: $color-black-transparent;
+    border: 1px solid $color-gray-darker;
+    transition: border 0.25s ease;
+    &:focus {
+      border-color: $color-green-darker;
+    }
+  }
+
+  select option {
+    background-color: $color-gray-darkest;
+  }
+}

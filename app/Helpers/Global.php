@@ -123,7 +123,7 @@ if (!function_exists('intermediateSyncArray')) {
      */
     function intermediateSyncArray(array $array)
     {
-        $arr = collect($array)->mapWithKeys(function($item, $key) {
+        $collection = collect($array)->mapWithKeys(function($item, $key) {
             return [
                 key($item) => [
                     'value' => $item[key($item)]
@@ -131,7 +131,7 @@ if (!function_exists('intermediateSyncArray')) {
             ];
         });
 
-        return $arr;
+        return $collection;
     }
 }
 
@@ -162,5 +162,26 @@ if (!function_exists('formatMoneyByDecimal')) {
         $formatted = money($money)->formatByDecimal();
 
         return $formatted;
+    }
+}
+
+if (!function_exists('arrayFromCollection')) {
+    /**
+     * Create associative array from collection with key and value based on model attribute
+     *
+     * @param $collection
+     * @param string $key
+     * @param string $value
+     * @return array
+     */
+    function arrayFromCollection($collection, $key, $value)
+    {
+        $array = [];
+
+        foreach($collection as $item) {
+            $array[$item[$key]] = $item[$value];
+        }
+
+        return $array;
     }
 }

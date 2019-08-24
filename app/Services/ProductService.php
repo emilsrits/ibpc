@@ -37,8 +37,8 @@ class ProductService
      */
     public function action(array $data)
     {
-        if (isset($data['catalog'])) {
-            $productIds = $data['catalog'];
+        if (isset($data['product'])) {
+            $productIds = $data['product'];
 
             switch ($data['mass-action']) {
                 case 1:

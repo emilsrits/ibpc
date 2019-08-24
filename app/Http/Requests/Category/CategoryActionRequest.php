@@ -25,7 +25,7 @@ class CategoryActionRequest extends FormRequest
     {
         return [
             'mass-action' => 'integer|in:0,1,2,3',
-            'categories' => 'nullable|array'
+            'category' => 'nullable|array'
         ];
     }
 }

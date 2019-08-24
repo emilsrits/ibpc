@@ -25,7 +25,7 @@ class SpecificationActionRequest extends FormRequest
     {
         return [
             'mass-action' => 'integer|in:0,1',
-            'specifications' => 'nullable|array'
+            'specification' => 'nullable|array'
         ];
     }
 }

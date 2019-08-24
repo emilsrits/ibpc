@@ -80,7 +80,7 @@ Create Product
                 </div>
             </div>
             <div id="specifications" class="product-content-section">
-                @include('partials.admin.product.specifications')
+                @include('admin.product._partials.specifications')
             </div>
         </form>
     </div>

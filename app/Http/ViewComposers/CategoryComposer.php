@@ -25,7 +25,7 @@ class CategoryComposer
     public function compose(View $view)
     {
         $view->with([
-            'parentCategories' => $this->categoryRepository->parent()->with('children')->active()->get(),
+            'parentCategories' => $this->categoryRepository->parent()->with('children')->active()->get()
         ]);
     }
 }

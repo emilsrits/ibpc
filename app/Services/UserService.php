@@ -36,19 +36,19 @@ class UserService
      */
     public function action(array $data)
     {
-        if (isset($data['users'])) {
-            $userIds = $data['users'];
+        if (isset($data['user'])) {
+            $userIds = $data['user'];
 
             switch ($data['mass-action']) {
                 case 1:
-                    $this->user->setStatus($userIds, User::USER_ENABLED);
+                    $this->user->setStatus($userIds, User::USER_STATUS_ENABLED);
                     $this->message = [
                         'type' => 'message-success',
                         'content' => 'User(s) enabled!'
                     ];
                     return true;
                 case 2:
-                    $this->user->setStatus($userIds, User::USER_DISABLED);
+                    $this->user->setStatus($userIds, User::USER_STATUS_DISABLED);
                     $this->message = [
                         'type' => 'message-success',
                         'content' => 'User(s) disabled!'

@@ -35,8 +35,8 @@ class Store extends Page
     public function elements()
     {
         return [
-            '@dropdown' => '.dropdown-toggle',
-            '@sign-out' => '#sign-out',
+            '@dropdown' => '#navbar-user-dropdown',
+            '@sign-out' => '#navbar-sign-out',
         ];
     }
 }

@@ -25,9 +25,9 @@ class UserActionRequest extends FormRequest
     {
         return [
             'mass-action' => 'integer|in:0,1,2',
-            'users' => 'nullable|array',
+            'user' => 'nullable|array',
             'id' => 'nullable|integer',
-            'user' => 'nullable|string',
+            'name' => 'nullable|string',
             'role' => 'nullable|integer',
             'status' => 'nullable|integer',
             'createdAt' => 'nullable|string',

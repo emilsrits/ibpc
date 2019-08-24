@@ -9,14 +9,14 @@
 
                 <div class="panel-block">
                     <form class="form" role="form" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
+                        @csrf
 
                         <div class="field">
                             <label for="first_name" class="label">First Name</label>
                             <div class="control">
                                 <input id="first-name" class="input" type="text" name="first_name" value="{{ old('first_name') }}" required>
                             </div>
-                            @if ($errors->has('first_name'))
+                            @if($errors->has('first_name'))
                                 <p class="help is-danger">{{ $errors->first('first_name') }}</p>
                             @endif
                         </div>
@@ -26,7 +26,7 @@
                             <div class="control">
                                 <input id="last-name" class="input" type="text" name="last_name" value="{{ old('last_name') }}" required>
                             </div>
-                            @if ($errors->has('last_name'))
+                            @if($errors->has('last_name'))
                                 <p class="help is-danger">{{ $errors->first('last_name') }}</p>
                             @endif
                         </div>
@@ -36,7 +36,7 @@
                             <div class="control">
                                 <input id="email" class="input" type="email" name="email" value="{{ old('email') }}" required autofocus>
                             </div>
-                            @if ($errors->has('email'))
+                            @if($errors->has('email'))
                                 <p class="help is-danger">{{ $errors->first('email') }}</p>
                             @endif
                         </div>
@@ -46,7 +46,7 @@
                             <div class="control">
                                 <input id="password" class="input" type="password" name="password" required>
                             </div>
-                            @if ($errors->has('password'))
+                            @if($errors->has('password'))
                                 <p class="help is-danger">{{ $errors->first('password') }}</p>
                             @endif
                         </div>
@@ -56,14 +56,14 @@
                             <div class="control">
                                 <input id="password-confirm" class="input" type="password" name="password_confirmation" required>
                             </div>
-                            @if ($errors->has('password_confirmation'))
+                            @if($errors->has('password_confirmation'))
                                 <p class="help is-danger">{{ $errors->first('password_confirmation') }}</p>
                             @endif
                         </div>
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link button-action" type="submit">
+                                <button class="button button-action action-do" type="submit">
                                     Register
                                 </button>
                             </div>

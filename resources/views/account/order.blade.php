@@ -8,7 +8,7 @@ Order #{{ $order->id }}
 <div class="section">
     <div class="container">
         <div id="user-account" class="box">
-            @include('partials.account.navigation')
+            @include('account._partials.navigation')
             
             <table class="table is-bordered">
                 <caption>Order #{{ $order->id }}</caption>

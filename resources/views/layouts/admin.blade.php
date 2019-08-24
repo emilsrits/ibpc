@@ -27,13 +27,13 @@
 <body>
     <div id="app">
         @yield('modal')
-        @include('partials.admin.header')
+        @include('admin._partials.header')
 
         <main>
             @yield('content')
         </main>
 
-        @include('partials.footer')
+        @include('_partials.footer')
     </div>
 
     <!-- Scripts Body -->

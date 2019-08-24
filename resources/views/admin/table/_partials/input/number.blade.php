@@ -1,0 +1,1 @@
+<input class="filter-input" type="text" min="{{ $min }}" max="{{ $max }}" name="{{ $name }}" value="{{ request($name) ?? '' }}">

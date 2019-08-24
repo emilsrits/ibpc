@@ -12,3 +12,19 @@
     background-color: $color-green;
   }
 }
+
+.inverted {
+  .pagination .pagination-list li a {
+    background-color: $color-gray-lighter;
+    color: $color-gray-darker;
+    &.is-current {
+      background-color: $color-green-darker;
+      &:hover {
+        color: $color-black;
+      }
+    }
+    &:hover {
+      background-color: $color-green;
+    }
+  }
+}

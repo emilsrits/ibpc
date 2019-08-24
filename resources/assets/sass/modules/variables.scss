@@ -25,6 +25,15 @@ $line-height-base: 1.6;
 // Bulma Override
 $family-sans-serif: $font-family-sans-serif;
 
+$button-active-color: $color-white;
+$button-active-border-color: transparent;
+$button-focus-color: $color-white;
+$button-focus-border-color: transparent;
+$button-focus-box-shadow-size: 0 1px 20px 2px;
+$button-focus-box-shadow-color: inset $color-gray-darker;
+$button-hover-color: $color-white;
+$button-hover-border-color: transparent;
+
 $navbar-padding-vertical: 0;
 $navbar-background-color: $color-black;
 $navbar-item-color: $color-gray-lightest;

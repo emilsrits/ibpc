@@ -14,22 +14,8 @@
   }
 }
 
-#checkout-cart .button {
-  background-color: $color-green;
-  &:hover {
-    background-color: $color-green-darker;
-  }
-}
-
 #checkout-delivery {
   #checkout-delivery-form {
-    .button {
-      background-color: $color-green;
-      &:hover {
-        background-color: $color-green-darker;
-      }
-    }
-
     .delivery-info {
       padding-left: 25px;
       color: $color-gray-lighter;

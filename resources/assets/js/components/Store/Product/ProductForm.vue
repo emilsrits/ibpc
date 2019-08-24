@@ -3,8 +3,12 @@
         <h2 class="product-title">{{ product.title }}</h2>
         <p class="product-code">{{ product.code }}</p>
 
-        <p v-if="productPrices.old" class="product-price-old"><s>{{ productPrices.old }}</s></p>
-        <p class="product-price-current">{{ productPrices.current }}</p>
+        <p class="product-price-old" v-if="productPrices.old">
+            <s>{{ productPrices.old }}</s>
+        </p>
+        <p class="product-price-current">
+            {{ productPrices.current }}
+        </p>
 
         <template v-if="product.status">
             <div v-if="product.stock > 5" class="stock-status in-stock">
@@ -12,7 +16,7 @@
                 <div class="stock-text">In Stock</div>
             </div>
 
-            <div v-else class="stock-status low-stock">
+            <div class="stock-status low-stock" v-else>
                 <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
                 <div class="stock-text">{{ product.stock }} In Stock</div>
             </div>
@@ -29,7 +33,7 @@
                 <input type="hidden" name="_token" :value="csrf">
                 <label for="qty">Qty:&nbsp;</label>
                 <input id="qty" type="number" name="qty" min="1" max="1000" value="1" title="qty" pattern="[0-9]*">
-                <button class="button is-link button-action" type="submit" name="submit">Add To Cart</button>
+                <button class="button button-action action-do" type="submit" name="submit">Add To Cart</button>
             </form>
         </div>
     </div>

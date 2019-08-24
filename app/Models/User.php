@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use App\Filters\QueryFilter;
+use App\Traits\HasStatus;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasStatus;
 
-    const USER_ENABLED = 1;
-    const USER_DISABLED = 0;
+    const USER_STATUS_ENABLED = 1;
+    const USER_STATUS_DISABLED = 0;
 
     /**
      * The properties that are mass assignable
@@ -108,6 +109,45 @@ class User extends Authenticatable
     }
 
     /**
+     * Find specific order
+     *
+     * @param $id
+     * @return Order
+     */
+    public function getOrder($id)
+    {
+        return $this->orders()->findOrFail($id);
+    }
+
+    /**
+     * Get collection of active orders
+     *
+     * @param null $limit
+     * @return mixed
+     */
+    public function getActiveOrders($limit = null)
+    {
+        if ($limit) {
+            return $this->orders()->active()->paginate($limit);
+        }
+        return $this->orders()->active()->get();
+    }
+
+    /**
+     * Get collection of finished orders
+     *
+     * @param null $limit
+     * @return mixed
+     */
+    public function getFinishedOrders($limit = null)
+    {
+        if ($limit) {
+            return $this->orders()->finished()->paginate($limit);
+        }
+        return $this->orders()->finished()->get();
+    }
+
+    /**
      * Checks if user has been given any role
      *
      * @return bool
@@ -171,45 +211,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Find specific order
-     *
-     * @param $id
-     * @return Order
-     */
-    public function getOrder($id)
-    {
-        return $this->orders()->findOrFail($id);
-    }
-
-    /**
-     * Get collection of active orders
-     *
-     * @param null $limit
-     * @return mixed
-     */
-    public function getActiveOrders($limit = null)
-    {
-        if ($limit) {
-            return $this->orders()->active()->paginate($limit);
-        }
-        return $this->orders()->active()->get();
-    }
-
-    /**
-     * Get collection of finished orders
-     *
-     * @param null $limit
-     * @return mixed
-     */
-    public function getFinishedOrders($limit = null)
-    {
-        if ($limit) {
-            return $this->orders()->finished()->paginate($limit);
-        }
-        return $this->orders()->finished()->get();
-    }
-
-    /**
      * Update user roles
      *
      * @param array $roles
@@ -221,6 +222,16 @@ class User extends Authenticatable
         } else {
             $this->roles()->sync(array_column($roles, 'id'));
         }
+    }
+
+    /**
+     * Return main role (lowest id)
+     *
+     * @return string
+     */
+    public function getMainRoleAttribute()
+    {
+        return optional($this->roles->min())->slug;
     }
 
     /**

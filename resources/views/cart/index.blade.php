@@ -9,30 +9,27 @@ Shopping Cart
     <div class="container">
         <div class="columns is-multiline">
             <div class="column is-12-mobile is-3-tablet is-2-widescreen">
-                @include('partials.store.categories')
+                @include('store._partials.categories')
             </div>
 
             <div class="column is-12-mobile is-9-tablet is-10-widescreen">
-                @include('partials.checkout.checkout_progress', ['step' => 1])
+                @include('checkout._partials.checkout_progress', ['step' => 1])
                 
                 <cart-form
-                    :cart-total-price="'{{ $cart ? money($cart->totalPrice) : null }}'"
+                    method="PATCH"
+                    cart-total-price="{{ $cart ? money($cart->totalPrice) : null }}"
                     :routes="{
                         action: '{{ url('/cart/update') }}',
                         checkout: '{{ url('/checkout') }}'
                     }"
                 >
-                    <template v-slot:form-method>
-                        {{ method_field('PATCH') }}
-                    </template>
-
                     @if(Session::has('cart'))
                         <template v-slot:cart-items="{removeProductFromCart}">
                             @foreach($products as $product)
                                 @if($product['item']['id'])
                                 <tr>
                                     <td class="has-text-centered">
-                                        <button class="cart-item-remove button-clean" type="button" value="{{ $product['item']['id'] }}" @click="removeProductFromCart">
+                                        <button class="cart-item-remove button button-clean" type="button" value="{{ $product['item']['id'] }}" @click="removeProductFromCart">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </td>

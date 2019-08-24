@@ -1,0 +1,1 @@
+<input class="filter-input" type="text" name="{{ $name }}" value="{{ request($name) ?? '' }}">

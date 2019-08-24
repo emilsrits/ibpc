@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Filters\QueryFilter;
+use App\Traits\HasPrice;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    use HasPrice;
+
     /**
      * The properties that are mass assignable
      *
@@ -147,16 +150,30 @@ class Order extends Model
             foreach ($ids as $id => $value) {
                 $order = Order::find($id);
                 if (orderStatusFinished($order->status)) {
-                    return false;
+                    continue;
                 }
                 $order->update(['status' => $status]);
             }
+
+            return true;
         } else {
             if (orderStatusFinished($this->status)) {
                 return false;
             }
             $this->update(['status' => $status]);
+
+            return true;
         }
+    }
+
+    /**
+     * Get full name of the user
+     *
+     * @return string
+     */
+    public function getUserFullNameAttribute()
+    {
+        return $this->user->full_name;
     }
 
     /**

@@ -34,8 +34,8 @@ class SpecificationService
      */
     public function action(array $data)
     {
-        if (isset($data['specifications'])) {
-            $specificationIds = $data['specifications'];
+        if (isset($data['specification'])) {
+            $specificationIds = $data['specification'];
 
             switch ($data['mass-action']) {
                 case 1:

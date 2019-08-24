@@ -1,11 +1,11 @@
 <template>
     <a class="item-link" :href="route">
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        <span v-if="cartData" id="navbar-cart-items">
+        <span id="navbar-cart-items" v-if="cartData">
             ({{ cartData.itemCount }})
             {{ cartData.price }}
         </span>
-        <span v-else id="navbar-cart-items">
+        <span id="navbar-cart-items" v-else>
             (0)
         </span>
     </a>

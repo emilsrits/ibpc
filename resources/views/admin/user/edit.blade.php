@@ -69,7 +69,7 @@ Edit User
                         <tr class="entity-attribute">
                             <td><label for="country">Country</label></td>
                             <td>
-                                @include('partials.widgets.countries', ['default' => $user->country])
+                                {!! Form::select('country', config('constants.countries'), old('country') ?? optional($user)->country) !!}
                             </td>
                         </tr>
                         <tr class="entity-attribute">

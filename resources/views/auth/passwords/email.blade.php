@@ -8,26 +8,26 @@
                 <p class="panel-heading">Reset Password</p>
 
                 <div class="panel-block">
-                    @if (session('status'))
+                    @if(session('status'))
                         <p class="alert alert-success">{{ session('status') }}</p>
                     @endif
 
                     <form class="form" role="form" method="POST" action="{{ url('/password/email') }}">
-                        {{ csrf_field() }}
+                        @csrf
 
                         <div class="field">
                             <label for="email" class="label">Email</label>
                             <div class="control">
                                 <input id="email" class="input" type="email" name="email" value="{{ old('email') }}" required autofocus>
                             </div>
-                            @if ($errors->has('email'))
+                            @if($errors->has('email'))
                                 <p class="help is-danger">{{ $errors->first('email') }}</p>
                             @endif
                         </div>
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link button-action" type="submit">Send Password Reset Link</button>
+                                <button class="button button-action action-do" type="submit">Send Password Reset Link</button>
                             </div>
                         </div>
                     </form>

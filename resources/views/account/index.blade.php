@@ -8,10 +8,10 @@ Active Orders
 <div class="section">
     <div class="container">
         <div id="user-account" class="box">
-            @include('partials.account.navigation')
+            @include('account._partials.navigation')
             
             @if(count($orders))
-                @include('partials.account.orders_table', ['orders' => $orders])
+                @include('account._partials.orders_table', ['orders' => $orders])
             @else
                 <p>You have no active orders</p>
             @endif

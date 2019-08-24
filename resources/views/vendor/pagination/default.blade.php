@@ -2,8 +2,8 @@
     <?php
         $start = $paginator->currentPage() - 2;
         $end = $paginator->currentPage() + 2;
-        if($start < 1) $start = 1;
-        if($end >= $paginator->lastPage() ) $end = $paginator->lastPage(); // reset end to last page
+        if ($start < 1) $start = 1;
+        if ($end >= $paginator->lastPage() ) $end = $paginator->lastPage(); // reset end to last page
     ?>
     <nav class="pagination is-small is-right">
         <ul class="pagination-list">
@@ -21,7 +21,7 @@
                 </li>
             @endif
             {{-- pages --}}
-            @for ($i = $start; $i <= $end; $i++)
+            @for($i = $start; $i <= $end; $i++)
                 @if($paginator->currentPage() == $i)
                     <li><a class="pagination-link is-current" href="{{ $paginator->url($i) }}">{{ $i }}</a></li>
                 @else

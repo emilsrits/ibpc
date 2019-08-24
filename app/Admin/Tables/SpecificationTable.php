@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Admin\Tables;
+
+use App\Admin\Tables\Table;
+
+class SpecificationTable extends Table
+{
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    function model()
+    {
+        return 'App\Models\Specification';
+    }
+
+    /**
+     * Specify table slug
+     *
+     * @return string
+     */
+    function slug()
+    {
+        return 'specification';
+    }
+
+    /**
+     * Add columns to the table
+     */
+    function addColumns()
+    {
+        $this->columnSet->add('id', '#ID')
+            ->width('100px');
+
+        $this->columnSet->add('slug', 'Slug');
+
+        $this->columnSet->add('name', 'Name');
+
+        $this->columnSet->add('property_count', 'Properties');
+
+        $this->columnSet->add('created_at', 'Created');
+
+        $this->columnSet->add('updated_at', 'Updated');
+    }
+}

@@ -25,7 +25,7 @@ class ProductActionRequest extends FormRequest
     {
         return [
             'mass-action' => 'integer|in:0,1,2,3',
-            'catalog' => 'nullable|array',
+            'product' => 'nullable|array',
             'id' => 'nullable|integer',
             'title' => 'nullable|string',
             'code' => 'nullable|string',

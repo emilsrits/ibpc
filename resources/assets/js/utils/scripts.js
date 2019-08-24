@@ -25,33 +25,6 @@
             $('.flash-message').fadeOut(500);
         });
 
-        // Check all checkboxes in table for mass action
-        $('#mass-select').on('click', function() {
-            if ($(this).is(':checked')) {
-                $('.entity-select').each(function () {
-                    $(this).prop('checked', true);
-                });
-            } else {
-                $('.entity-select').each(function () {
-                    $(this).prop('checked', false);
-                });
-            }
-        });
-
-        // Clear all filters when clicked
-        $('#filters-clear').on('click', function() {
-            clearAllInputs($('#table-search'));
-        });
-        // Clear all filters from a admin panel table
-        function clearAllInputs(selector) {
-            $(selector).find(':input').each(function() {
-                $(this).val('');
-            });
-            $(selector).find('select').each(function () {
-                $(this).selectedIndex = 0;
-            });
-        }
-
         // Toggle parent_id selection for category creation
         $('#category-parent').on('change', function() {
            if ($(this).val() === '1') {
@@ -60,62 +33,6 @@
                $('#category-parent-id').show();
            }
         });
-
-        // Confirm mass action on a entity
-        confirmAction = function(actions) {
-            var items = Object.values(actions);
-            for (let item of items) {
-                // If element is empty skip to next iteration
-                if ($.isEmptyObject(item.element)) {
-                    continue;
-                }
-                item.element.on('submit', function() {
-                    var event = massAction.val();
-                    if (event === item.id) {
-                        var numberOfChecked = $('.entity-select:checked').length;
-
-                        if (numberOfChecked > 0) {
-                            var actionCapitalized = item.action.charAt(0).toUpperCase() + item.action.slice(1);
-                            return confirm(actionCapitalized + ' ' + numberOfChecked + ' ' + item.entity + '?');
-                        }
-                    }
-                });
-                
-            }
-        }
-        var actionsCollection = {
-            product: {
-                element: $('#catalog-form'),
-                id: '3',
-                action: 'delete',
-                entity: 'products'
-            },
-            category: {
-                element: $('#categories-form'),
-                id: '3',
-                action: 'delete',
-                entity: 'categories'
-            },
-            specification: {
-                element: $('#specifications-form'),
-                id: '1',
-                action: 'delete',
-                entity: 'property groups'
-            },
-            property: {
-                element: $('#properties-form'),
-                id: '1',
-                action: 'delete',
-                entity: 'properties'
-            },
-            user: {
-                element: $('#users-form'),
-                id: '2',
-                action: 'disable',
-                entity: 'users'
-            }
-        };
-        confirmAction(actionsCollection);
 
         // Preview uploaded product media
         mediaUpload.on('change', function () {

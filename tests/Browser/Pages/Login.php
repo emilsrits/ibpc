@@ -38,6 +38,7 @@ class Login extends Page
             '@email' => 'input[name=email]',
             '@password' => 'input[name=password]',
             '@remember' => 'input[name=remember]',
+            '@login' => 'button.action-add',
         ];
     }
 }

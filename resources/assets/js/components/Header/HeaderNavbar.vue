@@ -21,7 +21,7 @@
                 <div class="navbar-end">
                     <slot name="navbar-end"></slot>
 
-                    <div v-if="!user" class="navbar-item">
+                    <div class="navbar-item" v-if="!user">
                         <div>
                             <a class="item-link" :href="routes.login">
                                 <i class="fa fa-sign-in">&nbsp;</i>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    <div v-else class="navbar-item has-dropdown is-hoverable">
+                    <div id="navbar-user-dropdown" class="navbar-item has-dropdown is-hoverable" v-else>
                         <a class="navbar-link item-link" :href="routes.account">
                             <i class="fa fa-user">&nbsp;</i>
                             Account
@@ -38,7 +38,7 @@
 
                         <div class="navbar-dropdown">
                             <div class="navbar-item">
-                                <a @click.prevent="submitLogoutForm">
+                                <a id="navbar-sign-out" @click.prevent="submitLogoutForm">
                                     <i class="fa fa-sign-out">&nbsp;</i>
                                     Sign Out
                                 </a>
@@ -55,7 +55,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'HeaderNavbar',
 

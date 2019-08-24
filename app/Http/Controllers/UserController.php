@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Tables\UserTable;
 use App\Models\User;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Requests\User\UserActionRequest;
@@ -17,12 +18,18 @@ class UserController extends Controller
      *
      * @param UserService $userService
      * @param UserRepository $userRepository
+     * @param UserTable $userTable
      * @param RoleRepository $roleRepository
      */
-    public function __construct(UserService $userService, UserRepository $userRepository, RoleRepository $roleRepository)
-    {
+    public function __construct(
+        UserService $userService,
+        UserRepository $userRepository,
+        UserTable $userTable,
+        RoleRepository $roleRepository
+    ) {
         $this->userService = $userService;
         $this->userRepository = $userRepository;
+        $this->userTable = $userTable;
         $this->roleRepository = $roleRepository;
     }
 
@@ -35,7 +42,7 @@ class UserController extends Controller
     {
         return view('admin.user.users', [
             'users' => $this->userRepository->paginate(),
-            'request' => null
+            'table' => $this->userTable
         ]);
     }
 
@@ -55,8 +62,9 @@ class UserController extends Controller
         }
 
         $users = $this->userRepository->filter($filters)->paginate();
+        $table = $this->userTable;
 
-        return view('admin.user.users', compact('users', 'request'));
+        return view('admin.user.users', compact('users', 'table', 'request'));
     }
 
     /**

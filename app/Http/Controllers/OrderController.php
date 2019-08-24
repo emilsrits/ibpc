@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Tables\OrderTable;
 use App\Models\Order;
 use App\Filters\OrderFilter;
 use Illuminate\Http\Request;
@@ -18,11 +19,16 @@ class OrderController extends Controller
      *
      * @param OrderService $orderService
      * @param OrderRepository $orderRepository
+     * @param OrderTable $orderTable
      */
-    public function __construct(OrderService $orderService, OrderRepository $orderRepository)
-    {
+    public function __construct(
+        OrderService $orderService,
+        OrderRepository $orderRepository,
+        OrderTable $orderTable
+    ) {
         $this->orderService = $orderService;
         $this->orderRepository = $orderRepository;
+        $this->orderTable = $orderTable;
     }
 
     /**
@@ -34,7 +40,10 @@ class OrderController extends Controller
     {
         $orders = $this->orderRepository->paginate();
 
-        return view('admin.order.orders', ['orders' => $orders, 'request' => null]);
+        return view('admin.order.orders', [
+            'orders' => $orders,
+            'table' => $this->orderTable
+        ]);
     }
 
     /**
@@ -53,8 +62,9 @@ class OrderController extends Controller
         }
 
         $orders = $this->orderRepository->with('user')->filter($filters)->paginate();
+        $table = $this->orderTable;
 
-        return view('admin.order.orders', compact('orders', 'request'));
+        return view('admin.order.orders', compact('orders', 'table', 'request'));
     }
 
     /**

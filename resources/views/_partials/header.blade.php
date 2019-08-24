@@ -34,7 +34,7 @@
                     @else
                     :cart="null"
                     @endif
-                    :route="'{{ url('/cart') }}'"
+                    route="{{ url('/cart') }}"
                 >
                 </header-navbar-cart>
                 </div>
