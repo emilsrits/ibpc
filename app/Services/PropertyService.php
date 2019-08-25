@@ -35,8 +35,8 @@ class PropertyService
      */
     public function action(array $data)
     {
-        if (isset($data['properties'])) {
-            $propertyIds = $data['properties'];
+        if (isset($data['property'])) {
+            $propertyIds = $data['property'];
 
             switch ($data['mass-action']) {
                 case 1:

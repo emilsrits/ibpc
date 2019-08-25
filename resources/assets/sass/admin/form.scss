@@ -1,28 +1,36 @@
-/* MISC */
-#product-media-preview {
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  align-items: end;
-  justify-items: center;
-  margin: 5px 0 15px;
-
-  .media-item {
-    position: relative;
-    display: inline-block;
-    &.new {
-      border: 1px solid $color-orange;
-    }
+#entity-edit-form, #entity-create-form {
+  .columns {
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
-  .product-media-remove {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+  .field.is-horizontal {
+    padding: 15px 0;
   }
 }
 
-#product-media-upload {
-  padding: 6px;
-  border: 3px dashed #d0ecf5;
+#specifications {
+  .specification-group {
+    padding: 15px 0;
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-gray-darker;
+    }
+
+    .field-body {
+      padding: 10px 0;
+    }
+
+    .label {
+      color: $color-gray-lighter;
+    }
+
+    .input {
+      color: $color-white;
+      border-color: $color-gray-darker;
+      background-color: $color-black-transparent;
+      &:focus {
+        border-color: $color-green-darker;
+      }
+    }
+  }
 }

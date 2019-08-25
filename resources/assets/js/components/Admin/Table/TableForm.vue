@@ -7,7 +7,7 @@
                 <div class="select">
                     <select id="mass-action" name="mass-action">
                         <option value="0"></option>
-                        <slot name="action-options"></slot>
+                        <slot name="select-options"></slot>
                     </select>
                 </div>
 
@@ -75,9 +75,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../sass/modules/variables.scss";
-
 .table-action {
-    margin: 20px 0 10px;
+    margin: 10px 0 15px;
 }
 </style>

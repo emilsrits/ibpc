@@ -26,6 +26,14 @@
   &.button-action.action-add {
     background-color: $color-green-darker;
   }
+
+  &.action-link {
+    color: $color-gray-lighter;
+    text-decoration: underline;
+    &:hover {
+      color: $color-green-darker;
+    }
+  }
   
   &.button-clean {
     margin: 0;
@@ -34,6 +42,17 @@
     border: none;
     &:focus:not(:active) {
       box-shadow: none;
+    }
+  }
+
+  &.button-label {
+    color: $color-gray-lightest;
+    background: rgba(0, 0, 0, 0.8);
+    border: transparent;
+    border-radius: 0;
+    border-top-left-radius: 5px;
+    &:hover {
+      color: $color-red;
     }
   }
 }

@@ -10,14 +10,17 @@ Property Groups
         <div class="box">
             <h1 class="is-size-5">Property Groups</h1>
 
-            <div class="entity-manage has-text-right">
-                <a class="button button-action action-add" href="{{ url('/admin/specification/create') }}">Add New</a>
-            </div>
+            <entity-manage
+                :routes="{
+                    add: '{{ url('/admin/specification/create') }}'
+                }"
+            >
+            </entity-manage>
 
             <table-form
                 action="{{ url('/admin/specifications') }}"
             >
-                <template v-slot:action-options>
+                <template v-slot:select-options>
                     <option value="1">Delete</option>
                 </template>
 

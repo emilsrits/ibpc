@@ -12,6 +12,9 @@ Vue.config.productionTip = false;
 
 import store from './vuex/store.js'
 
+import EntityManage from './components/Admin/Entity/EntityManage.vue';
+import EntityProductCategories from './components/Admin/Entity/EntityProductCategories.vue';
+import EntityProductMedia from './components/Admin/Entity/EntityProductMedia.vue';
 import TableForm from './components/Admin/Table/TableForm.vue';
 import HeaderNavbar from './components/Header/HeaderNavbar.vue';
 import HeaderNavbarCart from './components/Header//HeaderNavbarCart.vue';
@@ -24,6 +27,9 @@ const app = new Vue({
     el: '#app',
     store,
     components: {
+        EntityManage,
+        EntityProductCategories,
+        EntityProductMedia,
         TableForm,
         HeaderNavbar,
         HeaderNavbarCart,

@@ -16,7 +16,7 @@ Admin Panel
                             <thead>
                                 <th>Id</th>
                                 <th>User</th>
-                                <th>Price</th>
+                                <th>Cost</th>
                                 <th>Status</th>
                                 <th>Created</th>
                                 <th></th>

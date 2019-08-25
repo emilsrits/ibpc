@@ -3,7 +3,7 @@ $color-green-darker: #61892F;
 $color-green: #7eb62f;
 $color-gray-darkest: #222629;
 $color-gray-darker: #474B4F;
-$color-gray: #6B6E70;
+$color-gray: #6b6e70;
 $color-gray-lighter: #bebebe;
 $color-gray-lightest: #e0e0e0;
 
@@ -11,8 +11,10 @@ $color-red: #CC4040;
 $color-orange: #f37c34;
 $color-blue: #3273dc;
 $color-white: #eee;
+$color-gray-transparent: rgba(71, 75, 79, .3);
 $color-black: #1b1b1b;
 $color-black-transparent: rgba(0, 0, 0, .3);
+$color-random: rgb(random(255), random(255), random(255));
 
 // Typography
 $font-family-sans-serif: 'Roboto', sans-serif;
@@ -25,6 +27,9 @@ $line-height-base: 1.6;
 // Bulma Override
 $family-sans-serif: $font-family-sans-serif;
 
+$box-padding: 2rem 1.25rem;
+
+$button-color: $color-white;
 $button-active-color: $color-white;
 $button-active-border-color: transparent;
 $button-focus-color: $color-white;
@@ -86,5 +91,9 @@ $tabs-boxed-link-active-background-color: $color-gray-darkest;
 $tabs-border-bottom-color: $color-gray;
 $tabs-boxed-link-active-border-color: $color-gray;
 $tabs-boxed-link-hover-border-bottom-color: $color-gray;
+
+// Bulma Switches Override
+$switch-focus: none;
+$switch-background-active: $color-green-darker;
 
 @import "../vendor/bulma/utilities/_all.sass";

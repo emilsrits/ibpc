@@ -13,7 +13,7 @@ Users
             <table-form
                 action="{{ url('/admin/users') }}"
             >
-                <template v-slot:action-options>
+                <template v-slot:select-options>
                     <option value="1">Enable</option>
                     <option value="2">Disable</option>
                 </template>

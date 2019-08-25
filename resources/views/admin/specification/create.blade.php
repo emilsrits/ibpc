@@ -5,37 +5,44 @@ Create Property Group
 @endsection
 
 @section('content')
-<div class="admin-page lg-100 md-100 sm-100">
-    <div class="specification-create">
-        <h3>New Property Group</h3>
-        <form id="create-specifications-form" role="form" method="POST" action="{{ url('/admin/specification/create') }}">
-            {{ csrf_field() }}
-            <div class="manage-btn-group">
-                <div class="btn-manage-back">
-                    <a href="{{ url('/admin/specifications') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
+<div class="section">
+    <div class="container is-fluid">
+        <div class="box">
+            <h1 class="is-size-5">New Property Group</h1>
+
+            <form id="entity-create-form" role="form" method="POST" action="{{ url('/admin/specification/create') }}">
+                @csrf
+
+                <entity-manage
+                    :routes="{
+                        back: '{{ url('/admin/specifications') }}'
+                    }"
+                >
+                </entity-manage>
+
+                <div class="columns">
+                    <div class="column is-3">
+                        <h2 class="is-size-5">General</h2>
+                    </div>
+
+                    <div class="column is-9">
+                        <div class="field">
+                            <label class="label is-small" for="slug">Slug</label>
+                            <div class="control">
+                                <input class="input" type="text" name="slug" required value="{{ old('slug') }}">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label is-small" for="name">Name</label>
+                            <div class="control">
+                                <input class="input" type="text" name="name" required value="{{ old('name') }}">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="entity-save" type="submit" name="submit">Save</button>
-            </div>
-            <div class="specification-content-section">
-                <div class="content-section-toggle">
-                    <strong>General<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
-                </div>
-                <div class="content-container">
-                    <table class="specification-table">
-                        <tbody>
-                        <tr class="entity-attribute">
-                            <td><label for="slug">Slug</label></td>
-                            <td><input type="text" name="slug" required value="{{ old('slug') }}"></td>
-                        </tr>
-                        <tr class="entity-attribute">
-                            <td><label for="name">Name</label></td>
-                            <td><input type="text" name="name" required value="{{ old('name') }}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 @endsection

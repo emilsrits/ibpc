@@ -25,7 +25,7 @@ class PropertyActionRequest extends FormRequest
     {
         return [
             'mass-action' => 'integer|in:0,1',
-            'properties' => 'nullable|array'
+            'property' => 'nullable|array'
         ];
     }
 }

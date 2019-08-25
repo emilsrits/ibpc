@@ -83,16 +83,16 @@ export default {
             let el = event.currentTarget
 
             axios.post('/cart/remove', {
-                productId: el.value
-            })
-            .then(response => {
-                this.$store.dispatch('updateCart', response.data);
+                    productId: el.value
+                })
+                .then(response => {
+                    this.$store.dispatch('updateCart', response.data);
 
-                el.closest('tr').remove();
-            })
-            .catch(error => {
-                console.log('error: ' + error);
-            });
+                    el.closest('tr').remove();
+                })
+                .catch(error => {
+                    console.log('error: ' + error);
+                });
         },
 
         goToCheckout(event) {

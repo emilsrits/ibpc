@@ -10,14 +10,17 @@ Catalog
         <div class="box">
             <h1 class="is-size-5">Product List</h1>
 
-            <div class="entity-manage has-text-right">
-                <a class="button button-action action-add" href="{{ url('/admin/product/create') }}">Add New</a>
-            </div>
+            <entity-manage
+                :routes="{
+                    add: '{{ url('/admin/product/create') }}'
+                }"
+            >
+            </entity-manage>
 
             <table-form
                 action="{{ url('/admin/catalog') }}"
             >
-                <template v-slot:action-options>
+                <template v-slot:select-options>
                     <option value="1">Enable</option>
                     <option value="2">Disable</option>
                     <option value="3">Delete</option>

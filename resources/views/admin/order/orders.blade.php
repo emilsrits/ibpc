@@ -13,7 +13,7 @@ Orders
             <table-form
                 action="{{ url('/admin/orders') }}"
             >
-                <template v-slot:action-options>
+                <template v-slot:select-options>
                     @foreach(config('constants.order_status') as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach

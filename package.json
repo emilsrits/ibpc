@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "axios": "^0.19.0",
+    "bulma-switch": "^2.0.0",
     "cross-env": "^5.2.0",
     "laravel-mix": "^4.1.2",
     "lodash": "^4.17.15",

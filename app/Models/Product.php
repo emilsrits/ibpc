@@ -290,7 +290,7 @@ class Product extends Model
      */
     public function getCategoryId()
     {
-        return $this->categories()->allRelatedIds();
+        return $this->categories()->first()->id;
     }
 
     /**

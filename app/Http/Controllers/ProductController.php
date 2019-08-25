@@ -99,8 +99,8 @@ class ProductController extends Controller
      */
     public function createAsync(Request $request)
     {
-        $category = $this->categoryRepository->with('specifications.properties')->find($request->selectFieldValue);
-        $view = view('partials.admin.product.specifications', ['category'=> $category])->render();
+        $category = $this->categoryRepository->with('specifications.properties')->find($request->selectValue);
+        $view = view('admin.product._partials.specifications', ['category'=> $category])->render();
 
         if ($view) {
             return response()->json($view, 200);
@@ -133,7 +133,7 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->with('categories.specifications.properties')->find($product->id);
 
-        if (!$product->getCategoryId()->isEmpty()) {
+        if ($product->getCategoryId()) {
             $category = $this->categoryRepository->with('specifications.properties')->find($product->getCategoryId());
         } else {
             $category = null;

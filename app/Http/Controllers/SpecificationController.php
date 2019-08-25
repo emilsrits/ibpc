@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Tables\PropertyTable;
 use App\Admin\Tables\SpecificationTable;
 use Illuminate\Http\Request;
 use App\Models\Specification;
@@ -19,15 +20,18 @@ class SpecificationController extends Controller
      * @param SpecificationService $specificationService
      * @param SpecificationRepository $specificationRepository
      * @param SpecificationTable $specificationTable
+     * @param PropertyTable $propertyTable
      */
     public function __construct(
         SpecificationService $specificationService,
         SpecificationRepository $specificationRepository,
-        SpecificationTable $specificationTable
+        SpecificationTable $specificationTable,
+        PropertyTable $propertyTable
     ) {
         $this->specificationService = $specificationService;
         $this->specificationRepository = $specificationRepository;
         $this->specificationTable = $specificationTable;
+        $this->propertyTable = $propertyTable;
     }
 
     /**
@@ -91,7 +95,9 @@ class SpecificationController extends Controller
      */
     public function edit(Specification $specification)
     {
-        return view('admin.specification.edit', compact('specification'));
+        $table = $this->propertyTable;
+
+        return view('admin.specification.edit', compact('specification', 'table'));
     }
 
     /**

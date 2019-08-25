@@ -69,7 +69,7 @@ class ProductTable extends Table
             ]));
 
         $this->columnSet->add('category_title', 'Category')
-            ->filter(new SelectInput('category', arrayFromCollection($this->categoryRepository->all(), 'id', 'title')));
+            ->filter(new SelectInput('category', arrayFromCollection($this->categoryRepository->child()->get(), 'id', 'title')));
 
         $this->columnSet->add('created_at', 'Created')
             ->filter(new TextInput('createdAt'));

@@ -63,15 +63,15 @@ export default {
             let el = event.target;
 
             axios.post('/cart/add', {
-                productId: this.product.id,
-                qty: el.elements.qty.value
-            })
-            .then(response => {
-                this.$store.dispatch('updateCart', response.data);
-            })
-            .catch(error => {
-                console.log('error: ' + error);
-            });
+                    productId: this.product.id,
+                    qty: el.elements.qty.value
+                })
+                .then(response => {
+                    this.$store.dispatch('updateCart', response.data);
+                })
+                .catch(error => {
+                    console.log('error: ' + error);
+                });
         }
     }
 }
