@@ -32,14 +32,14 @@ Edit User
                                 <div class="field is-narrow">
                                     <label class="label is-small" for="first_name">First Name</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="first_name" value="{{ old('first_name') ?? $user->first_name }}">
+                                        <input class="input" type="text" name="first_name" value="{{ old('first_name', $user->first_name) }}">
                                     </div>
                                 </div>
 
                                 <div class="field is-narrow">
                                     <label class="label is-small" for="last_name">Last Name</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="last_name" value="{{ old('last_name') ?? $user->last_name }}">
+                                        <input class="input" type="text" name="last_name" value="{{ old('last_name', $user->last_name) }}">
                                     </div>
                                 </div>
                             </div>
@@ -50,14 +50,14 @@ Edit User
                                 <div class="field">
                                     <label class="label is-small" for="email">Email</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="email" value="{{ old('email') ?? $user->email }}">
+                                        <input class="input" type="text" name="email" value="{{ old('email', $user->email) }}">
                                     </div>
                                 </div>
 
                                 <div class="field is-narrow">
                                     <label class="label is-small" for="phone">Phone</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="phone" value="{{ old('phone') ?? $user->phone }}">
+                                        <input class="input" type="text" name="phone" value="{{ old('phone', $user->phone) }}">
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@ Edit User
                         <div class="field">
                             <label class="label is-small" for="address">Street Address</label>
                             <div class="control">
-                                <input class="input" type="text" name="address" value="{{ old('address') ?? $user->address }}">
+                                <input class="input" type="text" name="address" value="{{ old('address', $user->address) }}">
                             </div>
                         </div>
 
@@ -84,7 +84,7 @@ Edit User
                                     <label class="label is-small" for="country">Country</label>
                                     <div class="control">
                                         <div class="select">
-                                            {!! Form::select('country', config('constants.countries'), old('country') ?? optional($user)->country) !!}
+                                            {!! Form::select('country', config('constants.countries'), old('country', optional($user)->country)) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -92,14 +92,14 @@ Edit User
                                 <div class="field">
                                     <label class="label is-small" for="city">City</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="city" value="{{ old('city') ?? $user->city }}">
+                                        <input class="input" type="text" name="city" value="{{ old('city', $user->city) }}">
                                     </div>
                                 </div>
 
                                 <div class="field">
                                     <label class="label is-small" for="postcode">ZIP / Postal Code</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="postcode" value="{{ old('postcode') ?? $user->postcode }}">
+                                        <input class="input" type="text" name="postcode" value="{{ old('postcode', $user->postcode) }}">
                                     </div>
                                 </div>
                             </div>
@@ -131,14 +131,14 @@ Edit User
                         @foreach($roles as $role)
                             <div class="field">
                                 <input
-                                    id="{{ 'role[' . $role->id . '][id]' }}"
+                                    id="{{ "role[{$role->id}][id]" }}"
                                     class="switch is-small"
                                     type="checkbox"
-                                    name="{{ 'role[' . $role->id . '][id]' }}"
+                                    name="{{ "role[{$role->id}][id]" }}"
                                     value="{{ $role->id }}"
-                                    {{ $user->hasRole($role->slug) ? 'checked' : '' }}>
+                                    {{ old("role.{$role->id}", $user->hasRole($role->slug)) ? 'checked' : '' }}>
 
-                                <label for="{{ 'role[' . $role->id . '][id]' }}">{{ $role->slug }}</label>
+                                <label for="{{ "role[{$role->id}][id]" }}">{{ $role->slug }}</label>
                             </div>
                         @endforeach
                     </div>

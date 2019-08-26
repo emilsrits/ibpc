@@ -18,20 +18,22 @@
 
         <a
             class="button button-action action-add"
-            v-if="routes.add"
-            :href="routes.add">
+            :href="routes.add"
+            v-if="routes.add">
             Add New
         </a>
 
-        <button
-            id="entity-save"
-            class="button button-action action-do"
-            type="submit"
-            name="submit"
-            value="save"
-            v-else>
-            Save
-        </button>
+        <template v-else>
+            <button
+                id="entity-save"
+                class="button button-action action-do"
+                type="submit"
+                name="submit"
+                value="save"
+                v-if="canSave">
+                Save
+            </button>
+        </template>
     </div>
 </template>
 
@@ -40,6 +42,12 @@ export default {
     name: 'EntityManage',
 
     props: {
+        canSave: {
+            type: Boolean,
+            default() {
+                return true;
+            }
+        },
         routes: {
             type: Object,
             default() {
@@ -74,13 +82,13 @@ export default {
 
 <style lang="scss" scoped>
 .entity-manage {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px 0;
 
-  .button {
-    margin: 0 5px;
-  }
+    .button {
+        margin: 0 5px;
+    }
 }
 </style>

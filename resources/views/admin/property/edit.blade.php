@@ -31,7 +31,7 @@ Edit Property
                         <div class="field">
                             <label class="label is-small" for="name">Name</label>
                             <div class="control">
-                                <input class="input" type="text" name="name" required value="{{ old('name') ?? $property->name }}">
+                                <input class="input" type="text" name="name" required value="{{ old('name', $property->name) }}">
                             </div>
                         </div>
                     </div>

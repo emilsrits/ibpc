@@ -41,7 +41,7 @@ class OrderControllerTest extends TestCase
         $response = $this->post(route('order.action', [
             '_token' => csrf_token(),
             'mass-action' => $status,
-            'orders' => [
+            'order' => [
                 1 => [
                     'id' => 1
                 ]

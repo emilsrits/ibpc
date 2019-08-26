@@ -31,14 +31,14 @@ Edit Property Group
                         <div class="field">
                             <label class="label is-small" for="slug">Slug</label>
                             <div class="control">
-                                <input class="input" type="text" name="slug" required value="{{ old('slug') ?? $specification->slug }}">
+                                <input class="input" type="text" name="slug" required value="{{ old('slug', $specification->slug) }}">
                             </div>
                         </div>
 
                         <div class="field">
                             <label class="label is-small" for="name">Name</label>
                             <div class="control">
-                                <input class="input" type="text" name="name" required value="{{ old('name') ?? $specification->name }}">
+                                <input class="input" type="text" name="name" required value="{{ old('name', $specification->name) }}">
                             </div>
                         </div>
                     </div>

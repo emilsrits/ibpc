@@ -18,7 +18,7 @@ return [
     ],
 
     // Save a copy of invoice inside storage directory
-    'invoice_storage' => true,
+    'invoice_storage' => false,
 
     // Displayed currency in mail, PDF templates
     'currency' => 'EUR',

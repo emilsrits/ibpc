@@ -1,6 +1,5 @@
 require('./bootstrap.js');
 
-import './utils/scripts.js';
 import './utils/index.js';
 
 window.Vue = require('vue');
@@ -12,6 +11,7 @@ Vue.config.productionTip = false;
 
 import store from './vuex/store.js'
 
+import EntityCategoryParent from './components/Admin/Entity/EntityCategoryParent.vue';
 import EntityManage from './components/Admin/Entity/EntityManage.vue';
 import EntityProductCategories from './components/Admin/Entity/EntityProductCategories.vue';
 import EntityProductMedia from './components/Admin/Entity/EntityProductMedia.vue';
@@ -29,6 +29,7 @@ const app = new Vue({
     el: '#app',
     store,
     components: {
+        EntityCategoryParent,
         EntityManage,
         EntityProductCategories,
         EntityProductMedia,

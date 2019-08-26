@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.store')
 
 @section('title')
 Account Settings
@@ -22,17 +22,19 @@ Account Settings
                     <div class="column is-9">
                         <div class="field is-horizontal">
                             <div class="field-body">
+                                {{-- First Name Field --}}
                                 <div class="field is-narrow">
                                     <label class="label is-small" for="first_name">First Name</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="first_name" value="{{ old('first_name') ?? $user->first_name }}">
+                                        <input class="input" type="text" name="first_name" value="{{ old('first_name', $user->first_name) }}">
                                     </div>
                                 </div>
 
+                                {{-- Last Name Field --}}
                                 <div class="field is-narrow">
                                     <label class="label is-small" for="last_name">Last Name</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="last_name" value="{{ old('last_name') ?? $user->last_name }}">
+                                        <input class="input" type="text" name="last_name" value="{{ old('last_name', $user->last_name) }}">
                                     </div>
                                 </div>
                             </div>
@@ -40,17 +42,19 @@ Account Settings
 
                         <div class="field is-horizontal">
                             <div class="field-body">
+                                {{-- Email Field --}}
                                 <div class="field">
                                     <label class="label is-small" for="email">Email</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="email" value="{{ old('email') ?? $user->email }}">
+                                        <input class="input" type="text" name="email" value="{{ old('email', $user->email) }}">
                                     </div>
                                 </div>
 
+                                {{-- Phone Field --}}
                                 <div class="field is-narrow">
                                     <label class="label is-small" for="phone">Phone</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="phone" value="{{ old('phone') ?? $user->phone }}">
+                                        <input class="input" type="text" name="phone" value="{{ old('phone', $user->phone) }}">
                                     </div>
                                 </div>
                             </div>
@@ -64,35 +68,39 @@ Account Settings
                     </div>
 
                     <div class="column is-9">
+                        {{-- Street Address Field --}}
                         <div class="field">
                             <label class="label is-small" for="address">Street Address</label>
                             <div class="control">
-                                <input class="input" type="text" name="address" value="{{ old('address') ?? $user->address }}">
+                                <input class="input" type="text" name="address" value="{{ old('address', $user->address) }}">
                             </div>
                         </div>
 
                         <div class="field is-horizontal">
                             <div class="field-body">
+                                {{-- Country Field --}}
                                 <div class="field is-narrow">
                                     <label class="label is-small" for="country">Country</label>
                                     <div class="control">
                                         <div class="select">
-                                            {!! Form::select('country', config('constants.countries'), old('country') ?? optional($user)->country) !!}
+                                            {!! Form::select('country', config('constants.countries'), old('country', optional($user)->country)) !!}
                                         </div>
                                     </div>
                                 </div>
 
+                                {{-- City Field --}}
                                 <div class="field">
                                     <label class="label is-small" for="city">City</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="city" value="{{ old('city') ?? $user->city }}">
+                                        <input class="input" type="text" name="city" value="{{ old('city', $user->city) }}">
                                     </div>
                                 </div>
 
+                                {{-- Postal Code Field --}}
                                 <div class="field">
                                     <label class="label is-small" for="postcode">ZIP / Postal Code</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="postcode" value="{{ old('postcode') ?? $user->postcode }}">
+                                        <input class="input" type="text" name="postcode" value="{{ old('postcode', $user->postcode) }}">
                                     </div>
                                 </div>
                             </div>
@@ -108,6 +116,7 @@ Account Settings
                     <div class="column is-9">
                         <div class="field is-horizontal">
                             <div class="field-body">
+                                {{-- New Password Field --}}
                                 <div class="field">
                                     <label class="label is-small" for="password">New Password</label>
                                     <div class="control">
@@ -115,6 +124,7 @@ Account Settings
                                     </div>
                                 </div>
 
+                                {{-- New Password Confirmation Field --}}
                                 <div class="field">
                                     <label class="label is-small" for="password_confirmation">New Password Again</label>
                                     <div class="control">
@@ -127,6 +137,7 @@ Account Settings
                 </div>
 
                 <div id="account-update-confirm" class="form-section">
+                    {{-- Current Password Field --}}
                     <div class="field">
                         <label class="label is-small" for="current_password">Current Password</label>
                         <div class="control">

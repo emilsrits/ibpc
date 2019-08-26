@@ -23,7 +23,7 @@ export default {
     },
 
     methods: {
-        loadProperties() {
+        loadProperties(event) {
             let el = event.currentTarget;
             
             axios.get('/admin/product/categories', {

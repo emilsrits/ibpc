@@ -30,7 +30,7 @@
             @foreach($collection as $entity)
                 <tr>
                     <td>
-                        <input class="entity-select" type="checkbox" name="{{ $table->slug . '[' . $entity->id . '][id]' }}" value="{{ $entity->id }}">
+                        <input class="entity-select" type="checkbox" name="{{ "{$table->slug}[{$entity->id}][id]" }}" value="{{ $entity->id }}">
                     </td>
 
                     @foreach($table->getColumns() as $item)
@@ -38,7 +38,7 @@
                     @endforeach
 
                     <td>
-                        <a href="{{ url('/admin/' . $table->slug . '/edit', ['id' => $entity->id]) }}">
+                        <a href="{{ url("/admin/{$table->slug}/edit", ['id' => $entity->id]) }}">
                             <i class="fa fa-pencil"></i>
                         </a>
                     </td>

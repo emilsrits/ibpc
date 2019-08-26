@@ -117,7 +117,7 @@ class OrderController extends Controller
      * @param Order $order
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function invoice(Request $request, Order $order)
+    public function invoice(Order $order)
     {
         $this->orderService->invoice($order);
 

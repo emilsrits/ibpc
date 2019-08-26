@@ -10,9 +10,10 @@ Admin Panel
         <div class="box">
             <div class="manage-section">
                 <h4>Recent Orders</h4>
+
                 @if($orders)
                     <div class="scrollable-x">
-                        <table class="table is-fullwidth is-hoverable">
+                        <table class="table is-hoverable">
                             <thead>
                                 <th>Id</th>
                                 <th>User</th>
@@ -25,10 +26,10 @@ Admin Panel
                                 @foreach($orders as $order)
                                     <tr>
                                         <td>{{ $order->id }}</td>
-                                        <td>{{ $order->user->full_name }}</td>
+                                        <td class="no-wrap">{{ $order->user->full_name }}</td>
                                         <td class="no-wrap">@money($order->price)</td>
                                         <td>{{ $order->status }}</td>
-                                        <td>{{ $order->created_at }}</td>
+                                        <td class="no-wrap">{{ $order->created_at }}</td>
                                         <td>
                                             <a class="link-action" href="{{ url('/admin/order/edit', ['id' => $order->id]) }}">
                                                 <i class="fa fa-pencil"></i>

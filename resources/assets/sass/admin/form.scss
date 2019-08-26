@@ -4,8 +4,17 @@
     padding-bottom: 20px;
   }
 
+  .label {
+    color: $color-gray-lighter;
+  }
+
   .field.is-horizontal {
     padding: 15px 0;
+  }
+
+  .field.is-distinct {
+    padding-left: 6px;
+    border-left: 3px solid $color-gray-transparent;
   }
 }
 
@@ -33,4 +42,9 @@
       }
     }
   }
+}
+
+#send-invoice-form {
+  margin: 10px 0 0;
+  padding: 10px 0;
 }

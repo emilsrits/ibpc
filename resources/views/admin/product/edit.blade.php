@@ -29,7 +29,7 @@ Edit Product
 
                     <div class="column is-9">
                         <div class="field">
-                            <label class="label is-small" for="category">Category</label>
+                            <label class="label is-small">Category</label>
                             <div class="control">
                                 <span>{{ $product->category_title }}</span>
                             </div>

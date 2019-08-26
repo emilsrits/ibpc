@@ -1,30 +1,29 @@
 /* PAGINATION */
 .pagination .pagination-list li a {
+  color: $color-white;
+  font-weight: bold;
   background-color: $color-gray-darkest;
+  border: 1px solid transparent;
   transition: 0.2s ease;
   &.is-current {
     background-color: $color-green-darker;
-    &:hover {
-      color: $color-gray;
-    }
+    box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, .4);
   }
   &:hover {
-    background-color: $color-green;
+    background-color: $color-green-darker;
+    box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, .4);
   }
 }
 
 .inverted {
   .pagination .pagination-list li a {
+    color: $color-black;
     background-color: $color-gray-lighter;
-    color: $color-gray-darker;
     &.is-current {
       background-color: $color-green-darker;
-      &:hover {
-        color: $color-black;
-      }
     }
     &:hover {
-      background-color: $color-green;
+      background-color: $color-green-darker;
     }
   }
 }

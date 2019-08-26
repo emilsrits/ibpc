@@ -37,7 +37,7 @@
 	</div>
 
 	<!-- Scripts Body -->
-	<script src="{{ URL::to('/js/jquery.min.js') }}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="{{ URL::to('/js/magnific-popup.min.js') }}"></script>
 	<script src="{{ mix('/js/app.js') }}"></script>
 	@yield('scripts')

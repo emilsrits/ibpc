@@ -74,7 +74,7 @@ class InvoiceEventSubscriber
         // Save copy of invoice locally
         if ($save) {
             $now = Carbon::now();
-            Storage::put('orders/' . $now->year . '/' . $now->month . '/' . $order->id .'-invoice-' . str_random(2) . '.pdf', $pdf->output());
+            Storage::put("orders/{$now->year}/{$now->month}/{$order->id}-invoice-" . str_random(2) . ".pdf", $pdf->output());
         }
     }
 }

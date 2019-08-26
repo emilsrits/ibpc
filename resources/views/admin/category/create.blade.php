@@ -5,80 +5,86 @@ Create Category
 @endsection
 
 @section('content')
-<div class="admin-page lg-100 md-100 sm-100">
-    <div class="category-create">
-        <h3>New Category</h3>
-        <form id="create-categories-form" role="form" method="POST" action="{{ url('/admin/category/create') }}">
-            {{ csrf_field() }}
-            <div class="manage-btn-group">
-                <div class="btn-manage-back">
-                    <a href="{{ url('/admin/categories') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
+<div class="section">
+    <div class="container is-fluid">
+        <div class="box">
+            <h1 class="is-size-5">New Category</h1>
+
+            <form id="entity-create-form" role="form" method="POST" action="{{ url('/admin/category/create') }}">
+                @csrf
+
+                <entity-manage
+                    :routes="{
+                        back: '{{ url('/admin/categories') }}'
+                    }"
+                >
+                </entity-manage>
+
+                <div class="columns">
+                    <div class="column is-3">
+                        <h2 class="is-size-5">General</h2>
+                    </div>
+
+                    <div class="column is-9">
+                        <div class="field">
+                            <label class="label is-small" for="title">Title</label>
+                            <div class="control">
+                                <input class="input" type="text" name="title" required value="{{ old('title') }}">
+                            </div>
+                        </div>
+
+                        <entity-category-parent
+                            :top-level="{{ json_encode(old('top_level') === (string)1 ? true : false) }}"
+                        >
+                            <template v-slot:top-level="{topCategoryChange}">
+                                <div class="field is-narrow">
+                                    <label class="label is-small" for="top_level">Top Category</label>
+                                    <div class="control">
+                                        <div class="select">
+                                            <select class="input" name="top_level" required @change="topCategoryChange">
+                                                <option value="0">No</option>
+                                                <option value="1" {{ old('top_level') === (string)1 ? 'selected' : '' }}>Yes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <template v-slot:parent-id>
+                                <div class="field is-narrow">
+                                    <label class="label is-small" for="parent_id">Parent #ID</label>
+                                    <div class="control">
+                                        <input class="input" type="number" min="1" max="1000" name="parent_id" value="{{ old('parent_id') }}">
+                                    </div>
+                                </div>
+                            </template>
+                        </entity-category-parent>
+
+                        <div class="field is-narrow">
+                            <label class="label is-small" for="status">Status</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select class="input" name="status" required>
+                                        <option value="0">Disabled</option>
+                                        <option value="1" {{ old('status') === 1 ? 'selected' : '' }}>Enabled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="entity-save" type="submit" name="submit">Save</button>
-            </div>
-            <div class="category-content-section">
-                <div class="content-section-toggle">
-                    <strong>General<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
+
+                <div class="columns">
+                    <div class="column is-3">
+                        <h2 class="is-size-5">Property Groups</h2>
+                    </div>
+
+                    <div class="column is-9 scrollable-x">
+                        @include('admin.category._partials.property_groups')
+                    </div>
                 </div>
-                <div class="content-container">
-                    <table class="category-table">
-                        <tbody>
-                        <tr class="entity-attribute">
-                            <td><label for="title">Title</label></td>
-                            <td><input type="text" name="title" required value="{{ old('title') }}"></td>
-                        </tr>
-                        <tr class="entity-attribute">
-                            <td><label for="top_level">Top Category</label></td>
-                            <td>
-                                <select id="category-parent" name="top_level" required>
-                                    <option value="0">No</option>
-                                    <option value="1" {{ old('top_level') === '1' ? 'selected' : '' }}>Yes</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr id="category-parent-id" class="entity-attribute">
-                            <td><label for="parent_id">Parent ID</label></td>
-                            <td><input type="number" min="1" max="1000" name="parent_id" value="{{ old('parent_id') }}"></td>
-                        </tr>
-                        <tr class="entity-attribute">
-                            <td><label for="status">Status</label></td>
-                            <td>
-                                <select name="status" required>
-                                    <option value="0">Disabled</option>
-                                    <option value="1" {{ old('status') === '1' ? 'selected' : '' }}>Enabled</option>
-                                </select>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="category-content-section">
-                <div class="content-section-toggle">
-                    <strong>Property groups<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
-                </div>
-                <div class="content-container of-x">
-                    <table class="category-table">
-                        <tbody>
-                        @foreach($specifications->chunk(3) as $chunk)
-                            <tr class="entity-attribute">
-                                @foreach($chunk as $specification)
-                                    <td class="category-property-group no-wrap">
-                                        <label>
-                                            <input type="checkbox" name="{{ 'spec[' . $specification->id . '][id]' }}" 
-                                                {{ is_array(old('spec.'.$specification->id)) ? 'checked' : '' }}
-                                                value="{{ $specification->id }}">
-                                            {{ $specification->slug }}
-                                        </label>
-                                    </td>
-                                @endforeach
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 @endsection

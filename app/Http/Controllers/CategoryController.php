@@ -67,7 +67,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $specifications = $this->specificationRepository->orderBy('name')->get();
+        $specifications = $this->specificationRepository->orderBy('slug')->get();
 
         return view('admin.category.create', compact('specifications'));
     }
@@ -93,7 +93,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $specifications = $this->specificationRepository->orderBy('name')->get();
+        $specifications = $this->specificationRepository->orderBy('slug')->get();
 
         return view('admin.category.edit', compact('category', 'specifications'));
     }

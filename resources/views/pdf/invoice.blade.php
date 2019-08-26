@@ -56,26 +56,32 @@
             <td>Recipient:</td>
             <td>{{ config('constants.recipient.name') }}</td>
         </tr>
+        
         <tr>
             <td>Identification number:</td>
             <td>{{ config('constants.recipient.id') }}</td>
         </tr>
+
         <tr>
             <td>Registration number:</td>
             <td>{{ config('constants.recipient.reg') }}</td>
         </tr>
+
         <tr>
             <td>Address:</td>
             <td>{{ config('constants.recipient.address') }}</td>
         </tr>
+
         <tr>
             <td>Bank:</td>
             <td>{{ config('constants.recipient.bank') }}</td>
         </tr>
+
         <tr>
             <td>Bank code:</td>
             <td>{{ config('constants.recipient.code') }}</td>
         </tr>
+
         <tr>
             <td>Account:</td>
             <td>{{ config('constants.recipient.account') }}</td>
@@ -89,43 +95,46 @@
             <td>Payer:</td>
             <td>{{ $user->fullname }}</td>
         </tr>
+
         @if($order->delivery === 'address')
-        <tr>
-            <td>Delivery address:</td>
-            <td>{{ $user->fulladdress }}</td>
-        </tr>
+            <tr>
+                <td>Delivery address:</td>
+                <td>{{ $user->fulladdress }}</td>
+            </tr>
         @endif
         </tbody>
     </table>
     <hr>
     <table id="invoice-products">
         <thead>
-        <tr>
-            <th>Title</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Subtotal</th>
-        </tr>
+            <tr>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach($order->products as $product)
+            @foreach($order->products as $product)
+                <tr>
+                    <td>{{ $product->title }}</td>
+                    <td>{{ $product->pivot->quantity }}</td>
+                    <td style="white-space: nowrap">@moneyraw($product->getOrderPriceById($order->id, $product->id))</td>
+                    <td style="white-space: nowrap">@moneyraw($product->getOrderTotalPriceById($order->id, $product->id))</td>
+                </tr>
+            @endforeach
+
+            @if($order->delivery_cost)
+                <tr>
+                    <td colspan="3">Delivery cost:</td>
+                    <td>@moneyraw($order->delivery_cost)</td>
+                </tr>
+            @endif
+
             <tr>
-                <td>{{ $product->title }}</td>
-                <td>{{ $product->pivot->quantity }}</td>
-                <td style="white-space: nowrap">@moneyraw($product->getOrderPriceById($order->id, $product->id))</td>
-                <td style="white-space: nowrap">@moneyraw($product->getOrderTotalPriceById($order->id, $product->id))</td>
+                <td colspan="3">Total, {{ config('constants.currency') }}:</td>
+                <td>@moneyraw($order->price)</td>
             </tr>
-        @endforeach
-        @if($order->delivery_cost)
-            <tr>
-                <td colspan="3">Delivery cost:</td>
-                <td>@moneyraw($order->delivery_cost)</td>
-            </tr>
-        @endif
-        <tr>
-            <td colspan="3">Total, {{ config('constants.currency') }}:</td>
-            <td>@moneyraw($order->price)</td>
-        </tr>
         </tbody>
     </table>
     <p class="invoice-important">When submitting payment, please, indicate invoice number.</p>

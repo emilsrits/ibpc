@@ -39,10 +39,10 @@ class OrderService
 
                 if ($result === false) {
                     flashMessage('message-danger', 'Can not change status of a finished order!');
-                } else {
-                    flashMessage('message-success', "Order(s) {$status} !");
+                    return true;
                 }
 
+                flashMessage('message-success', "Order(s) {$status} !");
                 return true;
             }
 

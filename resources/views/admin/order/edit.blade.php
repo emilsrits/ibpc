@@ -5,115 +5,142 @@ Edit Order
 @endsection
 
 @section('content')
-<div class="admin-page lg-100 md-100 sm-100">
-    <div class="order-edit">
-        <h3>#{{ $order->id }}</h3>  
-        <form id="edit-order-form" role="form" method="POST" action="{{ url('/admin/order/update', ['id' => $order->id]) }}">
-            {{ method_field('PATCH') }}
-            {{ csrf_field() }}
-            <div class="manage-btn-group">
-                <div class="btn-manage-back">
-                    <a href="{{ url('/admin/orders') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
-                </div>
-                <button class="entity-save {{ $closed ? 'hidden' : '' }}" type="submit" name="submit" value="save">Save</button>
-            </div>
-            <div class="order-content-section">
-                <div class="content-container">
-                    <table class="order-table">
-                        <tbody>
-                        <tr class="entity-attribute">
-                            <td><label for="user">User</label></td>
-                            <td><span>{{ $order->user->full_name }}</span></td>
-                        </tr>
-                        <tr class="entity-attribute">
-                            <td><label for="status">Current status</label></td>
-                            <td><span>{{ $order->status }}</span></td>
-                        </tr>
-                        <tr class="entity-attribute">
-                            <td><label for="created">Created</label></td>
-                            <td><span>{{ $order->created_at }}</span></td>
-                        </tr>
-                        <tr class="entity-attribute">
-                            <td><label for="updated">Updated</label></td>
-                            <td><span>{{ $order->updated_at }}</span></td>
-                        </tr>
-                        @if($order->delivery_cost > 0)
-                            <tr class="entity-attribute">
-                                <td><label for="delivery">Delivery cost</label></td>
-                                <td><span>@money($order->delivery_cost)</span></td>
-                            </tr>
-                        @endif
-                        <tr class="entity-attribute">
-                            <td><label for="cost">Total cost incl. VAT:</label></td>
-                            <td><span>@money($order->price)</span></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            @if(!$closed)
-                <div class="order-content-section">
-                    <div class="content-section-toggle">
-                        <strong>Order Status<i class="fa fa-angle-down" aria-hidden="true"></i></strong>
+<div class="section">
+    <div class="container is-fluid">
+        <div class="box">
+            <h1 class="is-size-5">#{{ $order->id }}</h1>
+
+            <form id="entity-edit-form" role="form" method="POST" action="{{ url('/admin/order/update', ['id' => $order->id]) }}">
+                @method('PATCH')
+                @csrf
+
+                <entity-manage
+                    :can-save="{{ json_encode($closed ? false : true) }}"
+                    :routes="{
+                        back: '{{ url('/admin/orders') }}'
+                    }"
+                >
+                </entity-manage>
+
+                <div class="columns">
+                    <div class="column is-3">
+                        <h2 class="is-size-5">General</h2>
                     </div>
-                    <div class="content-container" style="display: none;">
-                        <table class="order-table">
-                            <tbody>
-                            <tr class="entity-attribute">
-                                <td><label for="status">Status</label></td>
-                                <td>
-                                    @foreach(config('constants.order_status') as $key => $value)
-                                        <label class="radio-block">
-                                            <input type="radio" name="status" value="{{ $value  }}"
-                                                    {{ $order->status === $value ? 'checked' : '' }}> {{ $value }}
+
+                    <div class="column is-9">
+                        <div class="field is-distinct">
+                            <label class="label is-small">User</label>
+                            <div class="control">
+                                <span>{{ $order->user->full_name }}</span>
+                            </div>
+                        </div>
+
+                        <div class="field is-distinct">
+                            <label class="label is-small">Current Status</label>
+                            <div class="control">
+                                <span>{{ $order->status }}</span>
+                            </div>
+                        </div>
+
+                        <div class="field is-distinct">
+                            <label class="label is-small">Created</label>
+                            <div class="control">
+                                <span>{{ $order->created_at }}</span>
+                            </div>
+                        </div>
+
+                        <div class="field is-distinct">
+                            <label class="label is-small">Updated</label>
+                            <div class="control">
+                                <span>{{ $order->updated_at }}</span>
+                            </div>
+                        </div>
+
+                        <div class="field is-distinct">
+                            <label class="label is-small">Delivery Cost</label>
+                            <div class="control">
+                                <span>@money($order->delivery_cost)</span>
+                            </div>
+                        </div>
+
+                        <div class="field is-distinct">
+                            <label class="label is-small">Total cost incl. VAT:</label>
+                            <div class="control">
+                                <span>@money($order->price)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if(!$closed)
+                    <div class="columns">
+                        <div class="column is-3">
+                            <h2 class="is-size-5">Order Status</h2>
+                        </div>
+
+                        <div class="column is-9">
+                            <div class="control">
+                                @foreach(config('constants.order_status') as $key => $value)
+                                    <div class="field">
+                                        <label class="radio">
+                                            <input type="radio" name="status" value="{{ $value  }}" {{ $order->status === $value ? 'checked' : '' }}>
+                                            {{ ucfirst($value) }}
                                         </label>
-                                    @endforeach
-                                </td>
-                            </tr>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <div class="columns">
+                    <div class="column is-3">
+                        <h2 class="is-size-5">Order Items</h2>
+                    </div>
+
+                    <div class="column is-9 scrollable-x">
+                        <table class="table is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Title</th>
+                                    <th>Code</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($order->products as $product)
+                                    <tr>
+                                        <td>{{ $product->id }}</td>
+                                        <td class="no-wrap">{{ $product->title }}</td>
+                                        <td class="no-wrap">{{ $product->code }}</td>
+                                        <td>{{ $product->pivot->quantity }}</td>
+                                        <td class="no-wrap">@money($product->getOrderPriceById($order->id, $product->id))</td>
+                                        <td class="no-wrap">@money($product->getOrderTotalPriceById($order->id, $product->id))</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
-            @endif
-            <div class="order-content-section">
-                <div class="content-section-toggle">
-                    <strong>Order Items<i class="fa fa-angle-up" aria-hidden="true"></i></strong>
-                </div>
-                <div class="content-container of-x">
-                    <table id="orders-table">
-                        <thead class="table-head">
-                        <tr>
-                            <th>Id</th>
-                            <th>Title</th>
-                            <th>Code</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Subtotal</th>
-                        </tr>
-                        </thead>
-                        <tbody class="table-body">
-                        @foreach($order->products as $product)
-                            <tr>
-                                <td>{{ $product->id }}</td>
-                                <td>{{ $product->title }}</td>
-                                <td>{{ $product->code }}</td>
-                                <td>{{ $product->pivot->quantity }}</td>
-                                <td class="no-wrap">@money($product->getOrderPriceById($order->id, $product->id))</td>
-                                <td class="no-wrap">@money($product->getOrderTotalPriceById($order->id, $product->id))</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </form>
+            </form>
 
-        <form id="send-invoice-form" role="form" method="POST" action="{{ url('/admin/order/invoice', ['id' => $order->id]) }}">
-            {{ csrf_field() }}
-            <div class="manage-btn-group">
-                <button class="entity-save" type="submit" name="submit" value="invoice">Resend Invoice</button>
+            <div class="columns">
+                <div class="column is-3">
+                    <h2 class="is-size-5">Invoice</h2>
+                </div>
+
+                <div class="column is-9">
+                    <form id="send-invoice-form" role="form" method="POST" action="{{ url('/admin/order/invoice', ['id' => $order->id]) }}">
+                        @csrf
+
+                        <button class="button button-action action-do" type="submit" name="submit" value="invoice">Resend Invoice</button>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 @endsection
