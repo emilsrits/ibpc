@@ -48,13 +48,8 @@ class CartController extends Controller
      */
     public function store(CartStoreRequest $request, Product $product)
     {
-        $action = $this->cartService->store($request->validated(), $product);
-        if ($action) {
-            $request->session()->flash($this->cartService->message['type'], $this->cartService->message['content']);
-            return redirect()->route('cart.index');
-        }
+        $this->cartService->store($request->validated(), $product);
 
-        $request->session()->flash($this->cartService->message['type'], $this->cartService->message['content']);
         return redirect()->back();
     }
 
@@ -100,7 +95,6 @@ class CartController extends Controller
     {
         $this->cartService->update($request->validated());
 
-        $request->session()->flash($this->cartService->message['type'], $this->cartService->message['content']);
         return redirect()->route('cart.index');
     }
 }

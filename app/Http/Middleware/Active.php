@@ -24,7 +24,7 @@ class Active
             Auth::logout();
         }
 
-        $request->session()->flash('message-warning', 'This account has been disabled!');
+        flashMessage('message-warning', 'This account has been disabled!');
         return redirect('/');
     }
 }

@@ -1,5 +1,33 @@
 <?php
 
+if (!function_exists('flashMessage')) {
+    /**
+     * Add flash message to request session
+     *
+     * @param string $type
+     * @param string $text
+     */
+    function flashMessage($type, $text) {
+        request()->session()->flash($type, $text);
+    }
+}
+
+if (!function_exists('messageResponse')) {
+    /**
+     * Return associative array item that contains message data
+     *
+     * @param string $type
+     * @param mixed $content
+     * @return array
+     */
+    function messageItem($type, $content) {
+        return [
+            'type' => $type,
+            'content' => $content
+        ];
+    }
+}
+
 if (!function_exists('orderStatusExists')) {
     /**
      * Check if order status is valid, defined in config

@@ -44,7 +44,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productRepository->with('categories')->paginate();
-        $categories = $this->categoryRepository->all();
 
         return view('admin.product.catalog', [
             'products' => $products,
@@ -63,7 +62,6 @@ class ProductController extends Controller
     {
         $action = $this->productService->action($request->validated());
         if ($action) {
-            $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
             return redirect()->back();
         }
 
@@ -119,7 +117,6 @@ class ProductController extends Controller
     {
         $this->productService->store($request->validated());
 
-        $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
         return redirect()->route('product.index');
     }
 
@@ -153,7 +150,6 @@ class ProductController extends Controller
     {
         $this->productService->update($request->validated(), $product);
 
-        $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
         return redirect()->back();
     }
 
@@ -183,10 +179,7 @@ class ProductController extends Controller
     public function delete(Request $request, Product $product)
     {
         $async = $request->wantsJson();
-
         $action = $this->productService->delete($product);
-
-        $request->session()->flash($this->productService->message['type'], $this->productService->message['content']);
 
         if ($async) {
             if ($action) {

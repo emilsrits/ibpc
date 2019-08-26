@@ -41,3 +41,5 @@
         </template>
     </header-navbar>
 </header>
+
+@include('_partials.widgets.flash_message')

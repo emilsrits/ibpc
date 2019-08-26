@@ -57,7 +57,6 @@ class OrderController extends Controller
     {
         $action = $this->orderService->action($request->validated());
         if ($action) {
-            $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
             return redirect()->back();
         }
 
@@ -77,11 +76,9 @@ class OrderController extends Controller
     {
         $action = $this->orderService->store(Auth::user(), session('cart'));
         if (!$action) {
-            $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
             return redirect()->back();
         }
 
-        $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
         return redirect()->route('order.success', ['success' => true]);
     }
 
@@ -110,7 +107,6 @@ class OrderController extends Controller
     {
         $this->orderService->update($request->validated(), $order);
 
-        $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
         return redirect()->back();
     }
 
@@ -125,7 +121,6 @@ class OrderController extends Controller
     {
         $this->orderService->invoice($order);
 
-        $request->session()->flash($this->orderService->message['type'], $this->orderService->message['content']);
         return redirect()->back();
     }
 

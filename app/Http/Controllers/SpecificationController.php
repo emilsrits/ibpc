@@ -55,10 +55,7 @@ class SpecificationController extends Controller
      */
     public function action(SpecificationActionRequest $request)
     {
-        $action = $this->specificationService->action($request->validated());
-        if ($action) {
-            $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
-        }
+        $this->specificationService->action($request->validated());
 
         return redirect()->back();
     }
@@ -83,7 +80,6 @@ class SpecificationController extends Controller
     {
         $this->specificationService->store($request->validated());
 
-        $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
         return redirect()->route('specification.index');
     }
 
@@ -111,7 +107,6 @@ class SpecificationController extends Controller
     {
         $this->specificationService->update($request->validated(), $specification);
 
-        $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
         return redirect()->back();
     }
 
@@ -128,11 +123,10 @@ class SpecificationController extends Controller
 
         $this->specificationService->delete($specification);
 
-        $request->session()->flash($this->specificationService->message['type'], $this->specificationService->message['content']);
-
         if ($async) {
             return response()->json(array('redirectUrl'=> route('specification.index')), 200);
         }
+        
         return redirect()->route('specification.index');
     }
 }

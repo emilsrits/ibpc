@@ -1,21 +1,26 @@
-<div class="flash-message">
-    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-        @if(Session::has('message-' . $msg))
-            <div class="message message-{{ $msg }}">
-                <div class="message-text">{{ Session::get('message-' . $msg) }}</div>
-                <div class="message-close">
-                    <a href="#" data-dismiss="message" aria-label="message-close"><i class="fa fa-times" aria-hidden="true"></i></a>
-                </div>
-            </div>
+<widget-messages>
+    @foreach(['danger', 'warning', 'success', 'info'] as $type)
+        @if(Session::has('message-' . $type))
+            <widget-messages-item
+                :message-type="'{{ 'message-' . $type }}'"
+                :message-content="'{{ session('message-' . $type) }}'"
+            >
+            </widget-messages-item>
         @endif
     @endforeach
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+
+    @if(count($errors) > 0)
+        <widget-messages-item
+            message-type="message-danger"
+            :message-content="'{{ session('message-' . $type) }}'"
+        >
+            <template v-slot:message-content>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </template>
+        </widget-messages-item>
     @endif
-</div>
+</widget-messages>

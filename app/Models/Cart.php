@@ -69,6 +69,7 @@ class Cart extends Model
         if (Session::has('delivery')) {
             Session::forget('delivery');
         }
+
         if (Session::has('cart')) {
             Session::forget('cart');
         }
@@ -83,10 +84,11 @@ class Cart extends Model
     {
         if (!$this->items) {
             $this->deleteCart();
+
             return true;
-        }  else {
-            return null;
         }
+        
+        return null;
     }
 
     /**

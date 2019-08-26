@@ -9,21 +9,12 @@ use App\Repositories\PropertyRepository;
 class PropertyService
 {
     /**
-     * @var array
-     */
-    public $message;
-    
-    /**
      * Create a new service instance.
      * 
      * @param PropertyRepository $propertyRepository
      */
     public function __construct(PropertyRepository $propertyRepository)
     {
-        $this->message = [
-            'type' => null,
-            'content' => null
-        ];
         $this->propertyRepository = $propertyRepository;
     }
 
@@ -41,12 +32,7 @@ class PropertyService
             switch ($data['mass-action']) {
                 case 1:
                     $this->propertyRepository->delete($propertyIds);
-
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'Properties deleted!'
-                    ];
-
+                    flashMessage('message-success', 'Properties deleted!');
                     return true;
             }
         }
@@ -66,10 +52,7 @@ class PropertyService
 
         $this->propertyRepository->create($data);
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Property successfully created!'
-        ];
+        flashMessage('message-success', 'Property successfully created!');
     }
 
     /**
@@ -82,10 +65,7 @@ class PropertyService
     {
         $this->propertyRepository->update($data, $property);
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Property successfully updated!'
-        ];
+        flashMessage('message-success', 'Property successfully updated!');
     }
 
     /**
@@ -97,9 +77,6 @@ class PropertyService
     {
         $this->propertyRepository->delete($property->id);
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Property deleted!'
-        ];
+        flashMessage('message-success', 'Property deleted!');
     }
 }

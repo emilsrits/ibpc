@@ -11,11 +11,6 @@ use App\Repositories\UserRepository;
 class OrderService
 {
     /**
-     * @var array
-     */
-    public $message;
-    
-    /**
      * Create a new service instance.
      * 
      * @param Order $order
@@ -23,10 +18,6 @@ class OrderService
      */
     public function __construct(Order $order, UserRepository $userRepository)
     {
-        $this->message = [
-            'type' => null,
-            'content' => null
-        ];
         $this->order = $order;
         $this->userRepository = $userRepository;
     }
@@ -47,15 +38,9 @@ class OrderService
                 $result = $this->order->setStatus($status, $orderIds);
 
                 if ($result === false) {
-                    $this->message = [
-                        'type' => 'message-danger',
-                        'content' => 'Can not change status of a finished order!'
-                    ];
+                    flashMessage('message-danger', 'Can not change status of a finished order!');
                 } else {
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'Order(s) ' . $status . '!'
-                    ];
+                    flashMessage('message-success', "Order(s) {$status} !");
                 }
 
                 return true;
@@ -75,11 +60,7 @@ class OrderService
     public function store($user, Cart $cart)
     {
         if (!$user->canMakeOrder()) {
-            $this->message = [
-                'type' => 'message-warning',
-                'content' => 'Please fill in missing shipping address information!'
-            ];
-
+            flashMessage('message-warning', 'Please fill in missing shipping address information!');
             return false;
         }
 
@@ -88,11 +69,7 @@ class OrderService
         $attached = $order->addItems($cart->items, $user->id);
 
         if ($attached === false) {
-            $this->message = [
-                'type' => 'message-danger',
-                'content' => 'Not enough of products in stock!'
-            ];
-
+            flashMessage('message-danger', 'Not enough of products in stock!');
             return false;
         }
 
@@ -100,10 +77,7 @@ class OrderService
 
         $cart->deleteCart();
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Order successfully placed!'
-        ];
+        flashMessage('message-success', 'Order successfully placed!');
 
         return true;
     }
@@ -123,27 +97,15 @@ class OrderService
             $statusSet = $order->setStatus($status);
 
             if ($statusSet === false) {
-                $this->message = [
-                    'type' => 'message-danger',
-                    'content' => 'Can not change status of a finished order!'
-                ];
-
+                flashMessage('message-danger', 'Can not change status of a finished order!');
                 return false;
             } else {
-                $this->message = [
-                    'type' => 'message-success',
-                    'content' => 'Order successfully updated!'
-                ];
-
+                flashMessage('message-success', 'Order successfully updated!');
                 return true;
             }
         } else {
             if (!orderStatusFinished($order->status)) {
-                $this->message = [
-                    'type' => 'message-danger',
-                    'content' => 'Order must have a status!'
-                ];
-
+                flashMessage('message-danger', 'Order must have a status!');
                 return false;
             }
         }
@@ -160,9 +122,6 @@ class OrderService
 
         event(new InvoiceResent($order, $user));
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Invoice successfully sent!'
-        ];
+        flashMessage('message-success', 'Invoice successfully sent!');
     }
 }

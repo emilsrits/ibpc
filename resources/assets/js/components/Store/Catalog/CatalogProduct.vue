@@ -13,8 +13,12 @@
             <div class="stock-text">In Stock</div>
         </div>
 
-        <div class="stock-status low-stock is-uppercase has-text-right" v-else>
+        <div class="stock-status low-stock is-uppercase has-text-right" v-else-if="product.stock > 0">
             <div class="stock-text">{{ product.stock }} In Stock</div>
+        </div>
+
+        <div class="stock-status out-of-stock is-uppercase has-text-right" v-else>
+            <div class="stock-text">Out Of Stock</div>
         </div>
 
         <div class="product-price">
@@ -24,7 +28,7 @@
             <div class="product-price-current">{{ productPrices.current }}</div>
         </div>
 
-        <div class="product-add-to-cart has-text-right">
+        <div class="product-add-to-cart has-text-right" v-if="product.status">
             <button class="product-quick-add" type="button" :value="product.id" @click="addProductToCart">
                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
             </button>
@@ -53,14 +57,14 @@ export default {
             let el = event.currentTarget
 
             axios.post('/cart/add', {
-                productId: el.value
-            })
-            .then(response => {
-                this.$store.dispatch('updateCart', response.data);
-            })
-            .catch(error => {
-                console.log('error: ' + error);
-            });
+                    productId: el.value
+                })
+                .then(response => {
+                    this.$store.dispatch('updateCart', response.data.cart);
+                })
+                .catch(error => {
+                    console.log('error: ' + error);
+                });
         }
     }
 }
@@ -104,13 +108,15 @@ export default {
             letter-spacing: 0.2px;
         }
     }
-
+    
     .in-stock .stock-text {
         color: $color-green;
     }
-
     .low-stock .stock-text {
         color: $color-orange;
+    }
+    .out-of-stock .stock-text {
+        color: $color-red;
     }
 
     .product-price {

@@ -22,6 +22,8 @@ import CatalogProduct from './components/Store/Catalog/CatalogProduct.vue';
 import ProductDetails from './components/Store/Product/ProductDetails.vue';
 import ProductForm from './components/Store/Product/ProductForm.vue';
 import CartForm from './components/Store/Cart/CartForm.vue';
+import WidgetMessages from './components/Widget/WidgetMessages.vue';
+import WidgetMessagesItem from './components/Widget/WidgetMessagesItem.vue';
 
 const app = new Vue({
     el: '#app',
@@ -36,6 +38,8 @@ const app = new Vue({
         CatalogProduct,
         ProductDetails,
         ProductForm,
-        CartForm
+        CartForm,
+        WidgetMessages,
+        WidgetMessagesItem
     }
 });

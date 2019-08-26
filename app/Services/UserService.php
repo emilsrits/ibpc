@@ -8,11 +8,6 @@ use App\Repositories\UserRepository;
 class UserService
 {
     /**
-     * @var array
-     */
-    public $message;
-
-    /**
      * Create a new service instance.
      * 
      * @param User $user
@@ -20,10 +15,6 @@ class UserService
      */
     public function __construct(User $user, UserRepository $userRepository)
     {
-        $this->message = [
-            'type' => null,
-            'content' => null
-        ];
         $this->user = $user;
         $this->userRepository = $userRepository;
     }
@@ -42,20 +33,13 @@ class UserService
             switch ($data['mass-action']) {
                 case 1:
                     $this->user->setStatus($userIds, User::USER_STATUS_ENABLED);
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'User(s) enabled!'
-                    ];
+                    flashMessage('message-success', 'User(s) enabled!');
                     return true;
                 case 2:
                     $this->user->setStatus($userIds, User::USER_STATUS_DISABLED);
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'User(s) disabled!'
-                    ];
+                    flashMessage('message-success', 'User(s) disabled!');
                     return true;
             }
-
             return false;
         }
     }
@@ -80,9 +64,6 @@ class UserService
 
         $this->userRepository->update($data, $user);
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Account successfully updated!'
-        ];
+        flashMessage('message-success', 'Account successfully updated!');
     }
 }

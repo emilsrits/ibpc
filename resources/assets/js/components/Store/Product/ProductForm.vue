@@ -10,7 +10,7 @@
             {{ productPrices.current }}
         </p>
 
-        <template v-if="product.status">
+        <template v-if="product.stock > 0 && product.status">
             <div v-if="product.stock > 5" class="stock-status in-stock">
                 <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
                 <div class="stock-text">In Stock</div>
@@ -28,7 +28,7 @@
             </div>
         </template>
 
-        <div class="form-container">
+        <div class="form-container" v-if="product.status">
             <form id="product-add-form" role="form" method="POST" :action="route" @submit.prevent="addProductToCart">
                 <input type="hidden" name="_token" :value="csrf">
                 <label for="qty">Qty:&nbsp;</label>
@@ -67,7 +67,7 @@ export default {
                     qty: el.elements.qty.value
                 })
                 .then(response => {
-                    this.$store.dispatch('updateCart', response.data);
+                    this.$store.dispatch('updateCart', response.data.cart);
                 })
                 .catch(error => {
                     console.log('error: ' + error);

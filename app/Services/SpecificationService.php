@@ -8,21 +8,12 @@ use App\Repositories\SpecificationRepository;
 class SpecificationService
 {
     /**
-     * @var array
-     */
-    public $message;
-    
-    /**
      * Create a new service instance.
      * 
      * @param SpecificationRepository $specificationRepository
      */
     public function __construct(SpecificationRepository $specificationRepository)
     {
-        $this->message = [
-            'type' => null,
-            'content' => null
-        ];
         $this->specificationRepository = $specificationRepository;
     }
 
@@ -40,12 +31,7 @@ class SpecificationService
             switch ($data['mass-action']) {
                 case 1:
                     $this->specificationRepository->delete($specificationIds);
-
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'Property groups deleted!'
-                    ];
-
+                    flashMessage('message-success', 'Property groups deleted!');
                     return true;
             }
         }
@@ -62,10 +48,7 @@ class SpecificationService
     {
         $this->specificationRepository->create($data);
         
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Property group successfully created!'
-        ];
+        flashMessage('message-success', 'Property group successfully created!');
     }
 
     /**
@@ -78,10 +61,7 @@ class SpecificationService
     {
         $this->specificationRepository->update($data, $specification);
         
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Property group successfully updated!'
-        ];
+        flashMessage('message-success', 'Property group successfully updated!');
     }
 
     /**
@@ -93,9 +73,6 @@ class SpecificationService
     {
         $this->specificationRepository->delete($specification->id);
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Property group deleted!'
-        ];
+        flashMessage('message-success', 'Property group deleted!');
     }
 }

@@ -55,11 +55,7 @@ class UserController extends Controller
      */
     public function action(UserActionRequest $request, UserFilter $filters)
     {
-        $action = $this->userService->action($request->validated());
-
-        if ($action) {
-            $request->session()->flash($this->userService->message['type'], $this->userService->message['content']);
-        }
+        $this->userService->action($request->validated());
 
         $users = $this->userRepository->filter($filters)->paginate();
         $table = $this->userTable;
@@ -91,7 +87,6 @@ class UserController extends Controller
     {
         $this->userService->update($request->validated(), $user);
 
-        $request->session()->flash($this->userService->message['type'], $this->userService->message['content']);
         return redirect()->back();
     }
 }

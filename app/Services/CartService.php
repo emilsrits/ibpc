@@ -9,22 +9,6 @@ use Illuminate\Support\Facades\Session;
 class CartService
 {
     /**
-     * @var array
-     */
-    public $message;
-    
-    /**
-     * Create a new service instance.
-     */
-    public function __construct()
-    {
-        $this->message = [
-            'type' => null,
-            'content' => null
-        ];
-    }
-
-    /**
      * Cart store action
      *
      * @param array $data
@@ -41,17 +25,11 @@ class CartService
 
             Session::put('cart', $cart);
 
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Product added to cart!'
-            ];
+            flashMessage('message-success', 'Product added to cart!');
 
             return true;
         } else {
-            $this->message = [
-                'type' => 'message-warning',
-                'content' => 'Product could not get added.'
-            ];
+            flashMessage('message-warning', 'Product could not get added.');
 
             return false;
         }
@@ -79,7 +57,8 @@ class CartService
             // Update displayed number of items in cart
             if (Session::has('cart')) {
                 $itemCount = count(Session::get('cart')->items);
-                $response = [
+
+                $response['cart'] = [
                     'itemCount' => $itemCount,
                     'price' => money(session('cart')->totalPrice)->format()
                 ];
@@ -116,6 +95,7 @@ class CartService
                 ];
             } else {
                 $itemCount = count(Session::get('cart')->items);
+
                 $response = [
                     'itemCount' => $itemCount,
                     'price' => money(session('cart')->totalPrice)->format()
@@ -140,15 +120,9 @@ class CartService
         $cartItemsQty = $data['cart'];
 
         if ($cart->updateCart($cartItemsQty) === false) {
-            $this->message = [
-                'type' => 'message-warning',
-                'content' => 'Invalid product quantity!'
-            ];
+            flashMessage('message-warning', 'Invalid product quantity!');
         } else {
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Cart updated!'
-            ];
+            flashMessage('message-success', 'Cart updated!');
         }
 
         Session::put('cart', $cart);

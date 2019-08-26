@@ -30,10 +30,7 @@ class PropertyController extends Controller
      */
     public function action(PropertyActionRequest $request)
     {
-        $action = $this->propertyService->action($request->validated());
-        if ($action) {
-            $request->session()->flash($this->propertyService->message['type'], $this->propertyService->message['content']);
-        }
+        $this->propertyService->action($request->validated());
 
         return redirect()->back();
     }
@@ -60,7 +57,6 @@ class PropertyController extends Controller
     {
         $this->propertyService->store($request->validated(), $specification);
 
-        $request->session()->flash($this->propertyService->message['type'], $this->propertyService->message['content']);
         return redirect()->route('specification.edit', compact('specification'));
     }
 
@@ -103,11 +99,10 @@ class PropertyController extends Controller
 
         $this->propertyService->delete($property);
 
-        $request->session()->flash($this->propertyService->message['type'], $this->propertyService->message['content']);
-
         if ($async) {
             return response()->json(array('redirectUrl'=> route('specification.edit', ['specification' => $property->specification])), 200);
         }
+
         return redirect()->route('specification.edit', ['specification' => $property->specification]);
     }
 }

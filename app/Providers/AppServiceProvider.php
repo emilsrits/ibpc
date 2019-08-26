@@ -7,7 +7,6 @@ use App\Models\Order;
 use App\Observers\MediaObserver;
 use App\Observers\OrderObserver;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,9 +22,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('moneyraw', function ($expression) {
             return "<?php echo money($expression)->formatByDecimal(); ?>";
         });
-
-        // Share errors variable across views
-        View::share('errors', null);
 
         Media::observe(MediaObserver::class);
         Order::observe(OrderObserver::class);

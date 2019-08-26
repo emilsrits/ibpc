@@ -9,11 +9,6 @@ use App\Repositories\ProductRepository;
 class ProductService
 {
     /**
-     * @var array
-     */
-    public $message;
-    
-    /**
      * Create a new service instance.
      * 
      * @param Product $product
@@ -21,10 +16,6 @@ class ProductService
      */
     public function __construct(Product $product, ProductRepository $productRepository)
     {
-        $this->message = [
-            'type' => null,
-            'content' => null
-        ];
         $this->product = $product;
         $this->productRepository = $productRepository;
     }
@@ -43,33 +34,18 @@ class ProductService
             switch ($data['mass-action']) {
                 case 1:
                     $this->product->setStatus($productIds, 1);
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'Product(s) enabled!'
-                    ];
-
+                    flashMessage('message-success', 'Product(s) enabled!');
                     return true;
                 case 2:
                     $this->product->setStatus($productIds, 0);
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'Product(s) disabled!'
-                    ];
-
+                    flashMessage('message-success', 'Product(s) disabled!');
                     return true;
                 case 3:
                     if (!$this->product->deleteProduct($productIds)) {
-                        $this->message = [
-                            'type' => 'message-danger',
-                            'content' => 'Can not delete products that are in active orders!'
-                        ];
-                    } else {
-                        $this->message = [
-                            'type' => 'message-success',
-                            'content' => 'Product(s) deleted!'
-                        ];
+                        flashMessage('message-danger', 'Can not delete products that are in active orders!');
+                        return false;
                     }
-
+                    flashMessage('message-success', 'Product(s) deleted!');
                     return true;
             }
         }
@@ -106,18 +82,12 @@ class ProductService
                 if ($uploaded) {
                     $product->media()->save($media);
                 } else {
-                    $this->message = [
-                        'type' => 'message-info',
-                        'content' => 'Maximum media amount for product exceeded!'
-                    ];
+                    flashMessage('message-info', 'Maximum media amount for product exceeded!');
                 }
             }
         }
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Product successfully created!'
-        ];
+        flashMessage('message-success', 'Product successfully created!');
     }
 
     /**
@@ -151,21 +121,13 @@ class ProductService
                 if ($uploaded) {
                     $product->media()->save($media);
                 } else {
-                    $this->message = [
-                        'type' => 'message-info',
-                        'content' => 'Maximum media amount for product exceeded!'
-                    ];
-
+                    flashMessage('message-info', 'Maximum media amount for product exceeded!');
                     return false;
                 }
             }
         }
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Product successfully updated!'
-        ];
-
+        flashMessage('message-success', 'Product successfully updated!');
         return true;
     }
 
@@ -184,9 +146,8 @@ class ProductService
         if ($product) {
             $product->media->find($mediaId)->delete();
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -198,19 +159,10 @@ class ProductService
     public function delete(Product $product)
     {
         if ($product->deleteProduct()) {
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Product deleted!'
-            ];
-
+            flashMessage('message-success', 'Product deleted!');
             return true;
-        } else {
-            $this->message = [
-                'type' => 'message-danger',
-                'content' => 'Can not delete products that are in active orders!'
-            ];
-
-            return false;
         }
+        flashMessage('message-danger', 'Can not delete products that are in active orders!');
+        return false;
     }
 }

@@ -18,7 +18,7 @@ class Owner
         if ($request->route('user')) {
             $user = $request->route('user');
             if ($user && $user->id != auth()->user()->id) {
-                $request->session()->flash('message-warning', 'Access not granted.');
+                flashMessage('message-warning', 'Access not granted.');
                 return redirect()->back();
             }
         }

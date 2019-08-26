@@ -55,11 +55,7 @@ class CategoryController extends Controller
      */
     public function action(CategoryActionRequest $request)
     {
-        $action = $this->categoryService->action($request->validated());
-        if ($action) {
-            $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
-            return redirect()->back();
-        }
+        $this->categoryService->action($request->validated());
 
         return redirect()->back();
     }
@@ -86,7 +82,6 @@ class CategoryController extends Controller
     {
         $this->categoryService->store($request->validated());
 
-        $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
         return redirect()->route('category.index');
     }
 
@@ -114,7 +109,6 @@ class CategoryController extends Controller
     {
         $this->categoryService->update($request->validated(), $category);
 
-        $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
         return redirect()->back();
     }
 
@@ -131,11 +125,9 @@ class CategoryController extends Controller
 
         $action = $this->categoryService->delete($category);
 
-        $request->session()->flash($this->categoryService->message['type'], $this->categoryService->message['content']);
-
         if ($async) {
             if ($action) {
-                return response()->json(array('redirectUrl'=> route('category.index')), 200);
+                return response()->json(array('redirectUrl' => route('category.index')), 200);
             }
             return response()->json(null, 400);
         }

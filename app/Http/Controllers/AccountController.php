@@ -83,7 +83,6 @@ class AccountController extends Controller
     {
         $this->userService->update($request->validated(), $user);
 
-        $request->session()->flash($this->userService->message['type'], $this->userService->message['content']);
         return redirect()->back();
     }
 }

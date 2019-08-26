@@ -14,11 +14,6 @@
             }
         });
 
-        // Hide flash message
-        $('.message-close').css('display', 'inline-block').click(function () {
-            $('.flash-message').fadeOut(500);
-        });
-
         // Toggle parent_id selection for category creation
         $('#category-parent').on('change', function() {
            if ($(this).val() === '1') {

@@ -8,11 +8,6 @@ use App\Repositories\CategoryRepository;
 class CategoryService
 {
     /**
-     * @var array
-     */
-    public $message;
-    
-    /**
      * Create a new service instance.
      * 
      * @param Category $category
@@ -20,10 +15,6 @@ class CategoryService
      */
     public function __construct(Category $category, CategoryRepository $categoryRepository)
     {
-        $this->message = [
-            'type' => null,
-            'content' => null
-        ];
         $this->category = $category;
         $this->categoryRepository = $categoryRepository;
     }
@@ -42,36 +33,19 @@ class CategoryService
             switch ($data['mass-action']) {
                 case 1:
                     $this->category->setStatus($categoryIds, 1);
-
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'Categories enabled!'
-                    ];
-                    
+                    flashMessage('message-success', 'Categories enabled!');
                     return true;
                 case 2:
                     $this->category->setStatus($categoryIds, 0);
-
-                    $this->message = [
-                        'type' => 'message-success',
-                        'content' => 'Categories disabled!'
-                    ];
-
+                    flashMessage('message-success', 'Categories disabled!');
                     return true;
                 case 3:
                     if ($this->category->deleteCategory($categoryIds)) {
-                        $this->message = [
-                            'type' => 'message-success',
-                            'content' => 'Categories deleted!'
-                        ];
-                    } else {
-                        $this->message = [
-                            'type' => 'message-danger',
-                            'content' => 'Cannot delete category with existing products!'
-                        ];
+                        flashMessage('message-success', 'Categories deleted!');
+                        return true;
                     }
-
-                    return true;
+                    flashMessage('message-danger', 'Could not delete category.');
+                    return false;
             }
         }
 
@@ -91,10 +65,7 @@ class CategoryService
             $category->setSpecifications($data['spec']);
         }
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Category successfully created!'
-        ];
+        flashMessage('message-success', 'Category successfully created!');
     }
     
     /**
@@ -111,10 +82,7 @@ class CategoryService
             $category->updateSpecifications($data['spec']);
         }
 
-        $this->message = [
-            'type' => 'message-success',
-            'content' => 'Category successfully updated!'
-        ];
+        flashMessage('message-success', 'Category successfully updated!');
     }
 
     /**
@@ -126,18 +94,10 @@ class CategoryService
     public function delete(Category $category)
     {
         if ($category->deleteCategory()) {
-            $this->message = [
-                'type' => 'message-success',
-                'content' => 'Category deleted!'
-            ];
-            
+            flashMessage('message-success', 'Category deleted!');
             return true;
         } else {
-            $this->message = [
-                'type' => 'message-danger',
-                'content' => 'Cannot delete category with existing products!'
-            ];
-
+            flashMessage('message-danger', 'Could not delete category.');
             return false;
         }
     }
