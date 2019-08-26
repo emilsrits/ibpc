@@ -9,7 +9,7 @@ Online store in Laravel framework
 ## Tools
 
   * Laravel     5.6.39
-  * PHP         >=7.1.3
+  * PHP         >=7.1
   * MySQL       >=5.6
 
 ## Installation
@@ -32,6 +32,8 @@ Run `php artisan migrate` to migrate tables and triggers, run `php artisan db:se
 Install Node dependencies by running `npm install` using the terminal in the app root directory.
 
 Run command `php artisan storage:link` to create symlink from `storage/app/public` to `public/storage` folder. This is needed for product images.
+
+Configure mail driver for sending mail.
 
 ## Testing
 ### PHPUnit
