@@ -109,6 +109,8 @@ class ProductService
         // Update product properties
         if (isset($data['properties'])) {
             $product->updateProperties($data['properties']);
+        } else {
+            $product->updateProperties([]);
         }
 
         // Update product media

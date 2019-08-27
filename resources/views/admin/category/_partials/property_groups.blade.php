@@ -10,7 +10,7 @@
                             class="switch is-small"
                             type="checkbox"
                             name="{{ "spec[{$specification->id}][id]" }}"
-                            value="{{ $specification->id }}"
+                            value="{{ $specification->id ?? '' }}"
                             {{ old("spec.{$specification->id}", optional($category)->getSpecificationById($specification->id)) ? 'checked' : '' }}>
 
                         <label for="{{ "spec[{$specification->id}][id]" }}">{{ $specification->slug }}</label>

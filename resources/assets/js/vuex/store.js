@@ -36,8 +36,8 @@ const actions = {
 };
 
 const getters = {
-    getMessages() {
-        return state.messages;
+    getMessage() {
+        return state.message;
     },
 
     getCart() {

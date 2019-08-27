@@ -80,6 +80,8 @@ class CategoryService
 
         if (isset($data['spec'])) {
             $category->updateSpecifications($data['spec']);
+        } else {
+            $category->updateSpecifications([]);
         }
 
         flashMessage('message-success', 'Category successfully updated!');

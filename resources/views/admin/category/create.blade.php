@@ -34,7 +34,7 @@ Create Category
                         </div>
 
                         <entity-category-parent
-                            :top-level="{{ json_encode(old('top_level') === (string)1 ? true : false) }}"
+                            :top-level="{{ json_encode(old('top_level') == 1 ? true : false) }}"
                         >
                             <template v-slot:top-level="{topCategoryChange}">
                                 <div class="field is-narrow">
@@ -43,7 +43,7 @@ Create Category
                                         <div class="select">
                                             <select class="input" name="top_level" required @change="topCategoryChange">
                                                 <option value="0">No</option>
-                                                <option value="1" {{ old('top_level') === (string)1 ? 'selected' : '' }}>Yes</option>
+                                                <option value="1" {{ old('top_level') == 1 ? 'selected' : '' }}>Yes</option>
                                             </select>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@ Create Category
                                 <div class="select">
                                     <select class="input" name="status" required>
                                         <option value="0">Disabled</option>
-                                        <option value="1" {{ old('status') === 1 ? 'selected' : '' }}>Enabled</option>
+                                        <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Enabled</option>
                                     </select>
                                 </div>
                             </div>

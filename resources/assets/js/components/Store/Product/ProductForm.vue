@@ -6,12 +6,13 @@
         <p class="product-price-old" v-if="productPrices.old">
             <s>{{ productPrices.old }}</s>
         </p>
+        
         <p class="product-price-current">
             {{ productPrices.current }}
         </p>
 
         <template v-if="product.stock > 0 && product.status">
-            <div v-if="product.stock > 5" class="stock-status in-stock">
+            <div class="stock-status in-stock" v-if="product.stock > 5">
                 <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
                 <div class="stock-text">In Stock</div>
             </div>
@@ -31,8 +32,10 @@
         <div class="form-container" v-if="product.status">
             <form id="product-add-form" role="form" method="POST" :action="route" @submit.prevent="addProductToCart">
                 <input type="hidden" name="_token" :value="csrf">
+
                 <label for="qty">Qty:&nbsp;</label>
                 <input id="qty" type="number" name="qty" min="1" max="1000" value="1" title="qty" pattern="[0-9]*">
+
                 <button class="button button-action action-do" type="submit" name="submit">Add To Cart</button>
             </form>
         </div>
