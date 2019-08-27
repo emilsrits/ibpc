@@ -69,10 +69,9 @@ class OrderController extends Controller
     /**
      * Create an order
      *
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(Request $request)
+    public function store()
     {
         $action = $this->orderService->store(Auth::user(), session('cart'));
         if (!$action) {

@@ -75,10 +75,13 @@ class OrderService
 
         event(new OrderCreated($order, $user));
 
+        if ($order->status === config('constants.order_status.canceled')) {
+            flashMessage('message-danger', 'Failed to create order.');
+            return false;
+        }
+
         $cart->deleteCart();
-
         flashMessage('message-success', 'Order successfully placed!');
-
         return true;
     }
 

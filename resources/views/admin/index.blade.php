@@ -11,7 +11,7 @@ Admin Panel
             <div class="manage-section">
                 <h4>Recent Orders</h4>
 
-                @if($orders)
+                @if(!$orders->isEmpty())
                     <div class="scrollable-x">
                         <table class="table is-hoverable">
                             <thead>

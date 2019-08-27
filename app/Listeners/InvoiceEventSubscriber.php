@@ -27,7 +27,7 @@ class InvoiceEventSubscriber
      * @param $event
      */
     public function onInvoiceResent($event) {
-        $this->sendInvoice($event->order, $event->user);
+        $this->resendInvoice($event->order, $event->user);
     }
 
     /**
@@ -57,17 +57,22 @@ class InvoiceEventSubscriber
      */
     private function sendInvoice($order, $user, $save = false)
     {
-        if ($order->status === config('constants.order_status.pending')) {
-            $order->status = config('constants.order_status.invoiced');
-        }
-
         // Generate PDF invoice file
         $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
 
         // Send mail with order info and attached invoice
-        Mail::to($user->email)->send(
-            new UserInvoiceMail($order, $user, $pdf)
-        );
+        try {
+            Mail::to($user->email)->send(
+                new UserInvoiceMail($order, $user, $pdf)
+            );
+
+            if ($order->status === config('constants.order_status.pending')) {
+                $order->status = config('constants.order_status.invoiced');
+            }
+        } catch(\Exception $e) {
+            $order->status = config('constants.order_status.canceled');
+            report($e);
+        }
 
         $order->save();
 
@@ -76,5 +81,32 @@ class InvoiceEventSubscriber
             $now = Carbon::now();
             Storage::put("orders/{$now->year}/{$now->month}/{$order->id}-invoice-" . str_random(2) . ".pdf", $pdf->output());
         }
+    }
+
+    /**
+     * Resend email to the user with invoice file attached
+     *
+     * @param $order
+     * @param $user
+     */
+    private function resendInvoice($order, $user)
+    {
+        // Generate PDF invoice file
+        $pdf = PDF::loadView('pdf.invoice', ['user' => $user, 'order' => $order]);
+
+        // Send mail with order info and attached invoice
+        try {
+            Mail::to($user->email)->send(
+                new UserInvoiceMail($order, $user, $pdf)
+            );
+
+            if ($order->status === config('constants.order_status.pending')) {
+                $order->status = config('constants.order_status.invoiced');
+            }
+        } catch(\Exception $e) {
+            report($e);
+        }
+
+        $order->save();
     }
 }
