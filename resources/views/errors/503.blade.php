@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Be right back.</title>
+    <title>Down for maintenance.</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
 
     <style>
         html, body {
@@ -17,23 +17,24 @@
             color: #B0BEC5;
             display: table;
             font-weight: 100;
-            font-family: 'Lato', sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
 
         .container {
-            text-align: center;
             display: table-cell;
+            text-align: center;
+            background-color: #222629;
             vertical-align: middle;
         }
 
         .content {
-            text-align: center;
             display: inline-block;
+            text-align: center;
         }
 
         .title {
-            font-size: 72px;
             margin-bottom: 40px;
+            font-size: 72px;
         }
     </style>
 </head>

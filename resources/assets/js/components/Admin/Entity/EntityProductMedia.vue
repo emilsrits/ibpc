@@ -48,10 +48,16 @@ export default {
                         }
                         reader.readAsDataURL(media[i]);
                     } else {
-                        console.log('This browser does not support FileReader');
+                        this.$store.dispatch('flashMessage', {
+                            type: 'message-warning',
+                            content: 'This browser does not support FileReader'
+                        }); 
                     }
                 } else {
-                    console.log('Invalid media type');
+                    this.$store.dispatch('flashMessage', {
+                        type: 'message-danger',
+                        content: 'Invalid media type.'
+                    }); 
                 }
             }
         },
