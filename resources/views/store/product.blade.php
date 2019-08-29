@@ -4,6 +4,10 @@
 {{ $product->code }}
 @endsection
 
+@push('styles')
+    <link rel="stylesheet" href="{{ URL::to('/css/magnific-popup.min.css') }}">
+@endpush
+
 @section('content')
 <div class="section">
     <div class="container">
@@ -78,4 +82,32 @@
         </div>
     </div>
 </div>
+@endsection
+
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="{{ URL::to('/js/magnific-popup.min.js') }}"></script>
+@endpush
+
+@section('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            (($) => {
+                // Magnific Popup initialize on product images
+                $('.product-media-item > img').magnificPopup({
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    },
+                    callbacks: {
+                        elementParse: function(item) {
+                            item.src = item.el.attr('src');
+                        }
+                    }
+                });
+            })(jQuery);
+            
+        })
+    </script>
 @endsection

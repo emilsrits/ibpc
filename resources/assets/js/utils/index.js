@@ -1,20 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    (($) => {
-        // Magnific Popup initialize on product images
-        $('.product-media-item > img').magnificPopup({
-            type: 'image',
-            gallery: {
-                enabled: true
-            },
-            callbacks: {
-                elementParse: function(item) {
-                    item.src = item.el.attr('src');
-                }
-            }
-        });
-    })(jQuery);
-
     // Toggle category navigation dropdowns
     const categoryToggles = document.querySelectorAll('.category-toggle');
     
