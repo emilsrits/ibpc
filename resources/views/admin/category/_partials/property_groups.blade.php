@@ -1,4 +1,4 @@
-<?php if (!isset($category)) $category = null; ?>
+@php if (!isset($category)) $category = null; @endphp
 <table class="table is-striped">
     @foreach($specifications->chunk(3) as $chunk)
         <tr>

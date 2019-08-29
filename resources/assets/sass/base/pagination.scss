@@ -1,17 +1,25 @@
 /* PAGINATION */
-.pagination .pagination-list li a {
-  color: $color-white;
-  font-weight: bold;
-  background-color: $color-gray-darkest;
-  border: 1px solid transparent;
-  transition: 0.2s ease;
-  &.is-current {
-    background-color: $color-green-darker;
-    box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, .4);
+.pagination {
+  .pagination-list {
+    li a {
+      color: $color-white;
+      font-weight: bold;
+      background-color: $color-gray-darkest;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      &.is-current {
+        background-color: $color-green-darker;
+        box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, .4);
+      }
+      &:hover {
+        background-color: $color-green-darker;
+        box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, .4);
+      }
+    }
   }
-  &:hover {
-    background-color: $color-green-darker;
-    box-shadow: inset 0px 0px 6px 5px rgba(0, 0, 0, .4);
+
+  .pagination-count {
+    margin: 8px 15px;
   }
 }
 
@@ -20,10 +28,20 @@
     color: $color-black;
     background-color: $color-gray-lighter;
     &.is-current {
-      background-color: $color-green-darker;
+      background-color: $color-green;
     }
     &:hover {
-      background-color: $color-green-darker;
+      background-color: $color-green;
+    }
+  }
+}
+
+@include tablet() {
+  .pagination {
+    justify-content: flex-end;
+
+    .pagination-list {
+      flex-grow: 0;
     }
   }
 }

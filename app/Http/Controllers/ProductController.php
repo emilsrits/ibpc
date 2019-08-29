@@ -13,9 +13,12 @@ use App\Http\Requests\Product\ProductStoreRequest;
 use App\Http\Requests\Product\ProductActionRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Http\Requests\Product\ProductUpdateAsyncRequest;
+use App\Traits\PaginatesModels;
 
 class ProductController extends Controller
 {
+    use PaginatesModels;
+
     /**
      * ProductController constructor
      *
@@ -43,6 +46,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+        if($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        }
+
         $products = $this->productRepository->with('categories')->paginate();
 
         return view('admin.product.catalog', [
@@ -183,7 +190,7 @@ class ProductController extends Controller
 
         if ($async) {
             if ($action) {
-                return response()->json(array('redirectUrl'=> route('product.index')), 200);
+                return response()->json(array('redirectUrl' => route('product.index')), 200);
             }
             return response()->json(null, 400);
         }

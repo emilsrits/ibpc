@@ -67,7 +67,7 @@ export default {
             if (confirmed) {
                 axios.delete(this.routes.delete)
                     .then(response => {
-                        window.location.href = response.data.redirectUrl
+                        window.location.href = response.data.redirectUrl;
                     })
                     .catch(error => {
                         console.log('error: ' + error);

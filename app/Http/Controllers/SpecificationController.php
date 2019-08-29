@@ -11,9 +11,12 @@ use App\Http\Requests\Specification\SpecificationStoreRequest;
 use App\Http\Requests\Specification\SpecificationActionRequest;
 use App\Http\Requests\Specification\SpecificationUpdateRequest;
 use App\Repositories\SpecificationRepository;
+use App\Traits\PaginatesModels;
 
 class SpecificationController extends Controller
 {
+    use PaginatesModels;
+    
     /**
      * SpecificationController constructor
      *
@@ -41,6 +44,10 @@ class SpecificationController extends Controller
      */
     public function index()
     {
+        if($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        }
+        
         $specifications = $this->specificationRepository->paginate();
         $table = $this->specificationTable;
 

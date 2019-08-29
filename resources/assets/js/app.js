@@ -24,6 +24,7 @@ import ProductForm from './components/Store/Product/ProductForm.vue';
 import CartForm from './components/Store/Cart/CartForm.vue';
 import WidgetMessages from './components/Widget/WidgetMessages.vue';
 import WidgetMessagesItem from './components/Widget/WidgetMessagesItem.vue';
+import WidgetPaginationSize from './components/Widget/WidgetPaginationSize.vue';
 
 const app = new Vue({
     el: '#app',
@@ -41,6 +42,7 @@ const app = new Vue({
         ProductForm,
         CartForm,
         WidgetMessages,
-        WidgetMessagesItem
+        WidgetMessagesItem,
+        WidgetPaginationSize
     }
 });

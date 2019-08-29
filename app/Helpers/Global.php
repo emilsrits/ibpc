@@ -111,19 +111,27 @@ if (!function_exists('sortEntry')) {
     }
 }
 
-if (!function_exists('roleIdFromSlug')) {
+if (!function_exists('arrayFromCollection')) {
     /**
-     * Return role ID based on slug
+     * Create associative array from collection with key and value based on model attribute
      *
-     * @param string $slug
-     * @return string
+     * @param $collection
+     * @param string $key
+     * @param string $value
+     * @return array
      */
-    function roleIdFromSlug(string $slug) {
-        $roles = config('constants.user_roles');
+    function arrayFromCollection($collection, $key, $value)
+    {
+        $array = [];
 
-        return $roles[$slug];
+        foreach($collection as $item) {
+            $array[$item[$key]] = $item[$value];
+        }
+
+        return $array;
     }
 }
+
 
 if (!function_exists('arrayExclude')) {
     /**
@@ -190,26 +198,5 @@ if (!function_exists('formatMoneyByDecimal')) {
         $formatted = money($money)->formatByDecimal();
 
         return $formatted;
-    }
-}
-
-if (!function_exists('arrayFromCollection')) {
-    /**
-     * Create associative array from collection with key and value based on model attribute
-     *
-     * @param $collection
-     * @param string $key
-     * @param string $value
-     * @return array
-     */
-    function arrayFromCollection($collection, $key, $value)
-    {
-        $array = [];
-
-        foreach($collection as $item) {
-            $array[$item[$key]] = $item[$value];
-        }
-
-        return $array;
     }
 }

@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Order\OrderActionRequest;
 use App\Http\Requests\Order\OrderUpdateRequest;
 use App\Repositories\OrderRepository;
+use App\Traits\PaginatesModels;
 
 class OrderController extends Controller
 {
+    use PaginatesModels;
+    
     /**
      * OrderController constructor
      *
@@ -38,6 +41,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+        if($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        }
+        
         $orders = $this->orderRepository->paginate();
 
         return view('admin.order.orders', [

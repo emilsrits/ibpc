@@ -109,7 +109,10 @@ abstract class Repository implements RepositoryInterface
      */
     public function paginate($limit = null, array $columns = ['*'])
     {
-        $limit = is_null($limit) ? config('constants.pagination.limit', 15) : $limit;
+        if (is_null($limit)) {
+            $limit = session('page-size') ?? config('constants.pagination.limit', 15);
+        }
+
         $result = $this->model->paginate($limit, $columns);
 
         $this->resetModel();

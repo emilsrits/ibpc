@@ -16,8 +16,10 @@ Checkout
                     <p>{{ $user->phone }}</p>
                 @endif
                 @if(!$user->canMakeOrder())
-                    <h4>Please fill in missing shipping address information</h4>
-                    <a href="{{ url('/user/edit') }}">Edit my account information</a>
+                    <div class="has-text-right">
+                        <h4>Please fill in missing shipping address information</h4>
+                        <a class="checkout-edit" href="{{ url('/user/edit') }}">Edit my account information</a>
+                    </div>
                 @else
                     <h4>Shipping Address</h4>
                     <p>{{ countryFromCode($user->country) }}</p>

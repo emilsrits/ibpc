@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Store\StoreSearchRequest;
+use App\Traits\PaginatesModels;
 use App\Repositories\ProductRepository;
 use App\Repositories\CategoryRepository;
+use App\Http\Requests\Store\StoreSearchRequest;
 
 class StoreController extends Controller
 {
+    use PaginatesModels;
+    
     /**
      * StoreController constructor
      *
@@ -27,7 +30,11 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $products = $this->productRepository->active()->paginate(16);
+        if($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        }
+
+        $products = $this->productRepository->active()->paginate();
 
         return view('store.index', compact('products'));
     }
@@ -54,8 +61,12 @@ class StoreController extends Controller
      */
     public function categorize($parent, $child)
     {
+        if($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        }
+        
         $categoryId = $this->categoryRepository->findBy('slug', $child)->id;
-        $products = $this->productRepository->active()->getByCategoryId($categoryId)->paginate(16);
+        $products = $this->productRepository->active()->getByCategoryId($categoryId)->paginate();
         
         return view('store.index', compact('products'));
     }

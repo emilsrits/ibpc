@@ -1,11 +1,27 @@
-@if($paginator->hasPages())
-    <?php
-        $start = $paginator->currentPage() - 2;
-        $end = $paginator->currentPage() + 2;
-        if ($start < 1) $start = 1;
-        if ($end >= $paginator->lastPage() ) $end = $paginator->lastPage(); // reset end to last page
-    ?>
-    <nav class="pagination is-small is-right">
+@php
+    $start = $paginator->currentPage() - 2;
+    $end = $paginator->currentPage() + 2;
+    if ($start < 1) $start = 1;
+    if ($end >= $paginator->lastPage()) $end = $paginator->lastPage(); // reset end to last page
+
+    $pageMax = $paginator->currentPage() * $paginator->perPage();
+    $pageMin = $pageMax - $paginator->perPage();
+    if ($paginator->currentPage() == 1) $pageMin += 1;
+    $fromToOf = $pageMin . ' - ' . $pageMax . ' of ' . $paginator->total();
+@endphp
+
+<nav class="pagination is-small is-right">
+    <div class="pagination-count">
+        <span>{{ $fromToOf }}</span>
+    </div>
+
+    <widget-pagination-size
+        default-size-prop="{{ session('page-size') }}"
+        route="{{ $paginator->url($paginator->currentPage()) }}"
+    >
+    </widget-pagination-size>
+
+    @if($paginator->hasPages())
         <ul class="pagination-list">
             {{-- previous page --}}
             @if($paginator->currentPage() == 1)
@@ -42,5 +58,5 @@
                 <li><a class="pagination-next" href="{{ $paginator->nextPageUrl() }}"><i class="fa fa-angle-right"></i></a></li>
             @endif
         </ul>
+    @endif
 </nav>
-@endif

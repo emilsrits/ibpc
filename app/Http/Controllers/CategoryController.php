@@ -11,9 +11,12 @@ use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 use App\Repositories\SpecificationRepository;
+use App\Traits\PaginatesModels;
 
 class CategoryController extends Controller
 {
+    use PaginatesModels;
+    
     /**
      * CategoryController constructor
      *
@@ -41,6 +44,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        }
+        
         $categories = $this->categoryRepository->paginate();
         $table = $this->categoryTable;
 

@@ -21,10 +21,10 @@ class ProductService
     }
 
     /**
-     * Product mass action
+     * Product mass action, returns true if action was performed (successfully or not)
      *
      * @param array $data
-     * @return mixed
+     * @return boolean
      */
     public function action(array $data)
     {
@@ -43,7 +43,7 @@ class ProductService
                 case 3:
                     if (!$this->product->deleteProduct($productIds)) {
                         flashMessage('message-danger', 'Can not delete products that are in active orders!');
-                        return false;
+                        return true;
                     }
                     flashMessage('message-success', 'Product(s) deleted!');
                     return true;
