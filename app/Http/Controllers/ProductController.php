@@ -186,13 +186,13 @@ class ProductController extends Controller
     public function delete(Request $request, Product $product)
     {
         $async = $request->wantsJson();
-        $action = $this->productService->delete($product);
+        $action = $this->productService->delete($product, $async);
 
         if ($async) {
             if ($action) {
                 return response()->json(array('redirectUrl' => route('product.index')), 200);
             }
-            return response()->json(null, 400);
+            return response()->json(messageItem('message-danger', 'Can not delete products that are in active orders!'), 400);
         }
         
         if ($action) {

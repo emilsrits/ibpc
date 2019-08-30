@@ -156,15 +156,21 @@ class ProductService
      * Product delete action
      *
      * @param Product $product
+     * @param bool $async
      * @return bool
      */
-    public function delete(Product $product)
+    public function delete(Product $product, $async = false)
     {
         if ($product->deleteProduct()) {
-            flashMessage('message-success', 'Product deleted!');
+            if (!$async) {
+                flashMessage('message-success', 'Product deleted!');
+            }
             return true;
         }
-        flashMessage('message-danger', 'Can not delete products that are in active orders!');
+
+        if (!$async) {
+            flashMessage('message-danger', 'Can not delete products that are in active orders!');
+        }
         return false;
     }
 }

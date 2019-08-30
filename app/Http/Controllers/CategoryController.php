@@ -130,13 +130,13 @@ class CategoryController extends Controller
     {
         $async = $request->wantsJson();
 
-        $action = $this->categoryService->delete($category);
+        $action = $this->categoryService->delete($category, $async);
 
         if ($async) {
             if ($action) {
                 return response()->json(array('redirectUrl' => route('category.index')), 200);
             }
-            return response()->json(null, 400);
+            return response()->json(messageItem('message-danger', 'Could not delete category. '), 400);
         }
         
         if ($action) {

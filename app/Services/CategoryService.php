@@ -91,16 +91,21 @@ class CategoryService
      * Category delete action
      *
      * @param Category $category
+     * @param bool $async
      * @return bool
      */
-    public function delete(Category $category)
+    public function delete(Category $category, $async = false)
     {
         if ($category->deleteCategory()) {
-            flashMessage('message-success', 'Category deleted!');
+            if (!$async) {
+                flashMessage('message-success', 'Category deleted!');
+            }
             return true;
-        } else {
-            flashMessage('message-danger', 'Could not delete category.');
-            return false;
         }
+
+        if (!$async) {
+            flashMessage('message-danger', 'Could not delete category.');
+        }
+        return false;
     }
 }

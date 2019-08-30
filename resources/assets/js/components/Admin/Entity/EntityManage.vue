@@ -70,7 +70,7 @@ export default {
                         window.location.href = response.data.redirectUrl;
                     })
                     .catch(error => {
-                        console.log('error: ' + error);
+                        this.$store.dispatch('flashMessage', error.response.data);
                     });
             }
 
