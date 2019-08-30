@@ -10,9 +10,12 @@ use App\Filters\UserFilter;
 use App\Services\UserService;
 use App\Repositories\UserRepository;
 use App\Repositories\RoleRepository;
+use App\Traits\PaginatesModels;
 
 class UserController extends Controller
 {
+    use PaginatesModels;
+    
     /**
      * UserController constructor
      *
@@ -40,6 +43,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        if ($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl' => request()->url()), 200);
+        }
+        
         return view('admin.user.users', [
             'users' => $this->userRepository->paginate(),
             'table' => $this->userTable

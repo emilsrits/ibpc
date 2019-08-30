@@ -30,8 +30,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        if($this->setSessionPageSize()) {
-            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        if ($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl' => request()->url()), 200);
         }
 
         $products = $this->productRepository->active()->paginate();
@@ -61,8 +61,8 @@ class StoreController extends Controller
      */
     public function categorize($parent, $child)
     {
-        if($this->setSessionPageSize()) {
-            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        if ($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl' => request()->url()), 200);
         }
         
         $categoryId = $this->categoryRepository->findBy('slug', $child)->id;

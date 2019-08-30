@@ -44,8 +44,8 @@ class SpecificationController extends Controller
      */
     public function index()
     {
-        if($this->setSessionPageSize()) {
-            return response()->json(array('redirectUrl'=> request()->url()), 200);
+        if ($this->setSessionPageSize()) {
+            return response()->json(array('redirectUrl' => request()->url()), 200);
         }
         
         $specifications = $this->specificationRepository->paginate();
