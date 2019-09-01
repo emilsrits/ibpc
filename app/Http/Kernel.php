@@ -56,5 +56,7 @@ class Kernel extends HttpKernel
         'cart' => \App\Http\Middleware\Cart::class,
         'active' => \App\Http\Middleware\Active::class,
         'owner' => \App\Http\Middleware\Owner::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
 }

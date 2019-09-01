@@ -51,10 +51,8 @@ export default {
         },
 
         leave(el, done) {
-            let that = this;
-
-            setTimeout(function() {
-                that.$refs.message.remove();
+            setTimeout(() => {
+                this.$refs.message.remove();
             }, 600);
         }
     }

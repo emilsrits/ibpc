@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="{{ URL::to('/css/font-awesome.min.css') }}">
 	@stack('styles')
 	<link rel="stylesheet" href="{{ URL::to('/css/app.css') }}">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 	@yield('styles')
 
 	<!-- Scripts Head -->

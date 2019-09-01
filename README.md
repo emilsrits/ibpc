@@ -8,8 +8,8 @@ Online store in Laravel framework
 
 ## Tools
 
-  * Laravel     5.6.39
-  * PHP         >=7.1
+  * Laravel     5.7.28
+  * PHP         >=7.1.3
   * MySQL       >=5.6
 
 ## Installation
