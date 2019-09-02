@@ -97,9 +97,7 @@ class CategoryService
     public function delete(Category $category, $async = false)
     {
         if ($category->deleteCategory()) {
-            if (!$async) {
-                flashMessage('message-success', 'Category deleted!');
-            }
+            flashMessage('message-success', 'Category deleted!');
             return true;
         }
 

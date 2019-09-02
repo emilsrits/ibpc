@@ -162,9 +162,7 @@ class ProductService
     public function delete(Product $product, $async = false)
     {
         if ($product->deleteProduct()) {
-            if (!$async) {
-                flashMessage('message-success', 'Product deleted!');
-            }
+            flashMessage('message-success', 'Product deleted!');
             return true;
         }
 
