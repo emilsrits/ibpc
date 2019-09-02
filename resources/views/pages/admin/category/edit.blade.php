@@ -82,7 +82,7 @@ Edit Category
                     </div>
 
                     <div class="column is-9 scrollable-x">
-                        @include('admin.category._partials.property_groups')
+                        @include('pages.admin.category._partials.property_groups')
                     </div>
                 </div>
             </form>

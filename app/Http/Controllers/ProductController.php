@@ -52,7 +52,7 @@ class ProductController extends Controller
 
         $products = $this->productRepository->with('categories')->paginate();
 
-        return view('admin.product.catalog', [
+        return view('pages.admin.product.catalog', [
             'products' => $products,
             'table' => $this->productTable
         ]);
@@ -75,7 +75,7 @@ class ProductController extends Controller
         $products = $this->productRepository->with('categories')->filter($filters)->paginate();
         $table = $this->productTable;
 
-        return view('admin.product.catalog', compact('products', 'table', 'request'));
+        return view('pages.admin.product.catalog', compact('products', 'table', 'request'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ProductController extends Controller
             $category = null;
         }
 
-        return view('admin.product.create', compact('categories', 'category'));
+        return view('pages.admin.product.create', compact('categories', 'category'));
     }
 
     /**
@@ -105,7 +105,7 @@ class ProductController extends Controller
     public function createAsync(Request $request)
     {
         $category = $this->categoryRepository->with('specifications.properties')->find($request->selectValue);
-        $view = view('admin.product._partials.specifications', ['category'=> $category])->render();
+        $view = view('pages.admin.product._partials.specifications', ['category'=> $category])->render();
 
         if ($view) {
             return response()->json($view, 200);
@@ -143,7 +143,7 @@ class ProductController extends Controller
             $category = null;
         }
 
-        return view('admin.product.edit', compact('product', 'category'));
+        return view('pages.admin.product.edit', compact('product', 'category'));
     }
 
     /**

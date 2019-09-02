@@ -30,7 +30,7 @@ class AccountController extends Controller
         $user = Auth::user();
         $orders = $user->getActiveOrders(20);
 
-        return view('account.index', compact('orders'));
+        return view('pages.account.index', compact('orders'));
     }
 
     /**
@@ -44,7 +44,7 @@ class AccountController extends Controller
         $user = Auth::user();
         $order = $user->getOrder($id);
 
-        return view('account.order', compact('user', 'order'));
+        return view('pages.account.order', compact('user', 'order'));
     }
 
     /**
@@ -57,7 +57,7 @@ class AccountController extends Controller
         $user = Auth::user();
         $orders = $user->getFinishedOrders(20);
 
-        return view('account.history', compact('orders'));
+        return view('pages.account.history', compact('orders'));
     }
 
     /**
@@ -69,7 +69,7 @@ class AccountController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        return view('account.edit', compact('user'));
+        return view('pages.account.edit', compact('user'));
     }
 
     /**

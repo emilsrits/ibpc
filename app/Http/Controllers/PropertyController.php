@@ -43,7 +43,7 @@ class PropertyController extends Controller
      */
     public function create(Specification $specification)
     {
-        return view('admin.property.create', compact('specification'));
+        return view('pages.admin.property.create', compact('specification'));
     }
 
     /**
@@ -69,7 +69,7 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        return view('admin.property.edit', compact('property'));
+        return view('pages.admin.property.edit', compact('property'));
     }
 
     /**

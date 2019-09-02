@@ -7,7 +7,7 @@ Order Successful
 @section('content')
 <div class="section">
     <div class="container">
-        @include('checkout._partials.checkout_progress', ['step' => 5])
+        @include('pages.checkout._partials.checkout_progress', ['step' => 5])
         <div id="checkout-success" class="box">
             <div class="order-success-message">
                 <h4>Order created!</h4>

@@ -47,7 +47,7 @@ class UserController extends Controller
             return response()->json(array('redirectUrl' => request()->url()), 200);
         }
         
-        return view('admin.user.users', [
+        return view('pages.admin.user.users', [
             'users' => $this->userRepository->paginate(),
             'table' => $this->userTable
         ]);
@@ -67,7 +67,7 @@ class UserController extends Controller
         $users = $this->userRepository->filter($filters)->paginate();
         $table = $this->userTable;
 
-        return view('admin.user.users', compact('users', 'table', 'request'));
+        return view('pages.admin.user.users', compact('users', 'table', 'request'));
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends Controller
     {
         $roles = $this->roleRepository->all();
 
-        return view('admin.user.edit', compact('user', 'roles'));
+        return view('pages.admin.user.edit', compact('user', 'roles'));
     }
 
     /**

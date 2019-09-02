@@ -49,7 +49,7 @@ class NumberInput extends Input
      */
     public function render()
     {
-        return view('admin.table._partials.input.number', [
+        return view('pages.admin.table._partials.input.number', [
             'name' => $this->name,
             'min' => $this->min,
             'max' => $this->max

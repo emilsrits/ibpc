@@ -42,7 +42,7 @@ class SelectInput extends Input
      */
     public function render()
     {
-        return view('admin.table._partials.input.select', [
+        return view('pages.admin.table._partials.input.select', [
             'name' => $this->name,
             'options' => $this->options
         ])->render();

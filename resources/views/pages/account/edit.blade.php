@@ -8,7 +8,7 @@ Account Settings
 <div class="section">
     <div class="container">
         <div id="user-account" class="box">
-            @include('account._partials.navigation')
+            @include('pages.account._partials.navigation')
 
             <form id="account--edit-form" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/user/update', ['id' => $user->id]) }}">
                 @method('PATCH')

@@ -117,7 +117,7 @@ abstract class Table implements TableInterface
             $this->paginated = true;
         }
 
-        return view('admin.table.index', [
+        return view('pages.admin.table.index', [
             'table' => $this,
             'collection' => $collection
         ])->render();

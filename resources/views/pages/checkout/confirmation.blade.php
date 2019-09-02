@@ -7,11 +7,11 @@ Checkout Confirmation
 @section('content')
 <div class="section">
     <div class="container">
-        @include('checkout._partials.checkout_progress', ['step' => 4])
+        @include('pages.checkout._partials.checkout_progress', ['step' => 4])
         <div id="checkout-confirm" class="box">
             <form id="checkout-confirm-form" role="form" method="POST" action="{{ url('/checkout/confirm') }}">
                 @csrf
-                @include('checkout._partials.cart_items', ['cart' => $cart])
+                @include('pages.checkout._partials.cart_items', ['cart' => $cart])
                 <div class="has-text-right">
                     <button id="order-submit" class="button button-action action-do" type="submit" title="Checkout">Order</button>
                 </div>

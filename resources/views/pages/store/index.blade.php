@@ -9,7 +9,7 @@ IBPC
     <div class="container">
         <div class="columns is-multiline">
             <div class="column is-12-mobile is-3-tablet is-2-widescreen">
-                @include('store._partials.categories')
+                @include('pages.store._partials.categories')
             </div>
 
             <div class="column is-12-mobile is-9-tablet is-10-widescreen">

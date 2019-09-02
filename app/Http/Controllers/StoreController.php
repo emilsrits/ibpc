@@ -36,7 +36,7 @@ class StoreController extends Controller
 
         $products = $this->productRepository->active()->paginate();
 
-        return view('store.index', compact('products'));
+        return view('pages.store.index', compact('products'));
     }
 
     /**
@@ -49,7 +49,7 @@ class StoreController extends Controller
     {
         $products = $this->productRepository->active()->getByTitleOrCode($request->q)->paginate(16);
 
-        return view('store.index', compact('products'));
+        return view('pages.store.index', compact('products'));
     }
 
     /**
@@ -68,7 +68,7 @@ class StoreController extends Controller
         $categoryId = $this->categoryRepository->findBy('slug', $child)->id;
         $products = $this->productRepository->active()->getByCategoryId($categoryId)->paginate();
         
-        return view('store.index', compact('products'));
+        return view('pages.store.index', compact('products'));
     }
 
     /**
@@ -81,6 +81,6 @@ class StoreController extends Controller
     {
         $product = $this->productRepository->with('properties.specification')->findBy('code', $code);
 
-        return view('store.product', compact('product'));
+        return view('pages.store.product', compact('product'));
     }
 }

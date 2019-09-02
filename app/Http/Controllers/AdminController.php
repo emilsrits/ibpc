@@ -25,6 +25,6 @@ class AdminController extends Controller
     {
         $orders = $this->orderRepository->active()->orderBy('created_at', 'desc')->take(5)->get();
 
-        return view('admin.index', compact('orders'));
+        return view('pages.admin.index', compact('orders'));
     }
 }

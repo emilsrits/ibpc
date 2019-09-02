@@ -35,7 +35,7 @@ class TextInput extends Input
      */
     public function render()
     {
-        return view('admin.table._partials.input.text', [
+        return view('pages.admin.table._partials.input.text', [
             'name' => $this->name
         ])->render();
     }

@@ -7,7 +7,7 @@ Checkout Delivery
 @section('content')
 <div class="section">
     <div class="container">
-        @include('checkout._partials.checkout_progress', ['step' => 3])
+        @include('pages.checkout._partials.checkout_progress', ['step' => 3])
         <div id="checkout-delivery" class="box">
             <form id="checkout-delivery-form" class="form" role="form" method="POST" action="{{ url('/checkout/confirmation') }}">
                 @csrf

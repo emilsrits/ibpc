@@ -31,12 +31,12 @@ class CartController extends Controller
     public function index()
     {
         if (!Session::has('cart')) {
-            return view('cart.index', ['cart' => null, 'products' => null]);
+            return view('pages.cart.index', ['cart' => null, 'products' => null]);
         }
 
         $cart = new Cart(session('cart'));
 
-        return view('cart.index', ['cart' => $cart, 'products' => $cart->items]);
+        return view('pages.cart.index', ['cart' => $cart, 'products' => $cart->items]);
     }
 
     /**

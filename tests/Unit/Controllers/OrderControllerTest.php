@@ -29,7 +29,7 @@ class OrderControllerTest extends TestCase
         $response = $this->get(route('order.index'));
 
         $response->assertSuccessful();
-        $response->assertViewIs('admin.order.orders');
+        $response->assertViewIs('pages.admin.order.orders');
         $response->assertViewHas('orders');
     }
 
@@ -64,7 +64,7 @@ class OrderControllerTest extends TestCase
         ]));
 
         $response->assertSuccessful();
-        $response->assertViewIs('admin.order.orders');
+        $response->assertViewIs('pages.admin.order.orders');
         $response->assertViewHas('orders');
     }
 

@@ -51,7 +51,7 @@ class SpecificationController extends Controller
         $specifications = $this->specificationRepository->paginate();
         $table = $this->specificationTable;
 
-        return view('admin.specification.specifications', compact('specifications', 'table'));
+        return view('pages.admin.specification.specifications', compact('specifications', 'table'));
     }
 
     /**
@@ -74,7 +74,7 @@ class SpecificationController extends Controller
      */
     public function create()
     {
-        return view('admin.specification.create');
+        return view('pages.admin.specification.create');
     }
 
     /**
@@ -100,7 +100,7 @@ class SpecificationController extends Controller
     {
         $table = $this->propertyTable;
 
-        return view('admin.specification.edit', compact('specification', 'table'));
+        return view('pages.admin.specification.edit', compact('specification', 'table'));
     }
 
     /**

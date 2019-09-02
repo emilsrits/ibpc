@@ -51,7 +51,7 @@ class CategoryController extends Controller
         $categories = $this->categoryRepository->paginate();
         $table = $this->categoryTable;
 
-        return view('admin.category.categories', compact('categories', 'table'));
+        return view('pages.admin.category.categories', compact('categories', 'table'));
     }
 
     /**
@@ -76,7 +76,7 @@ class CategoryController extends Controller
     {
         $specifications = $this->specificationRepository->orderBy('slug')->get();
 
-        return view('admin.category.create', compact('specifications'));
+        return view('pages.admin.category.create', compact('specifications'));
     }
 
     /**
@@ -102,7 +102,7 @@ class CategoryController extends Controller
     {
         $specifications = $this->specificationRepository->orderBy('slug')->get();
 
-        return view('admin.category.edit', compact('category', 'specifications'));
+        return view('pages.admin.category.edit', compact('category', 'specifications'));
     }
 
     /**

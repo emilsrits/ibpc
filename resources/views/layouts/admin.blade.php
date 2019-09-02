@@ -27,7 +27,7 @@
 <body>
     <div id="app">
         @yield('modal')
-        @include('admin._partials.header')
+        @include('pages.admin._partials.header')
 
         <main>
             @yield('content')

@@ -47,7 +47,7 @@ class OrderController extends Controller
         
         $orders = $this->orderRepository->paginate();
 
-        return view('admin.order.orders', [
+        return view('pages.admin.order.orders', [
             'orders' => $orders,
             'table' => $this->orderTable
         ]);
@@ -70,7 +70,7 @@ class OrderController extends Controller
         $orders = $this->orderRepository->with('user')->filter($filters)->paginate();
         $table = $this->orderTable;
 
-        return view('admin.order.orders', compact('orders', 'table', 'request'));
+        return view('pages.admin.order.orders', compact('orders', 'table', 'request'));
     }
 
     /**
@@ -99,7 +99,7 @@ class OrderController extends Controller
         $order = $this->orderRepository->with('user')->find($id);
         $closed = in_array($order->status, config('constants.order_status_finished'));
 
-        return view('admin.order.edit', compact('order', 'closed'));
+        return view('pages.admin.order.edit', compact('order', 'closed'));
     }
 
     /**
@@ -139,7 +139,7 @@ class OrderController extends Controller
     public function success(Request $request)
     {
         if ($request['success']) {
-            return view('checkout.success');
+            return view('pages.checkout.success');
         }
         
         return redirect()->route('shop.index');
