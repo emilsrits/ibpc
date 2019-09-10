@@ -18,7 +18,7 @@
             </div>
 
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link item-link" href="{{ url('/admin/catalog') }}">Catalog</a>
+                <a class="navbar-link item-link" href="{{ url('/admin/catalog') }}">Products</a>
 
                 <div class="navbar-dropdown">
                     <div class="navbar-item">

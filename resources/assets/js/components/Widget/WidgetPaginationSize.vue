@@ -15,15 +15,11 @@ export default {
     props: {
         enabled: {
             type: Boolean,
-            default() {
-                return true;
-            }
+            default: true
         },
         defaultSizeProp: {
             type: [Number, String],
-            default() {
-                return 20;
-            }
+            default: 20
         },
         route: {
             type: String,
@@ -32,7 +28,7 @@ export default {
     },
 
     computed: {
-        defaultSize: function() {
+        defaultSize () {
             return (Number.isInteger(Number(this.$props.defaultSizeProp)) ?  this.$props.defaultSizeProp : 20);
         }
     },

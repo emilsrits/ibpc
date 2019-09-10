@@ -22,6 +22,7 @@
 
 <script>
 import { setTimeout } from 'timers';
+
 export default {
     name: 'WidgetMessagesItem',
 
@@ -37,7 +38,7 @@ export default {
         }
     },
 
-    data: function () {
+    data () {
         return {
             show: true
         }

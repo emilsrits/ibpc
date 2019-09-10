@@ -53,15 +53,13 @@ export default {
     props: {
         method: {
             type: String,
-            default() {
-                return 'PATCH';
-            }
+            default: 'PATCH'
         },
         cartTotalPrice: String,
         routes: Object
     },
 
-    data: function () {
+    data () {
         return {
             csrf: window.Laravel.csrfToken,
             cartData: {

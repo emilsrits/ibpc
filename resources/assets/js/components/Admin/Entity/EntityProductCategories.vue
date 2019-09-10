@@ -16,7 +16,7 @@
 export default {
     name: 'EntityProductCategories',
 
-    data: function () {
+    data () {
         return {
             specifications: document.getElementById('specifications')
         }

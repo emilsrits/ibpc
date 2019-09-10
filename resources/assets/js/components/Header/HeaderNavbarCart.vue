@@ -23,7 +23,7 @@ export default {
         }
     },
 
-    data ()  {
+    data () {
         return {
             cartData: this.$props.cart
         }

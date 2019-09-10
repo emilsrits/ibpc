@@ -25,8 +25,7 @@ IBPC
                                 }"
                                 :media="'{{ $product->image }}'"
                                 :route="'{{ url('/p', ['code' => $product->code]) }}'"
-                            >
-                            </catalog-product>
+                            ></catalog-product>
                         </div>
                     @endforeach
                 </div>

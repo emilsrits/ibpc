@@ -32,7 +32,7 @@ export default {
         action: String
     },
 
-    data: function () {
+    data () {
         return {
             csrf: window.Laravel.csrfToken
         }

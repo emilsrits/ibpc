@@ -6,7 +6,7 @@ Vue.use(Vuex);
 const state = {
     message: {
         type: null,
-        content: null,
+        content: null
     },
 
     cart: {
@@ -27,7 +27,7 @@ const mutations = {
 
 const actions = {
     flashMessage(context, message) {
-        context.commit('FLASH_MESSAGE', message)
+        context.commit('FLASH_MESSAGE', message);
     },
 
     updateCart(context, cart) {

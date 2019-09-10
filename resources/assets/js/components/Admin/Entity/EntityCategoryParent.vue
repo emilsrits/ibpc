@@ -14,13 +14,11 @@ export default {
 
     props: {
         topLevel: {
-            default() {
-                return false;
-            }
+            default: false
         }
     },
 
-    data: function () {
+    data () {
         return {
             isTopLevel: this.$props.topLevel 
         }

@@ -35,7 +35,7 @@ export default {
                         preview.querySelectorAll('.media-item.new').forEach(node => node.parentNode.removeChild(node));
     
                         let reader = new FileReader();
-                        reader.onload = function (e) {
+                        reader.onload = (e) => {
                             let mediaItem = document.createElement('div');
                             mediaItem.className = 'media-item new';
 

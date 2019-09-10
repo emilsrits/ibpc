@@ -44,15 +44,11 @@ export default {
     props: {
         canSave: {
             type: Boolean,
-            default() {
-                return true;
-            }
+            default: true
         },
         routes: {
             type: Object,
-            default() {
-                return {};
-            }
+            default: {}
         }
     },
 

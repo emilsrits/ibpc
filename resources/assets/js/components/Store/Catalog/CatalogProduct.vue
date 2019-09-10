@@ -43,9 +43,7 @@ export default {
     props: {
         product: {
             type: Object,
-            default() {
-                return null;
-            }
+            default: null
         },
         productPrices: Object,
         media: String,

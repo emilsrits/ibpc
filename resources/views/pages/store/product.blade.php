@@ -28,7 +28,7 @@
                                     <div class="product-media-thumbs">
                                         @foreach($product->getImages(5, 1) as $image)
                                             <div class="product-media-item">
-                                                <img src="{{ $image->path }}" alt="{{ $image->id }}">
+                                                <img src="{{ $image->path }}">
                                             </div>
                                         @endforeach
                                     </div>

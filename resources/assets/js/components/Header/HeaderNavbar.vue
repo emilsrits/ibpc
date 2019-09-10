@@ -61,15 +61,13 @@ export default {
     props: {
         user: {
             type: Object,
-            default() {
-                return null;
-            }
+            default: null
         },
         media: Object,
         routes: Object
     },
     
-    data: function () {
+    data () {
         return {
             csrf: window.Laravel.csrfToken
         }
