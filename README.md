@@ -1,10 +1,4 @@
-# **IBPC** 
-
-**_IN DEVELOPMENT_**
-
 Online store in Laravel framework
-
-**Author:** @emilsrits
 
 ## Tools
 
@@ -23,12 +17,6 @@ Online store in Laravel framework
 4. Run `php artisan key:generate` to generate APP_KEY value in .env file. 
 
 5. Add `ADMIN_EMAIL=` and `ADMIN_PASSWORD=` to your **.env** file before seeding tables. This will create admin user for you to access administrator panel.
-
-Example:
-```
-ADMIN_EMAIL=admin@example.test
-ADMIN_PASSWORD=admin
-```
 
 6. Run `php artisan migrate` to migrate tables and triggers, run `php artisan db:seed` to seed tables.
 
