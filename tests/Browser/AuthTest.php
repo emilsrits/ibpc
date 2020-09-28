@@ -65,6 +65,7 @@ class AuthTest extends DuskTestCase
                 ->assertPathIs('/')
                 ->waitForText('Account')
                 ->mouseover('@dropdown')
+                ->pause(1000)
                 ->assertVisible('@sign-out')
                 ->click('@sign-out')
                 ->assertPathIs('/')

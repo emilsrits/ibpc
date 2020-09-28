@@ -25,7 +25,7 @@ class OrderTest extends TestCase
         $this->cart = new Cart();
 
         $this->createProductWithCategory([
-            'stock' => 10,
+            'stock' => 20,
         ], 3);
 
         foreach (Product::all() as $product) {
