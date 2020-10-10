@@ -1,5 +1,5 @@
 {
-    "name": "laravel/ibpc",
+    "name": "emilsrits/ibpc",
     "description": "Online store in Laravel.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
