@@ -13,7 +13,7 @@ Admin Panel
 
                 @if(!$orders->isEmpty())
                     <div class="scrollable-x">
-                        <table class="table is-hoverable">
+                        <table class="table is-hoverable is-fullwidth">
                             <thead>
                                 <th>Id</th>
                                 <th>User</th>
