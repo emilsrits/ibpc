@@ -12,8 +12,8 @@
       color: $color-gray-lighter;
       background: 0 0;
       border: none;
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
       outline: 0;
       cursor: pointer;
       transition: .3s ease-in-out;
@@ -21,6 +21,14 @@
           color: $color-green-darker;
           background-color: $color-black;
       }
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus {
+    border: none;
+    -webkit-text-fill-color: $color-gray-lightest;
+    transition: background-color 5000s ease-in-out 0s;
   }
 
   input[type="search"] {
@@ -36,7 +44,8 @@
       vertical-align: middle;
       transition: .3s ease-out;
       &:focus {
-          box-shadow: 0 0 2px $color-green-darker;
+          background: $color-gray-darkest;
+          box-shadow: 0 0 3px $color-green-darker;
       }
   }
 }
