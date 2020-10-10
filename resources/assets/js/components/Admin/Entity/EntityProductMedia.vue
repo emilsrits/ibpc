@@ -1,7 +1,7 @@
 <template>
     <div id="product-media">
         <label class="is-hidden" for="media">Media</label>
-        
+
         <div id="product-media-preview">
             <slot name="media-preview" :deleteMedia="deleteMedia"></slot>
         </div>
@@ -12,7 +12,8 @@
             name="media[]"
             accept="image/gif, image/jpeg, image/png"
             multiple="multiple"
-            @change="previewMedia">
+            @change="previewMedia"
+        />
     </div>
 </template>
 
@@ -22,18 +23,29 @@ export default {
 
     methods: {
         previewMedia(event) {
-            let el = event.currentTarget;
+            const el = event.currentTarget;
+            const media = el.files;
             let preview = document.getElementById('product-media-preview');
-            let media = el.files;
 
             for (let i = 0; i < media.length; i++) {
                 let mediaPath = media[i].name;
-                let extn = mediaPath.substring(mediaPath.lastIndexOf('.') + 1).toLowerCase();
+                let extn = mediaPath
+                    .substring(mediaPath.lastIndexOf('.') + 1)
+                    .toLowerCase();
 
-                if (extn == 'jpg' || extn == 'jpeg' || extn == 'png' || extn == 'gif') {
-                    if (typeof (FileReader) != 'undefined') {
-                        preview.querySelectorAll('.media-item.new').forEach(node => node.parentNode.removeChild(node));
-    
+                if (
+                    extn == 'jpg' ||
+                    extn == 'jpeg' ||
+                    extn == 'png' ||
+                    extn == 'gif'
+                ) {
+                    if (typeof FileReader != 'undefined') {
+                        preview
+                            .querySelectorAll('.media-item.new')
+                            .forEach((node) =>
+                                node.parentNode.removeChild(node)
+                            );
+
                         let reader = new FileReader();
                         reader.onload = (e) => {
                             let mediaItem = document.createElement('div');
@@ -45,19 +57,19 @@ export default {
 
                             mediaItem.appendChild(image);
                             preview.appendChild(mediaItem);
-                        }
+                        };
                         reader.readAsDataURL(media[i]);
                     } else {
                         this.$store.dispatch('flashMessage', {
                             type: 'message-warning',
-                            content: 'This browser does not support FileReader'
-                        }); 
+                            content: 'This browser does not support FileReader',
+                        });
                     }
                 } else {
                     this.$store.dispatch('flashMessage', {
                         type: 'message-danger',
-                        content: 'Invalid media type.'
-                    }); 
+                        content: 'Invalid media type.',
+                    });
                 }
             }
         },
@@ -65,27 +77,29 @@ export default {
         deleteMedia(event) {
             event.preventDefault();
 
-            let el = event.currentTarget;
+            const el = event.currentTarget;
+
             el.classList.add('disabled');
 
-            axios.put('/admin/product/update', {
+            axios
+                .put('/admin/product/update', {
                     mediaId: el.dataset.id,
-                    productId: el.dataset.product_id
+                    productId: el.dataset.product_id,
                 })
-                .then(response => {
+                .then((response) => {
                     el.parentNode.remove();
                 })
-                .catch(error => {
+                .catch((error) => {
                     el.classList.remove('disabled');
-                    console.log('error: ' + error);
+                    console.error('error: ' + error);
                 });
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss">
-@import "../../../../sass/modules/variables.scss";
+@import '@styleModules/variables.scss';
 
 #product-media-preview {
     display: grid;
@@ -112,16 +126,17 @@ export default {
 
 #product-media-upload {
     padding: 10px;
-    transition: border .3s ease;
+    transition: border 0.3s ease;
     border: 3px dashed $color-gray-lighter;
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         border-color: $color-green-darker;
     }
 }
 
 @include mobile() {
     #product-media {
-        input[type="file"] {
+        input[type='file'] {
             width: 100%;
         }
     }

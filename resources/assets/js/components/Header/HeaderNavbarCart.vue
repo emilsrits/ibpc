@@ -5,9 +5,7 @@
             ({{ cartData.itemCount }})
             {{ cartData.price }}
         </span>
-        <span id="navbar-cart-items" v-else>
-            (0)
-        </span>
+        <span id="navbar-cart-items" v-else> (0) </span>
     </a>
 </template>
 
@@ -19,22 +17,22 @@ export default {
         cart: Object,
         route: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
 
-    data () {
+    data() {
         return {
-            cartData: this.$props.cart
-        }
+            cartData: this.$props.cart,
+        };
     },
 
-    mounted () {
+    mounted() {
         this.$store.subscribe((mutation, state) => {
             if (mutation.type === 'UPDATE_CART') {
                 this.cartData = state.cart;
             }
         });
-    }
-}
+    },
+};
 </script>

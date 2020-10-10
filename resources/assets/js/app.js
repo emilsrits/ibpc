@@ -1,30 +1,27 @@
 require('./bootstrap.js');
 
-import './utils/index.js';
+import './utils';
 
 window.Vue = require('vue');
 
 Vue.config.productionTip = false;
-//Vue.config.devtools = false;
-//Vue.config.debug = false;
-//Vue.config.silent = true;
 
-import store from './vuex/store.js'
+import store from './store'
 
-import EntityCategoryParent from './components/Admin/Entity/EntityCategoryParent.vue';
-import EntityManage from './components/Admin/Entity/EntityManage.vue';
-import EntityProductCategories from './components/Admin/Entity/EntityProductCategories.vue';
-import EntityProductMedia from './components/Admin/Entity/EntityProductMedia.vue';
-import TableForm from './components/Admin/Table/TableForm.vue';
-import HeaderNavbar from './components/Header/HeaderNavbar.vue';
-import HeaderNavbarCart from './components/Header//HeaderNavbarCart.vue';
-import CatalogProduct from './components/Store/Catalog/CatalogProduct.vue';
-import ProductDetails from './components/Store/Product/ProductDetails.vue';
-import ProductForm from './components/Store/Product/ProductForm.vue';
-import CartForm from './components/Store/Cart/CartForm.vue';
-import WidgetMessages from './components/Widget/WidgetMessages.vue';
-import WidgetMessagesItem from './components/Widget/WidgetMessagesItem.vue';
-import WidgetPaginationSize from './components/Widget/WidgetPaginationSize.vue';
+import EntityCategoryParent from './components/Admin/Entity/EntityCategoryParent';
+import EntityManage from './components/Admin/Entity/EntityManage';
+import EntityProductCategories from './components/Admin/Entity/EntityProductCategories';
+import EntityProductMedia from './components/Admin/Entity/EntityProductMedia';
+import TableForm from './components/Admin/Table/TableForm';
+import HeaderNavbar from './components/Header/HeaderNavbar';
+import HeaderNavbarCart from './components/Header//HeaderNavbarCart';
+import CatalogProduct from './components/Store/Catalog/CatalogProduct';
+import ProductDetails from './components/Store/Product/ProductDetails';
+import ProductForm from './components/Store/Product/ProductForm';
+import CartForm from './components/Store/Cart/CartForm';
+import WidgetMessages from './components/Widget/WidgetMessages';
+import WidgetMessagesItem from './components/Widget/WidgetMessagesItem';
+import WidgetPaginationSize from './components/Widget/WidgetPaginationSize';
 
 const app = new Vue({
     el: '#app',

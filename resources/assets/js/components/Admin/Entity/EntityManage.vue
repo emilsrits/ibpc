@@ -3,7 +3,8 @@
         <a
             class="button button-clean action-link"
             v-if="routes.back"
-            :href="routes.back">
+            :href="routes.back"
+        >
             Go Back
         </a>
 
@@ -12,14 +13,16 @@
             class="button button-action action-remove"
             type="button"
             v-if="routes.delete"
-            @click="deleteEntity">
+            @click.prevent="deleteEntity"
+        >
             Delete
         </button>
 
         <a
             class="button button-action action-add"
             :href="routes.add"
-            v-if="routes.add">
+            v-if="routes.add"
+        >
             Add New
         </a>
 
@@ -30,7 +33,8 @@
                 type="submit"
                 name="submit"
                 value="save"
-                v-if="canSave">
+                v-if="canSave"
+            >
                 Save
             </button>
         </template>
@@ -44,36 +48,37 @@ export default {
     props: {
         canSave: {
             type: Boolean,
-            default: true
+            default: true,
         },
         routes: {
             type: Object,
-            default: {}
-        }
+            default: {},
+        },
     },
 
     methods: {
         deleteEntity(event) {
-            event.preventDefault();
-
-            let el = event.currentTarget;
-
-            let confirmed = confirm('Delete this?');
+            const el = event.currentTarget;
+            const confirmed = confirm('Delete this?');
 
             if (confirmed) {
-                axios.delete(this.routes.delete)
-                    .then(response => {
+                axios
+                    .delete(this.routes.delete)
+                    .then((response) => {
                         window.location.href = response.data.redirectUrl;
                     })
-                    .catch(error => {
-                        this.$store.dispatch('flashMessage', error.response.data);
+                    .catch((error) => {
+                        this.$store.dispatch(
+                            'flashMessage',
+                            error.response.data
+                        );
                     });
             }
 
             return false;
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>

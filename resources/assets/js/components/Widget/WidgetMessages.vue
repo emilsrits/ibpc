@@ -10,29 +10,29 @@ import WidgetMessagesItemVue from './WidgetMessagesItem.vue';
 export default {
     name: 'WidgetMessages',
 
-    mounted () {
+    mounted() {
         this.$store.subscribe((mutation, state) => {
             if (mutation.type === 'FLASH_MESSAGE') {
-                let message = state.message;
+                const message = state.message;
 
-                var ComponentClass = Vue.extend(WidgetMessagesItemVue);
-                var instance = new ComponentClass({
+                const ComponentClass = Vue.extend(WidgetMessagesItemVue);
+                const instance = new ComponentClass({
                     propsData: {
                         messageType: message.type,
-                        messageContent: message.content
-                    }
+                        messageContent: message.content,
+                    },
                 });
                 instance.$mount();
 
                 this.$refs.container.appendChild(instance.$el);
             }
         });
-    }
-}
+    },
+};
 </script>
 
 <style lang="scss">
-@import "../../../sass/modules/variables.scss";
+@import '@styleModules/variables.scss';
 
 .flash-message-container {
     position: absolute;
@@ -56,7 +56,7 @@ export default {
     .message-success {
         background-color: lighten($color-green-darker, 30%);
         border: 1px solid $color-green-darker;
-    } 
+    }
     .message-info {
         background-color: lighten($color-blue, 30%);
         border: 1px solid $color-blue;
@@ -84,7 +84,8 @@ export default {
             opacity: 0.5;
         }
 
-        a, a:hover {
+        a,
+        a:hover {
             color: $color-black;
         }
 

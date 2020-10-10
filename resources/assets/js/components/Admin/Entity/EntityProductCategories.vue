@@ -16,28 +16,29 @@
 export default {
     name: 'EntityProductCategories',
 
-    data () {
+    data() {
         return {
-            specifications: document.getElementById('specifications')
-        }
+            specifications: document.getElementById('specifications'),
+        };
     },
 
     methods: {
         loadProperties(event) {
-            let el = event.currentTarget;
-            
-            axios.get('/admin/product/categories', {
+            const el = event.currentTarget;
+
+            axios
+                .get('/admin/product/categories', {
                     params: {
-                        selectValue: el.options[el.selectedIndex].value
-                    }
+                        selectValue: el.options[el.selectedIndex].value,
+                    },
                 })
-                .then(response => {
+                .then((response) => {
                     specifications.innerHTML = response.data;
                 })
-                .catch(error => {
+                .catch((error) => {
                     specifications.innerHTML = '';
                 });
-        }
-    }
-}
+        },
+    },
+};
 </script>

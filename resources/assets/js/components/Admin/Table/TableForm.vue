@@ -1,7 +1,17 @@
 <template>
     <div class="scrollable-x">
-        <form id="entity-table-form" class="inverted" method="POST" :action="action" @submit="formSubmit">
-            <input type="hidden" name="_token" :value="csrf">
+        <form
+            id="entity-table-form"
+            class="inverted"
+            method="POST"
+            :action="action"
+            @submit.prevent="formSubmit"
+        >
+            <input 
+                type="hidden" 
+                name="_token" 
+                :value="csrf" 
+            />
 
             <div class="table-action">
                 <div class="select">
@@ -11,9 +21,16 @@
                     </select>
                 </div>
 
-                <button class="button button-action action-do" type="submit">Apply</button>
+                <button class="button button-action action-do" type="submit">
+                    Apply
+                </button>
 
-                <span id="table-filters-clear" class="button button-action has-text-dark" type="button" @click="clearFilters">
+                <span
+                    id="table-filters-clear"
+                    class="button button-action has-text-dark"
+                    type="button"
+                    @click="clearFilters"
+                >
                     <i class="fa fa-refresh"></i>
                     <span class="is-hidden-mobile">&nbsp;Clear Filters</span>
                 </span>
@@ -29,22 +46,19 @@ export default {
     name: 'TableForm',
 
     props: {
-        action: String
+        action: String,
     },
 
-    data () {
+    data() {
         return {
-            csrf: window.Laravel.csrfToken
-        }
+            csrf: window.Laravel.csrfToken,
+        };
     },
 
     methods: {
         formSubmit(event) {
-            event.preventDefault();
-
-            let el = event.currentTarget;
-
-            let massAction = document.getElementById('mass-action');
+            const el = event.currentTarget;
+            const massAction = document.getElementById('mass-action');
 
             if (massAction.options[massAction.selectedIndex].value != 0) {
                 let confirmed = confirm('Are you sure?');
@@ -69,9 +83,9 @@ export default {
                     element.value = '';
                 }
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>

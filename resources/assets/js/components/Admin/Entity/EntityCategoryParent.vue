@@ -1,7 +1,10 @@
 <template>
     <div class="field is-horizontal">
         <div class="field-body">
-            <slot name="top-level" :topCategoryChange="topCategoryChange"></slot>
+            <slot
+                name="top-level"
+                :topCategoryChange="topCategoryChange"
+            ></slot>
 
             <slot name="parent-id" v-if="!isTopLevel"></slot>
         </div>
@@ -14,26 +17,26 @@ export default {
 
     props: {
         topLevel: {
-            default: false
-        }
+            default: false,
+        },
     },
 
-    data () {
+    data() {
         return {
-            isTopLevel: this.$props.topLevel 
-        }
+            isTopLevel: this.$props.topLevel,
+        };
     },
 
     methods: {
         topCategoryChange(event) {
-            let el = event.currentTarget;
+            const el = event.currentTarget;
 
             if (el.options[el.selectedIndex].value == '1') {
                 this.isTopLevel = true;
             } else {
                 this.isTopLevel = false;
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>

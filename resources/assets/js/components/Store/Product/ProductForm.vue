@@ -6,37 +6,68 @@
         <p class="product-price-old" v-if="productPrices.old">
             <s>{{ productPrices.old }}</s>
         </p>
-        
+
         <p class="product-price-current">
             {{ productPrices.current }}
         </p>
 
         <template v-if="product.stock > 0 && product.status">
             <div class="stock-status in-stock" v-if="product.stock > 5">
-                <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+                <div class="stock-icon">
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                </div>
                 <div class="stock-text">In Stock</div>
             </div>
 
             <div class="stock-status low-stock" v-else>
-                <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+                <div class="stock-icon">
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                </div>
                 <div class="stock-text">{{ product.stock }} In Stock</div>
             </div>
         </template>
         <template v-else>
             <div class="stock-status out-of-stock">
-                <div class="stock-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+                <div class="stock-icon">
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                </div>
                 <div class="stock-text">Out of Stock</div>
             </div>
         </template>
 
         <div class="form-container" v-if="product.status">
-            <form id="product-add-form" role="form" method="POST" :action="route" @submit.prevent="addProductToCart">
-                <input type="hidden" name="_token" :value="csrf">
+            <form
+                id="product-add-form"
+                role="form"
+                method="POST"
+                :action="route"
+                @submit.prevent="addProductToCart"
+            >
+                <input 
+                    type="hidden" 
+                    name="_token" 
+                    :value="csrf" 
+                />
 
                 <label for="qty">Qty:&nbsp;</label>
-                <input id="qty" type="number" name="qty" min="1" max="1000" value="1" title="qty" pattern="[0-9]*">
+                <input
+                    id="qty"
+                    type="number"
+                    name="qty"
+                    min="1"
+                    max="1000"
+                    value="1"
+                    title="qty"
+                    pattern="[0-9]*"
+                />
 
-                <button class="button button-action action-do" type="submit" name="submit">Add To Cart</button>
+                <button
+                    class="button button-action action-do"
+                    type="submit"
+                    name="submit"
+                >
+                    Add To Cart
+                </button>
             </form>
         </div>
     </div>
@@ -49,39 +80,40 @@ export default {
     props: {
         product: {
             type: Object,
-            required: true
+            required: true,
         },
         productPrices: Object,
-        route: String
+        route: String,
     },
 
     data: function () {
         return {
-            csrf: window.Laravel.csrfToken
-        }
+            csrf: window.Laravel.csrfToken,
+        };
     },
 
     methods: {
         addProductToCart(event) {
-            let el = event.target;
+            const el = event.target;
 
-            axios.post('/cart/add', {
+            axios
+                .post('/cart/add', {
                     productId: this.product.id,
-                    qty: el.elements.qty.value
+                    qty: el.elements.qty.value,
                 })
-                .then(response => {
+                .then((response) => {
                     this.$store.dispatch('updateCart', response.data.cart);
                 })
-                .catch(error => {
-                    console.log('error: ' + error);
+                .catch((error) => {
+                    console.error('error: ' + error);
                 });
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../sass/modules/variables.scss";
+@import '@styleModules/variables.scss';
 
 .product-title {
     margin: 20px 0 10px;
@@ -112,10 +144,10 @@ export default {
         padding-right: 7px;
         vertical-align: middle;
         > i {
-            display:block;
+            display: block;
             font-size: 10px;
         }
-  }
+    }
 
     .stock-text {
         display: table-cell;
@@ -155,7 +187,7 @@ export default {
     align-items: center;
 
     label {
-    display: none;
+        display: none;
     }
 
     #qty {
@@ -168,7 +200,7 @@ export default {
         border: 1px $color-black solid;
         border-radius: 3px;
         outline: none;
-        transition: border-color ease-in-out .25s;
+        transition: border-color ease-in-out 0.25s;
         &:focus {
             border: 1px solid $color-green-darker;
         }

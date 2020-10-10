@@ -1,11 +1,23 @@
 <template>
     <div id="cart-form">
         <form role="form" method="POST" :action="routes.action">
-            <input type="hidden" name="_method" :value="method" v-if="method">
-            <input type="hidden" name="_token" :value="csrf">
+            <input 
+                v-if="method" 
+                :value="method" 
+                type="hidden" 
+                name="_method" 
+            />
+            <input 
+                type="hidden" 
+                name="_token" 
+                :value="csrf" 
+            />
 
             <fieldset>
-                <table id="shopping-cart-table" class="table is-fullwidth is-hoverable">
+                <table
+                    id="shopping-cart-table"
+                    class="table is-fullwidth is-hoverable"
+                >
                     <thead class="table-head">
                         <tr>
                             <th></th>
@@ -18,26 +30,46 @@
                     </thead>
                     <tbody class="table-body">
                         <tr v-if="!cartData.price">
-                            <td class="is-size-5 has-text-centered" colspan="6" style="padding: 20px 0;">
+                            <td
+                                class="is-size-5 has-text-centered"
+                                colspan="6"
+                                style="padding: 20px 0"
+                            >
                                 Cart is empty
                             </td>
                         </tr>
-                        <slot name="cart-items" :removeProductFromCart="removeProductFromCart"></slot>
+                        <slot
+                            name="cart-items"
+                            :removeProductFromCart="removeProductFromCart"
+                        ></slot>
                     </tbody>
                 </table>
             </fieldset>
 
             <div class="cart-actions" v-if="cartData.price">
                 <div class="cart-update has-text-right">
-                    <button class="button button-action action-do" type="submit" name="submit">Update Cart</button>
+                    <button
+                        class="button button-action action-do"
+                        type="submit"
+                        name="submit"
+                    >
+                        Update Cart
+                    </button>
                 </div>
 
                 <div class="cart-checkout has-text-right">
                     <div class="cart-total">
                         <span>Total excl. VAT: {{ cartData.price }}</span>
                     </div>
-                    <button class="button button-action action-add" type="button" title="Checkout" @click.prevent="goToCheckout">
-                        <i class="fa fa-arrow-right" aria-hidden="true">&nbsp;</i>
+                    <button
+                        class="button button-action action-add"
+                        type="button"
+                        title="Checkout"
+                        @click.prevent="goToCheckout"
+                    >
+                        <i class="fa fa-arrow-right" aria-hidden="true"
+                            >&nbsp;</i
+                        >
                         Checkout
                     </button>
                 </div>
@@ -53,22 +85,22 @@ export default {
     props: {
         method: {
             type: String,
-            default: 'PATCH'
+            default: 'PATCH',
         },
         cartTotalPrice: String,
-        routes: Object
+        routes: Object,
     },
 
-    data () {
+    data() {
         return {
             csrf: window.Laravel.csrfToken,
             cartData: {
-                price: this.$props.cartTotalPrice
-            }
-        }
+                price: this.$props.cartTotalPrice,
+            },
+        };
     },
 
-    mounted () {
+    mounted() {
         this.$store.subscribe((mutation, state) => {
             if (mutation.type === 'UPDATE_CART') {
                 this.cartData.price = state.cart.price;
@@ -78,30 +110,31 @@ export default {
 
     methods: {
         removeProductFromCart(event) {
-            let el = event.currentTarget
+            const el = event.currentTarget;
 
-            axios.post('/cart/remove', {
-                    productId: el.value
+            axios
+                .post('/cart/remove', {
+                    productId: el.value,
                 })
-                .then(response => {
+                .then((response) => {
                     this.$store.dispatch('updateCart', response.data);
 
                     el.closest('tr').remove();
                 })
-                .catch(error => {
-                    console.log('error: ' + error);
+                .catch((error) => {
+                    console.error('error: ' + error);
                 });
         },
 
         goToCheckout(event) {
             window.location = this.routes.checkout;
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../sass/modules/variables.scss";
+@import '@styleModules/variables.scss';
 
 #cart-form {
     .cart-actions {
@@ -158,7 +191,7 @@ export default {
         border: 1px $color-black solid;
         border-radius: 3px;
         outline: none;
-        transition: border-color ease-in-out .25s;
+        transition: border-color ease-in-out 0.25s;
         &:focus {
             border: 1px solid $color-green-darker;
         }

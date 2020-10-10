@@ -2,22 +2,35 @@
     <div class="product-item">
         <div class="product-media">
             <a :href="route">
-                <img class="image" :src="media" :alt="product.code">
+                <img 
+                    class="image" 
+                    :src="media" 
+                    :alt="product.code" 
+                />
             </a>
         </div>
         <p class="product-link has-text-centered">
             <a :href="route">{{ product.title }}</a>
         </p>
 
-        <div class="stock-status in-stock is-uppercase has-text-right" v-if="product.stock > 5">
+        <div
+            class="stock-status in-stock is-uppercase has-text-right"
+            v-if="product.stock > 5"
+        >
             <div class="stock-text">In Stock</div>
         </div>
 
-        <div class="stock-status low-stock is-uppercase has-text-right" v-else-if="product.stock > 0">
+        <div
+            class="stock-status low-stock is-uppercase has-text-right"
+            v-else-if="product.stock > 0"
+        >
             <div class="stock-text">{{ product.stock }} In Stock</div>
         </div>
 
-        <div class="stock-status out-of-stock is-uppercase has-text-right" v-else>
+        <div
+            class="stock-status out-of-stock is-uppercase has-text-right"
+            v-else
+        >
             <div class="stock-text">Out Of Stock</div>
         </div>
 
@@ -29,7 +42,12 @@
         </div>
 
         <div class="product-add-to-cart has-text-right" v-if="product.status">
-            <button class="product-quick-add" type="button" :value="product.id" @click="addProductToCart">
+            <button
+                class="product-quick-add"
+                type="button"
+                :value="product.id"
+                @click="addProductToCart"
+            >
                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
             </button>
         </div>
@@ -43,33 +61,34 @@ export default {
     props: {
         product: {
             type: Object,
-            default: null
+            default: null,
         },
         productPrices: Object,
         media: String,
-        route: String
+        route: String,
     },
 
     methods: {
         addProductToCart(event) {
-            let el = event.currentTarget
+            const el = event.currentTarget;
 
-            axios.post('/cart/add', {
-                    productId: el.value
+            axios
+                .post('/cart/add', {
+                    productId: el.value,
                 })
-                .then(response => {
+                .then((response) => {
                     this.$store.dispatch('updateCart', response.data.cart);
                 })
-                .catch(error => {
-                    console.log('error: ' + error);
+                .catch((error) => {
+                    console.error('error: ' + error);
                 });
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../sass/modules/variables.scss";
+@import '@styleModules/variables.scss';
 
 .product-item {
     padding: 10px 10px 4px;
@@ -84,7 +103,6 @@ export default {
             margin: auto;
             max-height: 120px;
             border: 2px solid $color-gray-darkest;
-
         }
     }
 
@@ -106,7 +124,7 @@ export default {
             letter-spacing: 0.2px;
         }
     }
-    
+
     .in-stock .stock-text {
         color: $color-green;
     }

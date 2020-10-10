@@ -2,12 +2,16 @@
     <div class="product-section">
         <div id="product-media-gallery">
             <div class="product-media-item">
-                <img class="image" :src="media" :alt="product.code">
+                <img 
+                    class="image" 
+                    :src="media" 
+                    :alt="product.code" 
+                />
             </div>
 
             <slot name="product-gallery"></slot>
         </div>
-        
+
         <slot name="product-properties"></slot>
     </div>
 </template>
@@ -19,15 +23,15 @@ export default {
     props: {
         product: {
             type: Object,
-            required: true
+            required: true,
         },
-        media: String
-    }
-}
+        media: String,
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "../../../../sass/modules/variables.scss";
+@import '@styleModules/variables.scss';
 
 #product-media-gallery {
     .product-media-item:first-child img {
@@ -78,7 +82,8 @@ export default {
     td {
         padding: 4px 5px;
         color: $color-gray-lighter;
-        &.property, &.value {
+        &.property,
+        &.value {
             border-bottom: 1px solid $color-gray-darker;
         }
         &.property {

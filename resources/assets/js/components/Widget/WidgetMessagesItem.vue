@@ -3,7 +3,11 @@
         <transition name="fade" v-on:leave="leave">
             <div :class="['message', messageType]" v-if="show">
                 <div class="message-close">
-                    <a aria-label="message-close" data-dismiss="message" @click="closeMessage">
+                    <a
+                        aria-label="message-close"
+                        data-dismiss="message"
+                        @click="closeMessage"
+                    >
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
@@ -29,24 +33,24 @@ export default {
     props: {
         messageType: {
             type: String,
-            required: true
+            required: true,
         },
         messageContent: {
             type: String,
             required: false,
-            default: null
-        }
+            default: null,
+        },
     },
 
-    data () {
+    data() {
         return {
-            show: true
-        }
+            show: true,
+        };
     },
 
     methods: {
         closeMessage(event) {
-            let el = event.currentTarget;
+            const el = event.currentTarget;
 
             this.show = false;
         },
@@ -55,14 +59,14 @@ export default {
             setTimeout(() => {
                 this.$refs.message.remove();
             }, 600);
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
 .fade-leave-active {
-    transition: opacity .5s;
+    transition: opacity 0.5s;
 }
 
 .fade-leave-to {

@@ -15,49 +15,52 @@ export default {
     props: {
         enabled: {
             type: Boolean,
-            default: true
+            default: true,
         },
         defaultSizeProp: {
             type: [Number, String],
-            default: 20
+            default: 20,
         },
         route: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
 
     computed: {
-        defaultSize () {
-            return (Number.isInteger(Number(this.$props.defaultSizeProp)) ?  this.$props.defaultSizeProp : 20);
-        }
+        defaultSize() {
+            return Number.isInteger(Number(this.$props.defaultSizeProp))
+                ? this.$props.defaultSizeProp
+                : 20;
+        },
     },
 
     methods: {
         changePageSize(event) {
-            let el = event.currentTarget;
-            let selection = el.options[el.selectedIndex].value;
+            const el = event.currentTarget;
+            const selection = el.options[el.selectedIndex].value;
 
-            axios.get(this.$props.route, {
+            axios
+                .get(this.$props.route, {
                     params: {
-                        pageSize: selection
-                    }
+                        pageSize: selection,
+                    },
                 })
-                .then(response => {
+                .then((response) => {
                     if (response.data.redirectUrl) {
                         window.location.href = response.data.redirectUrl;
                     }
                 })
-                .catch(error => {
-                    console.log('error: ' + error);
+                .catch((error) => {
+                    console.error('error: ' + error);
                 });
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "../../../sass/modules/variables.scss";
+@import '@styleModules/variables.scss';
 
 .page-size-select {
     margin: 8px 15px;

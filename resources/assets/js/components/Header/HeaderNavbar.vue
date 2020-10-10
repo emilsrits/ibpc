@@ -3,10 +3,17 @@
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" :href="routes.home">
-                    <img :src="media.logo" alt="IBPC">
+                    <img :src="media.logo" alt="IBPC" />
                 </a>
 
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-nav" @click="toggleNavbar">
+                <a
+                    role="button"
+                    class="navbar-burger burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                    data-target="main-nav"
+                    @click="toggleNavbar"
+                >
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -30,7 +37,11 @@
                         </div>
                     </div>
 
-                    <div id="navbar-user-dropdown" class="navbar-item has-dropdown is-hoverable" v-else>
+                    <div
+                        id="navbar-user-dropdown"
+                        class="navbar-item has-dropdown is-hoverable"
+                        v-else
+                    >
                         <a class="navbar-link item-link" :href="routes.account">
                             <i class="fa fa-user">&nbsp;</i>
                             Account
@@ -38,12 +49,24 @@
 
                         <div class="navbar-dropdown">
                             <div class="navbar-item">
-                                <a id="navbar-sign-out" @click.prevent="submitLogoutForm">
+                                <a
+                                    id="navbar-sign-out"
+                                    @click.prevent="submitLogoutForm"
+                                >
                                     <i class="fa fa-sign-out">&nbsp;</i>
                                     Sign Out
                                 </a>
-                                <form id="logout-form" :action="routes.logout" method="POST" style="display: none;">
-                                    <input type="hidden" name="_token" :value="csrf">
+                                <form
+                                    id="logout-form"
+                                    :action="routes.logout"
+                                    method="POST"
+                                    style="display: none"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="_token"
+                                        :value="csrf"
+                                    />
                                 </form>
                             </div>
                         </div>
@@ -61,21 +84,21 @@ export default {
     props: {
         user: {
             type: Object,
-            default: null
+            default: null,
         },
         media: Object,
-        routes: Object
+        routes: Object,
     },
-    
-    data () {
+
+    data() {
         return {
-            csrf: window.Laravel.csrfToken
-        }
+            csrf: window.Laravel.csrfToken,
+        };
     },
-    
+
     methods: {
         toggleNavbar(event) {
-            let el = event.currentTarget;
+            const el = event.currentTarget;
             let target = document.getElementById(el.dataset.target);
 
             el.classList.toggle('is-active');
@@ -84,13 +107,13 @@ export default {
 
         submitLogoutForm(event) {
             document.getElementById('logout-form').submit();
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-@import "../../../sass/modules/variables.scss";
+@import '@styleModules/variables.scss';
 
 @include until($desktop) {
     .navbar {
